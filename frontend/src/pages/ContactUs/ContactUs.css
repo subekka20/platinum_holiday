@@ -1,0 +1,117 @@
+.contact-card {
+    margin-top: 20px;
+    position: relative;
+    border-radius: 20px;
+    padding: 20px;
+    display: block;
+    box-shadow: 0px 10px 30px #22205723;
+    background: rgb(255, 255, 255);
+    transition: ease-in-out 0.5s;
+    border: none;
+    outline: none;
+    border-top: 3px solid #d12788;
+}
+
+.contact-form-section {
+    border-radius: 12px;
+    padding: 30px;
+    height: 100%;
+    position: relative;
+    background-color: #fdfdff;
+    /* border: 1px solid #ebeafc; */
+    box-shadow: inset 0px 0px 20px #22205723;
+}
+
+.contact-detail-section {
+    position: relative;
+    padding: 10px;
+}
+
+.contact-card-head {
+    font-size: 22px;
+    font-weight: 600;
+    display: block;
+    position: relative;
+}
+
+.contact-card-head::after {
+    content: '';
+    background-color: #d12788;
+    width: 80px;
+    height: 3px;
+    display: block;
+    margin-left: 0;
+    margin-top: 3px;
+    border-radius: 10px;
+}
+
+.contact-form-area {
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+}
+
+.contact-content-area {
+    position: relative;
+    margin-top: 30px;
+}
+
+.contact-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.content-card-desc {
+    color: #000;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7em;
+    display: block;
+}
+
+.contact-content i {
+    font-size: 20px;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d12788;
+    background-color: #FFF;
+    transition: ease 0.5s;
+    color: #d12788;
+}
+
+.contact-content a,
+.contact-content span {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+    margin: 0;
+    padding-top: 9px;
+}
+
+.contact-content a {
+    text-decoration: none;
+    transition: ease 0.5s;
+}
+
+.contact-content a:hover {
+    color: #d12788;
+}
+
+.contact-content a:hover i {
+    background-color: #d12788 !important;
+    color: #FFF !important;
+}
+
+.map-section {
+    border-radius: 40px;
+    overflow: hidden;
+    border: #37348b 3px solid;
+}
