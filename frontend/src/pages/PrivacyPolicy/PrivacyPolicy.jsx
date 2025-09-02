@@ -59,7 +59,7 @@ const PrivacyPolicy = () => {
             <div className="col-12 mb-4 mb-lg-5">
               <div className="mt-4 mt-sm-4 mt-lg-5">
                 <p className="section-paragraph text-center" data-aos="fade">
-                  At The Parking Deals, we are committed to protecting your
+                  At Platinum Holiday Service, we are committed to protecting your
                   privacy and ensuring the security of your personal
                   information. We collect and store data that is necessary to
                   provide you with our services, such as processing bookings and
@@ -104,7 +104,7 @@ const PrivacyPolicy = () => {
                 <div className="content-section">
                   <h4>01. Introduction</h4>
                   <p>
-                    Welcome to The Parking Deals. We are committed to protecting
+                    Welcome to Platinum Holiday Service. We are committed to protecting
                     your privacy and ensuring that your personal information is
                     handled in a safe and responsible manner. This Privacy
                     Policy outlines how we collect, use, and protect your
@@ -281,7 +281,7 @@ const PrivacyPolicy = () => {
                   <Divider />
 
                   <h6 className="content-contact-head mt-4">
-                    The Parking Deals
+                    Platinum Holiday Service
                   </h6>
                   {/* <div className="content-contact-detail">
                                         <i className="bi bi-geo-alt-fill"></i>

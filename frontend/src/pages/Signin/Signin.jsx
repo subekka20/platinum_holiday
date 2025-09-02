@@ -118,7 +118,7 @@ const Signin = () => {
                             <h3 className='section-heading text-center mx-auto text-purple' data-aos="zoom-out">Sign In</h3>
                             <div className="mt-5 mb-2 mb-sm-4">
                                 <p className='section-paragraph text-center mb-0' data-aos="fade">
-                                    Welcome back! Please sign in to access your bookings and manage your parking reservations effortlessly. Your convenience is our priority, and our secure platform ensures that your experience with us is smooth and hassle-free. If you have any questions or need assistance, our support team is here to help. Thank you for choosing The Parking Deals.
+                                    Welcome back! Please sign in to access your bookings and manage your parking reservations effortlessly. Your convenience is our priority, and our secure platform ensures that your experience with us is smooth and hassle-free. If you have any questions or need assistance, our support team is here to help. Thank you for choosing Platinum Holiday Service.
                                 </p>
                             </div>
                         </div>
@@ -133,9 +133,9 @@ const Signin = () => {
                         <div className="col-12 col-xl-6 col-lg-6 col-sm-10 col-md-10 mx-auto">
                             <article className="custom-card" data-aos="fade-up">
                                 <div className="custom-card-logo-area">
-                                    <img src="assets/images/logo.png" className='custom-card-logo' alt="The Parking Deals" />
+                                    <img src="assets/images/logo.png" className='custom-card-logo' alt="Platinum Holiday Service" />
                                 </div>
-                                <h3 className="custom-card-tile">Welcome to <span>The Parking Deals</span></h3>
+                                <h3 className="custom-card-tile">Welcome to <span>Platinum Holiday Service</span></h3>
                                 <h6 className="custom-card-sub-tile">Please sign in your account</h6>
                                 <form action="" className="custom-card-form"
                                     onSubmit={handleSubmit}

@@ -226,7 +226,7 @@ const ForgotPassword = () => {
                             <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
                                 <article className="custom-card" data-aos="fade-up">
                                     <div className="custom-card-logo-area">
-                                        <img src="assets/images/logo.png" className='custom-card-logo' alt="The Parking Deals" />
+                                        <img src="assets/images/logo.png" className='custom-card-logo' alt="Platinum Holiday Service" />
                                     </div>
                                     <h3 className="custom-card-tile">Email Verification</h3>
                                     <h6 className="custom-card-sub-tile">Enter your registered email address below for verification</h6>
@@ -277,7 +277,7 @@ const ForgotPassword = () => {
                                 <button className="back-page-btn" onClick={goBack} data-aos="fade-left"><i className="ri ri-arrow-left-line me-2"></i>Back</button>
                                 <article className="custom-card" data-aos="fade-up">
                                     <div className="custom-card-logo-area">
-                                        <img src="assets/images/logo.png" className='custom-card-logo' alt="The Parking Deals" />
+                                        <img src="assets/images/logo.png" className='custom-card-logo' alt="Platinum Holiday Service" />
                                     </div>
                                     <h3 className="custom-card-tile">OTP Verification</h3>
                                     <h6 className="custom-card-sub-tile">Enter the OTP verification code sent to your email address</h6>
@@ -336,7 +336,7 @@ const ForgotPassword = () => {
                                 <button className="back-page-btn" onClick={goBack} data-aos="fade-left"><i className="ri ri-arrow-left-line me-2"></i>Back</button>
                                 <article className="custom-card" data-aos="fade-up">
                                     <div className="custom-card-logo-area">
-                                        <img src="assets/images/logo.png" className='custom-card-logo' alt="The Parking Deals" />
+                                        <img src="assets/images/logo.png" className='custom-card-logo' alt="Platinum Holiday Service" />
                                     </div>
                                     <h3 className="custom-card-tile">Reset Your Password</h3>
                                     <h6 className="custom-card-sub-tile">Please enter your new password below.</h6>

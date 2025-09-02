@@ -1694,7 +1694,7 @@ const Booking = () => {
                         value="1"
                       />
                       <label htmlFor="isAgreed" className="ml-2">
-                        On making payment you agree to The Parking Deals&nbsp;
+                        On making payment you agree to Platinum Holiday Service&nbsp;
                         <a href="/terms-and-conditions" target="_blank">
                           Terms and Conditions
                         </a>

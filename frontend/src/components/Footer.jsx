@@ -105,7 +105,7 @@ const Footer = () => {
                   <img
                     src="../assets/images/logo-light.png"
                     className="footer-logo"
-                    alt="The Parking Deals"
+                    alt="Platinum Holiday Service"
                   />
                 </button>
                 <p className="footer-desc">

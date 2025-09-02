@@ -29,7 +29,7 @@ const sendEmailToUser = async (booking, user, type) => {
               <link
                   href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
                   rel="stylesheet">
-              <title>The Parking Deals</title>
+              <title>Platinum Holiday Service</title>
           </head>
   
           <body>
@@ -231,7 +231,7 @@ const sendEmailToUser = async (booking, user, type) => {
               </style>
               <div class="booking_info_area">
                   <div class="booking_info_header">
-                      <img src="https://www.theparkingdeals.co.uk/assets/images/logo.png" alt="The Parking Deals">
+                      <img src="https://www.theparkingdeals.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
                   </div>
                   <h3 class="booking_info_title">Booking ${type === "Cancelled"
             ? "Cancelled!"
@@ -330,7 +330,7 @@ const sendEmailToUser = async (booking, user, type) => {
   
                 <p class="mt-4">
                     Note:
-                    The Parking Deals acts as booking agents only and do not store or handle customer vehicles. Your service
+                    Platinum Holiday Service acts as booking agents only and do not store or handle customer vehicles. Your service
                     delivery contract will be with
                     <span>${company.companyName}.</span>
                     You must follow the instructions below and contact the service provider to
@@ -801,7 +801,7 @@ const sendEmailToUser = async (booking, user, type) => {
                 </p>
 
                 <h6 class="mt-5 booking_footer_text">
-                    The Parking Deals is a trading name of Air Travel Extras Limited. The Parking Deals uses 3rd party payment
+                    Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
                     processing
                     companies to accept payments. Therefore, you may see their name on your bank/card statements.
                 </h6>
@@ -881,7 +881,7 @@ const sendEmailToCompany = async (booking, user, type) => {
               <link
                   href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
                   rel="stylesheet">
-              <title>The Parking Deals</title>
+              <title>Platinum Holiday Service</title>
           </head>
   
           <body>
@@ -1084,7 +1084,7 @@ const sendEmailToCompany = async (booking, user, type) => {
   
               <div class="booking_info_area">
                   <div class="booking_info_header">
-                      <img src="https://www.theparkingdeals.co.uk/assets/images/logo.png" alt="The Parking Deals">
+                      <img src="https://www.theparkingdeals.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
                   </div>
                   
                   <h4 class="booking_head">
@@ -1166,7 +1166,7 @@ const sendEmailToCompany = async (booking, user, type) => {
                   </div>
   
                   <h6 class="mt-5 booking_footer_text">
-                      The Parking Deals is a trading name of Air Travel Extras Limited. The Parking Deals uses 3rd party payment
+                      Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
                       processing
                       companies to accept payments. Therefore, you may see their name on your bank/card statements.
                   </h6>

@@ -53,7 +53,7 @@ const Services = () => {
                         <div className="col-12 mb-4 mb-lg-5">
                             <div className="mt-4 mt-sm-4 mt-lg-5">
                                 <p className='section-paragraph text-center mb-0' data-aos="fade">
-                                    At The Parking Deals, we cater to a diverse clientele, including business professionals, families, and solo travelers, with a variety of parking services tailored to meet different needs. Our offerings include Valet Parking for a hassle-free experience, Self-Park Options for those who prefer to park their own vehicle, and Long-Term Parking for extended trips. Each service is designed to maximize your convenience and security, ensuring a smooth and worry-free parking experience.
+                                    At Platinum Holiday Service, we cater to a diverse clientele, including business professionals, families, and solo travelers, with a variety of parking services tailored to meet different needs. Our offerings include Valet Parking for a hassle-free experience, Self-Park Options for those who prefer to park their own vehicle, and Long-Term Parking for extended trips. Each service is designed to maximize your convenience and security, ensuring a smooth and worry-free parking experience.
                                 </p>
                             </div>
                         </div>

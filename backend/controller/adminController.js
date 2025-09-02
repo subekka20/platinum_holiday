@@ -384,11 +384,11 @@ const respondToTheContactOrFaqForm = async (req, res) => {
 
     const emailResponse = await sendEmail(
       form.email,
-      "Welcome to The Parking Deals!",
+      "Welcome to Platinum Holiday Service!",
       `
                 <div style="padding: 20px; font-family: Calibri;">
                     <div style="text-align: center;">
-                        <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="The Parking Deals Logo" width="80" height="80"></a>
+                        <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="Platinum Holiday Service Logo" width="80" height="80"></a>
                     </div>
                     <div style="margin-top: 40px; font-size: 15px;">
                         <p>Dear ${form.name},</p>

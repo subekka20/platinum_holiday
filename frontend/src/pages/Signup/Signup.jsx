@@ -262,7 +262,7 @@ const Signup = () => {
                   className="section-paragraph text-center mb-0"
                   data-aos="fade"
                 >
-                  Join The Parking Deals community today to unlock a world of
+                  Join Platinum Holiday Service community today to unlock a world of
                   convenient airport parking solutions. By signing up, you
                   gain access to our secure platform, where you can easily
                   browse and book from a variety of parking options tailored
@@ -270,7 +270,7 @@ const Signup = () => {
                   convenience or long-term savings, we have the perfect
                   parking solution for you. Don't miss out on exclusive offers
                   and seamless booking experiences—sign up now and simplify
-                  your travel plans with The Parking Deals.
+                  your travel plans with Platinum Holiday Service.
                 </p>
               </div>
             </div>
@@ -296,7 +296,7 @@ const Signup = () => {
                     <img
                       src="assets/images/logo.png"
                       className="custom-card-logo"
-                      alt="The Parking Deals"
+                      alt="Platinum Holiday Service"
                     />
                   </div>
                   <h3 className="custom-card-tile">Account Verification</h3>
@@ -382,7 +382,7 @@ const Signup = () => {
                     <img
                       src="assets/images/logo.png"
                       className="custom-card-logo"
-                      alt="The Parking Deals"
+                      alt="Platinum Holiday Service"
                     />
                   </div>
                   <h3 className="custom-card-tile">OTP Verification</h3>
@@ -483,7 +483,7 @@ const Signup = () => {
                     <img
                       src="assets/images/logo.png"
                       className="custom-card-logo center-panel-logo"
-                      alt="The Parking Deals"
+                      alt="Platinum Holiday Service"
                     />
                   </div>
                   <h3 className="custom-card-tile">Create Your Account</h3>

@@ -114,11 +114,11 @@ const Header = () => {
           </div>
         )} */}
 
-        <div className="promotion-label">
+        {/* <div className="promotion-label">
           <h6>
           <b>Spring into Savings!</b> Enjoy <b>30% Off</b> for All Customers – Limited Time Only!🌸✨<b>Book now!</b>
           </h6>
-        </div>
+        </div> */}
         <nav className={`nav-section ${scrolled ? "scrolled" : ""}`}>
           <div className="container-md">
             <div className="row">

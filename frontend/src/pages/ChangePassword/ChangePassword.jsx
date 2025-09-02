@@ -183,7 +183,7 @@ const ChangePassword = () => {
                         <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
                             <article className="custom-card" data-aos="fade-up">
                                 <div className="custom-card-logo-area">
-                                    <img src="assets/images/logo.png" className='custom-card-logo' alt="The Parking Deals" />
+                                    <img src="assets/images/logo.png" className='custom-card-logo' alt="Platinum Holiday Service" />
                                 </div>
                                 <h3 className="custom-card-tile">Change Your Password</h3>
                                 <h6 className="custom-card-sub-tile">Please enter your old password below to change your password.</h6>

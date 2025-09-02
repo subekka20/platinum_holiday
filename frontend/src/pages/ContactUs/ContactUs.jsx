@@ -130,7 +130,7 @@ const ContactUs = () => {
                   className="section-paragraph text-center mb-0"
                   data-aos="fade"
                 >
-                  At The Parking Deals, we are dedicated to providing
+                  At Platinum Holiday Service, we are dedicated to providing
                   exceptional customer service. If you have any questions, need
                   assistance with your reservation, or have any feedback, our
                   customer service team is here to help. You can reach us by

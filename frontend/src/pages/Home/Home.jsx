@@ -340,7 +340,7 @@ const Home = () => {
                   Unmatched Airport Parking Solutions
                 </h3>
                 <p className="hero-section-para" data-aos="fade-up">
-                  Welcome to The Parking Deals, your premier choice for airport
+                  Welcome to Platinum Holiday Service, your premier choice for airport
                   parking. We provide a range of tailored services including
                   Valet Parking, Self-Park Options, and Long-Term Parking. Enjoy
                   peace of mind knowing your vehicle is secure, and experience
@@ -401,7 +401,7 @@ const Home = () => {
                   Convenience at Your Fingertips
                 </h3>
                 <p className="hero-section-para" data-aos="fade-up">
-                  At The Parking Deals, we prioritize your convenience. Our
+                  At Platinum Holiday Service, we prioritize your convenience. Our
                   user-friendly online booking system makes reserving your spot
                   quick and easy. With 24/7 access, covered parking options, and
                   complimentary shuttle services, we ensure that your parking
@@ -431,7 +431,7 @@ const Home = () => {
                   Secure and Affordable Parking
                 </h3>
                 <p className="hero-section-para" data-aos="fade-up">
-                  Your vehicle's safety is our top priority. The Parking Deals
+                  Your vehicle's safety is our top priority. Platinum Holiday Service
                   offers secure parking facilities with round-the-clock
                   surveillance at competitive rates. Whether you're traveling
                   for a day or an extended period, our short-term and long-term
@@ -462,7 +462,7 @@ const Home = () => {
                   Premium Parking for Business Travelers
                 </h3>
                 <p className="hero-section-para" data-aos="fade-up">
-                  Business travel just got easier with The Parking Deals. Our
+                  Business travel just got easier with Platinum Holiday Service. Our
                   Business Parking service features dedicated spots close to the
                   terminal, priority shuttle services, and access to business
                   facilities. Maximize your productivity and minimize travel
@@ -500,7 +500,7 @@ const Home = () => {
               </h3>
 
               <p className="section-paragraph text-center text-lg-start mt-5 mb-5 mb-xl-0">
-                Planning your trip just got easier with The Parking Deals. Use
+                Planning your trip just got easier with Platinum Holiday Service. Use
                 our quick and convenient form to get an instant quote for your
                 airport parking needs. Simply select your airport from the
                 dropdown menu, enter your drop-off and pick-up dates and times,
@@ -510,7 +510,7 @@ const Home = () => {
                 and secure your spot in just a few clicks. Experience the
                 convenience of knowing your parking is sorted before you even
                 leave home. Fill out the form below and get ready for a
-                stress-free start to your journey with The Parking Deals.
+                stress-free start to your journey with Platinum Holiday Service.
               </p>
             </div>
             <div className="col-12 col-xl-6 col-lg-6">

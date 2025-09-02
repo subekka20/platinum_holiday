@@ -64,7 +64,7 @@ const FaQ = () => {
                   className="section-paragraph text-center mb-0"
                   data-aos="fade"
                 >
-                  At The Parking Deals, we strive to address all your questions
+                  At Platinum Holiday Service, we strive to address all your questions
                   and concerns. Here are some frequently asked questions to help
                   you navigate our services. You can easily make a reservation
                   through our website, and we accept all major credit cards for
@@ -87,9 +87,9 @@ const FaQ = () => {
             <div className="col-12">
               <div className="content-collapse-section" data-aos="fade-up">
                 <Accordion activeIndex={0}>
-                  <AccordionTab header="01. What services does The Parking Deals offer?">
+                  <AccordionTab header="01. What services does Platinum Holiday Service offer?">
                     <p className="m-0">
-                      The Parking Deals specializes in providing exceptional
+                      Platinum Holiday Service specializes in providing exceptional
                       airport parking solutions. We evaluate available parking
                       options to ensure you receive top-notch service at
                       competitive rates. Our services include secure and
@@ -132,7 +132,7 @@ const FaQ = () => {
                     <p className="m-0">
                       We partner with reputable parking facilities that
                       prioritize security. While we strive to ensure the safety
-                      of your vehicle, The Parking Deals is not responsible for
+                      of your vehicle, Platinum Holiday Service is not responsible for
                       any damage or theft. We recommend removing valuables from
                       your vehicle and locking it securely.
                     </p>

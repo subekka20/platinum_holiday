@@ -246,17 +246,17 @@ const register = async (
     if (role === "User") {
       emailResponse = await sendEmail(
         user.email,
-        "Welcome to The Parking Deals!",
+        "Welcome to Platinum Holiday Service!",
         `
             <div style="padding: 20px; font-family: Calibri;">
                 <div style="text-align: center;">
-                    <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="The Parking Deals Logo" width="80" height="80"></a>
+                    <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="Platinum Holiday Service Logo" width="80" height="80"></a>
                 </div>
                 <div style="margin-top: 40px; font-size: 15px;">
                     <p>Dear ${user.firstName || user.companyName},</p>
-                    <p>Thank you for registering in The Parking Deals! We're excited to have you on board.</p>
+                    <p>Thank you for registering in Platinum Holiday Service! We're excited to have you on board.</p>
                     <p>If you have any questions, please contact our support team at <a href="mailto:info@theparkingdeals.co.uk">info@theparkingdeals.co.uk</a>.</p>
-                    <p>Thank you for choosing The Parking Deals. We look forward to serving you.</p>
+                    <p>Thank you for choosing Platinum Holiday Service. We look forward to serving you.</p>
                 </div>
             </div>
         `
