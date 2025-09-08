@@ -258,11 +258,9 @@ const Home = () => {
   const capitalizeFirstLetter = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1);
 
-
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
-  }, [])
-
+  }, []);
 
   return (
     <>
@@ -270,7 +268,7 @@ const Home = () => {
       <Preloader />
       <Header />
 
-      <section className="hero-section overflow-hidden">
+      {/* <section className="hero-section overflow-hidden">
         <img
           src="assets/images/home/hero-section-image.svg"
           className="hero-section-img"
@@ -487,261 +485,456 @@ const Home = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-      </section>
+      </section> */}
 
       <Toast ref={toast} />
 
       <section className="section-padding overflow-hidden">
         <div className="container-md">
           <div className="row">
-            <div className="col-12 col-xl-6 col-lg-6 pe-xl-5">
-              <h3 className="section-heading text-center mx-auto text-lg-start ms-lg-0 text-purple">
-                Get Your Parking Quote
+            <div className="col-12 col-xl-6 col-lg-6 pe-xl-5 mt-4">
+              <h3 className="section-heading text-center mx-auto text-lg-start ms-lg-0">
+                Reserve your parking space
               </h3>
 
-              <p className="section-paragraph text-center text-lg-start mt-5 mb-5 mb-xl-0">
-                Planning your trip just got easier with Platinum Holiday Service. Use
-                our quick and convenient form to get an instant quote for your
-                airport parking needs. Simply select your airport from the
-                dropdown menu, enter your drop-off and pick-up dates and times,
-                and apply any available coupon codes to maximize your savings.
-                Whether you need short-term, long-term, or premium parking
-                options, our easy-to-use form will help you find the best rates
-                and secure your spot in just a few clicks. Experience the
-                convenience of knowing your parking is sorted before you even
-                leave home. Fill out the form below and get ready for a
-                stress-free start to your journey with Platinum Holiday Service.
+              <p className="section-paragraph text-center text-lg-start mt-5 mb-5 mb-xl-0 justify">
+                Make your travel planning effortless with Platinum Holiday
+                Service. Our fast and user-friendly booking form gives you an
+                instant quote for airport parking in seconds. Just choose your
+                airport, set your drop-off and pick-up dates, and apply any
+                coupon codes to unlock extra savings. From short-term and
+                long-term stays to premium parking options, we make it simple to
+                secure the best deal. Enjoy peace of mind knowing your parking
+                is reserved before you even leave home. Complete the form below
+                and start your journey stress-free with Platinum Holiday
+                Service.
               </p>
             </div>
             <div className="col-12 col-xl-6 col-lg-6">
-              <article
+              {/* <article
                 className="custom-card border-top-primary p-3"
                 id="reservation"
                 ref={reservationRef}
                 data-aos="fade-up"
+              > */}
+              <form
+                action=""
+                className="custom-card-form form-2 get-quote-form mt-0 p-3"
+                onSubmit={handleGetQuote}
               >
                 <div className="custom-card-logo-area mb-3">
-                  <h3 className="custom-card-header-head">GET QUOTE</h3>
+                  <h3 className="custom-card-header-head">Grab Your Space</h3>
                 </div>
-                <form
-                  action=""
-                  className="custom-card-form form-2 get-quote-form mt-0 p-3"
-                  onSubmit={handleGetQuote}
-                >
-                  <div className="form-head-input-area">
-                    <div className="row">
-                      <div className="col-12 col-xl-8 col-lg-10 col-md-8 col-sm-8 mx-auto">
-                        <div className="custom-form-group mb-0 input-with-icon">
-                          <label
-                            htmlFor="airport"
-                            className="custom-form-label form-required text-sm-center"
-                          >
-                            Select airport
-                          </label>
-                          <div className="form-icon-group">
-                            <i className="bi bi-airplane-fill input-grp-icon"></i>
-                            <Dropdown
-                              id="airport"
-                              value={selectedAirport}
-                              onChange={(e) => setSelectedAirport(e.value)}
-                              options={
-                                Array.isArray(airports)
-                                  ? airports.map((airport) => ({
+
+                <div className="form-head-input-area">
+                  <div className="row">
+                    <div className="col-12 col-xl-8 col-lg-10 col-md-8 col-sm-8 mx-auto">
+                      <div className="custom-form-group mb-0 input-with-icon">
+                        <label
+                          htmlFor="airport"
+                          className="custom-form-label form-required text-sm-center"
+                        >
+                          Select your airport
+                        </label>
+                        <div className="form-icon-group">
+                          <i className="bi bi-airplane-fill input-grp-icon"></i>
+                          <Dropdown
+                            id="airport"
+                            value={selectedAirport}
+                            onChange={(e) => setSelectedAirport(e.value)}
+                            options={
+                              Array.isArray(airports)
+                                ? airports.map((airport) => ({
                                     ...airport,
                                     name: capitalizeFirstLetter(airport.name),
                                   }))
-                                  : []
-                              }
-                              optionLabel="name"
-                              placeholder="Select a Airport"
-                              //   valueTemplate={selectedAirportTemplate}
-                              //   itemTemplate={airportOptionTemplate}
-                              className="w-full w-100 custom-form-dropdown"
-                              invalid={showError}
-                            />
-                          </div>
-                          {showError && !selectedAirport && (
-                            <small className="text-danger form-error-msg text-sm-center">
-                              This field is required
-                            </small>
-                          )}
+                                : []
+                            }
+                            optionLabel="name"
+                            placeholder="Select a Airport"
+                            //   valueTemplate={selectedAirportTemplate}
+                            //   itemTemplate={airportOptionTemplate}
+                            className="w-full w-100 custom-form-dropdown"
+                            invalid={showError}
+                          />
                         </div>
+                        {showError && !selectedAirport && (
+                          <small className="text-danger form-error-msg text-sm-center">
+                            This field is required
+                          </small>
+                        )}
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="row">
-                    <div className="col-12">
+                <div className="row col-12 mt-3 mb-2">
+                  {/* <div className="col-12">
                       <Divider className="mt-4 mb-4" />
-                    </div>
+                    </div> */}
 
-                    <div className="col-12 col-sm-6 col-xl-6">
-                      <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
-                        <label
-                          htmlFor="dropOffDate"
-                          className="custom-form-label form-required"
-                        >
-                          Drop off date
-                        </label>
-                        <div className="form-icon-group">
-                          <i className="bi bi-calendar-check-fill input-grp-icon"></i>
-                          <Calendar
-                            id="dropOffDate"
-                            value={dropOffDate}
-                            onChange={handleDropOffDateChange}
-                            placeholder="dd/mm/yyyy"
-                            dateFormat="dd/mm/yy"
-                            minDate={today}
-                            className="w-100"
-                            invalid={showError}
-                          />
-                        </div>
-                        {showError && !dropOffDate && (
-                          <small className="text-danger form-error-msg">
-                            This field is required
-                          </small>
-                        )}
+                  <div className="col-12 col-sm-6 col-xl-6">
+                    <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
+                      <label
+                        htmlFor="dropOffDate"
+                        className="custom-form-label form-required"
+                      >
+                        Entry date
+                      </label>
+                      <div className="form-icon-group">
+                        <i className="bi bi-calendar-check-fill input-grp-icon"></i>
+                        <Calendar
+                          id="dropOffDate"
+                          value={dropOffDate}
+                          onChange={handleDropOffDateChange}
+                          placeholder="dd/mm/yyyy"
+                          dateFormat="dd/mm/yy"
+                          minDate={today}
+                          className="w-100"
+                          invalid={showError}
+                        />
                       </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-xl-6">
-                      <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
-                        <label
-                          htmlFor="dropOffTime"
-                          className="custom-form-label form-required"
-                        >
-                          Drop off time
-                        </label>
-                        <div className="form-icon-group">
-                          <i className="bi bi-clock-fill input-grp-icon"></i>
-                          {/* <Calendar id="dropOffTime" className='w-100' value={dropOffTime} onChange={(e) => setDropOffTime(e.value)} placeholder='hh:mm' timeOnly invalid={showError} /> */}
-                          <Dropdown
-                            id="dropOffTime"
-                            value={dropOffTime}
-                            onChange={(e) => setDropOffTime(e.value)}
-                            options={times}
-                            optionLabel="time"
-                            placeholder="Select the time"
-                            valueTemplate={selectedTimeTemplate}
-                            itemTemplate={timeTemplate}
-                            className="w-full w-100 custom-form-dropdown"
-                            invalid={showError}
-                          />
-                        </div>
-                        {showError && !dropOffTime && (
-                          <small className="text-danger form-error-msg">
-                            This field is required
-                          </small>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-xl-6">
-                      <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
-                        <label
-                          htmlFor="pickupDate"
-                          className="custom-form-label form-required"
-                        >
-                          Pickup date
-                        </label>
-                        <div className="form-icon-group">
-                          <i className="bi bi-calendar-check-fill input-grp-icon"></i>
-                          <Calendar
-                            id="pickupDate"
-                            value={pickupDate}
-                            onChange={(e) => {
-                              setPickupDate(e.value);
-                              setPickupDateStr(
-                                e.value.toLocaleDateString("en-GB")
-                              );
-                            }}
-                            placeholder="dd/mm/yyyy"
-                            dateFormat="dd/mm/yy"
-                            minDate={dropOffDate}
-                            disabled={!dropOffDate}
-                            className="w-100"
-                            invalid={showError}
-                          />
-                        </div>
-                        {showError && !pickupDate && (
-                          <small className="text-danger form-error-msg">
-                            This field is required
-                          </small>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-xl-6">
-                      <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
-                        <label
-                          htmlFor="pickupTime"
-                          className="custom-form-label form-required"
-                        >
-                          Pickup time
-                        </label>
-                        <div className="form-icon-group">
-                          <i className="bi bi-clock-fill input-grp-icon"></i>
-                          {/* <Calendar id="pickupTime" className='w-100' value={pickupTime} onChange={(e) => setPickupTime(e.value)} placeholder='hh:mm' timeOnly invalid={showError} /> */}
-                          <Dropdown
-                            id="pickupTime"
-                            value={pickupTime}
-                            onChange={(e) => setPickupTime(e.value)}
-                            options={times}
-                            optionLabel="time"
-                            placeholder="Select the time"
-                            valueTemplate={selectedTimeTemplate}
-                            itemTemplate={timeTemplate}
-                            className="w-full w-100 custom-form-dropdown"
-                            invalid={showError}
-                          />
-                        </div>
-                        {showError && !pickupTime && (
-                          <small className="text-danger form-error-msg">
-                            This field is required
-                          </small>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-xl-6 col-lg-7 col-md-6 mx-auto">
-                      <div className="custom-form-group mb-2 mb-sm-2 input-with-icon">
-                        <label
-                          htmlFor="couponCode"
-                          className="custom-form-label text-sm-center"
-                        >
-                          Coupon Code
-                        </label>
-                        <div className="form-icon-group">
-                          <i className="bi bi-gift-fill input-grp-icon"></i>
-                          <InputText
-                            id="couponCode"
-                            className="custom-form-input"
-                            placeholder="Enter promo code"
-                            invalid={showError}
-                            value={couponCode}
-                            onChange={(e) => setCouponCode(e.target.value)}
-                          />
-                        </div>
-                        {/* {showError &&
-                                                    <small className="text-danger form-error-msg text-sm-center">This field is required</small>
-                                                } */}
-                      </div>
-                    </div>
-
-                    <div className="col-12">
-                      <Divider className="mb-4" />
+                      {showError && !dropOffDate && (
+                        <small className="text-danger form-error-msg">
+                          This field is required
+                        </small>
+                      )}
                     </div>
                   </div>
 
-                  <div className="custom-form-group contains-float-input mb-0">
-                    <Button
-                      label="GET QUOTE"
-                      className="w-100 submit-button justify-content-center"
-                      loading={loading}
-                    />
+                  <div className="col-12 col-sm-6 col-xl-6">
+                    <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
+                      <label
+                        htmlFor="dropOffTime"
+                        className="custom-form-label form-required"
+                      >
+                        Entry time
+                      </label>
+                      <div className="form-icon-group">
+                        <i className="bi bi-clock-fill input-grp-icon"></i>
+                        {/* <Calendar id="dropOffTime" className='w-100' value={dropOffTime} onChange={(e) => setDropOffTime(e.value)} placeholder='hh:mm' timeOnly invalid={showError} /> */}
+                        <Dropdown
+                          id="dropOffTime"
+                          value={dropOffTime}
+                          onChange={(e) => setDropOffTime(e.value)}
+                          options={times}
+                          optionLabel="time"
+                          placeholder="Select the time"
+                          valueTemplate={selectedTimeTemplate}
+                          itemTemplate={timeTemplate}
+                          className="w-full w-100 custom-form-dropdown"
+                          invalid={showError}
+                        />
+                      </div>
+                      {showError && !dropOffTime && (
+                        <small className="text-danger form-error-msg">
+                          This field is required
+                        </small>
+                      )}
+                    </div>
                   </div>
-                </form>
-              </article>
+
+                  <div className="col-12 col-sm-6 col-xl-6">
+                    <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
+                      <label
+                        htmlFor="pickupDate"
+                        className="custom-form-label form-required"
+                      >
+                        Exit date
+                      </label>
+                      <div className="form-icon-group">
+                        <i className="bi bi-calendar-check-fill input-grp-icon"></i>
+                        <Calendar
+                          id="pickupDate"
+                          value={pickupDate}
+                          onChange={(e) => {
+                            setPickupDate(e.value);
+                            setPickupDateStr(
+                              e.value.toLocaleDateString("en-GB")
+                            );
+                          }}
+                          placeholder="dd/mm/yyyy"
+                          dateFormat="dd/mm/yy"
+                          minDate={dropOffDate}
+                          disabled={!dropOffDate}
+                          className="w-100"
+                          invalid={showError}
+                        />
+                      </div>
+                      {showError && !pickupDate && (
+                        <small className="text-danger form-error-msg">
+                          This field is required
+                        </small>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="col-12 col-sm-6 col-xl-6">
+                    <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
+                      <label
+                        htmlFor="pickupTime"
+                        className="custom-form-label form-required"
+                      >
+                        Exit time
+                      </label>
+                      <div className="form-icon-group">
+                        <i className="bi bi-clock-fill input-grp-icon"></i>
+                        {/* <Calendar id="pickupTime" className='w-100' value={pickupTime} onChange={(e) => setPickupTime(e.value)} placeholder='hh:mm' timeOnly invalid={showError} /> */}
+                        <Dropdown
+                          id="pickupTime"
+                          value={pickupTime}
+                          onChange={(e) => setPickupTime(e.value)}
+                          options={times}
+                          optionLabel="time"
+                          placeholder="Select the time"
+                          valueTemplate={selectedTimeTemplate}
+                          itemTemplate={timeTemplate}
+                          className="w-full w-100 custom-form-dropdown"
+                          invalid={showError}
+                        />
+                      </div>
+                      {showError && !pickupTime && (
+                        <small className="text-danger form-error-msg">
+                          This field is required
+                        </small>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="custom-form-group contains-float-input mb-0">
+                  <Button
+                    label="Reserve Now"
+                    className="w-100 submit-button justify-content-center"
+                    loading={loading}
+                  />
+                </div>
+              </form>
+              {/* </article> */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Steps Section: User-friendly horizontal flow */}
+      <section
+        className="steps-section"
+        style={{
+          background: "#DDF4E7",
+          padding: "40px 0",
+          borderRadius: "16px",
+          margin: "20px 0",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "0",
+            flexWrap: "wrap",
+            maxWidth: "900px",
+            margin: "0 auto",
+          }}
+        >
+          {/* Step 1 */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              minWidth: "180px",
+              flex: 1,
+            }}
+          >
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "50%",
+                width: "80px",
+                height: "80px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 12px #0001",
+                marginBottom: "12px",
+              }}
+            >
+              <img
+                src="assets/images/home/select_date.png"
+                alt="Select Parking Dates"
+                style={{ width: "48px", height: "48px" }}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+              />
+            </div>
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: "1.1rem",
+                color: "#26667F",
+                textAlign: "center",
+                maxWidth: "140px",
+              }}
+            >
+              Select Parking Dates.
+            </div>
+          </div>
+          {/* Arrow and line 1 */}
+          <div style={{ display: "flex", alignItems: "center", flex: 0 }}>
+            <svg
+              width="120"
+              height="50"
+              viewBox="0 0 120 50"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0,25 C40,0 80,50 120,25"
+                stroke="#124170"
+                strokeWidth="2"
+                strokeDasharray="6 6"
+                fill="none"
+                strokeLinecap="round"
+              />
+            </svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ margin: "0 4px" }}
+            >
+              <path
+                d="M4 12h16m0 0l-5-5m5 5l-5 5"
+                stroke="#124170"
+                strokeWidth="2.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          {/* Step 2 */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              minWidth: "180px",
+              flex: 1,
+            }}
+          >
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "50%",
+                width: "80px",
+                height: "80px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 12px #0001",
+                marginBottom: "12px",
+              }}
+            >
+              <img
+                src="assets/images/home/search.png"
+                alt="Search and Book Space"
+                style={{ width: "48px", height: "48px" }}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+              />
+            </div>
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: "1.1rem",
+                color: "#26667F",
+                textAlign: "center",
+                maxWidth: "140px",
+              }}
+            >
+              Search and Book Space
+            </div>
+          </div>
+          {/* Arrow and line 2 */}
+          <div style={{ display: "flex", alignItems: "center", flex: 0 }}>
+            <svg
+              width="120"
+              height="50"
+              viewBox="0 0 120 50"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0,25 C40,0 80,50 120,25"
+                stroke="#124170"
+                strokeWidth="2"
+                strokeDasharray="6 6"
+                fill="none"
+                strokeLinecap="round"
+              />
+            </svg>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style={{ margin: "0 4px" }}
+            >
+              <path
+                d="M4 12h16m0 0l-5-5m5 5l-5 5"
+                stroke="#124170"
+                strokeWidth="2.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          {/* Step 3 */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              minWidth: "180px",
+              flex: 1,
+            }}
+          >
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "50%",
+                width: "80px",
+                height: "80px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 12px #0001",
+                marginBottom: "12px",
+              }}
+            >
+              <img
+                src="assets/images/home/travel.png"
+                alt="Enjoy Your Travel"
+                style={{ width: "48px", height: "48px" }}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+              />
+            </div>
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: "1.1rem",
+                color: "#26667F",
+                textAlign: "center",
+                maxWidth: "140px",
+              }}
+            >
+              Enjoy Your Travel
             </div>
           </div>
         </div>

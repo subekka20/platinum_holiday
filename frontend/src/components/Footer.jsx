@@ -93,222 +93,165 @@ const Footer = () => {
         </svg>
       </button>
 
-      <footer className="footer-section overflow-hidden">
+      <footer className="footer-section custom-footer overflow-hidden">
         <div className="footer-sub-section">
           <div className="container-md">
             <div className="row">
-              <div className="col-12 col-xxl-4 col-xl-4 text-center text-xl-start">
-                <button
-                  onClick={() => goToLink("/")}
-                  className="footer-logo-link"
+              {/* Four columns in a single row, evenly spaced */}
+              <div
+                className="col-12 d-flex flex-nowrap align-items-start"
+                style={{
+                  gap: "0",
+                  justifyContent: "space-evenly",
+                  alignItems: "flex-start",
+                }}
+              >
+                {/* Company Content */}
+                <div
+                  className="footer-col col-12 col-md-3 mb-4 mb-md-0"
+                  style={{
+                    flex: 1,
+                    minWidth: 220,
+                    maxWidth: 320,
+                    margin: "0 16px",
+                  }}
                 >
-                  <img
-                    src="../assets/images/logo-light.png"
-                    className="footer-logo"
-                    alt="Platinum Holiday Service"
-                  />
-                </button>
-                <p className="footer-desc">
-                  Air Travel Extras Limited trades under the name The Parking
-                  Deals. We specialize in providing exceptional airport parking
-                  solutions to meet the diverse needs of travelers.
-                </p>
-              </div>
-
-              <div className="col-12 col-xxl-8 col-xl-8 mt-5 mt-xl-0">
-                <div className="row pe-lg-0 ps-lg-0 ps-sm-3 pe-sm-3">
-                  <div className="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                    <h6 className="footer-link-head">Company</h6>
-                    <ul className="footer-link-area">
-                      <li className="footer-link-item">
-                        <button
-                          onClick={() => goToLink("/about-us")}
-                          className="footer-link"
-                        >
-                          About Us
-                        </button>
-                      </li>
-                      <li className="footer-link-item">
-                        <button
-                          onClick={() => goToLink("/contact-us")}
-                          className="footer-link"
-                        >
-                          Contact Us
-                        </button>
-                      </li>
-                      <li className="footer-link-item">
-                        <button
-                          onClick={() => goToLink("/services")}
-                          className="footer-link"
-                        >
-                          Services
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-4 mt-sm-0">
-                    <h6 className="footer-link-head">Quick Links</h6>
-                    <ul className="footer-link-area">
-                      <li className="footer-link-item">
-                        <button
-                          onClick={() => goToLink("/terms-and-conditions")}
-                          className="footer-link"
-                        >
-                          Terms & Conditions
-                        </button>
-                      </li>
-                      <li className="footer-link-item">
-                        <button
-                          onClick={() => goToLink("/privacy-policy")}
-                          className="footer-link"
-                        >
-                          Privacy Policy
-                        </button>
-                      </li>
-                      <li className="footer-link-item">
-                        <button
-                          onClick={() => goToLink("/faq")}
-                          className="footer-link"
-                        >
-                          FAQ
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-12 mt-4 mt-lg-0">
-                    <h6 className="footer-link-head text-sm-center text-lg-start">
-                      Contact
-                    </h6>
-                    <ul className="footer-link-area contact-detail">
-                      <li className="footer-link-item">
-                        <a
-                          href="tel:07777135649"
-                          className="footer-link with-icon"
-                        >
-                          <div className="link-icon-area">
-                            <i className="bi bi-telephone-fill"></i>
-                          </div>
-                          <span>07777135649</span>
-                        </a>
-                      </li>
-                      <li className="footer-link-item">
-                        <a
-                          href="mailto:info@theparkingdeals.co.uk"
-                          className="footer-link with-icon"
-                        >
-                          <div className="link-icon-area">
-                            <i className="bi bi-envelope-fill"></i>
-                          </div>
-                          <span>info@theparkingdeals.co.uk</span>
-                        </a>
-                      </li>
-                      {/* <li className='footer-link-item'>
-                                                <a href="mailto:" target='_blank' rel="noreferrer" className='footer-link with-icon'>
-                                                    <div className="link-icon-area">
-                                                        <i className="bi bi-geo-alt-fill"></i>
-                                                    </div>
-                                                    <span>info@theparkingdeals.co.uk</span>
-                                                </a>
-                                            </li> */}
-                    </ul>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                      <h6 className="footer-link-head">Intro</h6>
+                      <button
+                        onClick={() => goToLink("/")}
+                        className="footer-logo-link"
+                        style={{ padding: 0, background: 'none', border: 'none', marginTop: 20 }}
+                      >
+                        <img
+                          src="../assets/images/logo-light.png"
+                          className="footer-logo"
+                          alt="Platinum Holiday Service"
+                          style={{ width: 80, height: 80, objectFit: 'contain', display: 'block', boxShadow: '0 4px 24px 0 #b3c9c0', borderRadius: '16px' }}
+                        />
+                      </button>
+                    </div>
+                    <div className="footer-desc">
+                      Platinum Holiday delivers hassle-free, affordable airport parking with reliable, tailored solutions for every traveler.
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <Toast ref={toast} />
-            <div className="row mt-4">
-              <div className="col-12 col-xl-8 col-lg-8 col-md-10 col-sm-9 mx-auto">
-                <h6 className="footer-link-head text-center mb-4">
-                  Subscribe our newsletter
-                </h6>
-
-                <div className="subscribe-input-area">
-                  <form action="" onSubmit={handleSubmit(submit)}>
-                    <input
-                      type="email"
-                      className="subscribe-input"
-                      placeholder="Enter your email address..."
-                      id="email"
-                      {...register("email", {
-                        required: "Email is required",
-                        pattern: {
-                          value: /^\S+@\S+$/i,
-                          message: "Invalid email address",
-                        },
-                      })}
-                    />
-                    <Button
-                      type="submit"
-                      className="subscribe-btn"
-                      loading={loading}
-                      label="Subscribe"
-                    />
-                  </form>
+                {/* Company Links */}
+                <div
+                  className="footer-col col-12 col-md-3 mb-4 mb-md-0"
+                  style={{
+                    flex: 1,
+                    minWidth: 180,
+                    maxWidth: 260,
+                    margin: "0 16px",
+                  }}
+                >
+                  <h6 className="footer-link-head">Company</h6>
+                  <ul className="footer-link-area">
+                    <li className="footer-link-item">
+                      <button
+                        onClick={() => goToLink("/about-us")}
+                        className="footer-link"
+                      >
+                        About Us
+                      </button>
+                    </li>
+                    <li className="footer-link-item">
+                      <button
+                        onClick={() => goToLink("/contact-us")}
+                        className="footer-link"
+                      >
+                        Contact Us
+                      </button>
+                    </li>
+                    <li className="footer-link-item">
+                      <button
+                        onClick={() => goToLink("/faqs")}
+                        className="footer-link"
+                      >
+                        FAQs
+                      </button>
+                    </li>
+                  </ul>
                 </div>
-                {errors.email && (
-                  <small className="text-danger text-center form-error-msg">
-                    {errors.email.message}
-                  </small>
-                )}
-              </div>
-            </div>
-
-            <div className="row mt-4 mt-sm-5">
-              <div className="col-12">
-                <h6 className="footer-link-head text-center mb-4">
-                  Follow us :
-                </h6>
-                <div className="footer-social-container">
-                  <a
-                    href=""
-                    className="footer-social-link"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Facebook"
-                  >
-                    <i className="ri-facebook-fill"></i>
-                  </a>
-
-                  <a
-                    href=""
-                    className="footer-social-link"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Twitter"
-                  >
-                    <i className="ri-twitter-x-line"></i>
-                  </a>
-
-                  <a
-                    href=""
-                    className="footer-social-link"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Instagram"
-                  >
-                    <i className="ri-instagram-line"></i>
-                  </a>
-
-                  <a
-                    href=""
-                    className="footer-social-link"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Linkedin"
-                  >
-                    <i className="ri-linkedin-fill"></i>
-                  </a>
+                {/* Support Links */}
+                <div
+                  className="footer-col col-12 col-md-3 mb-4 mb-md-0"
+                  style={{
+                    flex: 1,
+                    minWidth: 180,
+                    maxWidth: 260,
+                    margin: "0 16px",
+                  }}
+                >
+                  <h6 className="footer-link-head">Support</h6>
+                  <ul className="footer-link-area">
+                    <li className="footer-link-item">
+                      <button
+                        onClick={() => goToLink("/terms-and-conditions")}
+                        className="footer-link"
+                      >
+                        Terms & Conditions
+                      </button>
+                    </li>
+                    <li className="footer-link-item">
+                      <button
+                        onClick={() => goToLink("/privacy-policy")}
+                        className="footer-link"
+                      >
+                        Privacy Policy
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                {/* Contact Info */}
+                <div
+                  className="footer-col col-12 col-md-3"
+                  style={{
+                    flex: 1,
+                    minWidth: 180,
+                    maxWidth: 260,
+                    margin: "0 16px",
+                  }}
+                >
+                  <h6 className="footer-link-head text-sm-center text-lg-start">
+                    Contact Info
+                  </h6>
+                  <ul className="footer-link-area contact-detail">
+                    <li className="footer-link-item">
+                      <a
+                        href="tel:+44 7375 551666"
+                        className="footer-link with-icon"
+                      >
+                        <div className="link-icon-area">
+                          <i className="bi bi-telephone-fill"></i>
+                        </div>
+                        <span>+44 7375 551666</span>
+                      </a>
+                    </li>
+                    <li className="footer-link-item">
+                      <a
+                        href="mailto:info@platinumholiday.co.uk"
+                        className="footer-link with-icon"
+                      >
+                        <div className="link-icon-area">
+                          <i className="bi bi-envelope-fill"></i>
+                        </div>
+                        <span>info@platinumholiday.co.uk</span>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
+          <Toast ref={toast} />
         </div>
         <div className="sub-footer">
           <p>
-            © <span className="currentYear">{currentYear}</span>, Air Travel
-            Extras Limited. All rights reserved.
+            © <span className="currentYear">{currentYear}</span> All rights
+            reserved.
           </p>
         </div>
       </footer>

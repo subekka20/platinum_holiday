@@ -129,7 +129,7 @@ const Header = () => {
                     className="nav-logo-link"
                   >
                     <img
-                      src="assets/images/logo-light.png"
+                      src="assets/images/logo.png"
                       className="nav-logo"
                       alt="Logo"
                     />
@@ -148,7 +148,7 @@ const Header = () => {
                             : ""
                           }`}
                       >
-                        About
+                        About Us
                       </button>
                     </li>
 
@@ -172,21 +172,21 @@ const Header = () => {
                             : ""
                           }`}
                       >
-                        Contact
+                        Contact Us
                       </button>
                     </li>
                   </ul>
 
                   {!user ? (
                     <ul className="nav-button-grp">
-                      <li className="nav-button-grp-item">
+                      {/* <li className="nav-button-grp-item">
                         <button
                           onClick={() => goToLink("/sign-up")}
                           className="nav-link-button with-outline text-uppercase letter-spaced"
                         >
                           Sign up
                         </button>
-                      </li>
+                      </li> */}
                       <li className="nav-button-grp-item">
                         <button
                           onClick={() => goToLink("/sign-in")}
