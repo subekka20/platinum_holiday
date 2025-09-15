@@ -716,73 +716,25 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Steps Section: User-friendly horizontal flow */}
-      <section
-        className="steps-section"
-        style={{
-          background: "#DDF4E7",
-          padding: "40px 0",
-          borderRadius: "16px",
-          margin: "20px 0",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "0",
-            flexWrap: "wrap",
-            maxWidth: "900px",
-            margin: "0 auto",
-          }}
-        >
+      {/* Steps Section: Responsive horizontal→vertical flow */}
+      <section className="steps-section">
+        <div className="steps-wrap">
           {/* Step 1 */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              minWidth: "180px",
-              flex: 1,
-            }}
-          >
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: "50%",
-                width: "80px",
-                height: "80px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 2px 12px #0001",
-                marginBottom: "12px",
-              }}
-            >
+          <div className="step">
+            <div className="step-icon">
               <img
                 src="assets/images/home/select_date.png"
                 alt="Select Parking Dates"
-                style={{ width: "48px", height: "48px" }}
                 onError={(e) => {
                   e.target.style.display = "none";
                 }}
               />
             </div>
-            <div
-              style={{
-                fontWeight: 600,
-                fontSize: "1.1rem",
-                color: "#26667F",
-                textAlign: "center",
-                maxWidth: "140px",
-              }}
-            >
-              Select Parking Dates.
-            </div>
+            <div className="step-title">Select Parking Dates.</div>
           </div>
+
           {/* Arrow and line 1 */}
-          <div style={{ display: "flex", alignItems: "center", flex: 0 }}>
+          <div className="connector">
             <svg
               width="120"
               height="50"
@@ -803,7 +755,7 @@ const Home = () => {
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              style={{ margin: "0 4px" }}
+              className="arrowhead"
             >
               <path
                 d="M4 12h16m0 0l-5-5m5 5l-5 5"
@@ -815,52 +767,23 @@ const Home = () => {
               />
             </svg>
           </div>
+
           {/* Step 2 */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              minWidth: "180px",
-              flex: 1,
-            }}
-          >
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: "50%",
-                width: "80px",
-                height: "80px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 2px 12px #0001",
-                marginBottom: "12px",
-              }}
-            >
+          <div className="step">
+            <div className="step-icon">
               <img
                 src="assets/images/home/search.png"
                 alt="Search and Book Space"
-                style={{ width: "48px", height: "48px" }}
                 onError={(e) => {
                   e.target.style.display = "none";
                 }}
               />
             </div>
-            <div
-              style={{
-                fontWeight: 600,
-                fontSize: "1.1rem",
-                color: "#26667F",
-                textAlign: "center",
-                maxWidth: "140px",
-              }}
-            >
-              Search and Book Space
-            </div>
+            <div className="step-title">Search and Book Space</div>
           </div>
+
           {/* Arrow and line 2 */}
-          <div style={{ display: "flex", alignItems: "center", flex: 0 }}>
+          <div className="connector">
             <svg
               width="120"
               height="50"
@@ -881,7 +804,7 @@ const Home = () => {
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              style={{ margin: "0 4px" }}
+              className="arrowhead"
             >
               <path
                 d="M4 12h16m0 0l-5-5m5 5l-5 5"
@@ -893,51 +816,145 @@ const Home = () => {
               />
             </svg>
           </div>
+
           {/* Step 3 */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              minWidth: "180px",
-              flex: 1,
-            }}
-          >
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: "50%",
-                width: "80px",
-                height: "80px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 2px 12px #0001",
-                marginBottom: "12px",
-              }}
-            >
+          <div className="step">
+            <div className="step-icon">
               <img
                 src="assets/images/home/travel.png"
                 alt="Enjoy Your Travel"
-                style={{ width: "48px", height: "48px" }}
                 onError={(e) => {
                   e.target.style.display = "none";
                 }}
               />
             </div>
-            <div
-              style={{
-                fontWeight: 600,
-                fontSize: "1.1rem",
-                color: "#26667F",
-                textAlign: "center",
-                maxWidth: "140px",
-              }}
-            >
-              Enjoy Your Travel
-            </div>
+            <div className="step-title">Enjoy Your Travel</div>
           </div>
         </div>
+
+        {/* Component-scoped CSS */}
+        <style>{`
+    .steps-section {
+      background: #DDF4E7;
+      padding: 40px 0;
+      border-radius: 16px;
+      margin: 20px 0;
+    }
+    .steps-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 180px;
+      flex: 1;
+      margin: 8px 0;
+    }
+    .step-icon {
+      background: #fff;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px #0001;
+      margin-bottom: 12px;
+    }
+    .step-icon img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+    .step-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #26667F;
+      text-align: center;
+      max-width: 160px;
+      line-height: 1.3;
+    }
+    .connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0;
+      padding: 0 4px;
+    }
+    .connector .arrowhead {
+      margin: 0 4px;
+      display: block;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    /* Tablets: tighten spacing slightly */
+    @media (max-width: 992px) {
+      .steps-wrap {
+        gap: 8px 0;
+      }
+      .step {
+        min-width: 160px;
+      }
+      .step-icon {
+        width: 72px;
+        height: 72px;
+      }
+      .step-icon img {
+        width: 40px;
+        height: 40px;
+      }
+      .step-title {
+        font-size: 1rem;
+        max-width: 150px;
+      }
+    }
+
+    /* Phones: stack vertically, hide connectors, shrink icons/text */
+    @media (max-width: 640px) {
+      .steps-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 0 16px;
+      }
+      .step {
+        flex: none;
+        min-width: 0;
+        padding: 12px 0;
+      }
+      .connector {
+        display: none; /* hide wavy lines & arrows on mobile */
+      }
+      .step-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 10px;
+      }
+      .step-icon img {
+        width: 36px;
+        height: 36px;
+      }
+      .step-title {
+        font-size: 0.98rem;
+        max-width: 220px;
+      }
+    }
+
+    /* Very small devices */
+    @media (max-width: 380px) {
+      .step-title {
+        font-size: 0.94rem;
+      }
+    }
+  `}</style>
       </section>
 
       <Footer />
