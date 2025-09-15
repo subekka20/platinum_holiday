@@ -38,7 +38,11 @@ const Preloader = () => {
     return (
         showPreloader && (
             <div className="loader-area" id="preloader" style={{ transition: 'opacity 0.5s', opacity: showPreloader ? '1' : '0' }}>
-                <div className="loader"></div>
+                <div className="loader dot-circle-loader">
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="dot-circle-dot" style={{ '--i': i }}></div>
+                    ))}
+                </div>
             </div>
         )
     );

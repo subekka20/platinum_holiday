@@ -1689,7 +1689,7 @@ const VendorList = () => {
                 >
                   <div className="tab-detail-content-area">
                     <p>
-                      For <b>The Parking Deals</b> T&Cs, please visit{" "}
+                      For <b>Platinum Holiday Service</b> T&Cs, please visit{" "}
                       <a
                         href="https://theparkingdeals.co.uk/terms-and-conditions"
                         target="_blank"

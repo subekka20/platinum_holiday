@@ -1,3 +1,8 @@
+/* Remove blue highlight on text selection for about page paragraph */
+.section-paragraph::selection {
+    background: #527583; /* match page bg or set to transparent */
+    color: inherit;
+}
 .section-image-area .about-img {
     max-width: 30%;
     display: block;
@@ -11,14 +16,14 @@
     padding: 20px;
     display: block;
     height: 100%;
-    box-shadow: 0px 10px 30px #22205723;
-    background: rgb(255, 255, 255);
+    box-shadow: 0px 10px 30px #26667F33;
+    background: #ffffff;
     border: 2px solid #ffffff;
     transition: ease-in-out 0.5s;
-    border-color: #d12788;
+    border-color: #0f6080;
     /* background: linear-gradient(32deg, rgba(255, 255, 255, 1) 50%, rgb(255, 246, 252) 100%); */
     border-style: solid;
-    border-width: 0px 0px 0px 4px;
+    border-width: 0px 0px 4px 0px;
 }
 
 .about-content-card:hover {
@@ -29,16 +34,17 @@
     font-size: 20px;
     font-weight: 600;
     display: block;
-    color: #000;
+    color: #26667F;
     transition: ease-in-out 0.5s;
 }
 
 .content-card-desc {
     margin-bottom: 0;
-    color: #000;
-    font-size: 15px;
+    color: #26667F;
+    font-size: 18px;
     line-height: 1.7em;
     transition: ease-in-out 0.5s;
+    text-align: justify;
 }
 
 .content-card-header {

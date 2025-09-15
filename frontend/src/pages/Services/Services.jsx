@@ -1,20 +1,20 @@
 import React from "react";
-import './Services.css';
-import './Services-responsive.css';
+import "./Services.css";
+import "./Services-responsive.css";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Preloader from "../../Preloader";
 
-import Tilt from 'react-parallax-tilt';
+import Tilt from "react-parallax-tilt";
 
 const Services = () => {
-    return (
-        <>
-            <Preloader />
-            <Header />
+  return (
+    <>
+      <Preloader />
+      <Header />
 
-            {/* Breadcrumb Section Start */}
-            <section className="breadcrumb-section overflow-hidden">
+      {/* Breadcrumb Section Start */}
+      {/* <section className="breadcrumb-section overflow-hidden">
                 <div className="container-md">
                     <div className="row">
                         <div className="col-12">
@@ -31,100 +31,136 @@ const Services = () => {
                         </div>
                     </div>
                 </div>
-            </section>
-            {/* Breadcrumb Section End */}
+            </section> */}
+      {/* Breadcrumb Section End */}
 
-            {/* Services Section Start */}
-            <section className="section-padding overflow-hidden">
-                <div className="container-md">
-                    <div className="row">
-                        <div className="col-12">
-                            <h3 className='section-heading text-center mx-auto text-purple' data-aos="zoom-out">Services</h3>
-                        </div>
+      {/* Services Section Start */}
+      <section className="section-padding overflow-hidden">
+        <div className="container-md">
+          <div className="column">
+            <div className="col-12">
+              <h3
+                className="section-heading text-center mx-auto text-purple"
+                data-aos="zoom-out"
+              >
+                Services
+              </h3>
+            </div>
 
-                        <div className="col-12 col-xl-6 col-lg-6 mx-auto">
-                            <div className="section-main-image-area mt-5" data-aos="zoom-out">
-                                <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                                    <img src="assets/images/services/services1-pink.svg" className="section-main-image animate-image" alt="Services" />
-                                </Tilt>
-                            </div>
-                        </div>
+            <div className="col-12 mb-4 mb-lg-5">
+              <div className="mt-4 mt-sm-4 mt-lg-5">
+                <p
+                  className="section-paragraph text-center mb-0"
+                  data-aos="fade"
+                >
+                  At Platinum Holiday Service, we believe parking should be the
+                  easiest part of your journey. That’s why we’ve redefined the
+                  experience with tailored options for every traveler. Glide in
+                  with our Valet Parking for a touch of luxury, choose Self-Park
+                  for independence and speed, or settle into Long-Term Parking
+                  designed for extended adventures. Each service blends
+                  security, convenience, and care, ensuring your trip begins and
+                  ends without stress. With us, parking isn’t just a
+                  necessity—it’s part of the Platinum experience.
+                </p>
+              </div>
+            </div>
+          </div>
 
-                        <div className="col-12 mb-4 mb-lg-5">
-                            <div className="mt-4 mt-sm-4 mt-lg-5">
-                                <p className='section-paragraph text-center mb-0' data-aos="fade">
-                                    At The Parking Deals, we cater to a diverse clientele, including business professionals, families, and solo travelers, with a variety of parking services tailored to meet different needs. Our offerings include Valet Parking for a hassle-free experience, Self-Park Options for those who prefer to park their own vehicle, and Long-Term Parking for extended trips. Each service is designed to maximize your convenience and security, ensuring a smooth and worry-free parking experience.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+          <div className="row content-card-row mt-5">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <article className="service-card">
+                {/* <div className="service-card-img-area">
+                                    <img src="assets/images/services/valet-parking.jpg" className="service-card-img" alt="Meet and Greet Service" />
+                                </div> */}
+                <div className="service-card-body">
+                  <h4 className="service-card-head">Meet and Greet</h4>
+                  <p className="service-card-desc">
+                    Begin and end your journey effortlessly with our exclusive
+                    Meet & Greet service. The moment you arrive at the airport,
+                    a courteous professional will be waiting at the terminal
+                    entrance, ready to assist with your luggage and handle your
+                    vehicle with care. While your car is safely parked in a
+                    secure facility, you can head straight to check-in without
+                    the usual stress or delays. On your return, your vehicle
+                    will be brought back to the terminal, ready and waiting for
+                    you. This service blends personalized care, convenience, and
+                    peace of mind, ensuring your travel feels smooth from start
+                    to finish.
+                  </p>
+                </div>
+              </article>
+            </div>
+            <div className="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <article className="service-card">
+                {/* <div className="service-card-img-area">
+                                    <img src="assets/images/services/valet-parking.jpg" className="service-card-img" alt="Valet Parking" />
+                                </div> */}
+                <div className="service-card-body">
+                  <h4 className="service-card-head">Valet Parking</h4>
+                  <p className="service-card-desc">
+                    Enjoy effortless travel with our Valet Parking service.
+                    Drive straight to the terminal and hand over your keys to
+                    our trusted valet team—while you head directly to check-in,
+                    we’ll ensure your vehicle is parked securely. Designed for
+                    travelers who value time and comfort, this service removes
+                    the stress of searching for a spot and guarantees a seamless
+                    start to your journey. On your return, your car will be
+                    ready and waiting at the terminal, making your exit as
+                    smooth as your arrival.
+                  </p>
+                </div>
+              </article>
+            </div>
 
-                    <div className='row content-card-row mt-5'>
-                        <div className="col-12 col-xl-6 col-lg-6 col-md-8 col-sm-8 mx-auto" data-aos="fade-up">
-                            <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'>
-                                <article className="service-card">
-                                    <div className="service-card-img-area">
-                                        <img src="assets/images/services/valet-parking.jpg" className="service-card-img" alt="Meet and Greet Service" />
-                                    </div>
-                                    <div className="service-card-body">
-                                        <h4 className="service-card-head">Meet and Greet</h4>
-                                        <p className="service-card-desc">
-                                            Experience a hassle-free start and end to your journey with our Meet and Greet service. Upon arrival at the airport, a friendly and professional driver will meet you at the terminal entrance. They will assist with your luggage and take care of parking your vehicle in a secure location, allowing you to proceed directly to check-in without any delay. On your return, your vehicle will be waiting for you at the terminal, ensuring a smooth and convenient departure. Our Meet and Greet service combines the highest level of convenience with personalized attention, making your travel experience seamless and enjoyable.
-                                        </p>
-                                    </div>
-                                </article>
-                            </Tilt>
-                        </div>
-
-                        {/* <div className="col-12 col-xl-4 col-lg-6 col-md-8 col-sm-8 mx-auto" data-aos="fade-up">
-                            <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'>
-                                <article className="service-card">
-                                    <div className="service-card-img-area">
-                                        <img src="assets/images/services/valet-parking.jpg" className="service-card-img" alt="Valet Parking" />
-                                    </div>
-                                    <div className="service-card-body">
-                                        <h4 className="service-card-head">Valet Parking</h4>
-                                        <p className="service-card-desc">
-                                            Experience the ultimate convenience with our Valet Parking service. Simply drive up to the terminal, and our professional valet attendants will take care of the rest. We'll park your vehicle in a secure location, allowing you to proceed directly to your check-in without the hassle of finding a parking spot. This service is perfect for those in a hurry or anyone looking for a stress-free start to their journey. Upon your return, your vehicle will be waiting for you at the terminal, ensuring a smooth and quick exit.
-                                        </p>
-                                    </div>
-                                </article>
-                            </Tilt>
-                        </div>
-
-                        <div className="col-12 col-xl-4 col-lg-6 col-md-8 col-sm-8 mx-auto" data-aos="fade-up">
-                            <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'>
-                                <article className="service-card">
-                                    <div className="service-card-img-area">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'> */}
+              <article className="service-card">
+                {/* <div className="service-card-img-area">
                                         <img src="assets/images/services/self-parking.jpg" className="service-card-img" alt="Self-Parking" />
-                                    </div>
-                                    <div className="service-card-body">
-                                        <h4 className="service-card-head">Self-Parking</h4>
-                                        <p className="service-card-desc">
-                                            For travelers who prefer to maintain control over their parking experience, our Self-Park Options are an ideal choice. We offer a variety of parking lots located conveniently close to the airport. You can park your vehicle yourself, keep your keys, and have the peace of mind that your car is secure. Our self-park facilities are equipped with 24/7 surveillance and easy shuttle services to and from the airport terminals, ensuring a seamless transition from your car to your flight.
-                                        </p>
-                                    </div>
-                                </article>
-                            </Tilt>
-                        </div>
+                                    </div> */}
+                <div className="service-card-body">
+                  <h4 className="service-card-head">Self-Parking</h4>
+                  <p className="service-card-desc">
+                    For travelers who enjoy flexibility and independence, our
+                    Self-Park option is the perfect fit. Choose from
+                    conveniently located lots just minutes from the airport,
+                    park your vehicle yourself, and keep your keys for complete
+                    peace of mind. With 24/7 surveillance and secure facilities,
+                    your car stays protected while you travel. Our reliable
+                    shuttle service ensures a quick and easy transfer between
+                    your vehicle and the terminal, giving you a smooth,
+                    stress-free start to your journey.
+                  </p>
+                </div>
+              </article>
+              {/* </Tilt> */}
+            </div>
 
-                        <div className="col-12 col-xl-4 col-lg-6 col-md-8 col-sm-8 mx-auto" data-aos="fade-up">
-                            <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'>
-                                <article className="service-card">
-                                    <div className="service-card-img-area">
+            <div className="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'> */}
+              <article className="service-card">
+                {/* <div className="service-card-img-area">
                                         <img src="assets/images/services/long-term-parking.jpg" className="service-card-img" alt="Long-Term Parking" />
-                                    </div>
-                                    <div className="service-card-body">
-                                        <h4 className="service-card-head">Long-Term Parking</h4>
-                                        <p className="service-card-desc">
-                                            If you're planning to be away for an extended period, our Long-Term Parking service provides a cost-effective solution for leaving your vehicle in a secure environment. Our long-term lots are monitored around the clock to ensure the safety of your car while you're away. We offer competitive rates to help you save money on parking fees without compromising on security. This service is ideal for vacations, business trips, or any extended stay, giving you one less thing to worry about while you're away.
-                                        </p>
-                                    </div>
-                                </article>
-                            </Tilt>
-                        </div>
+                                    </div> */}
+                <div className="service-card-body">
+                  <h4 className="service-card-head">Long-Term Parking</h4>
+                  <p className="service-card-desc">
+                    Travel with confidence knowing your vehicle is safe with our
+                    Long-Term Parking service. Perfect for vacations, business
+                    trips, or extended stays, this option offers a secure,
+                    cost-effective solution for leaving your car behind. Our
+                    facilities are monitored 24/7, giving you complete peace of
+                    mind while you’re away. With competitive rates and reliable
+                    security, you can focus on your journey knowing your vehicle
+                    will be ready and waiting when you return.
+                  </p>
+                </div>
+              </article>
+              {/* </Tilt> */}
+            </div>
 
-                        <div className="col-12 col-xl-4 col-lg-6 col-md-8 col-sm-8 mx-auto" data-aos="fade-up">
+            {/* <div className="col-12 col-xl-4 col-lg-6 col-md-8 col-sm-8 mx-auto" data-aos="fade-up">
                             <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className='h-100'>
                                 <article className="service-card">
                                     <div className="service-card-img-area">
@@ -219,14 +255,14 @@ const Services = () => {
                                 </article>
                             </Tilt>
                         </div> */}
-                    </div>
-                </div>
-            </section>
-            {/* Services Section End */}
+          </div>
+        </div>
+      </section>
+      {/* Services Section End */}
 
-            <Footer />
-        </>
-    )
-}
+      <Footer />
+    </>
+  );
+};
 
 export default Services;

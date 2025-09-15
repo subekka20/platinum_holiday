@@ -47,14 +47,14 @@ const sendVerificationEmail = async (
     `
         <div style="padding: 20px; font-family: Calibri;">
           <div style="text-align: center;">
-            <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="The Parking Deals Logo" width="80" height="80"></a>
+            <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="Platinum Holiday Service Logo" width="80" height="80"></a>
           </div>
           <div style="margin-top: 40px; font-size: 15px;">
             <p>Dear Sir/Madam,</p>
             <p>${content}</p>
             <h1>${verificationCode}</h1>
             <p>If you have any questions, please contact our support team at <a href="mailto:info@theparkingdeals.co.uk">info@theparkingdeals.co.uk</a>.</p>
-            <p>Thank you for choosing The Parking Deals. We look forward to serving you.</p>
+            <p>Thank you for choosing Platinum Holiday Service. We look forward to serving you.</p>
           </div>
         </div>
       `

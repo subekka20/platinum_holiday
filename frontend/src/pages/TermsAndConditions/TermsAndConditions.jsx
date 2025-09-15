@@ -49,7 +49,7 @@ const TermsAndConditions = () => {
                         <div className="col-12 mb-4 mb-lg-5">
                             <div className="mt-4 mt-sm-4 mt-lg-5">
                                 <p className='section-paragraph text-center mb-0' data-aos="fade">
-                                    Welcome to The Parking Deals! By using our website and services, you agree to comply with the following terms and conditions:
+                                    Welcome to Platinum Holiday Service! By using our website and services, you agree to comply with the following terms and conditions:
                                 </p>
                             </div>
                         </div>

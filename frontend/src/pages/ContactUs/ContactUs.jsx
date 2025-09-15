@@ -76,7 +76,7 @@ const ContactUs = () => {
       <Header />
 
       {/* Breadcrumb Section Start */}
-      <section className="breadcrumb-section overflow-hidden">
+      {/* <section className="breadcrumb-section overflow-hidden">
         <div className="container-md">
           <div className="row">
             <div className="col-12">
@@ -94,7 +94,7 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Breadcrumb Section End */}
 
       <Toast ref={toast} />
@@ -112,7 +112,7 @@ const ContactUs = () => {
               </h3>
             </div>
 
-            <div className="col-12 col-xl-6 col-lg-6 mx-auto">
+            {/* <div className="col-12 col-xl-6 col-lg-6 mx-auto">
               <div className="section-main-image-area mt-5" data-aos="zoom-out">
                 <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
                   <img
@@ -122,7 +122,7 @@ const ContactUs = () => {
                   />
                 </Tilt>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-12 mb-4 mb-lg-5">
               <div className="mt-4 mt-sm-4 mt-lg-5">
@@ -130,24 +130,13 @@ const ContactUs = () => {
                   className="section-paragraph text-center mb-0"
                   data-aos="fade"
                 >
-                  At The Parking Deals, we are dedicated to providing
-                  exceptional customer service. If you have any questions, need
-                  assistance with your reservation, or have any feedback, our
-                  customer service team is here to help. You can reach us by
-                  email at <a href="mailto:">info@theparkingdeals.uk</a> or by
-                  phone at <a href="tel:">07777135649</a>. Our team ensure your
-                  experience with us is seamless and satisfactory. For
-                  additional support, you can also visit our website at{" "}
-                  <a
-                    href="https://theparkingdeals.co.uk/"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    theparkingdeals.co.uk
-                  </a>
-                  , where you'll find helpful resources and information. We look
-                  forward to assisting you and ensuring a smooth and convenient
-                  parking experience.
+                  At Platinum Holiday Service, your journey comes first. We go
+                  beyond reservations to create stress-free, memorable
+                  experiences. From the moment you connect with us until the end
+                  of your stay, our team is committed to ensuring everything
+                  feels seamless, supportive, and enjoyable. Every detail
+                  matters — and we're here to make sure your holiday is as
+                  smooth as it is unforgettable.
                 </p>
               </div>
             </div>
@@ -157,21 +146,23 @@ const ContactUs = () => {
                 <div className="row">
                   <div className="col-12 col-xl-5">
                     <div className="contact-detail-section">
+                      <div className="contact-image mb-3 text-center">
+                        <img
+                          src="/assets/images/contact/contactus.png"
+                          alt="Contact Us"
+                          style={{ width: "100%" }}
+                        />
+                      </div>
                       <h4 className="contact-card-head">Reach us</h4>
 
                       <p
                         className="content-card-desc mt-4 mb-0"
                         data-aos="fade"
                       >
-                        We’re here to assist you with any questions or concerns.
-                        Please fill out the contact form below with your
-                        details, including your name, email, phone number, and
-                        the subject of your inquiry. Don’t forget to include
-                        your message so we can address your needs promptly. Our
-                        team will review your submission and get back to you as
-                        soon as possible. For immediate assistance, you can also
-                        reach us via email or call us. We look forward to
-                        hearing from you!
+                        Reach Out, We’re Listening Drop your details and message
+                        in the form below — that’s all it takes. Our team will
+                        connect with you swiftly to provide the support you
+                        need.
                       </p>
 
                       <div className="contact-content-area">
@@ -187,20 +178,20 @@ const ContactUs = () => {
                         <div className="contact-content" data-aos="fade-left">
                           <i className="bi bi-envelope-fill"></i>
                           <a
-                            href="mailto:info@theparkingdeals.co.uk"
+                            href="mailto:info@platinumholiday.co.uk"
                             className="contact-content-link"
                           >
-                            info@theparkingdeals.co.uk
+                            info@platinumholiday.co.uk
                           </a>
                         </div>
 
                         <div className="contact-content" data-aos="fade-left">
                           <i className="bi bi-telephone-fill"></i>
                           <a
-                            href="tel:07777135649"
+                            href="tel:+44 7375 551666"
                             className="contact-content-link"
                           >
-                            07777135649
+                            +44 7375 551666
                           </a>
                         </div>
                       </div>

@@ -97,7 +97,7 @@ const AdminLogin = () => {
                 <div className="col-12 col-xl-4 col-lg-6 col-sm-8 col-md-88 mx-auto">
                     <article className="custom-card" data-aos="fade-up">
                         <div className="custom-card-logo-area">
-                            <img src="assets/images/logo.png" className='custom-card-logo' alt="The Parking Deals" />
+                            <img src="assets/images/logo.png" className='custom-card-logo' alt="Platinum Holiday Service" />
                         </div>
                         <h3 className="custom-card-tile">Admin Login</h3>
                         <h6 className="custom-card-sub-tile">Welcome Back! Please enter your credentials to access the admin dashboard</h6>
