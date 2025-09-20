@@ -968,7 +968,7 @@ code {
   padding: 50px 0;
   background: #ddf4e7 !important;
   border-radius: 20px;
-  margin-top: 70px;
+  margin-top: 80px;
 }
 
 .breadcrumb-section {
@@ -1134,7 +1134,7 @@ code {
 }
 
 .custom-card-tile {
-  color: #000;
+  color: #26667F;
   font-weight: 600;
   font-size: 26px;
   margin-bottom: 10px;
@@ -1144,16 +1144,16 @@ code {
 .custom-card-tile::after {
   content: "";
   background-color: var(--color-secondary);
-  width: 100px;
+  /* width: fit-content; */
   height: 3px;
   display: block;
-  margin-left: 0;
+  /* margin-left: 35px; */
   margin-top: 3px;
   border-radius: 10px;
 }
 
 .custom-card-sub-tile {
-  color: #000;
+  color: #26667F;
   font-weight: 400;
   font-size: 16px;
   display: block;
@@ -1165,7 +1165,7 @@ code {
   margin-top: 30px;
   border-radius: 20px;
   padding: 40px 20px;
-  background-color: #26667f;
+  background-color: #26667f1a;
   border: 1px solid #ebeafc;
   position: relative;
 }
@@ -1520,7 +1520,7 @@ code {
 .custom-form-group .p-inputtext:focus,
 .custom-form-group .p-password-input:focus {
   border-color: var(--color-primary) !important;
-  box-shadow: 0px 0px 0px 4px #37348b2c !important;
+  box-shadow: 0px 0px 0px 4px #26667F !important;
 }
 
 .p-password-panel {
@@ -1546,12 +1546,14 @@ code {
   font-size: 15px;
   margin-bottom: 0;
   cursor: pointer;
+  color: #26667F;
+
 }
 
 .custom-check-group .custom-check-label a {
   font-size: 15px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #124170;
   text-decoration: none;
   transition: ease 0.5s;
 }
@@ -1605,7 +1607,7 @@ code {
 }
 
 .custom-form-link-area p {
-  color: #000;
+  color: #26667F;
   font-size: 15px;
   display: block;
   font-weight: 400;
@@ -1613,7 +1615,7 @@ code {
 }
 
 .custom-form-link {
-  color: var(--color-primary) !important;
+  color: #26667F;
   font-size: 15px;
   text-decoration: none;
   font-weight: 500;

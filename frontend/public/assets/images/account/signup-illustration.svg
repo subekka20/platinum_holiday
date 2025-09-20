@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <!-- Background -->
+  <rect width="600" height="400" fill="white"/>
+
+  <!-- Desk -->
+  <rect x="80" y="280" width="440" height="20" rx="5" fill="#124170"/>
+
+  <!-- Chair -->
+  <rect x="120" y="200" width="60" height="120" rx="8" fill="#26667F"/>
+
+  <!-- Character body -->
+  <rect x="140" y="150" width="80" height="130" rx="15" fill="#67C090"/>
+
+  <!-- Character head -->
+  <circle cx="180" cy="110" r="40" fill="#26667F"/>
+
+  <!-- Laptop -->
+  <rect x="250" y="120" width="230" height="150" rx="8" fill="#DDF4E7" stroke="#124170" stroke-width="4"/>
+
+  <!-- Screen -->
+  <rect x="265" y="135" width="200" height="120" rx="4" fill="white"/>
+
+  <!-- Signup form elements -->
+  <circle cx="365" cy="160" r="20" fill="#67C090"/>
+  <rect x="300" y="190" width="130" height="20" rx="5" fill="#DDF4E7"/>
+  <rect x="300" y="220" width="130" height="20" rx="5" fill="#DDF4E7"/>
+  <rect x="300" y="250" width="130" height="25" rx="8" fill="#124170"/>
+
+  <!-- Button label -->
+  <text x="365" y="268" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">Sign Up</text>
+</svg>

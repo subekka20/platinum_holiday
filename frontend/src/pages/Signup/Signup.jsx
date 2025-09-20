@@ -223,7 +223,7 @@ const Signup = () => {
       <Header />
 
       {/* Breadcrumb Section Start */}
-      <section className="breadcrumb-section overflow-hidden">
+      {/* <section className="breadcrumb-section overflow-hidden">
         <div className="container-md">
           <div className="row">
             <div className="col-12">
@@ -241,7 +241,7 @@ const Signup = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Breadcrumb Section End */}
 
       <Toast ref={toast} />
@@ -455,22 +455,8 @@ const Signup = () => {
             </div>
           ) : (
             <div className="row">
-              {/* <div className="col-12 col-xl-6 col-lg-6 my-auto d-lg-none d-xxl-block">
-                <div
-                  className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
-                  data-aos="zoom-out"
-                >
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/signup-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="Sign up"
-                    />
-                  </Tilt>
-                </div>
-              </div> */}
-
-              <div className="col-12 col-xl-9 col-xxl-8 col-lg-11 col-sm-11 col-md-11 mx-auto">
+             
+              <div className="col-12 col-xl-8 col-lg-6 my-auto d-lg-none d-xxl-block">
                 {/* <button
                   className="back-page-btn"
                   onClick={goBack}
@@ -486,10 +472,10 @@ const Signup = () => {
                       alt="Platinum Holiday Service"
                     />
                   </div>
-                  <h3 className="custom-card-tile">Create Your Account</h3>
-                  <h6 className="custom-card-sub-tile">
+                  <h3 className="custom-card-tile" style={{ textAlign: "center"}}>Create Your Account</h3>
+                  {/* <h6 className="custom-card-sub-tile">
                     Enter the details below
-                  </h6>
+                  </h6> */}
                   <form action="" className="custom-card-form"
                     onSubmit={handleSubmit}
                   >
@@ -536,6 +522,7 @@ const Signup = () => {
                             name="firstName"
                             value={signUpInfo.firstName}
                             onChange={handleInputChange}
+                            placeholder="Enter your first name"
                           />
                           {(showError && !signUpInfo.firstName) && (
                             <small className="text-danger form-error-msg">
@@ -559,6 +546,7 @@ const Signup = () => {
                             name="lastName"
                             value={signUpInfo.lastName}
                             onChange={handleInputChange}
+                            placeholder="Enter your last name"
                           />
                         </div>
                       </div>
@@ -620,6 +608,7 @@ const Signup = () => {
                             name="mobileNumber"
                             value={signUpInfo.mobileNumber}
                             onChange={handleInputChange}
+                            placeholder="Enter your mobile number"
                           />
                           {(showError && !signUpInfo.mobileNumber) && (
                             <small className="text-danger form-error-msg">
@@ -647,6 +636,7 @@ const Signup = () => {
                             header={header}
                             footer={footer}
                             toggleMask
+                            placeholder="Enter your password"
                           />
                           {(showError && !signUpInfo.password) && (
                             <small className="text-danger form-error-msg">
@@ -673,6 +663,7 @@ const Signup = () => {
                             onChange={handleInputChange}
                             feedback={false}
                             toggleMask
+                            placeholder="Re-enter your password"
                           />
                           {(showError && !signUpInfo.confirmPassword) && (
                             <small className="text-danger form-error-msg">
@@ -811,7 +802,7 @@ const Signup = () => {
                             htmlFor="rememberMe"
                             className="custom-check-label"
                           >
-                            By checking this, you will agree to our{" "}
+                            I accept the use of cookies in accordance with the {" "}
                             <a href="/terms-and-conditions" target="_blank">
                               Terms
                             </a>{" "}
@@ -844,6 +835,21 @@ const Signup = () => {
                     </div>
                   </form>
                 </article>
+              </div>
+
+               <div className="col-12 col-xl-4 col-lg-6 my-auto d-lg-none d-xxl-block">
+                <div
+                  className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
+                  data-aos="zoom-out"
+                >
+                  {/* <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}> */}
+                    <img
+                      src="assets/images/account/signup-illustration.svg"
+                      className="section-main-image animate-image"
+                      alt="Sign up"
+                    />
+                  {/* </Tilt> */}
+                </div>
               </div>
             </div>
           )}

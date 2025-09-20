@@ -1,9 +1,21 @@
 import api from "../api";
 
-export const sendVerificationEmail = async (email, setShowError, setLoading, setReSendLoading, setPage, setSeconds, setIsButtonDisabled, setResetPasswordInfo, setSignUpInfo, toast, resetPassword = false) => {
-    if (!email) {
-        setShowError(true);
-        toast?.current.show({
+export const sendVerificationEmail = async (
+  email,
+  setShowError,
+  setLoading,
+  setReSendLoading,
+  setPage,
+  setSeconds,
+  setIsButtonDisabled,
+  setResetPasswordInfo,
+  setSignUpInfo,
+  toast,
+  resetPassword = false
+) => {
+   if (!email) {
+       setShowError?.(true);
+       toast?.current?.show({
             severity: 'error',
             summary: 'Error in Submission.',
             detail: 'Please fill the required fields!.',
@@ -11,54 +23,66 @@ export const sendVerificationEmail = async (email, setShowError, setLoading, set
         });
         return false;
     }
-    setLoading(true);
-    setReSendLoading(true);
+   setLoading?.(true);
+   setReSendLoading?.(true);
     try {
         const endpoint = resetPassword ? "/api/user/request-reset-password-code" : "/api/user/request-verify-code";
         const response = await api.post(endpoint, { email });
         console.log(response.data);
         if(response.data?.emailSent){
-            setPage(2);
-            setSeconds(60);
-            setIsButtonDisabled(true);
-            toast?.current.show({
-                severity: 'success',
-                summary: 'Email sent successfully.',
-                detail: 'Please check your email.',
-                life: 3000
+           setPage?.(2);
+           setSeconds?.(60);
+           setIsButtonDisabled?.(true);
+           toast?.current?.show({
+               severity: 'success',
+               summary: 'Email sent successfully.',
+               detail: 'Please check your email.',
+               life: 3000
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return true;
         } else {
-            toast?.current.show({
-                severity: 'error',
-                summary: 'Email sent failed!',
-                detail: 'Please re-verify!',
-                life: 3000
-            });
-            resetPassword ? setResetPasswordInfo(prev => ({ ...prev, email: "" })) : setSignUpInfo(prev => ({ ...prev, email: "" }));
+           toast?.current?.show({
+               severity: 'error',
+               summary: 'Email sent failed!',
+               detail: 'Please re-verify!',
+               life: 3000
+           });
+           resetPassword ? setResetPasswordInfo(prev => ({ ...prev, email: "" })) : setSignUpInfo(prev => ({ ...prev, email: "" }));
+           (resetPassword ? setResetPasswordInfo : setSignUpInfo)?.(prev => ({ ...prev, email: "" }));
             return false;
         }
     } catch (err) {
         console.log(err);
-        toast?.current.show({
-            severity: 'error',
-            summary: 'Email sent failed!',
-            detail: err.response?.data.error,
-            life: 3000
+       toast?.current?.show({
+           severity: 'error',
+           summary: 'Email sent failed!',
+           detail: err?.response?.data?.error,
+           life: 3000
         });
-        resetPassword ? setResetPasswordInfo(prev => ({ ...prev, email: "" })) : setSignUpInfo(prev => ({ ...prev, email: "" }));
+       resetPassword ? setResetPasswordInfo(prev => ({ ...prev, email: "" })) : setSignUpInfo(prev => ({ ...prev, email: "" }));
+       (resetPassword ? setResetPasswordInfo : setSignUpInfo)?.(prev => ({ ...prev, email: "" }));
         return false;
     } finally {
-        setLoading(false);
-        setReSendLoading(false);
+       setLoading?.(false);
+       setReSendLoading?.(false);
     }
 };
 
-export const verifyOTP = async (otp, setShowError, setOTP, email, setLoading, setPage, toast, resetPassword, setVerified) => {
-    if (!otp) {
-        setShowError(true);
-        toast?.current.show({
+export const verifyOTP = async (
+  otp,
+  setShowError,
+  setOTP,
+  email,
+  setLoading,
+  setPage,
+  toast,
+  resetPassword,
+  setVerified
+) => {
+   if (!otp) {
+       setShowError?.(true);
+       toast?.current?.show({
             severity: 'error',
             summary: 'Error in Submission.',
             detail: 'Please fill the required fields!.',
@@ -66,14 +90,14 @@ export const verifyOTP = async (otp, setShowError, setOTP, email, setLoading, se
         });
         return false;
     }
-    setLoading(true);
+   setLoading?.(true);
     try {
         const endpoint = resetPassword ? "/api/user/verify-password-reset" : "/api/user/verify-email";
         const response = await api.post(endpoint, { verificationCode: otp, email });
         console.log(response.data);
-        setPage(3);
-        setVerified && setVerified(true);
-        toast?.current.show({
+       setPage?.(3);
+       setVerified?.(true);
+       toast?.current?.show({
             severity: 'success',
             summary: 'OTP verified successfully.',
             detail: resetPassword ? 'You can reset your password' : 'Please register with your account.',
@@ -83,15 +107,15 @@ export const verifyOTP = async (otp, setShowError, setOTP, email, setLoading, se
         return true;
     } catch (err) {
         console.log(err);
-        toast.current.show({
+       toast?.current?.show({
             severity: 'error',
             summary: 'Verification failed!',
-            detail: err.response?.data.error,
+           detail: err?.response?.data?.error,
             life: 3000
         });
         return false;
     } finally {
-        setLoading(false);
-        setOTP();
+       setLoading?.(false);
+       setOTP?.();
     }
 };
