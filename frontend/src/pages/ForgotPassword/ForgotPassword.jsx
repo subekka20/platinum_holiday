@@ -52,20 +52,23 @@ const ForgotPassword = () => {
     setResetPasswordInfo({ ...resetPasswordInfo, [name]: value });
   };
 
-  const handleVerifyEmail = async (e) => {
+  const handleVerifyEmail = (e) => {
     e.preventDefault();
-    await sendVerificationEmail(
-      resetPasswordInfo.email,
-      setLoading,
-      setReSendLoading,
-      () => setPage(3), 
-      setSeconds,
-      setIsButtonDisabled,
-      setResetPasswordInfo,
-      null,
-      toast,
-      true
-    );
+
+    const email = resetPasswordInfo.email?.trim();
+    if (!email) {
+      setShowError(true);
+      return;
+    }
+
+    const looksLikeEmail = /\S+@\S+\.\S+/.test(email);
+    if (!looksLikeEmail) {
+      setShowError(true);
+      return;
+    }
+
+    setShowError(false);
+    setPage(2);
   };
 
   useEffect(() => {
@@ -247,10 +250,10 @@ const ForgotPassword = () => {
                       alt="Platinum Holiday Service"
                     />
                   </div>
-                  <h3 className="custom-card-tile">Reset Your Password</h3>
-                  <h6 className="custom-card-sub-tile">
+                  <h3 className="custom-card-tile" style={{ textAlign: "center" }}>Reset Your Password</h3>
+                  {/* <h6 className="custom-card-sub-tile">
                     Please enter your new password below.
-                  </h6>
+                  </h6> */}
                   <form
                     action=""
                     className="custom-card-form"
@@ -274,6 +277,7 @@ const ForgotPassword = () => {
                             header={header}
                             footer={footer}
                             toggleMask
+                            placeholder="Enter your new password"
                           />
                         </div>
                       </div>
@@ -293,6 +297,7 @@ const ForgotPassword = () => {
                             onChange={handleInputChange}
                             feedback={false}
                             toggleMask
+                            placeholder="Re-enter your new password"
                           />
                         </div>
                       </div>
@@ -311,7 +316,7 @@ const ForgotPassword = () => {
                 <div className="section-main-image-area" data-aos="zoom-out">
                   <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
                     <img
-                      src="assets/images/account/reset-password-pink.svg"
+                      src="assets/images/account/reset-password.svg"
                       className="section-main-image animate-image"
                       alt="Reset Password"
                     />
