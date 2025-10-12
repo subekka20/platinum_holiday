@@ -48,7 +48,7 @@ const Customers = () => {
         confirmDialog({
             message: `Are you sure you want to ${status ? "BLOCK" : "UNBLOCK"} the customer account?`,
             header: 'Customer Account Status Confirmation',
-            icon: 'bi bi-info-circle',
+            icon: 'bi bi-trash-fill',
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept: () => {

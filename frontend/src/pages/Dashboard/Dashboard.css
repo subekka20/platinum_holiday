@@ -1,8 +1,8 @@
 .dashboard-section {
     border-radius: 40px;
     background-color: #ebeafc;
-    margin: 20px 0;
-    background-image: radial-gradient(#37348b4b 1px, transparent 0);
+    margin: 120px 0;
+    background-image: radial-gradient(#67C0904b 1px, transparent 0);
     background-size: 30px 30px;
     background-position: -5px -5px;
     background-attachment: fixed;
@@ -38,17 +38,17 @@
 }
 
 .dashboard-tab-area .dashboard-tab-link:hover {
-    color: #37348b !important;
+    color: #67C090 !important;
     background-color: #d8d8f1 !important;
 }
 
 .dashboard-tab-area .dashboard-tab-link.active {
-    background-color: #37348b !important;
+    background-color: #67C090 !important;
     color: #FFF !important;
 }
 
 .dashboard-tab-area .dashboard-tab-link:focus {
-    box-shadow: 0px 0px 0px 4px #37348b38 !important;
+    box-shadow: 0px 0px 0px 4px #67C09038 !important;
 }
 
 .dashboard-tab-content {
@@ -135,14 +135,14 @@
 
 
 .dashboard-profile-detail .dashboard-profile-detail-title i {
-    color: #37348b;
+    color: #67C090;
 }
 
 /* .dashboard-profile-detail .dashboard-profile-detail-title::before {
     content: '';
     width: 12px;
     height: 12px;
-    background-color: #37348b;
+    background-color: #67C090;
     border-radius: 50%;
     flex-shrink: 0;
     margin-right: 10px;
@@ -174,7 +174,7 @@
 }
 
 .dashboard-profile-head h5 {
-    color: #37348b;
+    color: #67C090;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 0;
@@ -188,7 +188,7 @@
     border: none;
     background-color: transparent;
     transition: ease 0.5s;
-    color: #37348b;
+    color: #67C090;
     font-size: 18px;
     line-height: 0;
 }
@@ -216,11 +216,11 @@
 }
 
 .dashboard-action-btn.primary {
-    color: #37348b !important;
+    color: #67C090 !important;
 }
 
 .dashboard-action-btn.primary:focus {
-    box-shadow: 0px 0px 0px 3px #37348b36;
+    box-shadow: 0px 0px 0px 3px #67C09036;
 }
 
 .edit-profile-section {
@@ -282,7 +282,7 @@
     padding: 12px 12px;
     font-size: 15px;
     font-weight: 500;
-    color: #37348b !important;
+    color: #67C090 !important;
     background: #ffffff !important;
     border-radius: 8px !important;
     border: 1px solid #ced4da;
@@ -297,11 +297,11 @@
 }
 
 .profil-img-upload .p-button.p-fileupload-choose:focus {
-    box-shadow: 0px 0px 0px 3px #37348b36;
+    box-shadow: 0px 0px 0px 3px #67C09036;
 }
 
 .profil-img-upload .p-button.p-fileupload-choose:hover {
-    background-color: #37348b !important;
+    background-color: #67C090 !important;
     color: #FFF !important;
 }
 
@@ -336,13 +336,13 @@
 }
 
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: #37348b !important;
-    border-color: #37348b !important;
+    background: #67C090 !important;
+    border-color: #67C090 !important;
     color: #FFF !important;
 }
 
 .p-paginator .p-paginator-pages .p-paginator-page {
-    color: #37348b !important;
+    color: #67C090 !important;
     font-size: 14px;
 }
 
@@ -350,7 +350,7 @@
 .p-paginator .p-paginator-prev,
 .p-paginator .p-paginator-next,
 .p-paginator .p-paginator-last {
-    color: #37348b !important;
+    color: #67C090 !important;
     border-radius: 8px;
 }
 
@@ -378,7 +378,7 @@
 
 .data-view-button {
     background-color: #d8d8f1;
-    color: #37348b;
+    color: #67C090;
     border-color: #d8d8f1;
     box-shadow: inset 0px 0px 8px #ababc971 !important;
     line-height: 0;
@@ -392,11 +392,11 @@
 }
 
 .data-view-button:focus {
-    box-shadow: 0px 0px 0px 3px #37348b71 !important;
+    box-shadow: 0px 0px 0px 3px #67C09071 !important;
 }
 
 .data-view-button:hover {
-    background-color: #37348b !important;
+    background-color: #67C090 !important;
     color: #c1c1db !important;
     box-shadow: inset 0px 0px 8px #33337971 !important;
 }
@@ -439,7 +439,7 @@
     font-size: 16px;
     font-weight: 700;
     display: block;
-    color: #37348b;
+    color: #67C090;
     max-width: max-content;
 }
 
@@ -499,11 +499,11 @@
 }
 
 .data-view-sub.bordered {
-    border: 1px solid #37348b;
+    border: 1px solid #67C090;
 }
 
 .data-view-sub-head {
-    color: #37348b;
+    color: #67C090;
     background-color: #ffffff;
     padding: 5px 10px;
     margin-bottom: 15px;

@@ -116,7 +116,7 @@ const Bookings = () => {
             <Preloader />
             <div>
                 <div className="page_header_area">
-                    <h4 className="page_heading">Bookings</h4>
+                    <h4 className="page_heading" style={{ color:"#fff" }}>Bookings</h4>
                 </div>
 
                 <div className="filter_area">

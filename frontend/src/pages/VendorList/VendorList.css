@@ -15,6 +15,7 @@
     transition: ease-in-out 0.5s;
     border: none;
     outline: none;
+    margin-top: 200px;
 }
 
 .results-option-data-area {
@@ -35,7 +36,7 @@
 }
 
 .results-option-data-area h6 {
-    color: #37348bab;
+    color: #124170;
     font-size: 14px;
     font-weight: 500;
     display: block;
@@ -49,7 +50,7 @@
 }
 
 .edit-float-btn {
-    background-color: #37348b !important;
+    background-color: #124170 !important;
     color: #FFF !important;
     z-index: 2 !important;
     border-radius: 10px !important;
@@ -67,13 +68,13 @@
 }
 
 .edit-float-btn:focus {
-    box-shadow: 0px 0px 0px 4px #37348b2c !important;
+    box-shadow: 0px 0px 0px 4px #1241702c !important;
     color: #FFF !important;
     outline: none;
 }
 
 .edit-float-btn:hover {
-    background-color: #312e7c !important;
+    background-color: #124170 !important;
 }
 
 .edit-float-btn i {
@@ -94,8 +95,8 @@
     border: none;
     outline: none;
     background-color: #ffffff;
-    border-top: 2px solid #37348b;
-    border-bottom: 2px solid #37348b;
+    border-top: 2px solid #124170;
+    border-bottom: 2px solid #124170;
 }
 
 .result-card:hover {
@@ -175,11 +176,11 @@
     font-weight: 600;
     margin-bottom: 0;
     display: block;
-    color: #37348b;
+    color: #124170;
 }
 
 .result-card-head {
-    color: #37348b;
+    color: #124170;
     font-size: 18px;
     font-weight: 600;
     display: block;
@@ -257,7 +258,7 @@
 }
 
 .result-card-body-area ul li::marker {
-    color: #37348b;
+    color: #124170;
 }
 
 .result-card-body-area ul li:last-child {
@@ -379,7 +380,7 @@
     font-weight: 600;
     margin-bottom: 0;
     display: block;
-    color: #37348b;
+    color: #124170;
 }
 
 .detail-card-info-area {
@@ -402,7 +403,7 @@
 
 .detail-card-info-icon-area i {
     font-size: 20px;
-    color: #37348b;
+    color: #124170;
     vertical-align: middle;
 }
 
@@ -421,7 +422,7 @@
 }
 
 .detail-card-info-body h6 {
-    color: #37348b;
+    color: #124170;
     font-size: 16px;
     display: block;
     font-weight: 600;
@@ -521,7 +522,7 @@
 
 .tab-detail-btn {
     border-radius: 12px !important;
-    color: #37348b !important;
+    color: #124170 !important;
     font-weight: 600 !important;
     font-size: 15px !important;
     border: 2px solid #FFF !important;
@@ -532,7 +533,7 @@
 }
 
 .tab-detail-btn:focus {
-    box-shadow: 0px 0px 0px 4px #37348b2c !important;
+    box-shadow: 0px 0px 0px 4px #1241702c !important;
 }
 
 .tab-detail-content {
@@ -738,5 +739,5 @@
 .show-data-head i {
     position: relative !important;
     transform: none !important;
-    color: #37348b;
+    color: #124170;
 }

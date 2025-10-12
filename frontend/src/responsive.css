@@ -5,6 +5,7 @@
 @media only screen and (min-width: 1199.9px) and (max-width: 1399.98px) {
     .section-padding {
         padding: 80px 0;
+        margin-top: 80px;
     }
 
     .breadcrumb-title {
@@ -44,6 +45,7 @@
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .section-padding {
         padding: 80px 0;
+        margin-top: 80px;
     }
 
     .breadcrumb-section {
@@ -115,6 +117,7 @@
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .section-padding {
         padding: 80px 0;
+        margin-top: 150px;
     }
 
     .breadcrumb-section {
@@ -202,6 +205,7 @@
 @media (min-width: 576px) and (max-width: 767px) {
     .section-padding {
         padding: 80px 0;
+        margin-top: 140px;
     }
 
     .breadcrumb-section {
@@ -289,10 +293,12 @@
 @media (max-width: 575px) {
     .menu-btn-link {
         padding: 12px;
+
     }
 
     .section-padding {
         padding: 60px 0;
+        margin-top: 120px;
     }
 
     .footer-desc {

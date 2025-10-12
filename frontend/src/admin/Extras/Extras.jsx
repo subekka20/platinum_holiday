@@ -194,7 +194,7 @@ const Extras = () => {
         confirmDialog({
             message: 'Are you sure you want to delete the promo code?',
             header: 'Delete Confirmation',
-            icon: 'bi bi-info-circle',
+            icon: 'bi bi-trash-fill',
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept: deletePromocode,
