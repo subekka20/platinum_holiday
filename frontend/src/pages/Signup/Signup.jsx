@@ -158,10 +158,11 @@ const Signup = () => {
       }, 2000);
     } catch (err) {
       console.log(err);
+      const errorMessage = err.response?.data?.error || err.message || 'An unexpected error occurred';
       toast.current.show({
         severity: 'error',
         summary: 'Failed to Register',
-        detail: err.response.data.error,
+        detail: errorMessage,
         life: 3000
       });
     }finally{

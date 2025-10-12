@@ -88,9 +88,9 @@ const Dashboard = () => {
 
     const logOut = () => {
         confirmDialog({
-            message: 'Are you sure you want to log out?',
+            message: 'Are you sure you want to Sign out?',
             header: 'Logout Confirmation',
-            icon: 'bi bi-info-circle',
+            icon: 'bi bi-trash-fill',
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept: () => {
@@ -300,7 +300,7 @@ const Dashboard = () => {
     //     confirmDialog({
     //         message: 'Are you sure you want to cancel the booking?',
     //         header: 'Booking Cancellation Confirmation',
-    //         icon: 'bi bi-info-circle',
+    //         icon: 'bi bi-trash-fill',
     //         defaultFocus: 'reject',
     //         acceptClassName: 'p-button-danger',
     //         accept: cancel
@@ -319,7 +319,7 @@ const Dashboard = () => {
         <Header />
 
         {/* Breadcrumb Section Start */}
-        <section className="breadcrumb-section overflow-hidden">
+        {/* <section className="breadcrumb-section overflow-hidden">
           <div className="container-md">
             <div className="row">
               <div className="col-12">
@@ -337,7 +337,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* Breadcrumb Section End */}
 
         <ConfirmDialog />
@@ -497,7 +497,7 @@ const Dashboard = () => {
                           text
                         />
                         <Button
-                          label="Logout"
+                          label="Sign out"
                           onClick={logOut}
                           severity="danger"
                           icon="bi bi-box-arrow-right"

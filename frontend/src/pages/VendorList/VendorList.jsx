@@ -378,11 +378,11 @@ const VendorList = () => {
       <Header />
 
       {/* Breadcrumb Section Start */}
-      <section className="breadcrumb-section overflow-hidden">
+      {/* <section className="breadcrumb-section overflow-hidden">
         <div className="container-md">
           <div className="row"></div>
         </div>
-      </section>
+      </section> */}
       {/* Breadcrumb Section End */}
 
       <section className="results-option-section" data-aos="fade-up">

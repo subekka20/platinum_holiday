@@ -39,7 +39,7 @@ app.use(
       "http://localhost:3001",
       "http://localhost:3002",
       "https://the-parking-deals.netlify.app",
-      "https://the-parking-deals-web.onrender.com",
+      "https://platinum-holiday-backend.onrender.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],

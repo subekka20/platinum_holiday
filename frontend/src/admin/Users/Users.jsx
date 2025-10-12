@@ -194,7 +194,7 @@ const Users = () => {
         confirmDialog({
             message: 'Are you sure you want to delete the data?',
             header: 'User Delete Confirmation',
-            icon: 'bi bi-info-circle',
+            icon: 'bi bi-trash-fill',
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept: () => {

@@ -1,8 +1,8 @@
 :root {
-    --color-primary: #37348b;
-    --color-primary-dark: #222057;
-    --color-secondary: #d12788;
-    --color-secondary-dark: #b10867;
+    --color-primary: #124170;
+    --color-primary-dark: #003a73;
+    --color-secondary: #26667F;
+    --color-secondary-dark: #005d82;
     --color-danger: #f60000;
     --text-color: #000;
 
@@ -24,20 +24,20 @@
 }
 
 .aply-btn {
-    background-color: #37348b;
-    border-color: #37348b !important;
+    background-color: #26667F;
+    border-color: #26667F !important;
     justify-content: center;
     padding-left: 30px;
     padding-right: 30px;
 }
 
 .aply-btn:hover {
-    background-color: #222057;
+    background-color: #124170;
 }
 
 .aply-btn:focus {
-    box-shadow: 0px 0px 0px 4px #37348b2c !important;
-    border-color: #222057 !important;
+    box-shadow: 0px 0px 0px 4px #1241702c !important;
+    border-color: #124170 !important;
 }
 
 .form-checkbox-area {
@@ -56,12 +56,12 @@
 }
 
 .p-checkbox.p-highlight .p-checkbox-box {
-    border-color: #37348b;
-    background: #37348b;
+    border-color: #124170;
+    background: #124170;
 }
 
 .form-checkbox-area .p-checkbox .p-checkbox-input:focus {
-    box-shadow: 0px 0px 0px 4px #37348b2c !important;
+    box-shadow: 0px 0px 0px 4px #1241702c !important;
 }
 
 .total-price-area {
@@ -73,7 +73,7 @@
     background-color: #eeeefb;
     position: relative;
     gap: 20px;
-    box-shadow: 0px 0px 15px #37348b11;
+    box-shadow: 0px 0px 15px #12417011;
     margin-top: 20px;
 }
 
@@ -89,7 +89,7 @@
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 0;
-    color: #d12788;
+    color: #26667F;
     display: block;
 }
 

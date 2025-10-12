@@ -68,9 +68,9 @@ const Layout = () => {
 
     const handleLogOut = () => {
         confirmDialog({
-            message: 'Are you sure you want to log out?',
-            header: 'Logout Confirmation',
-            icon: 'bi bi-info-circle',
+            message: 'Are you sure you want to Sign out?',
+            header: 'Sign out',
+            icon: 'bi bi-box-arrow-right',
             defaultFocus: 'reject',
             acceptClassName: 'p-button-danger',
             accept: () => { dispatch(setLogout()); },
@@ -109,11 +109,11 @@ const Layout = () => {
                     <li>
                         <Link href="#" className="logo_title_area">
                             <span class="icon logo">
-                                <img src="/assets/images/parking-deals-icon-logo-light.png" alt="" />
+                                <img src="/assets/images/logo-light.png" alt="" />
                             </span>
                             <span class="logo_title">
-                                The <br />
-                                <span> Parking Deals</span>
+                                Platinum Holiday <br />
+                                <span> Services</span>
                             </span>
                         </Link>
                     </li>
@@ -201,7 +201,7 @@ const Layout = () => {
                 </ul>
             </aside>
 
-            <div className="main_area">
+            <div className="main_area" style={{ backgroundColor: '#124170' }}>
                 {/* Nav bar */}
                 <nav className={`topbar ${scrolled ? 'scrolled' : ''}`}>
                     <div className='d-flex'>
@@ -241,7 +241,7 @@ const Layout = () => {
                                 <button className="profile-dropdown-link logout p-ripple" type='button'
                                     onClick={handleLogOut}>
                                     <i className='bi bi-box-arrow-right me-2'></i>
-                                    Logout
+                                    Sign out
                                     <Ripple />
                                 </button>
                             </li>

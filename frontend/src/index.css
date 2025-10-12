@@ -738,11 +738,11 @@ code {
 }
 
 .menu-link.active {
-  color: #d12788 !important;
+  color: #26667f !important;
 }
 
 .menu-link:hover {
-  color: #d12788 !important;
+  color: #26667f !important;
 }
 
 .menu-btn-link-area {
@@ -773,24 +773,24 @@ code {
 }
 
 .menu-btn-link.with-bg {
-  background-color: #d12788;
-  border: 2px solid #d12788;
+  background-color: #124170;
+  border: 2px solid #124170;
   color: #fff;
 }
 
 .menu-btn-link.with-bg:hover {
   background-color: transparent !important;
-  color: #d12788 !important;
+  color: #124170 !important;
 }
 
 .menu-btn-link.with-outline {
   background-color: transparent !important;
-  border: 2px solid #d12788;
-  color: #d12788;
+  border: 2px solid #124170;
+  color: #124170;
 }
 
 .menu-btn-link.with-outline:hover {
-  background-color: #d12788 !important;
+  background-color: #124170 !important;
   color: #fff !important;
 }
 
@@ -2001,15 +2001,15 @@ button.custom-form-link:disabled {
 }
 
 .custom-modal .modal-header .modal-title {
-  color: #37348b;
+  color: #124170;
   font-size: 16px !important;
   font-weight: 600;
   display: block;
   background-color: #fff;
   padding: 5px 12px;
   border-radius: 8px;
-  border-left: 2px solid #d12788;
-  box-shadow: 0px 0px 15px #37348b2c;
+  border-bottom: 2px solid #26667F;
+  box-shadow: 0px 0px 15px #1241702c;
 }
 
 .custom-modal .modal-header .btn-close {

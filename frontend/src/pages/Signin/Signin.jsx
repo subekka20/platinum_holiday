@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Tilt from "react-parallax-tilt";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 import { Password } from "primereact/password";
@@ -87,27 +86,6 @@ const Signin = () => {
       <Preloader />
       <Header />
 
-      {/* Breadcrumb Section Start */}
-      {/* <section className="breadcrumb-section overflow-hidden">
-                <div className="container-md">
-                    <div className="row">
-                        <div className="col-12">
-                            <h3 className='breadcrumb-title'>Sign in</h3>
-                            <nav aria-label="breadcrumb">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="/">Home</a>
-                                    </li>
-                                    <li className="breadcrumb-item active" aria-current="page">Sign in</li>
-                                </ol>
-                            </nav>
-
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-      {/* Breadcrumb Section End */}
-
       <Toast ref={toast} />
 
       {/* Sign in Section Start */}
@@ -141,13 +119,11 @@ const Signin = () => {
                 className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
                 data-aos="fade-up"
               >
-                {/* <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}> */}
                 <img
                   src="/assets/images/account/signin-illustration.svg"
                   alt="Sign in"
                   className="section-main-image animate-image"
                 />
-                {/* </Tilt> */}
               </div>
             </div>
             <div className="col-12 col-xl-6 col-lg-6 col-sm-10 col-md-10 mx-auto">
@@ -159,12 +135,12 @@ const Signin = () => {
                     alt="Platinum Holiday Service"
                   />
                 </div>
-                <h3 className="custom-card-tile" style={{ textAlign: "center"}}>
+                <h3
+                  className="custom-card-tile"
+                  style={{ textAlign: "center" }}
+                >
                   Welcome to <span>Platinum Holiday Service</span>
                 </h3>
-                {/* <h6 className="custom-card-sub-tile">
-                  Please sign in your account
-                </h6> */}
                 <form
                   action=""
                   className="custom-card-form"
@@ -273,7 +249,6 @@ const Signin = () => {
           </div>
         </div>
       </section>
-      {/* Sign in Section End */}
 
       <Footer />
     </>

@@ -260,7 +260,7 @@ const Header = () => {
                                 dispatch(setLogout());
                               }}
                             >
-                              <i className="bi bi-box-arrow-right me-2"></i>
+                              <i className="bi bi-trash-fill me-2"></i>
                               Logout
                               <Ripple />
                             </button>
@@ -365,7 +365,7 @@ const Header = () => {
                     dispatch(setLogout());
                   }}
                 >
-                  <i class="bi bi-box-arrow-right"></i>
+                  <i class="bi bi-trash-fill"></i>
                   Logout
                 </button>
               </div>
