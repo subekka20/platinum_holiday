@@ -165,7 +165,7 @@ const Signup = () => {
         detail: errorMessage,
         life: 3000
       });
-    }finally{
+    } finally {
       setLoading(false);
     };
   };
@@ -220,7 +220,7 @@ const Signup = () => {
 
   return (
     <>
-    <Preloader/>
+      <Preloader />
       <Header />
 
       {/* Breadcrumb Section Start */}
@@ -248,12 +248,12 @@ const Signup = () => {
       <Toast ref={toast} />
 
       {/* Sign up Section Start */}
-      <section className="section-padding overflow-hidden">
+      <section className="section-padding overflow-hidden auth-section">
         <div className="container-md">
           <div className="row">
             <div className="col-12 mb-4 mb-lg-5">
               <h3
-                className="section-heading text-center mx-auto text-purple"
+                className="section-heading text-center mx-auto text-white"
                 data-aos="zoom-out"
               >
                 Sign Up
@@ -292,7 +292,7 @@ const Signup = () => {
               </div>
 
               <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <article className="custom-card" data-aos="fade-up">
+                <article className="custom-card auth-card" data-aos="fade-up">
                   <div className="custom-card-logo-area">
                     <img
                       src="assets/images/logo.png"
@@ -346,7 +346,7 @@ const Signup = () => {
                     <div className="custom-form-group contains-float-input mb-0">
                       <Button
                         label={`${loading ? "Processing..." : "VERIFY"}`}
-                        className="w-100 submit-button justify-content-center"
+                        className="w-100 submit-button justify-content-center auth-btn"
                         loading={loading}
                         onClick={handleVerifyEmail}
                         disabled={!signUpInfo.email}
@@ -378,7 +378,7 @@ const Signup = () => {
                 >
                   <i className="ri ri-arrow-left-line me-2"></i>Back
                 </button>
-                <article className="custom-card" data-aos="fade-up">
+                <article className="custom-card auth-card" data-aos="fade-up">
                   <div className="custom-card-logo-area">
                     <img
                       src="assets/images/logo.png"
@@ -429,7 +429,7 @@ const Signup = () => {
                             ? "Verifying..."
                             : "VERIFY"
                           }`}
-                        className="w-100 submit-button justify-content-center"
+                        className="w-100 submit-button justify-content-center auth-btn"
                         onClick={handleVerifyOTP}
                         loading={loading}
                         disabled={!otp}
@@ -456,8 +456,8 @@ const Signup = () => {
             </div>
           ) : (
             <div className="row">
-             
-              <div className="col-12 col-xl-8 col-lg-6 my-auto d-lg-none d-xxl-block">
+
+              <div className="col-12 col-xl-9 col-lg-9 col-sm-10 col-md-10 mx-auto">
                 {/* <button
                   className="back-page-btn"
                   onClick={goBack}
@@ -465,7 +465,7 @@ const Signup = () => {
                 >
                   <i className="ri ri-arrow-left-line me-2"></i>Back
                 </button> */}
-                <article className="custom-card" data-aos="fade-up">
+                <article className="custom-card auth-card" data-aos="fade-up">
                   <div className="custom-card-logo-area">
                     <img
                       src="assets/images/logo.png"
@@ -473,7 +473,7 @@ const Signup = () => {
                       alt="Platinum Holiday Service"
                     />
                   </div>
-                  <h3 className="custom-card-tile" style={{ textAlign: "center"}}>Create Your Account</h3>
+                  <h3 className="custom-card-tile" style={{ textAlign: "center" , color: "#FFF"}}>Create Your Account</h3>
                   {/* <h6 className="custom-card-sub-tile">
                     Enter the details below
                   </h6> */}
@@ -486,6 +486,7 @@ const Signup = () => {
                           <label
                             htmlFor="title"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             Title
                           </label>
@@ -514,6 +515,7 @@ const Signup = () => {
                           <label
                             htmlFor="firstName"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             First name
                           </label>
@@ -538,6 +540,7 @@ const Signup = () => {
                           <label
                             htmlFor="lastName"
                             className="custom-form-label"
+                            style={{ color: "#FFF" }}
                           >
                             Last name
                           </label>
@@ -557,6 +560,7 @@ const Signup = () => {
                           <label
                             htmlFor="email"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             Email
                           </label>
@@ -599,6 +603,7 @@ const Signup = () => {
                           <label
                             htmlFor="mobileNumber"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             Mobile number
                           </label>
@@ -625,6 +630,7 @@ const Signup = () => {
                           <label
                             htmlFor="password"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             Password
                           </label>
@@ -653,6 +659,7 @@ const Signup = () => {
                           <label
                             htmlFor="confirmPassword"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             Confirm password
                           </label>
@@ -802,13 +809,14 @@ const Signup = () => {
                           <label
                             htmlFor="rememberMe"
                             className="custom-check-label"
+                            style={{ color: "#FFF" }}
                           >
                             I accept the use of cookies in accordance with the {" "}
-                            <a href="/terms-and-conditions" target="_blank">
+                            <a href="/terms-and-conditions" target="_blank" style={{ color: "#44c8fd" }}>
                               Terms
                             </a>{" "}
                             and{" "}
-                            <a href="/privacy-policy" target="_blank">
+                            <a href="/privacy-policy" target="_blank" style={{ color: "#44c8fd" }}>
                               {" "}
                               Privacy policy
                             </a>
@@ -819,17 +827,18 @@ const Signup = () => {
 
                     <div className="custom-form-group contains-float-input">
                       <Button
-                        label="SIGNUP"
+                        label="SIGN UP"
                         disabled={!checked}
-                        className="w-100 submit-button justify-content-center"
+                        className="w-100 submit-button justify-content-center auth-btn"
+                        style={{ color: "#FFF" }}
                         loading={loading}
                       />
                     </div>
 
-                    <div className="custom-form-link-area text-center">
+                    <div className="custom-form-link-area text-center" style={{ color: "#FFF" }}>
                       <p>
                         Already have account?{" "}
-                        <a href="/sign-in" className="custom-form-link">
+                        <a href="/sign-in" className="custom-form-link" style={{ color: "#FFF" }}>
                           <b>Sign in</b>
                         </a>
                       </p>
@@ -838,20 +847,18 @@ const Signup = () => {
                 </article>
               </div>
 
-               <div className="col-12 col-xl-4 col-lg-6 my-auto d-lg-none d-xxl-block">
+              {/* <div className="col-12 col-xl-4 col-lg-6 my-auto d-lg-none d-xxl-block">
                 <div
                   className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
                   data-aos="zoom-out"
                 >
-                  {/* <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}> */}
-                    <img
-                      src="assets/images/account/signup-illustration.svg"
-                      className="section-main-image animate-image"
-                      alt="Sign up"
-                    />
-                  {/* </Tilt> */}
+                  <img
+                    src="assets/images/account/signup-illustration.svg"
+                    className="section-main-image animate-image"
+                    alt="Sign up"
+                  />
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

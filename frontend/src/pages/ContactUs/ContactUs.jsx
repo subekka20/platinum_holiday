@@ -105,7 +105,7 @@ const ContactUs = () => {
           <div className="row">
             <div className="col-12">
               <h3
-                className="section-heading text-center mx-auto text-purple"
+                className="section-heading text-center mx-auto text-white"
                 data-aos="zoom-out"
               >
                 Contact Us
@@ -128,7 +128,7 @@ const ContactUs = () => {
               <div className="mt-4 mt-sm-4 mt-lg-5">
                 <p
                   className="section-paragraph text-center mb-0"
-                  data-aos="fade"
+                  data-aos="fade" style={{color:"#FFF"}}
                 >
                   At Platinum Holiday Service, your journey comes first. We go
                   beyond reservations to create stress-free, memorable
@@ -158,6 +158,7 @@ const ContactUs = () => {
                       <p
                         className="content-card-desc mt-4 mb-0"
                         data-aos="fade"
+                        style={{color:"#FFF"}}
                       >
                         Reach Out, We’re Listening Drop your details and message
                         in the form below — that’s all it takes. Our team will

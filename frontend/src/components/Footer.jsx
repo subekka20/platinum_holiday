@@ -110,7 +110,7 @@ const Footer = () => {
                           height: 80,
                           objectFit: "contain",
                           display: "block",
-                          boxShadow: "0 4px 24px 0 #b3c9c0",
+                          // boxShadow: "0 4px 24px 0 #b3c9c0",
                           borderRadius: 16,
                         }}
                       />

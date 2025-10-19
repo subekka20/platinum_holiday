@@ -35,7 +35,7 @@ const TermsAndConditions = () => {
                 <div className="container-md">
                     <div className="row">
                         <div className="col-12">
-                            <h3 className='section-heading text-center mx-auto text-purple' data-aos="zoom-out">Terms & Conditions</h3>
+                            <h3 className='section-heading text-center mx-auto text-white' data-aos="zoom-out">Terms & Conditions</h3>
                         </div>
 
                         <div className="col-12 col-xl-6 col-lg-6 mx-auto">

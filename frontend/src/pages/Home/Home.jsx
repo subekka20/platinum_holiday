@@ -489,25 +489,15 @@ const Home = () => {
 
       <Toast ref={toast} />
 
-      <section className="section-padding overflow-hidden">
+      <section className="ph-hero overflow-hidden">
         <div className="container-md">
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col-12 col-xl-6 col-lg-6 pe-xl-5 mt-4">
-              <h3 className="section-heading text-center mx-auto text-lg-start ms-lg-0">
-                Reserve your parking space
-              </h3>
-
-              <p className="section-paragraph text-center text-lg-start mt-5 mb-5 mb-xl-0 justify">
-                Make your travel planning effortless with Platinum Holiday
-                Service. Our fast and user-friendly booking form gives you an
-                instant quote for airport parking in seconds. Just choose your
-                airport, set your drop-off and pick-up dates, and apply any
-                coupon codes to unlock extra savings. From short-term and
-                long-term stays to premium parking options, we make it simple to
-                secure the best deal. Enjoy peace of mind knowing your parking
-                is reserved before you even leave home. Complete the form below
-                and start your journey stress-free with Platinum Holiday
-                Service.
+              <h1 className="ph-hero-title">Reserve your parking space</h1>
+              <p className="ph-hero-desc">
+                Make your travel planning effortless with Platinum Holiday Service. Our fast and
+                user-friendly booking process gives you an instant quote to airport parking in seconds.
+                Just choose your airport. Set entry and exit details to secure the best deal. Enjoy peace of mind.
               </p>
             </div>
             <div className="col-12 col-xl-6 col-lg-6">
@@ -519,11 +509,11 @@ const Home = () => {
               > */}
               <form
                 action=""
-                className="custom-card-form form-2 get-quote-form mt-0 p-3"
+                className="ph-card get-quote-form mt-0 p-3"
                 onSubmit={handleGetQuote}
               >
-                <div className="custom-card-logo-area mb-3">
-                  <h3 className="custom-card-header-head">Grab Your Space</h3>
+                <div className="ph-card-head mb-3">
+                  <h3>Grab Your Space</h3>
                 </div>
 
                 <div className="form-head-input-area">
@@ -532,7 +522,7 @@ const Home = () => {
                       <div className="custom-form-group mb-0 input-with-icon">
                         <label
                           htmlFor="airport"
-                          className="custom-form-label form-required text-sm-center"
+                          className="custom-form-label form-required text-sm-center ph-label"
                         >
                           Select your airport
                         </label>
@@ -554,8 +544,9 @@ const Home = () => {
                             placeholder="Select a Airport"
                             //   valueTemplate={selectedAirportTemplate}
                             //   itemTemplate={airportOptionTemplate}
-                            className="w-full w-100 custom-form-dropdown"
+                            className="w-full w-100 custom-form-dropdown ph-input"
                             invalid={showError}
+                            style={{ color: "#000" }}
                           />
                         </div>
                         {showError && !selectedAirport && (
@@ -577,7 +568,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="dropOffDate"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Entry date
                       </label>
@@ -590,8 +581,9 @@ const Home = () => {
                           placeholder="dd/mm/yyyy"
                           dateFormat="dd/mm/yy"
                           minDate={today}
-                          className="w-100"
+                          className="w-100 ph-input"
                           invalid={showError}
+                          style={{ color: "#000" }}
                         />
                       </div>
                       {showError && !dropOffDate && (
@@ -606,7 +598,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="dropOffTime"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Entry time
                       </label>
@@ -622,8 +614,9 @@ const Home = () => {
                           placeholder="Select the time"
                           valueTemplate={selectedTimeTemplate}
                           itemTemplate={timeTemplate}
-                          className="w-full w-100 custom-form-dropdown"
+                          className="w-full w-100 custom-form-dropdown ph-input"
                           invalid={showError}
+                          style={{ color: "#000" }}
                         />
                       </div>
                       {showError && !dropOffTime && (
@@ -638,7 +631,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="pickupDate"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Exit date
                       </label>
@@ -657,7 +650,7 @@ const Home = () => {
                           dateFormat="dd/mm/yy"
                           minDate={dropOffDate}
                           disabled={!dropOffDate}
-                          className="w-100"
+                          className="w-100 ph-input"
                           invalid={showError}
                         />
                       </div>
@@ -673,7 +666,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="pickupTime"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Exit time
                       </label>
@@ -689,7 +682,7 @@ const Home = () => {
                           placeholder="Select the time"
                           valueTemplate={selectedTimeTemplate}
                           itemTemplate={timeTemplate}
-                          className="w-full w-100 custom-form-dropdown"
+                          className="w-full w-100 custom-form-dropdown ph-input"
                           invalid={showError}
                         />
                       </div>
@@ -705,7 +698,7 @@ const Home = () => {
                 <div className="custom-form-group contains-float-input mb-0">
                   <Button
                     label="Reserve Now"
-                    className="w-100 submit-button justify-content-center"
+                    className="w-100 submit-button justify-content-center ph-btn"
                     loading={loading}
                   />
                 </div>
@@ -714,247 +707,210 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Steps Section: Responsive horizontal→vertical flow */}
-      <section className="steps-section">
-        <div className="steps-wrap">
-          {/* Step 1 */}
-          <div className="step">
-            <div className="step-icon">
-              <img
-                src="assets/images/home/select_date.png"
-                alt="Select Parking Dates"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
+        {/* Steps Section: Integrated into hero */}
+        <div className="steps-section">
+          <div className="steps-container">
+          <div className="steps-header">
+            <h3 className="steps-title">How It Works</h3>
+            <p className="steps-subtitle">Simple steps to secure your parking</p>
+          </div>
+          
+          <div className="steps-grid">
+            {/* Step 1 */}
+            <div className="step-card">
+              <div className="step-number">1</div>
+              <div className="step-icon">
+                <img
+                  src="assets/images/home/select_date.png"
+                  alt="Select Parking Dates"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+              <div className="step-title">Select Parking Dates</div>
+              <div className="step-description">Choose your entry and exit dates</div>
             </div>
-            <div className="step-title">Select Parking Dates.</div>
-          </div>
 
-          {/* Arrow and line 1 */}
-          <div className="connector">
-            <svg
-              width="120"
-              height="50"
-              viewBox="0 0 120 50"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0,25 C40,0 80,50 120,25"
-                stroke="#124170"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="arrowhead"
-            >
-              <path
-                d="M4 12h16m0 0l-5-5m5 5l-5 5"
-                stroke="#124170"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-
-          {/* Step 2 */}
-          <div className="step">
-            <div className="step-icon">
-              <img
-                src="assets/images/home/search.png"
-                alt="Search and Book Space"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
+            {/* Step 2 */}
+            <div className="step-card">
+              <div className="step-number">2</div>
+              <div className="step-icon">
+                <img
+                  src="assets/images/home/search.png"
+                  alt="Search and Book Space"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+              <div className="step-title">Search and Book Space</div>
+              <div className="step-description">Find and reserve your parking spot</div>
             </div>
-            <div className="step-title">Search and Book Space</div>
-          </div>
 
-          {/* Arrow and line 2 */}
-          <div className="connector">
-            <svg
-              width="120"
-              height="50"
-              viewBox="0 0 120 50"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0,25 C40,0 80,50 120,25"
-                stroke="#124170"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="arrowhead"
-            >
-              <path
-                d="M4 12h16m0 0l-5-5m5 5l-5 5"
-                stroke="#124170"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-
-          {/* Step 3 */}
-          <div className="step">
-            <div className="step-icon">
-              <img
-                src="assets/images/home/travel.png"
-                alt="Enjoy Your Travel"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
+            {/* Step 3 */}
+            <div className="step-card">
+              <div className="step-number">3</div>
+              <div className="step-icon">
+                <img
+                  src="assets/images/home/travel.png"
+                  alt="Enjoy Your Travel"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
+              <div className="step-title">Enjoy Your Travel</div>
+              <div className="step-description">Travel with peace of mind</div>
             </div>
-            <div className="step-title">Enjoy Your Travel</div>
           </div>
-        </div>
+          </div>
 
-        {/* Component-scoped CSS */}
-        <style>{`
+          {/* Component-scoped CSS */}
+          <style>{`
     .steps-section {
-      background: #DDF4E7;
-      padding: 40px 0;
-      border-radius: 16px;
-      margin: 20px 0;
+      background: transparent;
+      padding: 60px 0 40px 0;
+      margin: 0;
+      border: none;
     }
-    .steps-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      max-width: 900px;
+    
+    .steps-container {
+      max-width: 1000px;
       margin: 0 auto;
+      padding: 0 20px;
     }
-    .step {
+    
+    .steps-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .steps-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #dbeafe;
+      margin: 0 0 12px 0;
+    }
+    
+    .steps-subtitle {
+      font-size: 16px;
+      color: #b7c3d6;
+      margin: 0;
+    }
+    
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+    
+    .step-card {
+      background: rgba(15, 23, 32, 0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .step-card:hover {
+      border-color: rgba(123, 180, 255, 0.3);
+      transform: translateY(-4px);
+    }
+    
+    .step-number {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background: #0b7cd1;
+      color: #fff;
+      border-radius: 50%;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      min-width: 180px;
-      flex: 1;
-      margin: 8px 0;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
     }
+    
     .step-icon {
-      background: #fff;
+      background: #0e1622;
       border-radius: 50%;
       width: 80px;
       height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 12px #0001;
-      margin-bottom: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      margin: 0 auto 20px;
+      border: 1px solid #1f3147;
     }
+    
     .step-icon img {
       width: 48px;
       height: 48px;
       object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
     }
+    
     .step-title {
       font-weight: 600;
-      font-size: 1.1rem;
-      color: #26667F;
-      text-align: center;
-      max-width: 160px;
-      line-height: 1.3;
+      font-size: 18px;
+      color: #dbeafe;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
     }
-    .connector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0;
-      padding: 0 4px;
-    }
-    .connector .arrowhead {
-      margin: 0 4px;
-      display: block;
+    
+    .step-description {
+      font-size: 14px;
+      color: #b7c3d6;
+      line-height: 1.5;
+      margin: 0;
     }
 
-    /* ---------- Responsive ---------- */
-
-    /* Tablets: tighten spacing slightly */
-    @media (max-width: 992px) {
-      .steps-wrap {
-        gap: 8px 0;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
-      .step {
-        min-width: 160px;
+      
+      .step-card {
+        padding: 24px 20px;
       }
-      .step-icon {
-        width: 72px;
-        height: 72px;
-      }
-      .step-icon img {
-        width: 40px;
-        height: 40px;
-      }
-      .step-title {
-        font-size: 1rem;
-        max-width: 150px;
+      
+      .steps-title {
+        font-size: 28px;
       }
     }
-
-    /* Phones: stack vertically, hide connectors, shrink icons/text */
-    @media (max-width: 640px) {
-      .steps-wrap {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
+    
+    @media (max-width: 480px) {
+      .steps-container {
         padding: 0 16px;
       }
-      .step {
-        flex: none;
-        min-width: 0;
-        padding: 12px 0;
+      
+      .step-card {
+        padding: 20px 16px;
       }
-      .connector {
-        display: none; /* hide wavy lines & arrows on mobile */
-      }
+      
       .step-icon {
         width: 64px;
         height: 64px;
-        margin-bottom: 10px;
       }
+      
       .step-icon img {
         width: 36px;
         height: 36px;
       }
-      .step-title {
-        font-size: 0.98rem;
-        max-width: 220px;
-      }
-    }
-
-    /* Very small devices */
-    @media (max-width: 380px) {
-      .step-title {
-        font-size: 0.94rem;
-      }
     }
   `}</style>
+        </div>
       </section>
 
       <Footer />

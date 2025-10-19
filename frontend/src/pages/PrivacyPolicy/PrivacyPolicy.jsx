@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
           <div className="row">
             <div className="col-12">
               <h3
-                className="section-heading text-center mx-auto text-purple"
+                className="section-heading text-center mx-auto text-white"
                 data-aos="zoom-out"
               >
                 Privacy Policy

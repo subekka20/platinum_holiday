@@ -162,8 +162,10 @@ const ForgotPassword = () => {
           {page === 1 ? (
             // Email Verification Page
             <div className="row">
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <article className="custom-card" data-aos="fade-up">
+              <div className="col-12 col-xl-9 col-xxl-9 col-lg-9 col-sm-11 col-md-11 mx-auto">
+                <article className="custom-card" data-aos="fade-up" style={{
+                  backgroundColor: "#0f1720"
+                }}>
                   <div className="custom-card-logo-area">
                     <img
                       src="assets/images/logo.png"
@@ -173,7 +175,7 @@ const ForgotPassword = () => {
                   </div>
                   <h3
                     className="custom-card-tile"
-                    style={{ textAlign: "center" }}
+                    style={{ textAlign: "center" , color: "#FFF" }}
                   >
                     Email Verification
                   </h3>
@@ -214,12 +216,13 @@ const ForgotPassword = () => {
                         loading={loading}
                         onClick={handleVerifyEmail}
                         disabled={!resetPasswordInfo.email}
+                        style={{ color: "#FFF" }}
                       />
                     </div>
                   </form>
                 </article>
               </div>
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
+              {/* <div className="col-12 col-xl-6 col-lg-6 my-auto">
                 <div className="section-main-image-area" data-aos="zoom-out">
                   <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
                     <img
@@ -229,20 +232,23 @@ const ForgotPassword = () => {
                     />
                   </Tilt>
                 </div>
-              </div>
+              </div> */}
             </div>
           ) : (
             // Reset Password Page
             <div className="row">
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
+              <div className="col-12 col-xl-9 col-xxl-9 col-lg-9 col-sm-11 col-md-11 mx-auto">
                 <button
                   className="back-page-btn"
                   onClick={goBack}
                   data-aos="fade-left"
+                  style={{ color: "#FFF" }}
                 >
-                  <i className="ri ri-arrow-left-line me-2"></i>Back
+                  <i className="ri ri-arrow-left-line me-2" style={{ color: "#FFF" }}></i>Back
                 </button>
-                <article className="custom-card" data-aos="fade-up">
+                <article className="custom-card" data-aos="fade-up"  style={{
+                backgroundColor: "#0f1720"
+              }}>
                   <div className="custom-card-logo-area">
                     <img
                       src="assets/images/logo.png"
@@ -250,7 +256,7 @@ const ForgotPassword = () => {
                       alt="Platinum Holiday Service"
                     />
                   </div>
-                  <h3 className="custom-card-tile" style={{ textAlign: "center" }}>Reset Your Password</h3>
+                  <h3 className="custom-card-tile" style={{ textAlign: "center" , color: "#FFF" }}>Reset Your Password</h3>
                   {/* <h6 className="custom-card-sub-tile">
                     Please enter your new password below.
                   </h6> */}
@@ -265,6 +271,7 @@ const ForgotPassword = () => {
                           <label
                             htmlFor="password"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             New password
                           </label>
@@ -286,6 +293,7 @@ const ForgotPassword = () => {
                           <label
                             htmlFor="confirmPassword"
                             className="custom-form-label form-required"
+                            style={{ color: "#FFF" }}
                           >
                             Confirm password
                           </label>
@@ -312,7 +320,7 @@ const ForgotPassword = () => {
                   </form>
                 </article>
               </div>
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
+              {/* <div className="col-12 col-xl-6 col-lg-6 my-auto">
                 <div className="section-main-image-area" data-aos="zoom-out">
                   <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
                     <img
@@ -322,7 +330,7 @@ const ForgotPassword = () => {
                     />
                   </Tilt>
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

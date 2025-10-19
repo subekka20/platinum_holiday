@@ -644,7 +644,7 @@ const Booking = () => {
       <Header />
 
       {/* Breadcrumb Section Start */}
-      <section className="breadcrumb-section overflow-hidden">
+      {/* <section className="breadcrumb-section overflow-hidden">
         <div className="container-md">
           <div className="row">
             <div className="col-12">
@@ -662,7 +662,7 @@ const Booking = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Breadcrumb Section End */}
 
       <Toast ref={toast} />

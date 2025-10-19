@@ -36,7 +36,7 @@ const AboutUs = () => {
       {/* About us Section Start */}
       <section className="section-padding overflow-hidden">
         <div className="container">
-          <h3 className="section-heading text-center mx-auto text-purple">
+          <h3 className="section-heading text-center mx-auto text-white">
             About Us
           </h3>
 
@@ -50,7 +50,7 @@ const AboutUs = () => {
                         </div> */}
 
             <div className="col-12 ">
-              <p className="section-paragraph text-center mb-0">
+              <p className="section-paragraph text-center mb-0" style={{color:"#FFF"}}>
                 Platinum Holiday Service is your trusted partner for stress-free
                 airport parking. Our goal is to make every journey start and end
                 with ease by offering reliable, affordable, and convenient

@@ -160,7 +160,7 @@ const ChangePassword = () => {
                 <div className="container-md">
                     <div className="row">
                         <div className="col-12 mb-4 mb-lg-5">
-                            <h3 className='section-heading text-center mx-auto text-purple' data-aos="zoom-out">Change Password</h3>
+                            <h3 className='section-heading text-center mx-auto text-white' data-aos="zoom-out">Change Password</h3>
                             <div className="mt-5 mb-2 mb-sm-4">
                                 <p className='section-paragraph text-center mb-0' data-aos="fade">
                                     To ensure the security of your account, it's important to update your password regularly. Please enter your current password, followed by your new password, and confirm the new password. Your new password should be a combination of letters, numbers, and special characters to enhance security. Once updated, you will use your new password to access your account. If you encounter any issues, please contact our support team for assistance.

@@ -330,6 +330,7 @@ const VendorList = () => {
           type="button"
           className="btn-close"
           onClick={() => setShowEditModal(false)}
+          style={{ backgroundColor: "#FFF" }}
         ></button>
       </div>
     );
@@ -386,38 +387,79 @@ const VendorList = () => {
       {/* Breadcrumb Section End */}
 
       <section className="results-option-section" data-aos="fade-up">
-        <div className="container-md">
+        <div className="container-md" >
           <div className="row">
-            <div className="col-12">
-              <article className="results-option-area">
-                <div className="custom-card-form form-2 results-option-form mt-0 p-4">
-                  {/* <button className='edit-float-btn' onClick={() => setVisible(true)}>
+            <div className="col-12" >
+              <article className="results-option-area" style={{ backgroundColor: "#0f1720" }}>
+                {/* <div className="custom-card-form form-2 results-option-form mt-0 p-4"> */}
+                {/* <button className='edit-float-btn' onClick={() => setVisible(true)}>
                                         <i className="bi bi-pencil-square"></i>
                                     </button> */}
-                  <Button
-                    icon="bi bi-pencil-square"
-                    className="edit-float-btn"
-                    onClick={() => setShowEditModal(true)}
-                  />
+                <Button
+                  icon="bi bi-pencil-square"
+                  className="edit-float-btn"
+                  onClick={() => setShowEditModal(true)}
+                />
+                <div className="col-12 col-xl-8 col-lg-10 mx-auto">
                   <div className="row">
-                    <div className="col-12 col-xl-6 col-lg-6 col-md-8 col-sm-8 mx-auto">
-                      <div className="custom-form-group mb-0 input-with-icon">
-                        <label
-                          htmlFor="airport"
-                          className="custom-form-label text-sm-center"
-                        >
-                          Airport
-                        </label>
-                        <h6
-                          onClick={() => setShowEditModal(true)}
-                          className="show-data-head"
-                        >
-                          <i class="bi bi-airplane-fill input-grp-icon"></i>
-                          {selectedAirport?.name ||
-                            quoteInfo?.selectedAirport.name}
-                        </h6>
+                    <div className="col-12 col-sm-6">
+                      <div className="custom-form-group mb-3 mb-md-0 input-with-icon">
                         <div className="form-icon-group">
-                          {/* <Dropdown
+                          <i class="bi bi-p-square input-grp-icon"></i>
+                          <Dropdown
+                            value={parkingOption}
+                            onChange={(e) => setParkingOption(e.value)}
+                            options={parking_options}
+                            optionLabel="name"
+                            placeholder="Select Parking Option"
+                            className="w-full w-100 custom-form-dropdown"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-12 col-sm-6">
+                      <div className="custom-form-group mb-3 mb-md-0 input-with-icon">
+                        <div className="form-icon-group">
+                          <i class="bi bi-arrow-down-up input-grp-icon"></i>
+                          <Dropdown
+                            value={filterOption}
+                            onChange={(e) => setFilterOption(e.value)}
+                            options={filter_options}
+                            optionLabel="name"
+                            placeholder="Select Price Option"
+                            className="w-full w-100 custom-form-dropdown"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-12">
+                  <Divider className="mt-4 mb-4" />
+                </div>
+
+                <div className="row">
+                  <div className="col-12 col-xl-9 col-lg-9 col-md-8 mx-auto">
+                    <div className="custom-form-group mb-0 input-with-icon">
+                      <label
+                        htmlFor="airport"
+                        className="custom-form-label text-sm-center"
+                        style={{color:"#FFF"}}
+                      >
+                        Airport
+                      </label>
+                      <h6
+                        onClick={() => setShowEditModal(true)}
+                        className="show-data-head"
+                      >
+                        <i class="bi bi-airplane-fill input-grp-icon"></i>
+                        {selectedAirport?.name ||
+                          quoteInfo?.selectedAirport.name}
+                      </h6>
+                      <div className="form-icon-group">
+                        {/* <Dropdown
                               id="airport"
                               value={selectedAirport}
                               onChange={(e) => setSelectedAirport(e.value)}
@@ -429,100 +471,51 @@ const VendorList = () => {
                               itemTemplate={airportOptionTemplate}
                               className="w-full w-100 custom-form-dropdown"
                             /> */}
-                        </div>
                       </div>
                     </div>
-
-                    <div className="col-12">
-                      <Divider className="mt-4 mb-4" />
-                    </div>
-
-                    <div className="col-12">
-                      <div className="row">
-                        <div className="col-12 col-sm-6 mb-2 mb-sm-0">
-                          <div className="results-option-data-area">
-                            <h5>Dropoff Detail</h5>
-                            <div className="row">
-                              <div className="col-12 col-md-6 mb-2 mb-md-0">
-                                <h6 onClick={() => setShowEditModal(true)}>
-                                  <i class="bi bi-calendar-check-fill me-2"></i>
-                                  {dropOffDate?.toLocaleDateString("en-GB") ||
-                                    quoteInfo?.dropOffDate.toLocaleDateString(
-                                      "en-GB"
-                                    )}
-                                </h6>
-                              </div>
-                              <div className="col-12 col-md-6">
-                                <h6 onClick={() => setShowEditModal(true)}>
-                                  <i class="bi bi-clock-fill me-2"></i>
-                                  {/* {dropOffTime?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) || quoteInfo?.dropOffTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} */}
-                                  {dropOffTime?.time || quoteInfo?.dropOffTime}
-                                </h6>
-                              </div>
+                    <div className="row">
+                      <div className="col-12 col-xl-6 col-lg-6 col-md-6">
+                        <div className="results-option-data-area">
+                          <h5 style={{color:"#FFF"}}>Dropoff Detail</h5>
+                          <div className="row">
+                            <div className="col-12 col-md-6 mb-2 mb-md-0">
+                              <h6 onClick={() => setShowEditModal(true)}  style={{color:"#FFF"}}>
+                                <i class="bi bi-calendar-check-fill me-2"></i>
+                                {dropOffDate?.toLocaleDateString("en-GB") ||
+                                  quoteInfo?.dropOffDate.toLocaleDateString(
+                                    "en-GB"
+                                  )}
+                              </h6>
                             </div>
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-6">
-                          <div className="results-option-data-area">
-                            <h5>Pickup Detail</h5>
-                            <div className="row">
-                              <div className="col-12 col-md-6 mb-2 mb-md-0">
-                                <h6 onClick={() => setShowEditModal(true)}>
-                                  <i class="bi bi-calendar-check-fill me-2"></i>
-                                  {pickupDate?.toLocaleDateString("en-GB") ||
-                                    quoteInfo?.pickupDate.toLocaleDateString(
-                                      "en-GB"
-                                    )}
-                                </h6>
-                              </div>
-                              <div className="col-12 col-md-6">
-                                <h6 onClick={() => setShowEditModal(true)}>
-                                  <i class="bi bi-clock-fill me-2"></i>
-                                  {/* {pickupTime?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) || quoteInfo?.pickupTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} */}
-                                  {pickupTime?.time || quoteInfo?.pickupTime}
-                                </h6>
-                              </div>
+                            <div className="col-12 col-md-6">
+                              <h6 onClick={() => setShowEditModal(true)} style={{color:"#FFF"}}>
+                                <i class="bi bi-clock-fill me-2"></i>
+                                {/* {dropOffTime?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) || quoteInfo?.dropOffTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} */}
+                                {dropOffTime?.time || quoteInfo?.dropOffTime}
+                              </h6>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="col-12">
-                      <Divider className="mt-4 mb-4" />
-                    </div>
-
-                    <div className="col-12 col-xl-8 col-lg-10 mx-auto">
-                      <div className="row">
-                        <div className="col-12 col-sm-6">
-                          <div className="custom-form-group mb-3 mb-md-0 input-with-icon">
-                            <div className="form-icon-group">
-                              <i class="bi bi-p-square input-grp-icon"></i>
-                              <Dropdown
-                                value={parkingOption}
-                                onChange={(e) => setParkingOption(e.value)}
-                                options={parking_options}
-                                optionLabel="name"
-                                placeholder="Select Parking Option"
-                                className="w-full w-100 custom-form-dropdown"
-                              />
+                      <div className="col-12 col-xl-6 col-lg-6 col-md-6">
+                        <div className="results-option-data-area">
+                          <h5 style={{color:"#FFF"}}>Pickup Detail</h5>
+                          <div className="row">
+                            <div className="col-12 col-md-6 mb-2 mb-md-0">
+                              <h6 onClick={() => setShowEditModal(true)}  style={{color:"#FFF"}}>
+                                <i class="bi bi-calendar-check-fill me-2" ></i>
+                                {pickupDate?.toLocaleDateString("en-GB") ||
+                                  quoteInfo?.pickupDate.toLocaleDateString(
+                                    "en-GB"
+                                  )}
+                              </h6>
                             </div>
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-6">
-                          <div className="custom-form-group mb-3 mb-md-0 input-with-icon">
-                            <div className="form-icon-group">
-                              <i class="bi bi-arrow-down-up input-grp-icon"></i>
-                              <Dropdown
-                                value={filterOption}
-                                onChange={(e) => setFilterOption(e.value)}
-                                options={filter_options}
-                                optionLabel="name"
-                                placeholder="Select Price Option"
-                                className="w-full w-100 custom-form-dropdown"
-                              />
+                            <div className="col-12 col-md-6">
+                              <h6 onClick={() => setShowEditModal(true)} style={{color:"#FFF"}}>
+                                <i class="bi bi-clock-fill me-2"></i>
+                                {/* {pickupTime?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) || quoteInfo?.pickupTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} */}
+                                {pickupTime?.time || quoteInfo?.pickupTime}
+                              </h6>
                             </div>
                           </div>
                         </div>
@@ -530,6 +523,7 @@ const VendorList = () => {
                     </div>
                   </div>
                 </div>
+                {/* </div> */}
               </article>
             </div>
           </div>
@@ -576,13 +570,17 @@ const VendorList = () => {
                                 £ {quote.quote}
                               </span>
                             )}
-
-                            {quote?.quote > 0 && quote?.finalQuote < quote?.quote && (
-                              <span className="percentage">
-                                -{handleCalculateDiscountPercentage(quote?.finalQuote ?? 0, quote?.quote ?? 0)}%
-                                {/* -{discountPercentage}% */}
-                              </span>
-                            )}
+                            {quote?.quote > 0 &&
+                              quote?.finalQuote < quote?.quote && (
+                                <span className="percentage">
+                                  -
+                                  {handleCalculateDiscountPercentage(
+                                    quote?.finalQuote ?? 0,
+                                    quote?.quote ?? 0
+                                  )}
+                                  %{/* -{discountPercentage}% */}
+                                </span>
+                              )}
                           </h3>
                           <div className="result-card-sub">
                             {quote.quote > 0 && (
@@ -717,20 +715,22 @@ const VendorList = () => {
           setShowEditModal(false);
         }}
         className="custom-modal modal_dialog modal_dialog_md"
-      >
+        style={{ backgroundColor: "#1a2332" }}>
         <div className="modal-body p-2">
           <form
             action=""
             className="custom-card-form form-2 get-quote-form p-3 mt-0"
             onSubmit={handleEditSearch}
+            style={{backgroundColor:"transparent"}}
           >
-            <div className="form-head-input-area">
+            <div className="form-head-input-area" style={{backgroundColor:"#26667f1a"}}>
               <div className="row">
                 <div className="col-12 col-xl-8 col-lg-6 mx-auto">
                   <div className="custom-form-group mb-0 input-with-icon">
                     <label
                       htmlFor="airport"
-                      className="custom-form-label form-required text-sm-center"
+                      className="custom-form-label form-required text-sm-center text-white"
+                      style={{ color: "#fff" }}
                     >
                       Select airport
                     </label>
@@ -897,6 +897,7 @@ const VendorList = () => {
                       itemTemplate={timeTemplate}
                       className="w-full w-100 custom-form-dropdown"
                       invalid={showError}
+                      style={{color:"#FFF"}}
                     />
                   </div>
                   {showError && !pickupTime && (
@@ -960,6 +961,7 @@ const VendorList = () => {
           setShowViewModal(false);
         }}
         className="custom-modal modal_dialog modal_dialog_lg"
+        style={{ backgroundColor:"#26667f"}}
       >
         <div class="modal-body">
           <div className="tab-detail-tabs-area mt-0">
@@ -1739,13 +1741,17 @@ const VendorList = () => {
                     {selectedVendor?.quote > 0 && (
                       <span>£ {selectedVendor.quote}</span>
                     )}
-
-                    {selectedVendor?.quote > 0 && selectedVendor?.finalQuote < selectedVendor?.quote && (
-                      <span className="percentage">
-                        -{handleCalculateDiscountPercentage(selectedVendor?.finalQuote ?? 0, selectedVendor?.quote ?? 0)}%
-                        {/* -{discountPercentage}% */}
-                      </span>
-                    )}
+                    {selectedVendor?.quote > 0 &&
+                      selectedVendor?.finalQuote < selectedVendor?.quote && (
+                        <span className="percentage">
+                          -
+                          {handleCalculateDiscountPercentage(
+                            selectedVendor?.finalQuote ?? 0,
+                            selectedVendor?.quote ?? 0
+                          )}
+                          %{/* -{discountPercentage}% */}
+                        </span>
+                      )}
                   </h5>
                 </div>
 

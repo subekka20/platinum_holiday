@@ -5,7 +5,7 @@
   display: block;
   height: 100%;
   box-shadow: 0px 10px 30px #26667f33;
-  background: #ffffff;
+  background: radial-gradient(1200px 600px at 80% 10%, #1f2a36 0%, #0f1720 55%, #0b1017 100%);
   border: 2px solid #ffffff;
   border-color: #0f6080;
   transition: ease-in-out 0.5s;
@@ -79,7 +79,7 @@
 }
 
 .service-card-desc {
-  color: #26667F;
+  color: #FFF;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.6em;

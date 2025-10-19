@@ -40,7 +40,7 @@ const Services = () => {
           <div className="column">
             <div className="col-12">
               <h3
-                className="section-heading text-center mx-auto text-purple"
+                className="section-heading text-center mx-auto text-white"
                 data-aos="zoom-out"
               >
                 Services
@@ -51,7 +51,8 @@ const Services = () => {
               <div className="mt-4 mt-sm-4 mt-lg-5">
                 <p
                   className="section-paragraph text-center mb-0"
-                  data-aos="fade"
+                  data-aos="fade" 
+                  style={{color:"#FFF"}}
                 >
                   At Platinum Holiday Service, we believe parking should be the
                   easiest part of your journey. That’s why we’ve redefined the

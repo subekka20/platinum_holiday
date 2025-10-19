@@ -5,7 +5,7 @@
     padding: 20px;
     display: block;
     box-shadow: 0px 10px 30px #22205723;
-    background: rgb(255, 255, 255);
+    background: #0f1720;;
     transition: ease-in-out 0.5s;
     border: none;
     outline: none;
@@ -17,7 +17,8 @@
     padding: 30px;
     height: 100%;
     position: relative;
-    background-color: #fdfdff;
+    /* background-color: #fdfdff; */
+    background-color: #0f1720;
     /* border: 1px solid #ebeafc; */
     box-shadow: inset 0px 0px 20px #22205723;
 }
@@ -32,7 +33,7 @@
     font-weight: 600;
     display: block;
     position: relative;
-    color: #124170;
+    color: #FFF;
 }
 
 .contact-card-head::after {
@@ -65,7 +66,7 @@
 }
 
 .content-card-desc {
-    color: #124170;
+    color: #FFF;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7em;
@@ -85,14 +86,14 @@
     border: 1px solid #124170;
     background-color: #FFF;
     transition: ease 0.5s;
-    color: #124170;
+    color: #000000;
 }
 
 .contact-content a,
 .contact-content span {
     font-size: 15px;
     font-weight: 500;
-    color: #124170;
+    color: #FFF;
     margin: 0;
     padding-top: 9px;
 }
@@ -103,16 +104,20 @@
 }
 
 .contact-content a:hover {
-    color: #124170;
+    color: #26667F;
 }
 
 .contact-content a:hover i {
-    background-color: #124170 !important;
-    color: #FFF !important;
+    background-color: #FFF !important;
+    color: #26667F !important;
 }
 
 .map-section {
     border-radius: 40px;
     overflow: hidden;
-    border: #37348b 3px solid;
+    border: #26667F 3px solid;
+}
+
+.custom-form-label {
+    color: #FFF;
 }

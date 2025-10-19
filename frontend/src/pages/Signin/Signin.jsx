@@ -89,12 +89,12 @@ const Signin = () => {
       <Toast ref={toast} />
 
       {/* Sign in Section Start */}
-      <section className="section-padding overflow-hidden">
+      <section className="section-padding overflow-hidden auth-section">
         <div className="container-md">
           <div className="row">
             <div className="col-12 mb-4 mb-lg-5">
               <h3
-                className="section-heading text-center mx-auto text-purple"
+                className="section-heading text-center mx-auto text-white"
                 data-aos="zoom-out"
               >
                 Sign In
@@ -114,7 +114,7 @@ const Signin = () => {
               </div>
             </div>
 
-            <div className="col-12 col-xl-6 col-lg-6 my-auto">
+            {/* <div className="col-12 col-xl-6 col-lg-6 my-auto">
               <div
                 className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
                 data-aos="fade-up"
@@ -125,9 +125,9 @@ const Signin = () => {
                   className="section-main-image animate-image"
                 />
               </div>
-            </div>
-            <div className="col-12 col-xl-6 col-lg-6 col-sm-10 col-md-10 mx-auto">
-              <article className="custom-card" data-aos="fade-up">
+            </div> */}
+            <div className="col-12 col-xl-9 col-lg-9 col-sm-10 col-md-10 mx-auto">
+              <article className="custom-card auth-card" data-aos="fade-up">
                 <div className="custom-card-logo-area">
                   <img
                     src="assets/images/logo.png"
@@ -137,7 +137,7 @@ const Signin = () => {
                 </div>
                 <h3
                   className="custom-card-tile"
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "center" , color: "#FFF"}}
                 >
                   Welcome to <span>Platinum Holiday Service</span>
                 </h3>
@@ -205,6 +205,7 @@ const Signin = () => {
                         <label
                           htmlFor="rememberMe"
                           className="custom-check-label"
+                          style={{ color: "#FFF" }}
                         >
                           Remember me
                         </label>
@@ -229,16 +230,16 @@ const Signin = () => {
 
                   <div className="custom-form-group contains-float-input">
                     <Button
-                      label="LOGIN"
-                      className="w-100 submit-button justify-content-center"
+                      label="SIGN IN"
+                      className="w-100 submit-button justify-content-center auth-btn"
                       loading={loading}
                     />
                   </div>
 
-                  <div className="custom-form-link-area text-center">
+                  <div className="custom-form-link-area text-center" >
                     <p>
                       Don't have an account?{" "}
-                      <a href="/sign-up" className="custom-form-link">
+                      <a href="/sign-up" className="custom-form-link" style={{ color: "#FFF" }}>
                         <b>Sign up</b>
                       </a>
                     </p>

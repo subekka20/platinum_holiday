@@ -22,8 +22,8 @@
     position: relative;
     border-radius: 12px;
     padding: 20px;
-    background-color: #ebeafc;
-    box-shadow: 0px 0px 20px #FFF;
+    background-color: #0f1720;
+    /* box-shadow: 0px 0px 20px #FFF; */
     border: 2px solid #FFF;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .results-option-data-area h6 {
-    color: #124170;
+    color: #FFF;
     font-size: 14px;
     font-weight: 500;
     display: block;
@@ -50,7 +50,7 @@
 }
 
 .edit-float-btn {
-    background-color: #124170 !important;
+    background-color: #FFF !important;
     color: #FFF !important;
     z-index: 2 !important;
     border-radius: 10px !important;
@@ -68,13 +68,13 @@
 }
 
 .edit-float-btn:focus {
-    box-shadow: 0px 0px 0px 4px #1241702c !important;
+    box-shadow: 0px 0px 0px 4px #FFF2c !important;
     color: #FFF !important;
     outline: none;
 }
 
 .edit-float-btn:hover {
-    background-color: #124170 !important;
+    background-color: #FFF !important;
 }
 
 .edit-float-btn i {
@@ -94,9 +94,9 @@
     transition: ease-in-out 0.5s;
     border: none;
     outline: none;
-    background-color: #ffffff;
-    border-top: 2px solid #124170;
-    border-bottom: 2px solid #124170;
+    background-color: #0f1720;
+    /* border-top: 2px solid #FFF;
+    border-bottom: 2px solid #FFF; */
 }
 
 .result-card:hover {
@@ -111,7 +111,7 @@
     border-radius: 12px;
     padding: 20px;
     border: 2px solid #ebeafc;
-    background-color: #f7f6ff;
+    background-color: #0f1720;
 }
 
 .result-card-logo-area {
@@ -124,7 +124,7 @@
     border-radius: 12px;
     border: 3px solid #ffffff;
     box-shadow: 0px 0px 20px #22205723;
-    background-color: #FFF;
+    background-color: #0f1720;
     overflow: hidden;
 }
 
@@ -147,7 +147,7 @@
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 12px;
-    background-color: #ebeafc;
+    background-color: #0f1720;
 }
 
 .result-card-star-area {
@@ -176,11 +176,11 @@
     font-weight: 600;
     margin-bottom: 0;
     display: block;
-    color: #124170;
+    color: #FFF;
 }
 
 .result-card-head {
-    color: #124170;
+    color: #FFF;
     font-size: 18px;
     font-weight: 600;
     display: block;
@@ -192,7 +192,7 @@
 
 .result-card-price {
     font-size: 23px;
-    color: #d12788;
+    color: #2776d1;
     font-weight: 600;
     display: block;
 
@@ -207,11 +207,11 @@
 .percentage {
     margin-left: 10px;
     font-size: 18px;
-    background-color: #ffffff;
+    background-color: #0f1720;
     text-wrap: nowrap;
     padding: 3px 8px;
     border-radius: 6px;
-    color: #008f3b !important;
+    color: #00248f !important;
     box-shadow: 0px 5px 20px rgba(34, 32, 87, 0.07);
     vertical-align: middle;
     text-decoration: none !important;
@@ -225,7 +225,7 @@
 }
 
 .result-card-sub p {
-    color: #008f3b;
+    color: #c3a9fc;
     font-size: 14px;
     font-weight: 400;
     display: block;
@@ -237,7 +237,7 @@
 }
 
 .result-card-body-area {
-    background-color: #ebeafc;
+    background-color: #0f1720;
     position: relative;
     border-radius: 12px;
     padding: 15px;
@@ -251,14 +251,14 @@
 }
 
 .result-card-body-area ul li {
-    color: #000;
+    color: #FFF;
     font-size: 14px;
     margin-bottom: 8px;
     font-weight: 400;
 }
 
 .result-card-body-area ul li::marker {
-    color: #124170;
+    color: #FFF;
 }
 
 .result-card-body-area ul li:last-child {
@@ -281,7 +281,7 @@
 .result-card-feature {
     width: 45px;
     height: 45px;
-    background-color: #ebeafc;
+    background-color: #FFF;
     border-radius: 8px;
     position: relative;
     display: flex;
@@ -299,7 +299,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    background-color: #ebeafc;
+    background-color: #0f1720;
     border-radius: 12px;
     padding: 15px;
 }
@@ -331,7 +331,7 @@
 /*  */
 .detail-card {
     border-radius: 20px;
-    background-color: #FFF;
+    background-color: #0f1720;
     position: relative;
     padding: 10px;
     box-shadow: 0px 10px 20px #22205709;
@@ -351,7 +351,7 @@
     height: 200px;
     border-radius: 12px;
     border: 3px solid #ebeafc;
-    background-color: #FFF;
+    background-color: #0f1720;
     overflow: hidden;
     box-shadow: 0px 0px 20px #2220571e;
 }
@@ -371,7 +371,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 12px;
-    background-color: #ebeafc;
+    background-color: #0f1720;
 }
 
 .detail-card-label-area h5 {
@@ -380,7 +380,7 @@
     font-weight: 600;
     margin-bottom: 0;
     display: block;
-    color: #124170;
+    color: #FFF;
 }
 
 .detail-card-info-area {
@@ -403,14 +403,14 @@
 
 .detail-card-info-icon-area i {
     font-size: 20px;
-    color: #124170;
+    color: #FFF;
     vertical-align: middle;
 }
 
 .detail-card-info-body {
     padding: 10px;
     width: 100%;
-    background-color: #ebeafc;
+    background-color: #0f1720;
 }
 
 .detail-card-info-body p {
@@ -422,7 +422,7 @@
 }
 
 .detail-card-info-body h6 {
-    color: #124170;
+    color: #FFF;
     font-size: 16px;
     display: block;
     font-weight: 600;
@@ -502,7 +502,7 @@
 
 .tab-detail-area {
     border-radius: 20px;
-    background-color: #FFF;
+    background-color: #0f1720;
     position: relative;
     padding: 20px;
     box-shadow: 0px 10px 20px #22205709;
@@ -522,7 +522,7 @@
 
 .tab-detail-btn {
     border-radius: 12px !important;
-    color: #124170 !important;
+    color: #FFF !important;
     font-weight: 600 !important;
     font-size: 15px !important;
     border: 2px solid #FFF !important;
@@ -533,7 +533,7 @@
 }
 
 .tab-detail-btn:focus {
-    box-shadow: 0px 0px 0px 4px #1241702c !important;
+    box-shadow: 0px 0px 0px 4px #FFF2c !important;
 }
 
 .tab-detail-content {
@@ -592,7 +592,7 @@
     position: relative;
     border-radius: 12px;
     padding: 15px;
-    background-color: #ebeafc;
+    background-color: #0f1720;
     margin-bottom: 15px;
 }
 
@@ -640,7 +640,7 @@
     position: relative;
     width: 100%;
     margin-top: 15px;
-    background-color: #FFF;
+    background-color: #0f1720;
     border-radius: 10px;
     padding: 15px;
 }
@@ -730,14 +730,15 @@
     text-align: center;
     gap: 10px;
     border-radius: 8px;
-    background-color: #ebeafc;
+    background-color: #0f1720;
     padding: 12px 15px;
     margin-top: 5px;
     cursor: pointer;
+    color: #FFF;
 }
 
 .show-data-head i {
     position: relative !important;
     transform: none !important;
-    color: #124170;
+    color: #fff;
 }
