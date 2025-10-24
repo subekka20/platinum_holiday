@@ -322,16 +322,24 @@ const VendorList = () => {
 
   const editModalHeader = () => {
     return (
-      <div className="modal-header p-2">
-        <h1 className="modal-title fs-5" id="editModalLabel">
-          Edit your search
-        </h1>
+      <div className="modern-edit-modal-header">
+        <div className="edit-header-content">
+          <div className="edit-header-icon">
+            <i className="bi bi-pencil-square"></i>
+          </div>
+          <div className="edit-header-info">
+            <h2 className="edit-modal-title">Edit Your Search</h2>
+            <p className="edit-modal-subtitle">Modify your parking preferences</p>
+          </div>
+        </div>
         <button
           type="button"
-          className="btn-close"
+          className="modern-edit-close-btn"
           onClick={() => setShowEditModal(false)}
-          style={{ backgroundColor: "#FFF" }}
-        ></button>
+          title="Close"
+        >
+          <i className="bi bi-x-lg"></i>
+        </button>
       </div>
     );
   };
@@ -386,136 +394,176 @@ const VendorList = () => {
       </section> */}
       {/* Breadcrumb Section End */}
 
-      <section className="results-option-section" data-aos="fade-up">
-        <div className="container-md" >
+      <section className="modern-results-section" data-aos="fade-up">
+        <div className="container-md">
           <div className="row">
-            <div className="col-12" >
-              <article className="results-option-area" style={{ backgroundColor: "#0f1720" }}>
-                {/* <div className="custom-card-form form-2 results-option-form mt-0 p-4"> */}
-                {/* <button className='edit-float-btn' onClick={() => setVisible(true)}>
-                                        <i className="bi bi-pencil-square"></i>
-                                    </button> */}
-                <Button
-                  icon="bi bi-pencil-square"
-                  className="edit-float-btn"
-                  onClick={() => setShowEditModal(true)}
-                />
-                <div className="col-12 col-xl-8 col-lg-10 mx-auto">
-                  <div className="row">
-                    <div className="col-12 col-sm-6">
-                      <div className="custom-form-group mb-3 mb-md-0 input-with-icon">
-                        <div className="form-icon-group">
-                          <i class="bi bi-p-square input-grp-icon"></i>
-                          <Dropdown
-                            value={parkingOption}
-                            onChange={(e) => setParkingOption(e.value)}
-                            options={parking_options}
-                            optionLabel="name"
-                            placeholder="Select Parking Option"
-                            className="w-full w-100 custom-form-dropdown"
-                          />
-                        </div>
+            <div className="col-12">
+              <div className="modern-results-container">
+                {/* Header Section */}
+                <div className="results-header">
+                  <div className="header-content">
+                    <div className="header-icon">
+                      <i className="bi bi-search"></i>
+                    </div>
+                    <div className="header-text">
+                      <h2>Your Search Results</h2>
+                      <p>Refine your parking options below</p>
+                    </div>
+                  </div>
+                  
+                  <button
+                    className="modern-edit-btn"
+                    onClick={() => setShowEditModal(true)}
+                    title="Edit Search"
+                  >
+                    <i className="bi bi-pencil-square"></i>
+                    <span>Edit Search</span>
+                  </button>
+                </div>
+
+                {/* Filter Options */}
+                <div className="filter-options-section">
+                  <div className="filter-grid">
+                    <div className="filter-card">
+                      <div className="filter-icon">
+                        <i className="bi bi-p-square-fill"></i>
+                      </div>
+                      <div className="filter-content">
+                        <label className="filter-label">Parking Type</label>
+                        <Dropdown
+                          value={parkingOption}
+                          onChange={(e) => setParkingOption(e.value)}
+                          options={parking_options}
+                          optionLabel="name"
+                          placeholder="Select Type"
+                          className="modern-dropdown"
+                        />
                       </div>
                     </div>
 
-                    <div className="col-12 col-sm-6">
-                      <div className="custom-form-group mb-3 mb-md-0 input-with-icon">
-                        <div className="form-icon-group">
-                          <i class="bi bi-arrow-down-up input-grp-icon"></i>
-                          <Dropdown
-                            value={filterOption}
-                            onChange={(e) => setFilterOption(e.value)}
-                            options={filter_options}
-                            optionLabel="name"
-                            placeholder="Select Price Option"
-                            className="w-full w-100 custom-form-dropdown"
-                          />
-                        </div>
+                    <div className="filter-card">
+                      <div className="filter-icon">
+                        <i className="bi bi-funnel-fill"></i>
+                      </div>
+                      <div className="filter-content">
+                        <label className="filter-label">Sort By</label>
+                        <Dropdown
+                          value={filterOption}
+                          onChange={(e) => setFilterOption(e.value)}
+                          options={filter_options}
+                          optionLabel="name"
+                          placeholder="Sort Options"
+                          className="modern-dropdown"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="col-12">
-                  <Divider className="mt-4 mb-4" />
-                </div>
-
-                <div className="row">
-                  <div className="col-12 col-xl-9 col-lg-9 col-md-8 mx-auto">
-                    <div className="custom-form-group mb-0 input-with-icon">
-                      <label
-                        htmlFor="airport"
-                        className="custom-form-label text-sm-center"
-                        style={{color:"#FFF"}}
-                      >
-                        Airport
-                      </label>
-                      <h6
+                {/* Search Summary */}
+                <div className="search-summary">
+                  <div className="summary-header">
+                    <h3>
+                      <i className="bi bi-info-circle-fill me-2"></i>
+                      Booking Summary
+                    </h3>
+                  </div>
+                  
+                  <div className="summary-content">
+                    {/* Airport Information */}
+                    <div className="summary-card airport-card">
+                      <div className="card-icon">
+                        <i className="bi bi-airplane-fill"></i>
+                      </div>
+                      <div className="card-content">
+                        <h4>Airport</h4>
+                        <p>{selectedAirport?.name || quoteInfo?.selectedAirport.name}</p>
+                      </div>
+                      <button 
+                        className="edit-detail-btn"
                         onClick={() => setShowEditModal(true)}
-                        className="show-data-head"
+                        title="Edit Airport"
                       >
-                        <i class="bi bi-airplane-fill input-grp-icon"></i>
-                        {selectedAirport?.name ||
-                          quoteInfo?.selectedAirport.name}
-                      </h6>
-                      <div className="form-icon-group">
-                        {/* <Dropdown
-                              id="airport"
-                              value={selectedAirport}
-                              onChange={(e) => setSelectedAirport(e.value)}
-                              options={airports}
-                              optionLabel="name"
-                              placeholder="Select a Airport"
-                              filter
-                              valueTemplate={selectedAirportTemplate}
-                              itemTemplate={airportOptionTemplate}
-                              className="w-full w-100 custom-form-dropdown"
-                            /> */}
-                      </div>
+                        <i className="bi bi-pencil"></i>
+                      </button>
                     </div>
-                    <div className="row">
-                      <div className="col-12 col-xl-6 col-lg-6 col-md-6">
-                        <div className="results-option-data-area">
-                          <h5 style={{color:"#FFF"}}>Dropoff Detail</h5>
-                          <div className="row">
-                            <div className="col-12 col-md-6 mb-2 mb-md-0">
-                              <h6 onClick={() => setShowEditModal(true)}  style={{color:"#FFF"}}>
-                                <i class="bi bi-calendar-check-fill me-2"></i>
+
+                    {/* Trip Timeline */}
+                    <div className="trip-timeline">
+                      {/* Drop-off Details */}
+                      <div className="timeline-item departure">
+                        <div className="timeline-dot">
+                          <i className="bi bi-box-arrow-down"></i>
+                        </div>
+                        <div className="timeline-content">
+                          <div className="timeline-header">
+                            <h4>Drop-off</h4>
+                            <button 
+                              className="edit-detail-btn"
+                              onClick={() => setShowEditModal(true)}
+                              title="Edit Drop-off"
+                            >
+                              <i className="bi bi-pencil"></i>
+                            </button>
+                          </div>
+                          <div className="timeline-details">
+                            <div className="detail-item">
+                              <i className="bi bi-calendar3"></i>
+                              <span>
                                 {dropOffDate?.toLocaleDateString("en-GB") ||
-                                  quoteInfo?.dropOffDate.toLocaleDateString(
-                                    "en-GB"
-                                  )}
-                              </h6>
+                                  quoteInfo?.dropOffDate.toLocaleDateString("en-GB")}
+                              </span>
                             </div>
-                            <div className="col-12 col-md-6">
-                              <h6 onClick={() => setShowEditModal(true)} style={{color:"#FFF"}}>
-                                <i class="bi bi-clock-fill me-2"></i>
-                                {/* {dropOffTime?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) || quoteInfo?.dropOffTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} */}
-                                {dropOffTime?.time || quoteInfo?.dropOffTime}
-                              </h6>
+                            <div className="detail-item">
+                              <i className="bi bi-clock"></i>
+                              <span>{dropOffTime?.time || quoteInfo?.dropOffTime}</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="col-12 col-xl-6 col-lg-6 col-md-6">
-                        <div className="results-option-data-area">
-                          <h5 style={{color:"#FFF"}}>Pickup Detail</h5>
-                          <div className="row">
-                            <div className="col-12 col-md-6 mb-2 mb-md-0">
-                              <h6 onClick={() => setShowEditModal(true)}  style={{color:"#FFF"}}>
-                                <i class="bi bi-calendar-check-fill me-2" ></i>
+
+                      {/* Connection Line */}
+                      <div className="timeline-connection">
+                        <div className="connection-line">
+                          <div className="connection-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                        </div>
+                        <div className="duration-badge">
+                          <i className="bi bi-hourglass-split"></i>
+                          <span>{dayDifference} days</span>
+                        </div>
+                      </div>
+
+                      {/* Pick-up Details */}
+                      <div className="timeline-item arrival">
+                        <div className="timeline-dot">
+                          <i className="bi bi-box-arrow-up"></i>
+                        </div>
+                        <div className="timeline-content">
+                          <div className="timeline-header">
+                            <h4>Pick-up</h4>
+                            <button 
+                              className="edit-detail-btn"
+                              onClick={() => setShowEditModal(true)}
+                              title="Edit Pick-up"
+                            >
+                              <i className="bi bi-pencil"></i>
+                            </button>
+                          </div>
+                          <div className="timeline-details">
+                            <div className="detail-item">
+                              <i className="bi bi-calendar3"></i>
+                              <span>
                                 {pickupDate?.toLocaleDateString("en-GB") ||
-                                  quoteInfo?.pickupDate.toLocaleDateString(
-                                    "en-GB"
-                                  )}
-                              </h6>
+                                  quoteInfo?.pickupDate.toLocaleDateString("en-GB")}
+                              </span>
                             </div>
-                            <div className="col-12 col-md-6">
-                              <h6 onClick={() => setShowEditModal(true)} style={{color:"#FFF"}}>
-                                <i class="bi bi-clock-fill me-2"></i>
-                                {/* {pickupTime?.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) || quoteInfo?.pickupTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} */}
-                                {pickupTime?.time || quoteInfo?.pickupTime}
-                              </h6>
+                            <div className="detail-item">
+                              <i className="bi bi-clock"></i>
+                              <span>{pickupTime?.time || quoteInfo?.pickupTime}</span>
                             </div>
                           </div>
                         </div>
@@ -523,8 +571,27 @@ const VendorList = () => {
                     </div>
                   </div>
                 </div>
-                {/* </div> */}
-              </article>
+
+                {/* Results Counter */}
+                <div className="results-counter">
+                  <div className="counter-content">
+                    <i className="bi bi-list-ul"></i>
+                    <span>
+                      Found <strong>{quotes?.length || 0}</strong> parking options
+                    </span>
+                  </div>
+                  <div className="counter-badges">
+                    <div className="badge secure">
+                      <i className="bi bi-shield-check"></i>
+                      <span>Secure</span>
+                    </div>
+                    <div className="badge instant">
+                      <i className="bi bi-lightning"></i>
+                      <span>Instant</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -541,157 +608,146 @@ const VendorList = () => {
                     data-aos="fade-up"
                     key={quote._id}
                   >
-                    <article className="result-card">
-                      <div className="result-card-label-area">
-                        <h5>{quote.serviceType}</h5>
-                      </div>
-                      <div className="result-card-head-area">
-                        <div className="result-card-logo-area">
-                          <img
-                            src={quote.dp || "assets/images/lion-parking.png"}
-                            alt=""
-                          />
+                    <article className="modern-result-card">
+                      {/* Header Section with Service Type Badge */}
+                      <div className="card-header-section">
+                        <div className="service-type-badge">
+                          <i className="bi bi-shield-check me-2"></i>
+                          {quote.serviceType}
                         </div>
-                        <div className="result-card-head-detail-area">
-                          <h4 className="result-card-head">
-                            {quote.companyName}
-                          </h4>
-                          <div className="result-card-star-area">
-                            <Rating
-                              value={quote.rating}
-                              readOnly
-                              cancel={false}
+                        {quote?.quote > 0 && quote?.finalQuote < quote?.quote && (
+                          <div className="discount-badge">
+                            -{handleCalculateDiscountPercentage(
+                              quote?.finalQuote ?? 0,
+                              quote?.quote ?? 0
+                            )}% OFF
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Main Content Section */}
+                      <div className="card-main-content">
+                        <div className="company-info-section">
+                          <div className="company-logo-wrapper">
+                            <img
+                              src={quote.dp || "assets/images/lion-parking.png"}
+                              alt={quote.companyName}
+                              className="company-logo"
                             />
                           </div>
-                          <h3 className="result-card-price">
-                            £ {quote.finalQuote}
+                          <div className="company-details">
+                            <h3 className="company-name">{quote.companyName}</h3>
+                            <div className="rating-wrapper">
+                              <Rating
+                                value={quote.rating}
+                                readOnly
+                                cancel={false}
+                                className="custom-rating"
+                              />
+                              <span className="rating-text">({quote.rating || 4.5})</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Price Section */}
+                        <div className="price-section">
+                          <div className="price-main">
+                            <span className="currency">£</span>
+                            <span className="price-value">{quote.finalQuote}</span>
                             {quote.quote > 0 && (
-                              <span className="cut-price ms-3">
-                                £ {quote.quote}
-                              </span>
+                              <span className="original-price">£{quote.quote}</span>
                             )}
-                            {quote?.quote > 0 &&
-                              quote?.finalQuote < quote?.quote && (
-                                <span className="percentage">
-                                  -
-                                  {handleCalculateDiscountPercentage(
-                                    quote?.finalQuote ?? 0,
-                                    quote?.quote ?? 0
-                                  )}
-                                  %{/* -{discountPercentage}% */}
-                                </span>
-                              )}
-                          </h3>
-                          <div className="result-card-sub">
-                            {quote.quote > 0 && (
-                              <p>
-                                <i class="bi bi-hand-thumbs-up-fill me-2"></i>
-                                Save{" "}
-                                <span>
-                                  £ {quote.quote - quote.finalQuote}
-                                </span>{" "}
-                                Today
-                              </p>
-                            )}
+                          </div>
+                          {quote.quote > 0 && (
+                            <div className="savings-info">
+                              <i className="bi bi-piggy-bank me-1"></i>
+                              Save £{quote.quote - quote.finalQuote} Today
+                            </div>
+                          )}
+                        </div>
+                      </div>
 
-                            <p>
-                              <i class="bi bi-lightning-fill me-2"></i>
-                              Cancellation Cover Available
-                            </p>
+                      {/* Features Section */}
+                      <div className="features-section">
+                        <h5 className="features-title">
+                          <i className="bi bi-list-check me-2"></i>
+                          What's Included
+                        </h5>
+                        <div className="features-grid">
+                          {quote.facilities.slice(0, 4).map((facility, index) => (
+                            <div key={index} className="feature-item">
+                              <i className="bi bi-check-circle-fill me-2"></i>
+                              {facility}
+                            </div>
+                          ))}
+                          {quote.facilities.length > 4 && (
+                            <div className="feature-item more-features">
+                              <i className="bi bi-plus-circle me-2"></i>
+                              +{quote.facilities.length - 4} more features
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Security Features */}
+                      <div className="security-section">
+                        <div className="security-features">
+                          <div className="security-item" title="Secure Barrier">
+                            <img src="assets/images/features/secure-barrier.png" alt="Secure Barrier" />
+                            <span>Secure</span>
+                          </div>
+                          <div className="security-item" title="CCTV Cameras">
+                            <img src="assets/images/features/cctv-camera.png" alt="CCTV" />
+                            <span>CCTV</span>
+                          </div>
+                          <div className="security-item" title="Disability Access">
+                            <img src="assets/images/features/disability.png" alt="Accessible" />
+                            <span>Accessible</span>
+                          </div>
+                          <div className="security-item" title="Fencing">
+                            <img src="assets/images/features/fence.png" alt="Fenced" />
+                            <span>Fenced</span>
                           </div>
                         </div>
                       </div>
-                      <div className="result-card-body-area">
-                        <ul>
-                          {quote.facilities.map((facility, index) => {
-                            return <li key={index}>{facility}</li>;
-                          })}
-                        </ul>
+
+                      {/* Benefits Section */}
+                      <div className="benefits-section">
+                        <div className="benefit-item">
+                          <i className="bi bi-lightning-fill benefit-icon"></i>
+                          <span>Free Cancellation</span>
+                        </div>
+                        <div className="benefit-item">
+                          <i className="bi bi-clock-fill benefit-icon"></i>
+                          <span>24/7 Support</span>
+                        </div>
                       </div>
-                      <div className="result-card-footer-area">
-                        <Divider className="mt-3 mb-3" />
-                        <div className="result-card-feature-area">
-                          <div
-                            className="result-card-feature"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Secure Barrier"
-                          >
-                            <img
-                              src="assets/images/features/secure-barrier.png"
-                              alt="Secure Barrier"
-                            />
-                          </div>
 
-                          <div
-                            className="result-card-feature"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Disability"
-                          >
-                            <img
-                              src="assets/images/features/disability.png"
-                              alt="Disability"
-                            />
-                          </div>
-
-                          <div
-                            className="result-card-feature"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="CCTV Cameras"
-                          >
-                            <img
-                              src="assets/images/features/cctv-camera.png"
-                              alt="CCTV Cameras"
-                            />
-                          </div>
-
-                          <div
-                            className="result-card-feature"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Fencing"
-                          >
-                            <img
-                              src="assets/images/features/fence.png"
-                              alt="Fencing"
-                            />
-                          </div>
-                        </div>
-                        <Divider className="mt-3 mb-3" />
-
-                        <div className="result-card-btn-area">
-                          <Button
-                            label="VIEW"
-                            severity="secondary"
-                            className="result-card-btn"
-                            onClick={() => {
-                              setSelectedVendor(quote);
-                              setShowViewModal(true);
-                            }}
-                          />
-                          <Button
-                            label="BOOK"
-                            className="custom-btn-primary result-card-btn"
-                            onClick={() =>
-                              handleBooking(
-                                quote._id,
-                                quote.companyName,
-                                quote.dp,
-                                quote.finalQuote,
-                                quote.serviceType
-                              )
-                            }
-                          />
-                        </div>
-
-                        {/* <div className="result-card-status-area">
-                          <p>
-                            <i className="bi bi-eye-fill me-2"></i>
-                            13 Currently Viewing
-                          </p>
-                        </div> */}
+                      {/* Action Buttons */}
+                      <div className="action-section">
+                        <Button
+                          label="View Details"
+                          severity="secondary"
+                          outlined
+                          className="view-btn"
+                          onClick={() => {
+                            setSelectedVendor(quote);
+                            setShowViewModal(true);
+                          }}
+                        />
+                        <Button
+                          label="Book Now"
+                          className="book-btn"
+                          onClick={() =>
+                            handleBooking(
+                              quote._id,
+                              quote.companyName,
+                              quote.dp,
+                              quote.finalQuote,
+                              quote.serviceType
+                            )
+                          }
+                        />
                       </div>
                     </article>
                   </div>
@@ -716,12 +772,11 @@ const VendorList = () => {
         }}
         className="custom-modal modal_dialog modal_dialog_md"
         style={{ backgroundColor: "#1a2332" }}>
-        <div className="modal-body p-2">
+        <div className="modern-edit-modal-body">
           <form
             action=""
-            className="custom-card-form form-2 get-quote-form p-3 mt-0"
+            className="modern-edit-form"
             onSubmit={handleEditSearch}
-            style={{backgroundColor:"transparent"}}
           >
             <div className="form-head-input-area" style={{backgroundColor:"#26667f1a"}}>
               <div className="row">
@@ -952,846 +1007,354 @@ const VendorList = () => {
       </Dialog>
       {/*  */}
 
-      {/* vendor detail modal */}
+      {/* vendor detail modal - Modern UI */}
       <Dialog
-        header={viewModalHeader}
+        header={() => (
+          <div className="modern-modal-header">
+            <div className="header-content">
+              <div className="company-header">
+                <div className="company-logo-wrapper">
+                  <img 
+                    src={selectedVendor?.dp || "assets/images/default-company.png"} 
+                    alt={selectedVendor?.companyName}
+                    className="company-logo-header"
+                  />
+                </div>
+                <div className="company-info-header">
+                  <h2 className="company-name-header">{selectedVendor?.companyName}</h2>
+                  <div className="service-type-badge-header">
+                    <i className="bi bi-shield-check me-2"></i>
+                    {selectedVendor?.serviceType}
+                  </div>
+                </div>
+              </div>
+              <div className="price-section-header">
+                <div className="price-main-header">
+                  <span className="currency-header">£</span>
+                  <span className="price-value-header">{selectedVendor?.finalQuote}</span>
+                  {selectedVendor?.quote > 0 && (
+                    <span className="original-price-header">£{selectedVendor?.quote}</span>
+                  )}
+                </div>
+                {selectedVendor?.quote > 0 && selectedVendor?.finalQuote < selectedVendor?.quote && (
+                  <div className="discount-badge-header">
+                    -{handleCalculateDiscountPercentage(
+                      selectedVendor?.finalQuote ?? 0,
+                      selectedVendor?.quote ?? 0
+                    )}% OFF
+                  </div>
+                )}
+              </div>
+            </div>
+            <button
+              type="button"
+              className="modern-close-btn"
+              onClick={() => setShowViewModal(false)}
+            >
+              <i className="bi bi-x-lg"></i>
+            </button>
+          </div>
+        )}
         visible={showViewModal}
         onHide={() => {
           if (!showViewModal) return;
           setShowViewModal(false);
         }}
-        className="custom-modal modal_dialog modal_dialog_lg"
-        style={{ backgroundColor:"#26667f"}}
+        className="modern-vendor-modal"
+        style={{ 
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          borderRadius: "20px",
+          boxShadow: "0 25px 50px rgba(0,0,0,0.25)"
+        }}
+        maximizable
       >
-        <div class="modal-body">
-          <div className="tab-detail-tabs-area mt-0">
-            <ul
-              class="nav nav-tabs tab-detail-tabs"
-              id="companyDetailTab"
-              role="tablist"
-            >
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link tab-detail-btn active"
-                  id="overview-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#overview-tab-pane"
-                  type="button"
-                  role="tab"
-                  aria-controls="overview-tab-pane"
-                  aria-selected="true"
-                >
-                  Overview
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link tab-detail-btn"
-                  id="drop-off-procedure-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#drop-off-procedure-tab-pane"
-                  type="button"
-                  role="tab"
-                  aria-controls="drop-off-procedure-tab-pane"
-                  aria-selected="false"
-                >
-                  Drop-Off Procedure
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link tab-detail-btn"
-                  id="return-procedure-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#return-procedure-tab-pane"
-                  type="button"
-                  role="tab"
-                  aria-controls="return-procedure-tab-pane"
-                  aria-selected="false"
-                >
-                  Return Procedure
-                </button>
-              </li>
-
-              {/* <li class="nav-item" role="presentation">
-                    <button
-                      class="nav-link tab-detail-btn"
-                      id="view-map-tab"
-                      data-bs-toggle="tab"
-                      data-bs-target="#view-map-tab-pane"
-                      type="button"
-                      role="tab"
-                      aria-controls="view-map-tab-pane"
-                      aria-selected="false"
-                    >
-                      View Map
-                    </button>
-                  </li> */}
-
-              {/* <li class="nav-item" role="presentation">
-                    <button
-                      class="nav-link tab-detail-btn"
-                      id="photos-tab"
-                      data-bs-toggle="tab"
-                      data-bs-target="#photos-tab-pane"
-                      type="button"
-                      role="tab"
-                      aria-controls="photos-tab-pane"
-                      aria-selected="false"
-                    >
-                      Photos
-                    </button>
-                  </li> */}
-
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link tab-detail-btn"
-                  id="reviews-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#reviews-tab-pane"
-                  type="button"
-                  role="tab"
-                  aria-controls="reviews-tab-pane"
-                  aria-selected="false"
-                >
-                  Reviews
-                </button>
-              </li>
-
-              <li class="nav-item" role="presentation">
-                <button
-                  class="nav-link tab-detail-btn"
-                  id="terms-conditions-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#terms-conditions-tab-pane"
-                  type="button"
-                  role="tab"
-                  aria-controls="terms-conditions-tab-pane"
-                  aria-selected="false"
-                >
-                  Terms & Conditions
-                </button>
-              </li>
-            </ul>
+        <div className="modern-modal-body">
+          {/* Quick Info Cards */}
+          <div className="quick-info-section">
+            <div className="info-card">
+              <div className="info-icon">
+                <i className="bi bi-geo-alt-fill"></i>
+              </div>
+              <div className="info-content">
+                <span className="info-label">Location</span>
+                <span className="info-value">{selectedAirport?.name}</span>
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-icon">
+                <i className="bi bi-star-fill"></i>
+              </div>
+              <div className="info-content">
+                <span className="info-label">Rating</span>
+                <span className="info-value">
+                  <Rating
+                    value={selectedVendor?.rating || 4.5}
+                    readOnly
+                    cancel={false}
+                    className="header-rating"
+                  />
+                </span>
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-icon">
+                <i className="bi bi-clock-fill"></i>
+              </div>
+              <div className="info-content">
+                <span className="info-label">Support</span>
+                <span className="info-value">24/7 Available</span>
+              </div>
+            </div>
+            <div className="info-card">
+              <div className="info-icon">
+                <i className="bi bi-shield-check-fill"></i>
+              </div>
+              <div className="info-content">
+                <span className="info-label">Security</span>
+                <span className="info-value">Fully Secured</span>
+              </div>
+            </div>
           </div>
-          <div className="row tab-detail-row">
-            <div className="col-12 col-xl-8 pe-xl-2">
-              <article
-                class="tab-content tab-detail-area mt-3"
-                id="companyDetailTabContent"
+
+          {/* Main Content with Modern Tabs */}
+          <div className="modern-tabs-container">
+            <div className="modern-tab-navigation">
+              <button
+                className="modern-tab-btn active"
+                onClick={(e) => {
+                  document.querySelectorAll('.modern-tab-btn').forEach(btn => btn.classList.remove('active'));
+                  document.querySelectorAll('.modern-tab-content').forEach(content => content.classList.remove('active'));
+                  e.target.classList.add('active');
+                  document.getElementById('modern-overview').classList.add('active');
+                }}
               >
-                {/* Overview */}
-                <div
-                  class="tab-pane tab-detail-content fade show active"
-                  id="overview-tab-pane"
-                  role="tabpanel"
-                  aria-labelledby="overview-tab"
-                  tabindex="0"
-                >
-                  <div className="tab-detail-content-area">
-                    {/* <h1>Why Use {selectedVendor?.name}?</h1>
-                        <ul>
-                          <li>
-                            {selectedVendor?.name} Meet and Greet airport parking
-                            service offers the best option for those who are
-                            traveling with heavy luggage or families traveling
-                            with kids.
-                          </li>
-                          <li>
-                            {selectedVendor?.name} at Heathrow Airport lets you drop
-                            your car in the nearest car park, so you can just
-                            walk inside and board your flight while your car
-                            is parked in a car park away from the terminal.
-                          </li>
-                          <li>
-                            {selectedVendor?.name} aims to offer the best prices for
-                            both short stay airport parking as well as long
-                            term airport parking.
-                          </li>
-                          <li>
-                            Our aim is to provide a stress-free and affordable
-                            parking solution for all your travels to and from
-                            Airport.
-                          </li>
-                          <li>
-                            Meet and Greet parking service is available at
-                            Heathrow Terminal 1, Heathrow Terminal 2, Heathrow
-                            Terminal 3, Heathrow Terminal 4 and Heathrow
-                            Terminal 5.
-                          </li>
-                        </ul>
-                        <br />
+                <i className="bi bi-info-circle me-2"></i>
+                Overview
+              </button>
+              <button
+                className="modern-tab-btn"
+                onClick={(e) => {
+                  document.querySelectorAll('.modern-tab-btn').forEach(btn => btn.classList.remove('active'));
+                  document.querySelectorAll('.modern-tab-content').forEach(content => content.classList.remove('active'));
+                  e.target.classList.add('active');
+                  document.getElementById('modern-dropoff').classList.add('active');
+                }}
+              >
+                <i className="bi bi-box-arrow-down me-2"></i>
+                Drop-Off
+              </button>
+              <button
+                className="modern-tab-btn"
+                onClick={(e) => {
+                  document.querySelectorAll('.modern-tab-btn').forEach(btn => btn.classList.remove('active'));
+                  document.querySelectorAll('.modern-tab-content').forEach(content => content.classList.remove('active'));
+                  e.target.classList.add('active');
+                  document.getElementById('modern-pickup').classList.add('active');
+                }}
+              >
+                <i className="bi bi-box-arrow-up me-2"></i>
+                Pick-Up
+              </button>
+              <button
+                className="modern-tab-btn"
+                onClick={(e) => {
+                  document.querySelectorAll('.modern-tab-btn').forEach(btn => btn.classList.remove('active'));
+                  document.querySelectorAll('.modern-tab-content').forEach(content => content.classList.remove('active'));
+                  e.target.classList.add('active');
+                  document.getElementById('modern-reviews').classList.add('active');
+                }}
+              >
+                <i className="bi bi-star me-2"></i>
+                Reviews
+              </button>
+              <button
+                className="modern-tab-btn"
+                onClick={(e) => {
+                  document.querySelectorAll('.modern-tab-btn').forEach(btn => btn.classList.remove('active'));
+                  document.querySelectorAll('.modern-tab-content').forEach(content => content.classList.remove('active'));
+                  e.target.classList.add('active');
+                  document.getElementById('modern-terms').classList.add('active');
+                }}
+              >
+                <i className="bi bi-file-text me-2"></i>
+                Terms
+              </button>
+            </div>
 
-                        <h2>Disabled Info</h2>
-                        <p>Disabled & Family Friendly.</p>
-                        <br />
-
-                        <h2>Insurance</h2>
-                        <p>Drivers are fully insured to drive any vehicle.</p>
-                        <br />
-
-                        <h2>Additional Info</h2>
-                        <ul>
-                          <li>Drop off and pick up at the terminal.</li>
-                          <li>
-                            Operating Hours - 4.00 to 23.59 / 7 Days A Week.
-                          </li>
-                          <li>
-                            Please check booking confirmation for Company
-                            details.
-                          </li>
-                          <li>
-                            Valet Service for an additional £30.00, on
-                            request.
-                          </li>
-                          <li>
-                            <u>
-                              "Customer has to pay for the entry and exit
-                              fee".
-                            </u>
-                          </li>
-                        </ul>
-                        <br />
-
-                        <h2>Important</h2>
-                        <ul>
-                          <li>
-                            {selectedVendor?.name} is a trading name of {selectedVendor?.name}
-                            ltd. Full instructions will be provided in booking
-                            confirmation email.
-                          </li>
-                          <li>
-                            Our platform operate as a comparison site/booking
-                            agent. Your chosen Service provider will take the
-                            vehicle, park to their car park and return the
-                            vehicle. You must raise any issues regarding
-                            parking service ( Delay, Damage etc.) with service
-                            provider.
-                          </li>
-                          <li>
-                            We do our best to tell you as much about available
-                            products as possible before you purchase. All
-                            product specific information is provided by
-                            Service Providers. Therefore, we can't always keep
-                            track of changes to how they run. If you find
-                            anything that's not completely accurate in our
-                            information, Please let us know and we will take
-                            the necessary steps.
-                          </li>
-                        </ul>
-                        <br />
-
-                        <p>
-                          Ultra Low Emission Zone (ULEZ) has expanded across
-                          all London boroughs including Heathrow Airport from
-                          29 August 2023. If you drive anywhere within the
-                          ULEZ, including the Heathrow Airport from 29 August
-                          2023, and your vehicle does not meet the emissions
-                          standards, you will have to pay a charge of £12.50.
-                          Please make sure to setup AUTO PAY when coming to
-                          the airport to avoid any penalty tickets. The
-                          operator will not be liable in case you receive a
-                          penalty for not paying the ULEZ charge.
-                        </p> */}
+            <div className="modern-tab-contents">
+              {/* Overview Tab */}
+              <div id="modern-overview" className="modern-tab-content active">
+                <div className="content-card">
+                  <h3 className="content-title">
+                    <i className="bi bi-info-circle-fill me-2"></i>
+                    Service Overview
+                  </h3>
+                  <div className="content-body">
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: selectedVendor?.overView,
+                        __html: selectedVendor?.overView || "<p>No overview information available for this vendor.</p>",
                       }}
                     />
                   </div>
                 </div>
-                {/*  */}
+                
+                {/* Facilities Grid */}
+                {selectedVendor?.facilities && selectedVendor.facilities.length > 0 && (
+                  <div className="facilities-section">
+                    <h3 className="content-title">
+                      <i className="bi bi-list-check me-2"></i>
+                      Available Facilities
+                    </h3>
+                    <div className="facilities-grid">
+                      {selectedVendor.facilities.map((facility, index) => (
+                        <div key={index} className="facility-item">
+                          <i className="bi bi-check-circle-fill facility-icon"></i>
+                          <span className="facility-text">{facility}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
-                {/* Drop-Off Procedure */}
-                <div
-                  class="tab-pane tab-detail-content fade"
-                  id="drop-off-procedure-tab-pane"
-                  role="tabpanel"
-                  aria-labelledby="drop-off-procedure-tab"
-                  tabindex="0"
-                >
-                  <div className="tab-detail-content-area">
-                    {/* <p>
-                          Beginning on August 29, 2023, the Ultra Low Emission
-                          Zone (ULEZ) in London has been extended to cover the
-                          entire Greater London area, Heathrow Airport
-                          included.
-                        </p>
-
-                        <p>
-                          This expansion, executed by Transport for London
-                          (TfL), seeks to mitigate air pollution across the
-                          city. As of this date, Heathrow Airport and its
-                          terminals (2, 3, 4 and 5) fall within the boundaries
-                          of ULEZ. Consequently, vehicles entering the airport
-                          are required to comply with specific emission
-                          criteria to avoid incurring a daily fee.
-                        </p>
-                        <br />
-                        <p>
-                          To check if your car is ULEZ complaint please visit:
-                        </p>
-
-                        <a
-                          href="https://tfl.gov.uk/modes/driving/check-your-vehicle/ "
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          https://tfl.gov.uk/modes/driving/check-your-vehicle/{" "}
-                        </a>
-
-                        <br />
-
-                        <p>
-                          Please be aware that if your vehicle does not meet
-                          ULEZ compliance standards, you will be responsible
-                          for set up auto pay in TFL website. To set this up,
-                          please visit:
-                        </p>
-
-                        <a
-                          href="https://tfl.gov.uk/modes/driving/pay-to-drive-in-london"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          https://tfl.gov.uk/modes/driving/pay-to-drive-in-london
-                        </a>
-                        <br />
-                        <p>
-                          <b>
-                            Once your holiday parking has been booked and
-                            confirmed via email you are ready to go. Please do
-                            call us on 07479259475 when you are 30 minutes
-                            away so we can allocate a driver to collect your
-                            car, one of our friendly chauffeurs will be
-                            waiting to accept your car.
-                          </b>
-                        </p>
-
-                        <p>
-                          <b>
-                            <u>
-                              <em>
-                                "Customer has to pay for the entry and exit
-                                fee".
-                              </em>
-                            </u>
-                          </b>
-                        </p>
-
-                        <p>
-                          Please see the directions for each Terminal we serve
-                          below.
-                        </p>
-
-                        <br />
-
-                        <h2>Terminal 2 - sat-nav postcode: TW6 1EW</h2>
-
-                        <h2>Terminal 2 - Departure Instructions:</h2>
-
-                        <ul>
-                          <li>
-                            From the M25 exit at Junction 15, follow the signs
-                            for Terminals 1, 2 & 3 all the way round following
-                            onto the Western Perimeter Road.
-                          </li>
-                          <li>
-                            Go through the main tunnel to the Central Terminal
-                            Area for Terminals 1, 2 & 3. Exiting the tunnel,
-                            keep right, passing the Central Bus Station,
-                            joining the final approaches to Terminal 2 on
-                            Cosmopolitan Way.
-                          </li>
-                          <li>
-                            Please keep to the right, as the road to Terminal
-                            2 will move away from the building before turning
-                            back as the road ramps up to Terminal 2 Departures
-                            & the Short Stay 2 car park on Constellation Way.
-                          </li>
-                          <li>
-                            Once you are on the rising ramp, continue to keep
-                            right as the ramp will lead directly into the
-                            "Short stay car park" entry barriers.
-                          </li>
-                          <li>
-                            Please make sure you are in lane 6, (towards the
-                            ticket machine), which will take you to Level 4 of
-                            the Short Stay car park. Take a ticket at the
-                            barrier and enter the car park.
-                          </li>
-                          <li>
-                            Once you enter the car park on Level 4, keep to
-                            the RIGHT following the signs for 'Off Airport
-                            Parking Meet & Greet' and then please park your
-                            car in "row B" Off Airport Parking Meet & Greet
-                            bays.
-                          </li>
-                          <li>
-                            Here you see our chauffeurs who are based near the
-                            ticket pay machine. They will be wearing black
-                            jackets and be expecting you.
-                          </li>
-                        </ul>
-                        <br />
-
-                        <h2>Terminal 3 - sat-nav postcode: TW6 1QG</h2>
-
-                        <h2>Terminal 3 - Departure Instructions</h2>
-
-                        <ul>
-                          <li>
-                            From the M25 exit at Junction 15, follow the signs
-                            for Terminals 1, 2 & 3 all the way round following
-                            onto the Western Perimeter Road.
-                          </li>
-                          <li>
-                            Go through the main tunnel to the Central Terminal
-                            Area for Terminals 1, 2 & 3.
-                          </li>
-                          <li>
-                            Exiting the tunnel, keep in the 1st lane and
-                            follow signs for Terminal 3 Short Stay Carpark
-                            (Carpark 3).
-                          </li>
-                          <li>
-                            Take a ticket from the barrier and follow signs to
-                            Level 4, then please park your car in "row A" Off
-                            Airport Parking Meet & Greet bays.
-                          </li>
-                          <li>
-                            Here you see our chauffeurs who are based near the
-                            ticket pay machine. They will be wearing black
-                            jackets and be expecting you.
-                          </li>
-                        </ul>
-                        <br />
-
-                        <h2>Terminal 4 - sat-nav postcode: TW6 3XA</h2>
-
-                        <h2>Terminal 4 - Departure Instructions</h2>
-
-                        <ul>
-                          <li>
-                            Please follow directions to the Short Stay car
-                            park and then drive up to Level 2, Row E or F.
-                            Look for the "Off Airport Meet and Greet' sign and
-                            park your car in Off Airport Parking Meet & Greet
-                            bays.
-                          </li>
-                          <li>
-                            Please have your email booking confirmation ready,
-                            together with your return flight details.
-                          </li>
-                          <li>
-                            From level 2 it's just a short walk to the
-                            terminal.
-                          </li>
-                        </ul>
-                        <br />
-
-                        <h2>Terminal 5 - sat-nav postcode: TW6 2GA</h2>
-
-                        <h2>Terminal 5 - Departure Instructions</h2>
-
-                        <ul>
-                          <li>
-                            Please follow the signs for the "Short Stay
-                            Passenger Pickup", which is located on the
-                            right-hand side of the ramp, as you take the exit
-                            for Terminal 5 from the roundabout.
-                          </li>
-                          <li>
-                            On arrival at the Short Stay car park, please move
-                            to the left-hand lane, following directions to
-                            "LEVEL 4" AVIS.
-                          </li>
-                          <li>
-                            Take a ticket from the barrier and follow signs
-                            for Off Airport Parking and make your way to zones
-                            "R-S". Please Park your car in these designated
-                            areas, sign posted as "Off Airport Meet & Greet”.
-                          </li>
-                          <li>
-                            Here you see our chauffeurs who are based near the
-                            ticket pay machine. They will be wearing black
-                            jackets and be expecting you.
-                          </li>
-                        </ul> */}
+              {/* Drop-Off Procedure Tab */}
+              <div id="modern-dropoff" className="modern-tab-content">
+                <div className="content-card">
+                  <h3 className="content-title">
+                    <i className="bi bi-box-arrow-down me-2"></i>
+                    Drop-Off Procedure
+                  </h3>
+                  <div className="content-body">
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: selectedVendor?.dropOffProcedure,
+                        __html: selectedVendor?.dropOffProcedure || "<p>No drop-off procedure information available.</p>",
                       }}
                     />
                   </div>
                 </div>
-                {/*  */}
+              </div>
 
-                {/* Return Procedure */}
-                <div
-                  class="tab-pane tab-detail-content fade"
-                  id="return-procedure-tab-pane"
-                  role="tabpanel"
-                  aria-labelledby="return-procedure-tab"
-                  tabindex="0"
-                >
-                  <div className="tab-detail-content-area">
-                    {/* <p>
-                          Please do call us on 07479 259 475 once arrived at
-                          the airport.
-                        </p>
-
-                        <br />
-
-                        <h2>Terminal 2 Return Instructions</h2>
-
-                        <p>
-                          On your return, once you have collected your luggage
-                          and are about to clear Customs, please call the
-                          number provided when your car was dropped off.
-                        </p>
-                        <p>
-                          Make your way to the same place where you dropped
-                          the vehicle off, (Level 4 of the Short Stay car
-                          park) and your car will be ready and waiting for you
-                          in row B next to the lift/pay machine.
-                        </p>
-                        <br />
-
-                        <h2>Terminal 3 Return Instructions</h2>
-                        <p>
-                          On your return, once you have collected your luggage
-                          and are about to clear Customs, please call the
-                          number provided when your car was dropped off.
-                        </p>
-
-                        <p>
-                          As you arrive in the arrivals, just before the Exit
-                          door on the Right-Hand Side, please take the lift to
-                          Short stay 3 Level 4 Car Park and your car will be
-                          ready and waiting for you in row A Off Airport
-                          Parking Meet & Greet bays.
-                        </p>
-                        <br />
-
-                        <h2>Terminal 4 Return Instructions</h2>
-
-                        <p>
-                          On your return, once you have collected your luggage
-                          and are about to clear Customs, please call the
-                          number provided when your car was dropped off. Walk
-                          back to the Short Stay car park (Level 2, E or F Off
-                          Airport Parking Meet & Greet bays) where your car
-                          will be ready and waiting for you.
-                        </p>
-                        <br />
-
-                        <h2>Terminal 5 Return Instructions</h2>
-
-                        <p>
-                          On your return, once you have collected your luggage
-                          and are about to clear Customs, please call the
-                          number provided when your car was dropped off.
-                        </p>
-
-                        <p>
-                          Make your way to where you dropped the car off,
-                          (Level 4, Short Stay car park), where your car will
-                          be ready and waiting for you in Row R or S Off
-                          Airport Parking Meet & Greet bays.
-                        </p> */}
+              {/* Pick-Up Procedure Tab */}
+              <div id="modern-pickup" className="modern-tab-content">
+                <div className="content-card">
+                  <h3 className="content-title">
+                    <i className="bi bi-box-arrow-up me-2"></i>
+                    Pick-Up Procedure
+                  </h3>
+                  <div className="content-body">
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: selectedVendor?.pickUpProcedure,
+                        __html: selectedVendor?.pickUpProcedure || "<p>No pick-up procedure information available.</p>",
                       }}
                     />
                   </div>
                 </div>
-                {/*  */}
+              </div>
 
-                {/* View Map */}
-                {/* <div
-                      class="tab-pane tab-detail-content fade"
-                      id="view-map-tab-pane"
-                      role="tabpanel"
-                      aria-labelledby="view-map-tab"
-                      tabindex="0"
-                    >
-                      <div className="tab-detail-map-view-area">
-                        <iframe
-                          width="100%"
-                          height="100%"
-                          frameborder="0"
-                          scrolling="no"
-                          marginheight="0"
-                          marginwidth="0"
-                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=London+(The%20Parking%20Deals)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                        ></iframe>
+              {/* Reviews Tab */}
+              <div id="modern-reviews" className="modern-tab-content">
+                <div className="content-card">
+                  <h3 className="content-title">
+                    <i className="bi bi-star me-2"></i>
+                    Customer Reviews
+                  </h3>
+                  <div className="reviews-section">
+                    <div className="no-reviews-state">
+                      <div className="no-reviews-icon">
+                        <i className="bi bi-chat-quote"></i>
                       </div>
-                    </div> */}
-                {/*  */}
-
-                {/* Photos */}
-                {/* <div
-                      class="tab-pane tab-detail-content fade"
-                      id="photos-tab-pane"
-                      role="tabpanel"
-                      aria-labelledby="photos-tab"
-                      tabindex="0"
-                    >
-                      <div className="tab-detail-image-content">
-                        <Image
-                          src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg"
-                          alt="Image"
-                          width="200"
-                          height="150"
-                          preview
-                        />
-                        <Image
-                          src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg"
-                          alt="Image"
-                          width="200"
-                          height="150"
-                          preview
-                        />
-                        <Image
-                          src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg"
-                          alt="Image"
-                          width="200"
-                          height="150"
-                          preview
-                        />
-                        <Image
-                          src="https://primefaces.org/cdn/primereact/images/galleria/galleria10.jpg"
-                          alt="Image"
-                          width="200"
-                          height="150"
-                          preview
-                        />
-                      </div>
-                    </div> */}
-                {/*  */}
-
-                {/* Reviews */}
-                <div
-                  class="tab-pane tab-detail-content fade"
-                  id="reviews-tab-pane"
-                  role="tabpanel"
-                  aria-labelledby="reviews-tab"
-                  tabindex="0"
-                >
-                  <div className="tab-detail-review-area">
-                    {/* <article className="review-data-area">
-                          <div className="review-data-header-area">
-                            <div className="review-avatar-image-area">
-                              <img src="assets/images/user.png" alt="" />
-                            </div>
-                            <div className="w-100">
-                              <h5>Maddy P</h5>
-                              <div className="review-data-rating">
-                                <Rating value={4} readOnly cancel={false} />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="review-data-body">
-                            <p>
-                              The team are polite, efficient and lovely. No
-                              issues whatsoever, they even called me
-                              proactively to check we were on track and all
-                              okay. Thank you, will definitely use again.
-                            </p>
-                          </div>
-                        </article>
-
-                        <article className="review-data-area">
-                          <div className="review-data-header-area">
-                            <div className="review-avatar-image-area">
-                              <img src="assets/images/user.png" alt="" />
-                            </div>
-                            <div className="w-100">
-                              <h5>Maddy P</h5>
-                              <div className="review-data-rating">
-                                <Rating value={4} readOnly cancel={false} />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="review-data-body">
-                            <p>
-                              The team are polite, efficient and lovely. No
-                              issues whatsoever, they even called me
-                              proactively to check we were on track and all
-                              okay. Thank you, will definitely use again.
-                            </p>
-                          </div>
-                        </article>
-
-                        <article className="review-data-area">
-                          <div className="review-data-header-area">
-                            <div className="review-avatar-image-area">
-                              <img src="assets/images/user.png" alt="" />
-                            </div>
-                            <div className="w-100">
-                              <h5>Maddy P</h5>
-                              <div className="review-data-rating">
-                                <Rating value={4} readOnly cancel={false} />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="review-data-body">
-                            <p>
-                              The team are polite, efficient and lovely. No
-                              issues whatsoever, they even called me
-                              proactively to check we were on track and all
-                              okay. Thank you, will definitely use again.
-                            </p>
-                          </div>
-                        </article>
-
-                        <article className="review-data-area">
-                          <div className="review-data-header-area">
-                            <div className="review-avatar-image-area">
-                              <img src="assets/images/user.png" alt="" />
-                            </div>
-                            <div className="w-100">
-                              <h5>Maddy P</h5>
-                              <div className="review-data-rating">
-                                <Rating value={4} readOnly cancel={false} />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="review-data-body">
-                            <p>
-                              The team are polite, efficient and lovely. No
-                              issues whatsoever, they even called me
-                              proactively to check we were on track and all
-                              okay. Thank you, will definitely use again.
-                            </p>
-                          </div>
-                        </article> */}
-
-                    <div className="no-data-area">
-                      <img
-                        src="assets/images/no-data/no-data-found.png"
-                        className="no-data-img"
-                        alt=""
+                      <h4>No Reviews Yet</h4>
+                      <p>Be the first to review this parking service and help other travelers!</p>
+                      <Button
+                        label="Write a Review"
+                        className="review-btn"
+                        icon="bi bi-pencil-fill"
+                        outlined
                       />
-                      <h4>No review data!</h4>
                     </div>
                   </div>
                 </div>
-                {/*  */}
+              </div>
 
-                {/* Terms & Conditions */}
-                <div
-                  class="tab-pane tab-detail-content fade"
-                  id="terms-conditions-tab-pane"
-                  role="tabpanel"
-                  aria-labelledby="terms-conditions-tab"
-                  tabindex="0"
-                >
-                  <div className="tab-detail-content-area">
-                    <p>
-                      For <b>Platinum Holiday Service</b> T&Cs, please visit{" "}
-                      <a
-                        href="https://theparkingdeals.co.uk/terms-and-conditions"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        https://theparkingdeals.co.uk/terms-and-conditions
-                      </a>
-                    </p>
-                  </div>
-                </div>
-                {/*  */}
-              </article>
-            </div>
-
-            <div className="col-12 col-xl-4 ps-xl-2">
-              <article className="detail-card mt-3 card-sticky">
-                <div className="detail-card-logo-area">
-                  <img src={selectedVendor?.dp} alt="" />
-                </div>
-                <div className="detail-card-label-area">
-                  <h5>{selectedVendor?.serviceType}</h5>
-                </div>
-                <div className="detail-card-info-area mb-1">
-                  <div className="detail-card-info-icon-area">
-                    <i class="bi bi-building-fill"></i>
-                  </div>
-                  <div className="detail-card-info-body">
-                    <p>Company :</p>
-                    <h6>{selectedVendor?.companyName}</h6>
-                  </div>
-                </div>
-
-                <div className="detail-card-info-area">
-                  <div className="detail-card-info-icon-area">
-                    <i class="bi bi-geo-alt-fill"></i>
-                  </div>
-                  <div className="detail-card-info-body">
-                    <p>Location :</p>
-                    <h6>{selectedAirport?.name}</h6>
-                  </div>
-                </div>
-
-                <div className="detail-card-price-area">
-                  <p>Price</p>
-                  <h5>
-                    £ {selectedVendor?.finalQuote}
-                    {selectedVendor?.quote > 0 && (
-                      <span>£ {selectedVendor.quote}</span>
-                    )}
-                    {selectedVendor?.quote > 0 &&
-                      selectedVendor?.finalQuote < selectedVendor?.quote && (
-                        <span className="percentage">
-                          -
-                          {handleCalculateDiscountPercentage(
-                            selectedVendor?.finalQuote ?? 0,
-                            selectedVendor?.quote ?? 0
-                          )}
-                          %{/* -{discountPercentage}% */}
-                        </span>
-                      )}
-                  </h5>
-                </div>
-
-                <div className="detail-card-feature-area">
-                  {selectedVendor?.quote > 0 && (
-                    <p>
-                      <i class="bi bi-hand-thumbs-up-fill me-2"></i>
-                      Save{" "}
+              {/* Terms & Conditions Tab */}
+              <div id="modern-terms" className="modern-tab-content">
+                <div className="content-card">
+                  <h3 className="content-title">
+                    <i className="bi bi-file-text me-2"></i>
+                    Terms & Conditions
+                  </h3>
+                  <div className="content-body">
+                    <div className="terms-notice">
+                      <i className="bi bi-info-circle-fill me-2"></i>
                       <span>
-                        £ {selectedVendor.quote - selectedVendor.finalQuote}
-                      </span>{" "}
-                      Today
-                    </p>
-                  )}
-
-                  <p>
-                    <i class="bi bi-lightning-fill me-2"></i>
-                    Cancellation Cover Available
-                  </p>
+                        For <strong>Platinum Holiday Service</strong> Terms & Conditions, please visit our{" "}
+                        <a
+                          href="https://theparkingdeals.co.uk/terms-and-conditions"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="terms-link"
+                        >
+                          official terms page
+                        </a>
+                      </span>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <Divider className="mt-2 mb-2" />
-
-                <Button
-                  label="BOOK"
-                  className="custom-btn-primary w-100 result-card-btn"
-                  // class="btn-close"
-                  // aria-label="Close"
-                  onClick={() => {
-                    handleBooking(
-                      selectedVendor?._id,
-                      selectedVendor?.companyName,
-                      selectedVendor?.dp,
-                      selectedVendor?.finalQuote,
-                      selectedVendor?.serviceType
-                    );
-                    setShowViewModal(false);
-                  }}
-                />
-              </article>
+          {/* Bottom Action Section */}
+          <div className="modal-footer-section">
+            <div className="savings-highlight">
+              {selectedVendor?.quote > 0 && (
+                <div className="savings-card">
+                  <div className="savings-icon">
+                    <i className="bi bi-piggy-bank-fill"></i>
+                  </div>
+                  <div className="savings-text">
+                    <span className="savings-label">You Save</span>
+                    <span className="savings-amount">
+                      £{selectedVendor.quote - selectedVendor.finalQuote} Today
+                    </span>
+                  </div>
+                </div>
+              )}
+              <div className="guarantee-card">
+                <div className="guarantee-icon">
+                  <i className="bi bi-shield-check-fill"></i>
+                </div>
+                <div className="guarantee-text">
+                  <span className="guarantee-label">Free Cancellation</span>
+                  <span className="guarantee-desc">Up to 24 hours before</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="action-buttons">
+              <Button
+                label="Compare Prices"
+                severity="secondary"
+                outlined
+                className="compare-btn"
+                icon="bi bi-arrow-left-right"
+                onClick={() => setShowViewModal(false)}
+              />
+              <Button
+                label={`Book for £${selectedVendor?.finalQuote}`}
+                className="book-now-btn"
+                icon="bi bi-credit-card-fill"
+                onClick={() => {
+                  handleBooking(
+                    selectedVendor?._id,
+                    selectedVendor?.companyName,
+                    selectedVendor?.dp,
+                    selectedVendor?.finalQuote,
+                    selectedVendor?.serviceType
+                  );
+                  setShowViewModal(false);
+                }}
+              />
             </div>
           </div>
         </div>
