@@ -708,205 +708,336 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Steps Section: Integrated into hero */}
-        <div className="steps-section">
-          <div className="steps-container">
-          <div className="steps-header">
-            <h3 className="steps-title">How It Works</h3>
-            <p className="steps-subtitle">Simple steps to secure your parking</p>
-          </div>
-          
-          <div className="steps-grid">
-            {/* Step 1 */}
-            <div className="step-card">
-              <div className="step-number">1</div>
-              <div className="step-icon">
-                <img
-                  src="assets/images/home/select_date.png"
-                  alt="Select Parking Dates"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
+        {/* Enhanced Process Section */}
+        <div className="process-section">
+          <div className="process-container">
+            <div className="process-header">
+              <span className="process-badge">Simple Process</span>
+              <h2 className="process-title">Book Your Parking in 3 Easy Steps</h2>
+              <p className="process-subtitle">
+                Experience hassle-free airport parking with our streamlined booking process
+              </p>
+            </div>
+            
+            <div className="process-timeline">
+              {/* Step 1 */}
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <div className="timeline-icon">
+                    <i className="bi bi-search"></i>
+                  </div>
+                  <div className="timeline-info">
+                    <h4 className="timeline-title">Search & Compare</h4>
+                    <p className="timeline-description">
+                      Select your airport, choose dates and times. 
+                      Compare prices from multiple parking providers instantly.
+                    </p>
+                    <div className="timeline-features">
+                      <span className="feature-tag">Real-time availability</span>
+                      <span className="feature-tag">Best price guarantee</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="timeline-connector"></div>
               </div>
-              <div className="step-title">Select Parking Dates</div>
-              <div className="step-description">Choose your entry and exit dates</div>
+
+              {/* Step 2 */}
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <div className="timeline-icon">
+                    <i className="bi bi-credit-card"></i>
+                  </div>
+                  <div className="timeline-info">
+                    <h4 className="timeline-title">Book & Pay Securely</h4>
+                    <p className="timeline-description">
+                      Choose your preferred parking option and complete your booking 
+                      with our secure payment system.
+                    </p>
+                    <div className="timeline-features">
+                      <span className="feature-tag">Instant confirmation</span>
+                      <span className="feature-tag">Secure payment</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="timeline-connector"></div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <div className="timeline-icon">
+                    <i className="bi bi-airplane"></i>
+                  </div>
+                  <div className="timeline-info">
+                    <h4 className="timeline-title">Park & Travel</h4>
+                    <p className="timeline-description">
+                      Arrive at your reserved parking space, drop off your vehicle, 
+                      and enjoy your stress-free journey.
+                    </p>
+                    <div className="timeline-features">
+                      <span className="feature-tag">24/7 security</span>
+                      <span className="feature-tag">Free shuttle service</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Step 2 */}
-            <div className="step-card">
-              <div className="step-number">2</div>
-              <div className="step-icon">
-                <img
-                  src="assets/images/home/search.png"
-                  alt="Search and Book Space"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
+            {/* Benefits Grid */}
+            <div className="benefits-grid">
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-shield-check"></i>
+                </div>
+                <h5>Secure & Safe</h5>
+                <p>CCTV monitored facilities</p>
               </div>
-              <div className="step-title">Search and Book Space</div>
-              <div className="step-description">Find and reserve your parking spot</div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="step-card">
-              <div className="step-number">3</div>
-              <div className="step-icon">
-                <img
-                  src="assets/images/home/travel.png"
-                  alt="Enjoy Your Travel"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-clock"></i>
+                </div>
+                <h5>Save Time</h5>
+                <p>Quick online booking</p>
               </div>
-              <div className="step-title">Enjoy Your Travel</div>
-              <div className="step-description">Travel with peace of mind</div>
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-currency-dollar"></i>
+                </div>
+                <h5>Best Prices</h5>
+                <p>Guaranteed lowest rates</p>
+              </div>
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-headset"></i>
+                </div>
+                <h5>24/7 Support</h5>
+                <p>Always here to help</p>
+              </div>
             </div>
           </div>
-          </div>
 
-          {/* Component-scoped CSS */}
+          {/* Enhanced Component Styles */}
           <style>{`
-    .steps-section {
+    .process-section {
       background: transparent;
-      padding: 60px 0 40px 0;
+      padding: 80px 0 60px 0;
       margin: 0;
-      border: none;
     }
     
-    .steps-container {
-      max-width: 1000px;
+    .process-container {
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
     }
     
-    .steps-header {
+    .process-header {
       text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .process-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .process-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+    }
+    
+    .process-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .process-timeline {
+      margin-bottom: 60px;
+    }
+    
+    .timeline-item {
+      position: relative;
       margin-bottom: 40px;
     }
     
-    .steps-title {
-      font-size: 32px;
-      font-weight: 700;
-      color: #dbeafe;
-      margin: 0 0 12px 0;
+    .timeline-item:last-child .timeline-connector {
+      display: none;
     }
     
-    .steps-subtitle {
-      font-size: 16px;
-      color: #b7c3d6;
-      margin: 0;
-    }
-    
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    .timeline-content {
+      display: flex;
+      align-items: flex-start;
       gap: 24px;
-      align-items: start;
-    }
-    
-    .step-card {
-      background: rgba(15, 23, 32, 0.4);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.1);
       transition: all 0.3s ease;
     }
     
-    .step-card:hover {
-      border-color: rgba(123, 180, 255, 0.3);
-      transform: translateY(-4px);
+    .timeline-content:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateX(8px);
     }
     
-    .step-number {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 32px;
-      height: 32px;
-      background: #0b7cd1;
-      color: #fff;
+    .timeline-icon {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: white;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    .timeline-info {
+      flex: 1;
+    }
+    
+    .timeline-title {
+      font-size: 24px;
       font-weight: 700;
-      font-size: 14px;
+      color: #ffffff;
+      margin: 0 0 12px 0;
     }
     
-    .step-icon {
-      background: #0e1622;
+    .timeline-description {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      margin: 0 0 16px 0;
+    }
+    
+    .timeline-features {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .feature-tag {
+      background: rgba(102, 126, 234, 0.2);
+      color: #a5b4fc;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+    
+    .timeline-connector {
+      position: absolute;
+      left: 54px;
+      top: 100%;
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(102, 126, 234, 0.5), transparent);
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    
+    .benefit-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.02);
+    }
+    
+    .benefit-icon {
+      background: rgba(102, 126, 234, 0.2);
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      width: 80px;
-      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      margin: 0 auto 20px;
-      border: 1px solid #1f3147;
+      margin: 0 auto 16px;
+      color: #a5b4fc;
+      font-size: 20px;
     }
     
-    .step-icon img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
-    }
-    
-    .step-title {
-      font-weight: 600;
+    .benefit-item h5 {
       font-size: 18px;
-      color: #dbeafe;
-      margin: 0 0 12px 0;
-      line-height: 1.4;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 8px 0;
     }
     
-    .step-description {
+    .benefit-item p {
       font-size: 14px;
-      color: #b7c3d6;
-      line-height: 1.5;
+      color: rgba(255,255,255,0.7);
       margin: 0;
     }
 
-    /* Responsive */
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+      .process-title {
+        font-size: 32px;
       }
       
-      .step-card {
-        padding: 24px 20px;
+      .timeline-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
       }
       
-      .steps-title {
-        font-size: 28px;
+      .timeline-connector {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .benefits-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
       }
     }
     
     @media (max-width: 480px) {
-      .steps-container {
+      .process-container {
         padding: 0 16px;
       }
       
-      .step-card {
-        padding: 20px 16px;
+      .timeline-content {
+        padding: 24px 20px;
       }
       
-      .step-icon {
-        width: 64px;
-        height: 64px;
+      .process-title {
+        font-size: 28px;
       }
       
-      .step-icon img {
-        width: 36px;
-        height: 36px;
+      .process-subtitle {
+        font-size: 16px;
       }
     }
   `}</style>
