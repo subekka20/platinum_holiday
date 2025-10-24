@@ -190,35 +190,36 @@
 .contact-cards {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .contact-card {
   background: rgba(30, 41, 59, 0.5);
   border: 1px solid rgba(51, 65, 85, 0.3);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 8px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   transition: all 0.3s ease;
 }
 
 .contact-card:hover {
   background: rgba(30, 41, 59, 0.8);
   border-color: rgba(59, 130, 246, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .contact-icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 10px;
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .contact-icon.phone {
@@ -240,16 +241,16 @@
 .contact-label {
   display: block;
   color: #94a3b8;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .contact-value {
   color: #f1f5f9;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s ease;
