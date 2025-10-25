@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Tilt from "react-parallax-tilt";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
@@ -11,7 +10,6 @@ import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { sendVerificationEmail } from "../../utils/authUtil";
 import withComponentName from "../../withComponentName";
-import Preloader from "../../Preloader";
 
 const ForgotPassword = () => {
   const toast = useRef(null);
@@ -153,188 +151,162 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Preloader />
       <Header />
-      <section className="section-padding overflow-hidden">
-        <div className="container-md">
-          <Toast ref={toast} />
+      <Toast ref={toast} />
 
-          {page === 1 ? (
-            // Email Verification Page
-            <div className="row">
-              <div className="col-12 col-xl-9 col-xxl-9 col-lg-9 col-sm-11 col-md-11 mx-auto">
-                <article className="custom-card" data-aos="fade-up" style={{
-                  backgroundColor: "#0f1720"
-                }}>
-                  <div className="custom-card-logo-area">
+      {/* Clean Forgot Password Section */}
+      <section className="clean-signin-section">
+        <div className="container">
+          <div className="row justify-content-center align-items-center min-vh-100">
+            {page === 1 ? (
+              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="clean-signin-card" data-aos="fade-up">
+                  <div className="clean-card-header">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="clean-card-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h2 className="clean-card-title">Reset Password</h2>
+                    <p className="clean-card-subtitle">
+                      Enter your email address to receive password reset instructions
+                    </p>
                   </div>
-                  <h3
-                    className="custom-card-tile"
-                    style={{ textAlign: "center" , color: "#FFF" }}
-                  >
-                    Email Verification
-                  </h3>
-                  {/* <h6 className="custom-card-sub-tile">
-                    Enter your registered email address below for verification
-                  </h6> */}
-                  <form action="" className="custom-card-form">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="verify_email"
-                            className="custom-form-label form-required"
-                          >
-                            Email
-                          </label>
-                          <InputText
-                            id="verify_email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            placeholder="Enter your email address"
-                            name="email"
-                            value={resetPasswordInfo.email}
-                            onChange={handleInputChange}
-                          />
-                          {showError && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="custom-form-group contains-float-input mb-0">
-                      <Button
-                        label={`${loading ? "Processing..." : "VERIFY"}`}
-                        className="w-100 submit-button justify-content-center"
-                        loading={loading}
-                        onClick={handleVerifyEmail}
-                        disabled={!resetPasswordInfo.email}
-                        style={{ color: "#FFF" }}
+                  
+                  <form className="clean-signin-form" onSubmit={handleVerifyEmail}>
+                    <div className="clean-input-group">
+                      <InputText
+                        id="verify_email"
+                        keyfilter="email"
+                        className="clean-input"
+                        placeholder="Enter your email address"
+                        name="email"
+                        value={resetPasswordInfo.email}
+                        onChange={handleInputChange}
                       />
+                      {/* <label htmlFor="verify_email" className="clean-label">
+                        Email Address *
+                      </label>
+                       */}
+                      {(showError && !resetPasswordInfo.email) && (
+                        <small className="clean-error-msg">
+                          This field is required
+                        </small>
+                      )}
+                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resetPasswordInfo.email) && resetPasswordInfo.email && (
+                        <small className="clean-error-msg">
+                          Enter valid email
+                        </small>
+                      )}
+                    </div>
+
+                    <Button
+                      label={loading ? "Processing..." : "SEND RESET LINK"}
+                      className="clean-submit-btn"
+                      loading={loading}
+                      disabled={!resetPasswordInfo.email}
+                      type="submit"
+                    />
+
+                    <div className="clean-form-footer">
+                      <p>
+                        Remember your password?{" "}
+                        <a href="/sign-in" className="clean-link">
+                          Sign in
+                        </a>
+                      </p>
                     </div>
                   </form>
-                </article>
-              </div>
-              {/* <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area" data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/account-verification-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="Email Verification"
-                    />
-                  </Tilt>
                 </div>
-              </div> */}
-            </div>
-          ) : (
-            // Reset Password Page
-            <div className="row">
-              <div className="col-12 col-xl-9 col-xxl-9 col-lg-9 col-sm-11 col-md-11 mx-auto">
-                <button
-                  className="back-page-btn"
-                  onClick={goBack}
-                  data-aos="fade-left"
-                  style={{ color: "#FFF" }}
-                >
-                  <i className="ri ri-arrow-left-line me-2" style={{ color: "#FFF" }}></i>Back
-                </button>
-                <article className="custom-card" data-aos="fade-up"  style={{
-                backgroundColor: "#0f1720"
-              }}>
-                  <div className="custom-card-logo-area">
+              </div>
+            ) : (
+              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="clean-signin-card" data-aos="fade-up">
+                  <button
+                    className="clean-back-btn"
+                    onClick={goBack}
+                  >
+                    <i className="ri ri-arrow-left-line"></i>
+                    Back
+                  </button>
+                  
+                  <div className="clean-card-header">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="clean-card-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h2 className="clean-card-title">Create New Password</h2>
+                    <p className="clean-card-subtitle">
+                      Please enter your new password below
+                    </p>
                   </div>
-                  <h3 className="custom-card-tile" style={{ textAlign: "center" , color: "#FFF" }}>Reset Your Password</h3>
-                  {/* <h6 className="custom-card-sub-tile">
-                    Please enter your new password below.
-                  </h6> */}
-                  <form
-                    action=""
-                    className="custom-card-form"
-                    onSubmit={handleSubmit}
-                  >
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="password"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            New password
-                          </label>
-                          <Password
-                            id="password"
-                            className="custom-form-input"
-                            name="newPassword"
-                            value={resetPasswordInfo.newPassword}
-                            onChange={handleInputChange}
-                            header={header}
-                            footer={footer}
-                            toggleMask
-                            placeholder="Enter your new password"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12">
-                        <div className="custom-form-group">
-                          <label
-                            htmlFor="confirmPassword"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            Confirm password
-                          </label>
-                          <Password
-                            id="confirmPassword"
-                            className="custom-form-input"
-                            name="confirmPassword"
-                            value={resetPasswordInfo.confirmPassword}
-                            onChange={handleInputChange}
-                            feedback={false}
-                            toggleMask
-                            placeholder="Re-enter your new password"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="custom-form-group contains-float-input mb-0">
-                      <Button
-                        label="RESET"
-                        className="w-100 submit-button justify-content-center"
-                        loading={loading}
+                  
+                  <form className="clean-signin-form" onSubmit={handleSubmit}>
+                    <div className="clean-input-group">
+                      <Password
+                        className="clean-password"
+                        name="newPassword"
+                        value={resetPasswordInfo.newPassword}
+                        onChange={handleInputChange}
+                        header={header}
+                        footer={footer}
+                        toggleMask
+                        placeholder="Enter your new password"
+                        feedback={true}
                       />
+                      {/* <label className="clean-label">New Password *</label> */}
+                      {(showError && !resetPasswordInfo.newPassword) && (
+                        <small className="clean-error-msg">This field is required</small>
+                      )}
+                      {(resetPasswordInfo.newPassword.length < 8 && resetPasswordInfo.newPassword) && (
+                        <small className="clean-error-msg">Password must be at least 8 characters long</small>
+                      )}
+                    </div>
+
+                    <div className="clean-input-group">
+                      <Password
+                        className="clean-password"
+                        name="confirmPassword"
+                        value={resetPasswordInfo.confirmPassword}
+                        onChange={handleInputChange}
+                        feedback={false}
+                        toggleMask
+                        placeholder="Re-enter your new password"
+                      />
+                      {/* <label className="clean-label">Confirm Password *</label> */}
+                      {(showError && !resetPasswordInfo.confirmPassword) && (
+                        <small className="clean-error-msg">This field is required</small>
+                      )}
+                      {(resetPasswordInfo.newPassword !== resetPasswordInfo.confirmPassword && resetPasswordInfo.confirmPassword) && (
+                        <small className="clean-error-msg">Passwords do not match</small>
+                      )}
+                    </div>
+
+                    <Button
+                      label="RESET PASSWORD"
+                      className="clean-submit-btn"
+                      loading={loading}
+                      type="submit"
+                    />
+
+                    <div className="clean-form-footer">
+                      <p>
+                        Remember your password?{" "}
+                        <a href="/sign-in" className="clean-link">
+                          Sign in
+                        </a>
+                      </p>
                     </div>
                   </form>
-                </article>
-              </div>
-              {/* <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area" data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/reset-password.svg"
-                      className="section-main-image animate-image"
-                      alt="Reset Password"
-                    />
-                  </Tilt>
                 </div>
-              </div> */}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </section>
+      {/* Forgot Password Section End */}
+
       <Footer />
     </>
   );
