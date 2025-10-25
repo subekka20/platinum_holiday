@@ -1107,7 +1107,7 @@ const VendorList = () => {
             </div>
             <div className="info-card">
               <div className="info-icon">
-                <i className="bi bi-shield-check-fill"></i>
+                <i className="bi bi-shield-check"></i>
               </div>
               <div className="info-content">
                 <span className="info-label">Security</span>
