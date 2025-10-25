@@ -11,7 +11,6 @@ import { Toast } from "primereact/toast";
 import { setLogin } from "../../state";
 import api from "../../api";
 import withComponentName from "../../withComponentName";
-import Preloader from "../../Preloader";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -83,169 +82,116 @@ const Signin = () => {
 
   return (
     <>
-      <Preloader />
       <Header />
-
       <Toast ref={toast} />
 
-      {/* Sign in Section Start */}
-      <section className="section-padding overflow-hidden auth-section">
-        <div className="container-md">
-          <div className="row">
-            <div className="col-12 mb-4 mb-lg-5">
-              <h3
-                className="section-heading text-center mx-auto text-white"
-                data-aos="zoom-out"
-              >
-                Sign In
-              </h3>
-              <div className="mt-5 mb-2 mb-sm-4">
-                <p
-                  className="section-paragraph text-center mb-0"
-                  data-aos="fade"
-                >
-                  Welcome Back to Platinum Holiday Service Sign in to access
-                  your bookings and manage your parking reservations with ease.
-                  Our secure platform ensures a smooth, hassle-free experience
-                  every time. Need help? Our support team is always here for
-                  you. Thank you for choosing Platinum Holiday Service — your
-                  journey starts here.
-                </p>
-              </div>
+      {/* Clean Signin Section */}
+      <section className="clean-signin-section">
+        <div className="signin-container">
+          <div className="signin-card">
+            {/* Logo Section */}
+            <div className="logo-section">
+              <img
+                src="assets/images/logo.png"
+                className="signin-logo"
+                alt="Platinum Holiday Service"
+              />
+              <h1 className="company-name">Platinum Holiday Service</h1>
             </div>
 
-            {/* <div className="col-12 col-xl-6 col-lg-6 my-auto">
-              <div
-                className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
-                data-aos="fade-up"
-              >
-                <img
-                  src="/assets/images/account/signin-illustration.svg"
-                  alt="Sign in"
-                  className="section-main-image animate-image"
-                />
+            {/* Form Section */}
+            <div className="form-section">
+              <div className="form-header">
+                <h2 className="form-title">Sign In</h2>
+                <p className="form-subtitle">
+                  Welcome back! Please sign in to your account
+                </p>
               </div>
-            </div> */}
-            <div className="col-12 col-xl-9 col-lg-9 col-sm-10 col-md-10 mx-auto">
-              <article className="custom-card auth-card" data-aos="fade-up">
-                <div className="custom-card-logo-area">
-                  <img
-                    src="assets/images/logo.png"
-                    className="custom-card-logo"
-                    alt="Platinum Holiday Service"
+
+              <form className="signin-form" onSubmit={handleSubmit}>
+                <div className="input-group">
+                  <label htmlFor="email" className="input-label form-required">
+                    Email 
+                  </label>
+                  <InputText
+                    id="email"
+                    keyfilter="email"
+                    className="clean-input"
+                    name="email"
+                    value={signInInfo.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter your email address"
                   />
+                  {require && !signInInfo.email && (
+                    <small className="error-text">This field is required</small>
+                  )}
+                  {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInInfo.email) &&
+                    signInInfo.email && (
+                      <small className="error-text">Enter valid email</small>
+                    )}
                 </div>
-                <h3
-                  className="custom-card-tile"
-                  style={{ textAlign: "center" , color: "#FFF"}}
-                >
-                  Welcome to <span>Platinum Holiday Service</span>
-                </h3>
-                <form
-                  action=""
-                  className="custom-card-form"
-                  onSubmit={handleSubmit}
-                >
-                  <div className="custom-form-group contains-float-input">
-                    <FloatLabel>
-                      <InputText
-                        id="email"
-                        keyfilter="email"
-                        className="custom-form-input"
-                        name="email"
-                        value={signInInfo.email}
-                        onChange={handleInputChange}
-                      />
-                      <label htmlFor="email" className="custom-float-label">
-                        Email
-                      </label>
-                    </FloatLabel>
-                    {require && !signInInfo.email && (
-                      <small className="text-danger form-error-msg">
-                        This field is required
-                      </small>
-                    )}
-                    <small className="text-danger form-error-msg">
-                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInInfo.email) &&
-                      signInInfo.email
-                        ? "Enter valid email"
-                        : ""}
+
+                <div className="input-group">
+                  <label
+                    htmlFor="password"
+                    className="input-label form-required"
+                  >
+                    Password
+                  </label>
+                  <Password
+                    id="password"
+                    className="clean-input"
+                    name="password"
+                    value={signInInfo.password}
+                    onChange={handleInputChange}
+                    toggleMask
+                    placeholder="Enter your password"
+                  />
+                  {require && !signInInfo.password && (
+                    <small className="error-text">
+                      This field is required
                     </small>
-                  </div>
+                  )}
+                  {signInInfo.password.length < 8 && signInInfo.password && (
+                    <small className="error-text">
+                      Password must be at least 8 characters long
+                    </small>
+                  )}
+                </div>
 
-                  <div className="custom-form-group contains-float-input">
-                    <FloatLabel>
-                      <Password
-                        className="custom-form-input"
-                        name="password"
-                        value={signInInfo.password}
-                        onChange={handleInputChange}
-                        feedback={false}
-                        toggleMask
-                      />
-                      <label htmlFor="username" className="custom-float-label">
-                        Password
-                      </label>
-                    </FloatLabel>
-                    {require && !signInInfo.password && (
-                      <small className="text-danger form-error-msg">
-                        This field is required
-                      </small>
-                    )}
-                  </div>
-
-                  <div className="custom-form-group contains-float-input">
-                    <div className="custom-check-group">
-                      <div className="custom-check-area">
-                        <Checkbox
-                          inputId="rememberMe"
-                          onChange={(e) => setChecked(e.checked)}
-                          checked={checked}
-                        ></Checkbox>
-                        <label
-                          htmlFor="rememberMe"
-                          className="custom-check-label"
-                          style={{ color: "#FFF" }}
-                        >
-                          Remember me
-                        </label>
-                      </div>
-
-                      <a
-                        href="/forgot-password"
-                        style={{
-                          color: "#ff0000ff",
-                          fontSize: "15px",
-                          textDecoration: "none",
-                          fontWeight: 500,
-                          transition: "ease 0.5s",
-                          border: "none",
-                          outline: "none",
-                        }}
-                      >
-                        Forgot password?
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="custom-form-group contains-float-input">
-                    <Button
-                      label="SIGN IN"
-                      className="w-100 submit-button justify-content-center auth-btn"
-                      loading={loading}
+                <div className="form-extras">
+                  <div className="remember-section">
+                    <Checkbox
+                      inputId="rememberMe"
+                      onChange={(e) => setChecked(e.checked)}
+                      checked={checked}
+                      className="clean-checkbox"
                     />
+                    <label htmlFor="rememberMe" className="remember-label">
+                      Remember me
+                    </label>
                   </div>
+                  <a href="/forgot-password" className="forgot-password">
+                    Forgot Password?
+                  </a>
+                </div>
 
-                  <div className="custom-form-link-area text-center" >
-                    <p>
-                      Don't have an account?{" "}
-                      <a href="/sign-up" className="custom-form-link" style={{ color: "#FFF" }}>
-                        <b>Sign up</b>
-                      </a>
-                    </p>
-                  </div>
-                </form>
-              </article>
+                <Button
+                  label="Sign In"
+                  className="signin-button"
+                  loading={loading}
+                  disabled={loading}
+                />
+
+                <div className="signup-section">
+                  <p className="signup-text">
+                    Don't have an account?{" "}
+                    <a href="/sign-up" className="signup-link">
+                      Sign Up 
+                    </a>
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
         </div>

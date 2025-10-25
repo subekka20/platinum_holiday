@@ -3449,3 +3449,387 @@ button.custom-form-link:disabled {
     font-size: 11px;
   }
 }
+
+/* Clean & Simple Signin Styles */
+.clean-signin-section {
+  min-height: calc(100vh - 160px); /* Accounting for header and footer height */
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+.clean-signin-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+.signin-container {
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
+}
+
+.signin-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 30px;
+  text-align: center;
+  color: white;
+}
+
+.signin-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  filter: brightness(0) invert(1);
+}
+
+.company-name {
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.95;
+  color: #f7fafc;
+}
+
+.form-section {
+  padding: 30px 20px;
+  background: white;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: #718096;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.signin-form {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.input-label {
+  display: block !important;
+  color: #4ba2fa !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+}
+
+.required-asterisk {
+  color: #ef4444 !important;
+  font-weight: 700 !important;
+  margin-left: 2px !important;
+}
+
+.clean-input {
+  width: 100% !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  color: #2d3748 !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 400 !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+/* Password component specific styling */
+.clean-input.p-password {
+  width: 100% !important;
+  display: block !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.clean-input.p-password > .p-inputwrapper {
+  width: 100% !important;
+  display: block !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.clean-input .p-password-input {
+  width: 100% !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  color: #2d3748 !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 400 !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+.clean-input .p-password-input::placeholder {
+  color: #a0aec0 !important;
+  font-weight: 400 !important;
+}
+
+.clean-input .p-password-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+  background: #ffffff !important;
+  outline: none !important;
+}
+
+.clean-input::placeholder {
+  color: #a0aec0 !important;
+  font-weight: 400 !important;
+}
+
+.clean-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+  background: #ffffff !important;
+  outline: none !important;
+}
+
+.clean-label {
+  color: #718096 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+}
+
+.clean-label.p-float-label-active {
+  color: #667eea !important;
+}
+
+/* Password toggle button styling */
+.clean-input .p-password-toggle {
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: transparent !important;
+  border: none !important;
+  color: #718096 !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  transition: color 0.3s ease !important;
+}
+
+.clean-input .p-password-toggle:hover {
+  color: #667eea !important;
+}
+
+/* Ensure password container has relative positioning */
+.clean-input.p-password {
+  position: relative !important;
+}
+
+.error-text {
+  color: #e53e3e !important;
+  font-size: 13px !important;
+  margin-top: 6px !important;
+  display: block !important;
+  font-weight: 500 !important;
+}
+
+.form-extras {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.remember-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clean-checkbox {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.remember-label {
+  color: #4a5568 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.forgot-password {
+  color: #667eea !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+}
+
+.forgot-password:hover {
+  color: #5a67d8 !important;
+}
+
+.signin-button {
+  width: 100% !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 16px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4) !important;
+  margin-bottom: 25px !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+.signin-button:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5) !important;
+}
+
+.signin-button:disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.signup-section {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.signup-text {
+  color: #404855 !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+.signup-link {
+  color: #667eea !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+  background-color: white !important;
+  border: 1px solid #000000 !important;
+}
+
+.signup-link:hover {
+  color: #5a67d8 !important;
+}
+
+/* Responsive Design for Clean Signin */
+@media (max-width: 768px) {
+  .clean-signin-section {
+    padding: 15px;
+  }
+  
+  .signin-card {
+    border-radius: 16px;
+  }
+  
+  .logo-section {
+    padding: 30px 25px;
+  }
+  
+  .signin-logo {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .company-name {
+    font-size: 1.2rem;
+  }
+  
+  .form-section {
+    padding: 30px 25px;
+  }
+  
+  .form-title {
+    font-size: 1.7rem;
+  }
+  
+  .form-extras {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .clean-signin-section {
+    padding: 10px;
+  }
+  
+  .logo-section {
+    padding: 25px 20px;
+  }
+  
+  .form-section {
+    padding: 25px 20px;
+  }
+  
+  .clean-input {
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+  }
+  
+  .signin-button {
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+  }
+}
