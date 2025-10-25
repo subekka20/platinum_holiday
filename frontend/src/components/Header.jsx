@@ -204,68 +204,126 @@ const Header = () => {
                       >
                         <button
                           type="button"
-                          className="profile-toggle-btn p-ripple"
+                          className="elegant-profile-toggle p-ripple"
                           onClick={toggleDropdownMenu}
                         >
-                          <div className="profile-toggle-img-area">
-                            {/* <img src="assets/images/profile-img.png" className='profile-toggle-img' alt="" /> */}
+                          <div className="profile-avatar-container">
                             <img
                               src={user?.dp || "assets/images/user.png"}
-                              className="profile-toggle-no-img"
-                              alt=""
+                              className="profile-avatar"
+                              alt="User Avatar"
                             />
+                            <div className="avatar-status-indicator"></div>
                           </div>
-                          <div className="profile-toggle-detail">
-                            <h5>Hi 👋</h5>
-                            <h6>{user?.firstName || "---------"}</h6>
+                          <div className="profile-info">
+                            <span className="profile-greeting">Welcome back</span>
+                            <span className="profile-name">{user?.firstName || "User"}</span>
                           </div>
-                          <i
-                            className={`bi bi-chevron-down ${isOpen ? "rotate" : ""
-                              }`}
-                          ></i>
+                          <div className="dropdown-arrow">
+                            <i
+                              className={`bi bi-chevron-down ${isOpen ? "rotated" : ""}`}
+                            ></i>
+                          </div>
                           <Ripple />
                         </button>
-                        <ul
-                          className={`profile-dropdown-menu ${isOpen ? "open" : ""
-                            }`}
+
+                        <div
+                          className={`elegant-dropdown-menu ${isOpen ? "show" : ""}`}
                         >
-                          <div className="profile-dropdown-detail">
-                            <div className="profile-dropdown-image-area">
-                              {/* <img src="assets/images/profile-img.png" className='profile-dropdown-img' alt="" /> */}
+                          <div className="dropdown-header">
+                            <div className="dropdown-avatar">
                               <img
                                 src={user?.dp || "assets/images/user.png"}
-                                className="profile-dropdown-no-img"
-                                alt=""
+                                className="dropdown-avatar-img"
+                                alt="User"
                               />
+                              <div className="avatar-overlay">
+                                <i className="bi bi-camera-fill"></i>
+                              </div>
                             </div>
-                            <h6 className="dropdown-profile-name">
-                              {user?.firstName || "---------"}
-                            </h6>
+                            <div className="dropdown-user-info">
+                              <h6 className="dropdown-user-name">
+                                {user?.firstName || "User"} {user?.lastName || ""}
+                              </h6>
+                              <p className="dropdown-user-email">
+                                {user?.email || "user@example.com"}
+                              </p>
+                            </div>
                           </div>
-                          <li className="profile-dropdown-item mb-1 mt-1">
+
+                          <div className="dropdown-divider"></div>
+
+                          <div className="dropdown-menu-items">
                             <button
                               onClick={() => goToLink("/dashboard")}
-                              className="profile-dropdown-link profile p-ripple"
+                              className="elegant-dropdown-item p-ripple"
                             >
-                              <i className="bi bi-speedometer2 me-2"></i>
-                              Dashboard
+                              <div className="item-icon dashboard">
+                                <i className="bi bi-grid-3x3-gap-fill"></i>
+                              </div>
+                              <div className="item-content">
+                                <span className="item-title">Dashboard</span>
+                                <span className="item-subtitle">View your overview</span>
+                              </div>
+                              <div className="item-arrow">
+                                <i className="bi bi-chevron-right"></i>
+                              </div>
                               <Ripple />
                             </button>
-                          </li>
-                          <li className="profile-dropdown-item">
+
                             <button
-                              className="profile-dropdown-link logout p-ripple"
+                              onClick={() => goToLink("/profile")}
+                              className="elegant-dropdown-item p-ripple"
+                            >
+                              <div className="item-icon profile">
+                                <i className="bi bi-person-fill"></i>
+                              </div>
+                              <div className="item-content">
+                                <span className="item-title">Profile Settings</span>
+                                <span className="item-subtitle">Manage your account</span>
+                              </div>
+                              <div className="item-arrow">
+                                <i className="bi bi-chevron-right"></i>
+                              </div>
+                              <Ripple />
+                            </button>
+
+                            <button
+                              onClick={() => goToLink("/bookings")}
+                              className="elegant-dropdown-item p-ripple"
+                            >
+                              <div className="item-icon bookings">
+                                <i className="bi bi-calendar-check-fill"></i>
+                              </div>
+                              <div className="item-content">
+                                <span className="item-title">My Bookings</span>
+                                <span className="item-subtitle">View reservations</span>
+                              </div>
+                              <div className="item-arrow">
+                                <i className="bi bi-chevron-right"></i>
+                              </div>
+                              <Ripple />
+                            </button>
+                          </div>
+
+                          <div className="dropdown-divider"></div>
+
+                          <div className="dropdown-footer">
+                            <button
+                              className="elegant-logout-btn p-ripple"
                               type="button"
                               onClick={() => {
                                 dispatch(setLogout());
                               }}
                             >
-                              <i className="bi bi-trash-fill me-2"></i>
-                              Logout
+                              <div className="logout-icon">
+                                <i className="bi bi-box-arrow-right"></i>
+                              </div>
+                              <span>Sign Out</span>
                               <Ripple />
                             </button>
-                          </li>
-                        </ul>
+                          </div>
+                        </div>
                       </li>
                     </ul>
                   )}

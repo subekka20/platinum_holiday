@@ -145,16 +145,12 @@ const Signin = () => {
                     value={signInInfo.password}
                     onChange={handleInputChange}
                     toggleMask
+                    feedback={false}
                     placeholder="Enter your password"
                   />
                   {require && !signInInfo.password && (
                     <small className="error-text">
                       This field is required
-                    </small>
-                  )}
-                  {signInInfo.password.length < 8 && signInInfo.password && (
-                    <small className="error-text">
-                      Password must be at least 8 characters long
                     </small>
                   )}
                 </div>
