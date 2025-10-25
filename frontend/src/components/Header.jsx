@@ -272,24 +272,7 @@ const Header = () => {
                             </button>
 
                             <button
-                              onClick={() => goToLink("/profile")}
-                              className="elegant-dropdown-item p-ripple"
-                            >
-                              <div className="item-icon profile">
-                                <i className="bi bi-person-fill"></i>
-                              </div>
-                              <div className="item-content">
-                                <span className="item-title">Profile Settings</span>
-                                <span className="item-subtitle">Manage your account</span>
-                              </div>
-                              <div className="item-arrow">
-                                <i className="bi bi-chevron-right"></i>
-                              </div>
-                              <Ripple />
-                            </button>
-
-                            <button
-                              onClick={() => goToLink("/bookings")}
+                              onClick={() => goToLink("/dashboard?tab=bookings")}
                               className="elegant-dropdown-item p-ripple"
                             >
                               <div className="item-icon bookings">
