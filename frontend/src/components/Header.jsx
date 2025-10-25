@@ -273,10 +273,11 @@ const Header = () => {
                   <ul className="menu-toggle-btn-area">
                     <li className="nav-button-grp-item">
                       <button
-                        className="menu-toggle-button"
+                        className={`menu-toggle-button ${menuOpen ? 'active' : ''}`}
                         onClick={toggleMenu}
+                        aria-label="Toggle menu"
                       >
-                        <i class="bi bi-list"></i>
+                        <span className="hamburger-line"></span>
                       </button>
                     </li>
                   </ul>
@@ -291,106 +292,157 @@ const Header = () => {
           onClick={closeMenu}
         ></div>
 
-        <div className={`mobile-menu-section ${menuOpen ? "show" : ""}`}>
-          <button className="menu-close-button" onClick={closeMenu}>
-            <i class="ri-close-large-line"></i>
-          </button>
-          <button onClick={() => goToLink("/")} className="menu-logo-link">
-            <img src="assets/images/logo.png" alt="Logo" />
-          </button>
-          <ul className="menu-link-area">
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/")}
-                className={`menu-link ${window.location.pathname === "/" ? "active" : ""
-                  }`}
-              >
-                Home
-              </button>
-            </li>
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/about-us")}
-                className={`menu-link ${window.location.pathname === "/about-us" ? "active" : ""
-                  }`}
-              >
-                About
-              </button>
-            </li>
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/services")}
-                className={`menu-link ${window.location.pathname === "/services" ? "active" : ""
-                  }`}
-              >
-                Services
-              </button>
-            </li>
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/contact-us")}
-                className={`menu-link ${window.location.pathname === "/contact-us" ? "active" : ""
-                  }`}
-              >
-                Contact
-              </button>
-            </li>
-          </ul>
+        <div className={`modern-mobile-menu ${menuOpen ? "show" : ""}`}>
+          <div className="mobile-menu-header">
+            <button onClick={() => goToLink("/")} className="mobile-menu-logo">
+              <img src="assets/images/logo-light.png" alt="Platinum Holiday" />
+              <span className="brand-text">Platinum Holiday</span>
+            </button>
+            <button className="modern-close-button" onClick={closeMenu}>
+              <span className="close-line"></span>
+              <span className="close-line"></span>
+            </button>
+          </div>
 
-          {user ? (
-            <div className="menu-profile-area">
-              <div className="menu-profile-body">
-                <div className="menu-profile-img-area">
-                  <img src={user?.dp || "assets/images/user.png"} alt="" />
-                </div>
-                <div className="menu-profile-content">
-                  <h6 className="menu-profile-head">👋 Hi,</h6>
-                  <h6 className="menu-profile-name">
-                    {user?.firstName || "---------"}
-                  </h6>
-                </div>
-              </div>
-              <hr />
-              <div className="menu-profile-footer">
+          <nav className="mobile-nav-area">
+            <ul className="mobile-nav-list">
+              <li className="mobile-nav-item">
                 <button
-                  onClick={() => goToLink("/dashboard")}
-                  className="menu-profile-link primary-btn"
-                >
-                  <i className="bi bi-speedometer2"></i> Dashboard
-                </button>
-                <button
-                  type="button"
-                  className="menu-profile-link danger-btn"
                   onClick={() => {
-                    dispatch(setLogout());
+                    goToLink("/");
+                    closeMenu();
                   }}
+                  className={`mobile-nav-link ${window.location.pathname === "/" ? "active" : ""
+                    }`}
                 >
-                  <i class="bi bi-trash-fill"></i>
-                  Logout
-                </button>
-              </div>
-            </div>
-          ) : (
-            <ul className="menu-btn-link-area">
-              <li className="menu-btn-link-item">
-                <button
-                  onClick={() => goToLink("/sign-up")}
-                  className="menu-btn-link with-outline"
-                >
-                  Sign up
+                  <i className="bi bi-house-fill"></i>
+                  <span>Home</span>
+                  <i className="bi bi-chevron-right"></i>
                 </button>
               </li>
-
-              <li className="menu-btn-link-item">
+              <li className="mobile-nav-item">
                 <button
-                  onClick={() => goToLink("/sign-in")}
-                  className="menu-btn-link with-bg"
+                  onClick={() => {
+                    goToLink("/about-us");
+                    closeMenu();
+                  }}
+                  className={`mobile-nav-link ${window.location.pathname === "/about-us" ? "active" : ""
+                    }`}
                 >
-                  Sign in
+                  <i className="bi bi-info-circle-fill"></i>
+                  <span>About Us</span>
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+              </li>
+              <li className="mobile-nav-item">
+                <button
+                  onClick={() => {
+                    goToLink("/services");
+                    closeMenu();
+                  }}
+                  className={`mobile-nav-link ${window.location.pathname === "/services" ? "active" : ""
+                    }`}
+                >
+                  <i className="bi bi-gear-fill"></i>
+                  <span>Services</span>
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+              </li>
+              <li className="mobile-nav-item">
+                <button
+                  onClick={() => {
+                    goToLink("/contact-us");
+                    closeMenu();
+                  }}
+                  className={`mobile-nav-link ${window.location.pathname === "/contact-us" ? "active" : ""
+                    }`}
+                >
+                  <i className="bi bi-telephone-fill"></i>
+                  <span>Contact Us</span>
+                  <i className="bi bi-chevron-right"></i>
                 </button>
               </li>
             </ul>
+          </nav>
+
+          {user ? (
+            <div className="mobile-user-section">
+              <div className="mobile-user-card">
+                <div className="mobile-user-info">
+                  <div className="mobile-user-avatar">
+                    <img src={user?.dp || "assets/images/user.png"} alt="User" />
+                  </div>
+                  <div className="mobile-user-details">
+                    <h6 className="mobile-user-greeting">👋 Welcome back</h6>
+                    <h5 className="mobile-user-name">
+                      {user?.firstName || "User"}
+                    </h5>
+                  </div>
+                </div>
+                <div className="mobile-user-actions">
+                  <button
+                    onClick={() => {
+                      goToLink("/dashboard");
+                      closeMenu();
+                    }}
+                    className="mobile-action-btn primary"
+                  >
+                    <i className="bi bi-speedometer2"></i>
+                    Dashboard
+                  </button>
+                  <button
+                    type="button"
+                    className="mobile-action-btn danger"
+                    onClick={() => {
+                      dispatch(setLogout());
+                      closeMenu();
+                    }}
+                  >
+                    <i className="bi bi-box-arrow-right"></i>
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="mobile-auth-section">
+              <div className="mobile-auth-buttons">
+                <button
+                  onClick={() => {
+                    goToLink("/sign-up");
+                    closeMenu();
+                  }}
+                  className="mobile-auth-btn secondary"
+                >
+                  <i className="bi bi-person-plus"></i>
+                  Create Account
+                </button>
+                <button
+                  onClick={() => {
+                    goToLink("/sign-in");
+                    closeMenu();
+                  }}
+                  className="mobile-auth-btn primary"
+                >
+                  <i className="bi bi-box-arrow-in-right"></i>
+                  Sign In
+                </button>
+              </div>
+            </div>
           )}
+
+          <div className="mobile-menu-footer">
+            <div className="mobile-contact-info">
+              <a href="tel:+447375551666" className="mobile-contact-item">
+                <i className="bi bi-telephone-fill"></i>
+                +44 7375 551666
+              </a>
+              <a href="mailto:info@platinumholiday.co.uk" className="mobile-contact-item">
+                <i className="bi bi-envelope-fill"></i>
+                info@platinumholiday.co.uk
+              </a>
+            </div>
+          </div>
         </div>
       </header>
     </>
