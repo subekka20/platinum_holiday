@@ -377,7 +377,7 @@ const Signup = () => {
                             placeholder="Select"
                             className="clean-dropdown"
                           />
-                          <label className="clean-label">Title *</label>
+                          {/* <label className="clean-label">Title *</label> */}
                           {(showError && !signUpInfo.title) && (
                             <small className="clean-error-msg">This field is required</small>
                           )}
@@ -386,6 +386,7 @@ const Signup = () => {
 
                       <div className="col-md-4 col-sm-8">
                         <div className="clean-input-group">
+                          {/* <label className="clean-label">First Name *</label> */}
                           <InputText
                             className="clean-input"
                             name="firstName"
@@ -393,7 +394,6 @@ const Signup = () => {
                             onChange={handleInputChange}
                             placeholder="Enter your first name"
                           />
-                          <label className="clean-label">First Name *</label>
                           {(showError && !signUpInfo.firstName) && (
                             <small className="clean-error-msg">This field is required</small>
                           )}
@@ -409,7 +409,7 @@ const Signup = () => {
                             onChange={handleInputChange}
                             placeholder="Enter your last name"
                           />
-                          <label className="clean-label">Last Name</label>
+                          {/* <label className="clean-label">Last Name</label> */}
                         </div>
                       </div>
 
@@ -423,7 +423,7 @@ const Signup = () => {
                             onChange={handleInputChange}
                             placeholder="Enter your email address"
                           />
-                          <label className="clean-label">Email Address *</label>
+                          {/* <label className="clean-label">Email Address *</label> */}
                           {(showError && !signUpInfo.email) && (
                             <small className="clean-error-msg">This field is required</small>
                           )}
@@ -446,7 +446,7 @@ const Signup = () => {
                             onChange={handleInputChange}
                             placeholder="Enter your mobile number"
                           />
-                          <label className="clean-label">Mobile Number *</label>
+                          {/* <label className="clean-label">Mobile Number *</label> */}
                           {(showError && !signUpInfo.mobileNumber) && (
                             <small className="clean-error-msg">This field is required</small>
                           )}
@@ -469,7 +469,7 @@ const Signup = () => {
                             placeholder="Enter your password"
                             feedback={true}
                           />
-                          <label className="clean-label">Password *</label>
+                          {/* <label className="clean-label">Password *</label> */}
                           {(showError && !signUpInfo.password) && (
                             <small className="clean-error-msg">This field is required</small>
                           )}
@@ -490,7 +490,7 @@ const Signup = () => {
                             toggleMask
                             placeholder="Re-enter your password"
                           />
-                          <label className="clean-label">Confirm Password *</label>
+                          {/* <label className="clean-label">Confirm Password *</label> */}
                           {(showError && !signUpInfo.confirmPassword) && (
                             <small className="clean-error-msg">This field is required</small>
                           )}
@@ -530,7 +530,7 @@ const Signup = () => {
                     <div className="clean-form-footer">
                       <p>
                         Already have an account?{" "}
-                        <a href="/sign-in" className="clean-link">
+                        <a href="/sign-in" style={{ textDecoration:"none", color:"purple", fontSize: "16px", fontWeight: "bold" }}>
                           Sign in
                         </a>
                       </p>

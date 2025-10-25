@@ -3847,7 +3847,8 @@ button.custom-form-link:disabled {
 }
 
 .signin-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
   backdrop-filter: blur(20px);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(0, 0, 0, 0.05);
@@ -3857,7 +3858,7 @@ button.custom-form-link:disabled {
 
 /* Clean Signup Card Styles */
 .clean-signin-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
   backdrop-filter: blur(20px);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -3925,7 +3926,7 @@ button.custom-form-link:disabled {
 
 .form-section {
   padding: 30px 20px;
-  background: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .form-header {
@@ -3941,7 +3942,7 @@ button.custom-form-link:disabled {
 }
 
 .form-subtitle {
-  color: #718096;
+  color: #ffffff;
   font-size: 0.95rem;
   margin: 0;
 }
@@ -3959,6 +3960,21 @@ button.custom-form-link:disabled {
 .clean-input-group {
   position: relative;
   margin-bottom: 24px;
+}
+
+/* Additional spacing for password fields */
+.clean-input-group .clean-password {
+  position: relative;
+  z-index: 1;
+}
+
+.clean-input-group .clean-password .p-password-panel {
+  z-index: 1000;
+  background: rgba(26, 32, 44, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  backdrop-filter: blur(10px) !important;
+  color: white !important;
 }
 
 .clean-label {
@@ -4000,7 +4016,7 @@ button.custom-form-link:disabled {
 
 .input-label {
   display: block !important;
-  color: #4ba2fa !important;
+  color: white !important;
   font-weight: 500 !important;
   font-size: 14px !important;
   margin-bottom: 8px !important;
@@ -4172,7 +4188,7 @@ button.custom-form-link:disabled {
 
 .signin-button {
   width: 100% !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, #667eea 0%, #6b00d8 100%);
   border: none !important;
   border-radius: 12px !important;
   padding: 16px 24px !important;
@@ -4191,7 +4207,7 @@ button.custom-form-link:disabled {
 
 .clean-submit-btn {
   width: 100% !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, #667eea 0%, #6b00d8 100%) !important;
   border: none !important;
   border-radius: 12px !important;
   padding: 16px 24px !important;
@@ -4238,22 +4254,21 @@ button.custom-form-link:disabled {
 }
 
 .signup-text {
-  color: #404855 !important;
+  color: white !important;
   font-size: 14px !important;
   margin: 0 !important;
 }
 
 .signup-link {
-  color: #667eea !important;
+  color: white !important;
   text-decoration: none !important;
   font-weight: 600 !important;
   transition: color 0.3s ease !important;
-  background-color: white !important;
-  border: 1px solid #000000 !important;
+  background-color:  #9142e1 !important;
 }
 
 .signup-link:hover {
-  color: #5a67d8 !important;
+  color: white !important;
 }
 
 /* Responsive Design for Clean Signin */
@@ -4337,6 +4352,7 @@ button.custom-form-link:disabled {
 .signup-form .row > [class*="col-"] {
   padding-left: 8px !important;
   padding-right: 8px !important;
+  margin-bottom: 20px !important;
 }
 
 /* Clean Dropdown Styles */
@@ -4390,10 +4406,14 @@ button.custom-form-link:disabled {
   background: transparent !important;
   border: none !important;
   padding: 0 !important;
+  position: relative !important;
+  display: block !important;
 }
 
 .clean-password .p-inputwrapper {
   width: 100% !important;
+  position: relative !important;
+  display: block !important;
 }
 
 .clean-password .p-password-input {
@@ -4408,6 +4428,8 @@ button.custom-form-link:disabled {
   transition: all 0.3s ease !important;
   line-height: 1.5 !important;
   height: 56px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
 }
 
 .clean-password .p-password-input::placeholder {
@@ -4636,17 +4658,17 @@ button.custom-form-link:disabled {
   .signup-form-card {
     margin: 0 10px !important;
   }
-  
+
   .signup-form .row > [class*="col-"] {
     padding-left: 6px !important;
     padding-right: 6px !important;
     margin-bottom: 16px !important;
   }
-  
+
   .clean-otp-input.p-inputotp {
     gap: 8px !important;
   }
-  
+
   .clean-otp-input .p-inputotp-input {
     width: 40px !important;
     height: 40px !important;
@@ -4662,17 +4684,17 @@ button.custom-form-link:disabled {
     font-size: 15px !important;
     height: 50px !important;
   }
-  
+
   .clean-password .p-password-input {
     padding: 14px 45px 14px 16px !important;
   }
-  
+
   .clean-otp-input .p-inputotp-input {
     width: 35px !important;
     height: 35px !important;
     font-size: 14px !important;
   }
-  
+
   .clean-checkbox-label {
     font-size: 13px !important;
   }

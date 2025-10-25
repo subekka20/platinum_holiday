@@ -102,7 +102,7 @@ const Signin = () => {
             {/* Form Section */}
             <div className="form-section">
               <div className="form-header">
-                <h2 className="form-title">Sign In</h2>
+                <h2 className="form-title" style={{color:"white"}}>Sign In</h2>
                 <p className="form-subtitle">
                   Welcome back! Please sign in to your account
                 </p>
@@ -182,7 +182,7 @@ const Signin = () => {
                 <div className="signup-section">
                   <p className="signup-text">
                     Don't have an account?{" "}
-                    <a href="/sign-up" className="signup-link">
+                    <a href="/sign-up" style={{ textDecoration:"none", color:"purple", fontSize: "16px", fontWeight: "bold" }}>
                       Sign Up 
                     </a>
                   </p>
