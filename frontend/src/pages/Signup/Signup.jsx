@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Tilt from 'react-parallax-tilt';
 import { InputText } from "primereact/inputtext";
 import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
@@ -10,7 +9,6 @@ import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from "primereact/checkbox";
 import { Button } from 'primereact/button';
 import { InputOtp } from 'primereact/inputotp';
-
 import { Toast } from 'primereact/toast';
 import api from "../../api";
 import { sendVerificationEmail, verifyOTP } from "../../utils/authUtil";
@@ -152,9 +150,9 @@ const Signup = () => {
         detail: "You have been registered successfully",
         life: 3000
       });
-      // window.location.href = "/sign-in";
+      // Redirect to home page after successful registration
       setTimeout(() => {
-        navigate("/sign-in")
+        navigate("/")
       }, 2000);
     } catch (err) {
       console.log(err);
@@ -220,423 +218,248 @@ const Signup = () => {
 
   return (
     <>
-      <Preloader />
       <Header />
-
-      {/* Breadcrumb Section Start */}
-      {/* <section className="breadcrumb-section overflow-hidden">
-        <div className="container-md">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="breadcrumb-title">Sign up</h3>
-              <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="/">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    Sign up
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* Breadcrumb Section End */}
-
       <Toast ref={toast} />
 
-      {/* Sign up Section Start */}
-      <section className="section-padding overflow-hidden auth-section">
-        <div className="container-md">
-          <div className="row">
-            <div className="col-12 mb-4 mb-lg-5">
-              <h3
-                className="section-heading text-center mx-auto text-white"
-                data-aos="zoom-out"
-              >
-                Sign Up
-              </h3>
-              <div className="mt-5 mb-2 mb-sm-4">
-                <p
-                  className="section-paragraph text-center mb-0"
-                  data-aos="fade"
-                >
-                  Join Platinum Holiday Service community today to unlock a world of
-                  convenient airport parking solutions. By signing up, you
-                  gain access to our secure platform, where you can easily
-                  browse and book from a variety of parking options tailored
-                  to your travel needs. Whether you prefer short-term
-                  convenience or long-term savings, we have the perfect
-                  parking solution for you. Don't miss out on exclusive offers
-                  and seamless booking experiences—sign up now and simplify
-                  your travel plans with Platinum Holiday Service.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {page === 1 ? (
-            <div className="row">
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area" data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/account-verification-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="Account Verification"
-                    />
-                  </Tilt>
-                </div>
-              </div>
-
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <article className="custom-card auth-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+      {/* Clean Signup Section */}
+      <section className="clean-signin-section">
+        <div className="container">
+          <div className="row justify-content-center align-items-center min-vh-100">
+            {page === 1 ? (
+              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="clean-signin-card" data-aos="fade-up">
+                  <div className="clean-card-header">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="clean-card-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h2 className="clean-card-title">Account Verification</h2>
+                    <p className="clean-card-subtitle">
+                      Enter your email address below for verification
+                    </p>
                   </div>
-                  <h3 className="custom-card-tile">Account Verification</h3>
-                  <h6 className="custom-card-sub-tile">
-                    Enter your email address below for verification
-                  </h6>
-                  <form action="" className="custom-card-form">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="verify_email"
-                            className="custom-form-label form-required"
-                          >
-                            Email
-                          </label>
-                          <InputText
-                            id="verify_email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            placeholder="Enter your email address"
-                            name="email"
-                            value={signUpInfo.email}
-                            onChange={handleInputChange}
-                          />
-
-                          {(showError && !signUpInfo.email) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                          <small className="text-danger form-error-msg">
-                            {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                              signUpInfo.email
-                            ) && signUpInfo.email
-                              ? "Enter valid email"
-                              : ""}
-                          </small>
-                          <small className="text-danger form-error-msg">
-                            {emailExists ? "Email already exists" : ""}
-                          </small>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="custom-form-group contains-float-input mb-0">
-                      <Button
-                        label={`${loading ? "Processing..." : "VERIFY"}`}
-                        className="w-100 submit-button justify-content-center auth-btn"
-                        loading={loading}
-                        onClick={handleVerifyEmail}
-                        disabled={!signUpInfo.email}
+                  
+                  <form className="clean-signin-form" onSubmit={handleVerifyEmail}>
+                    <div className="clean-input-group">
+                      <InputText
+                        id="verify_email"
+                        keyfilter="email"
+                        className="clean-input"
+                        placeholder="Enter your email address"
+                        name="email"
+                        value={signUpInfo.email}
+                        onChange={handleInputChange}
                       />
+                      <label htmlFor="verify_email" className="clean-label">
+                        Email Address *
+                      </label>
+                      
+                      {(showError && !signUpInfo.email) && (
+                        <small className="clean-error-msg">
+                          This field is required
+                        </small>
+                      )}
+                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
+                        <small className="clean-error-msg">
+                          Enter valid email
+                        </small>
+                      )}
+                      {emailExists && (
+                        <small className="clean-error-msg">
+                          Email already exists
+                        </small>
+                      )}
                     </div>
-                  </form>
-                </article>
-              </div>
-            </div>
-          ) : page === 2 ? (
-            <div className="row">
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area " data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/enter-otp-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="OTP Verification"
+
+                    <Button
+                      label={loading ? "Processing..." : "VERIFY EMAIL"}
+                      className="clean-submit-btn"
+                      loading={loading}
+                      disabled={!signUpInfo.email || emailExists}
+                      type="submit"
                     />
-                  </Tilt>
+                                    </form>
                 </div>
               </div>
-
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <button
-                  className="back-page-btn"
-                  onClick={goBack}
-                  data-aos="fade-left"
-                >
-                  <i className="ri ri-arrow-left-line me-2"></i>Back
-                </button>
-                <article className="custom-card auth-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+            ) : page === 2 ? (
+              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="clean-signin-card" data-aos="fade-up">
+                  <button
+                    className="clean-back-btn"
+                    onClick={goBack}
+                  >
+                    <i className="ri ri-arrow-left-line"></i>
+                    Back
+                  </button>
+                  
+                  <div className="clean-card-header">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="clean-card-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h2 className="clean-card-title">OTP Verification</h2>
+                    <p className="clean-card-subtitle">
+                      Enter the OTP verification code sent to your email address
+                    </p>
                   </div>
-                  <h3 className="custom-card-tile">OTP Verification</h3>
-                  <h6 className="custom-card-sub-tile">
-                    Enter the OTP verification code sent to your email address
-                  </h6>
-                  <form action="" className="custom-card-form">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-4">
-                          <label
-                            htmlFor="otp"
-                            className="custom-form-label form-required text-center mx-auto"
-                          >
-                            Enter OTP
-                          </label>
-
-                          <div className="otp-input-area">
-                            <InputOtp
-                              id="otp"
-                              className="custom-form-input otp-input"
-                              value={otp}
-                              onChange={(e) => {
-                                setShowError(false);
-                                setOTP(e.value);
-                              }}
-                            />
-                          </div>
-                          {(showError && !otp) && (
-                            <small className="text-danger form-error-msg text-center mt-3">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
+                  
+                  <form className="clean-signin-form" onSubmit={handleVerifyOTP}>
+                    <div className="clean-otp-group">
+                      <label className="clean-otp-label">Enter OTP *</label>
+                      <div className="clean-otp-container">
+                        <InputOtp
+                          value={otp}
+                          onChange={(e) => {
+                            setShowError(false);
+                            setOTP(e.value);
+                          }}
+                          numInputs={6}
+                          className="clean-otp-input"
+                        />
                       </div>
+                      {(showError && !otp) && (
+                        <small className="clean-error-msg">
+                          This field is required
+                        </small>
+                      )}
                     </div>
 
-                    <div className="custom-form-group contains-float-input">
-                      <Button
-                        label={`${reSendLoading
-                          ? "Processing..."
-                          : loading
-                            ? "Verifying..."
-                            : "VERIFY"
-                          }`}
-                        className="w-100 submit-button justify-content-center auth-btn"
-                        onClick={handleVerifyOTP}
-                        loading={loading}
-                        disabled={!otp}
-                      />
-                    </div>
-
-                    <div className="custom-form-link-area text-center">
+                    <Button
+                      label={reSendLoading ? "Processing..." : loading ? "Verifying..." : "VERIFY OTP"}
+                      className="clean-submit-btn"
+                      loading={loading}
+                      disabled={!otp}
+                      type="submit"
+                    />
+                    
+                    <div className="clean-resend-section">
                       <p>
-                        Didn’t received the code?{" "}
+                        Didn't receive the code?{" "}
                         <button
-                          className="custom-form-link"
+                          type="button"
+                          className="clean-link-btn"
                           onClick={handleResendCode}
                           disabled={isButtonDisabled}
                         >
-                          <b>
-                            Resend Code {isButtonDisabled && `(${seconds}s)`}
-                          </b>
+                          Resend Code {isButtonDisabled && `(${seconds}s)`}
                         </button>
                       </p>
                     </div>
                   </form>
-                </article>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="row">
-
-              <div className="col-12 col-xl-9 col-lg-9 col-sm-10 col-md-10 mx-auto">
-                {/* <button
-                  className="back-page-btn"
-                  onClick={goBack}
-                  data-aos="fade-left"
-                >
-                  <i className="ri ri-arrow-left-line me-2"></i>Back
-                </button> */}
-                <article className="custom-card auth-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+            ) : (
+              <div className="col-12 col-lg-10 col-xl-8 mx-auto">
+                <div className="clean-signin-card signup-form-card" data-aos="fade-up">
+                  <div className="clean-card-header">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo center-panel-logo"
+                      className="clean-card-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h2 className="clean-card-title">Create Your Account</h2>
+                    <p className="clean-card-subtitle">
+                      Complete your registration details below
+                    </p>
                   </div>
-                  <h3 className="custom-card-tile" style={{ textAlign: "center" , color: "#FFF"}}>Create Your Account</h3>
-                  {/* <h6 className="custom-card-sub-tile">
-                    Enter the details below
-                  </h6> */}
-                  <form action="" className="custom-card-form"
-                    onSubmit={handleSubmit}
-                  >
+                  
+                  <form className="clean-signin-form signup-form" onSubmit={handleSubmit}>
                     <div className="row">
-                      <div className="col-12 col-sm-3 col-xl-2 col-lg-2 col-md-3">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="title"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            Title
-                          </label>
-                          <Dropdown id="title" value={{ name: signUpInfo.title }} onChange={(e) => setSignUpInfo({ ...signUpInfo, title: e.value?.name })} options={titles} optionLabel="name"
-                            placeholder="Select" className="w-full w-100 custom-form-dropdown" />
-                          {/* <select id="title" className="custom-form-input"
-                            name="title"
-                            value={signUpInfo.title}
-                            onChange={handleInputChange}
-                          >
-                            <option value="">Select</option>
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Ms">Ms</option>
-                          </select> */}
+                      <div className="col-md-3 col-sm-4">
+                        <div className="clean-input-group">
+                          <Dropdown 
+                            value={{ name: signUpInfo.title }} 
+                            onChange={(e) => setSignUpInfo({ ...signUpInfo, title: e.value?.name })} 
+                            options={titles} 
+                            optionLabel="name"
+                            placeholder="Select"
+                            className="clean-dropdown"
+                          />
+                          <label className="clean-label">Title *</label>
                           {(showError && !signUpInfo.title) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="clean-error-msg">This field is required</small>
                           )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-9 col-xl-5 col-lg-5 col-md-9">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="firstName"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            First name
-                          </label>
+                      <div className="col-md-4 col-sm-8">
+                        <div className="clean-input-group">
                           <InputText
-                            id="firstName"
-                            className="custom-form-input"
+                            className="clean-input"
                             name="firstName"
                             value={signUpInfo.firstName}
                             onChange={handleInputChange}
                             placeholder="Enter your first name"
                           />
+                          <label className="clean-label">First Name *</label>
                           {(showError && !signUpInfo.firstName) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="clean-error-msg">This field is required</small>
                           )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-5 col-lg-5">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="lastName"
-                            className="custom-form-label"
-                            style={{ color: "#FFF" }}
-                          >
-                            Last name
-                          </label>
+                      <div className="col-md-5">
+                        <div className="clean-input-group">
                           <InputText
-                            id="lastName"
-                            className="custom-form-input"
+                            className="clean-input"
                             name="lastName"
                             value={signUpInfo.lastName}
                             onChange={handleInputChange}
                             placeholder="Enter your last name"
                           />
+                          <label className="clean-label">Last Name</label>
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="email"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            Email
-                          </label>
-                          {/* <InputText
-                            id="email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            value={signUpInfo.email}
-                            readOnly
-                          /> */}
+                      <div className="col-md-6">
+                        <div className="clean-input-group">
                           <InputText
-                            id="verify_email"
                             keyfilter="email"
-                            className="custom-form-input"
-                            placeholder="Enter your email address"
+                            className="clean-input"
                             name="email"
                             value={signUpInfo.email}
                             onChange={handleInputChange}
+                            placeholder="Enter your email address"
                           />
+                          <label className="clean-label">Email Address *</label>
                           {(showError && !signUpInfo.email) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="clean-error-msg">This field is required</small>
                           )}
-                          <small className="text-danger form-error-msg">
-                            {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                              signUpInfo.email
-                            ) && signUpInfo.email
-                              ? "Enter valid email"
-                              : ""}
-                          </small>
-                          <small className="text-danger form-error-msg">
-                            {emailExists ? "Email already exists" : ""}
-                          </small>
+                          {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
+                            <small className="clean-error-msg">Enter valid email</small>
+                          )}
+                          {emailExists && (
+                            <small className="clean-error-msg">Email already exists</small>
+                          )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="mobileNumber"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            Mobile number
-                          </label>
+                      <div className="col-md-6">
+                        <div className="clean-input-group">
                           <InputText
-                            id="mobileNumber"
                             keyfilter="num"
-                            className="custom-form-input"
+                            className="clean-input"
                             name="mobileNumber"
                             value={signUpInfo.mobileNumber}
                             onChange={handleInputChange}
                             placeholder="Enter your mobile number"
                           />
+                          <label className="clean-label">Mobile Number *</label>
                           {(showError && !signUpInfo.mobileNumber) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="clean-error-msg">This field is required</small>
                           )}
-                          <small className='text-danger form-error-msg'>{(!(/^\d{9,}$/.test(signUpInfo.mobileNumber)) && signUpInfo.mobileNumber) ? "Enter valid phone number" : ""}</small>
+                          {(!(/^\d{9,}$/.test(signUpInfo.mobileNumber)) && signUpInfo.mobileNumber) && (
+                            <small className="clean-error-msg">Enter valid phone number</small>
+                          )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="password"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            Password
-                          </label>
+                      <div className="col-md-6">
+                        <div className="clean-input-group">
                           <Password
-                            id="password"
-                            className="custom-form-input"
+                            className="clean-password"
                             name="password"
                             value={signUpInfo.password}
                             onChange={handleInputChange}
@@ -644,28 +467,22 @@ const Signup = () => {
                             footer={footer}
                             toggleMask
                             placeholder="Enter your password"
+                            feedback={true}
                           />
+                          <label className="clean-label">Password *</label>
                           {(showError && !signUpInfo.password) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="clean-error-msg">This field is required</small>
                           )}
-                          <small className='text-danger form-error-msg'>{(signUpInfo.password.length < 8 && signUpInfo.password) ? "Password must be atleast 8 characters long" : ""}</small>
+                          {(signUpInfo.password.length < 8 && signUpInfo.password) && (
+                            <small className="clean-error-msg">Password must be at least 8 characters long</small>
+                          )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group">
-                          <label
-                            htmlFor="confirmPassword"
-                            className="custom-form-label form-required"
-                            style={{ color: "#FFF" }}
-                          >
-                            Confirm password
-                          </label>
+                      <div className="col-md-6">
+                        <div className="clean-input-group">
                           <Password
-                            id="confirmPassword"
-                            className="custom-form-input"
+                            className="clean-password"
                             name="confirmPassword"
                             value={signUpInfo.confirmPassword}
                             onChange={handleInputChange}
@@ -673,197 +490,59 @@ const Signup = () => {
                             toggleMask
                             placeholder="Re-enter your password"
                           />
+                          <label className="clean-label">Confirm Password *</label>
                           {(showError && !signUpInfo.confirmPassword) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="clean-error-msg">This field is required</small>
                           )}
-                          <small className='text-danger text-capitalized form-error-message'>{(signUpInfo.password !== signUpInfo.confirmPassword && signUpInfo.confirmPassword) ? "Password & Confirm Password must be equal" : ""}</small>
-                        </div>
-                      </div>
-
-                      {/* <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="addressLine1"
-                            className="custom-form-label form-required"
-                          >
-                            Address Line 1
-                          </label>
-                          <InputText
-                            id="addressLine1"
-                            className="custom-form-input"
-                            name="addressL1"
-                            value={signUpInfo.addressL1}
-                            onChange={handleInputChange}
-
-                          />
-                          {(showError && !signUpInfo.addressL1) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                          {(signUpInfo.password !== signUpInfo.confirmPassword && signUpInfo.confirmPassword) && (
+                            <small className="clean-error-msg">Password & Confirm Password must match</small>
                           )}
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="addressLine2"
-                            className="custom-form-label"
-                          >
-                            Address Line 2
-                          </label>
-                          <InputText
-                            id="addressLine2"
-                            className="custom-form-input"
-                            name="addressL2"
-                            value={signUpInfo.addressL2}
-                            onChange={handleInputChange}
-                          />
-                          {showError && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-                      <div className="col-12 col-sm-6 col-xl-4 col-lg-4">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="city"
-                            className="custom-form-label form-required"
-                          >
-                            City
-                          </label>
-                          <InputText
-                            id="city"
-                            className="custom-form-input"
-                            name="city"
-                            value={signUpInfo.city}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.city) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-4 col-lg-4">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="country"
-                            className="custom-form-label form-required"
-                          >
-                            Country
-                          </label>
-                          <InputText
-                            id="country"
-                            className="custom-form-input"
-                            name="country"
-                            value={signUpInfo.country}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.country) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-4 col-lg-4">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="postcode"
-                            className="custom-form-label form-required"
-                          >
-                            Postcode
-                          </label>
-                          <InputText
-                            id="postcode"
-                            className="custom-form-input"
-                            name="postCode"
-                            value={signUpInfo.postCode}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.postCode) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div> */}
-                    </div>
-
-                    <div className="custom-form-group contains-float-input">
-                      <div className="custom-check-group">
-                        <div className="custom-check-area">
-                          <Checkbox
-                            inputId="rememberMe"
-                            onChange={(e) => setChecked(e.checked)}
-                            checked={checked}
-                          ></Checkbox>
-                          <label
-                            htmlFor="rememberMe"
-                            className="custom-check-label"
-                            style={{ color: "#FFF" }}
-                          >
-                            I accept the use of cookies in accordance with the {" "}
-                            <a href="/terms-and-conditions" target="_blank" style={{ color: "#44c8fd" }}>
-                              Terms
-                            </a>{" "}
-                            and{" "}
-                            <a href="/privacy-policy" target="_blank" style={{ color: "#44c8fd" }}>
-                              {" "}
-                              Privacy policy
-                            </a>
-                          </label>
                         </div>
                       </div>
                     </div>
 
-                    <div className="custom-form-group contains-float-input">
-                      <Button
-                        label="SIGN UP"
-                        disabled={!checked}
-                        className="w-100 submit-button justify-content-center auth-btn"
-                        style={{ color: "#FFF" }}
-                        loading={loading}
+                    <div className="clean-checkbox-group">
+                      <Checkbox
+                        inputId="terms"
+                        onChange={(e) => setChecked(e.checked)}
+                        checked={checked}
                       />
+                      <label htmlFor="terms" className="clean-checkbox-label">
+                        I accept the use of cookies in accordance with the{" "}
+                        <a href="/terms-and-conditions" target="_blank" className="clean-link">
+                          Terms
+                        </a>{" "}
+                        and{" "}
+                        <a href="/privacy-policy" target="_blank" className="clean-link">
+                          Privacy Policy
+                        </a>
+                      </label>
                     </div>
 
-                    <div className="custom-form-link-area text-center" style={{ color: "#FFF" }}>
+                    <Button
+                      label="CREATE ACCOUNT"
+                      disabled={!checked}
+                      className="clean-submit-btn"
+                      loading={loading}
+                      type="submit"
+                    />
+
+                    <div className="clean-form-footer">
                       <p>
-                        Already have account?{" "}
-                        <a href="/sign-in" className="custom-form-link" style={{ color: "#FFF" }}>
-                          <b>Sign in</b>
+                        Already have an account?{" "}
+                        <a href="/sign-in" className="clean-link">
+                          Sign in
                         </a>
                       </p>
                     </div>
                   </form>
-                </article>
-              </div>
-
-              {/* <div className="col-12 col-xl-4 col-lg-6 my-auto d-lg-none d-xxl-block">
-                <div
-                  className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
-                  data-aos="zoom-out"
-                >
-                  <img
-                    src="assets/images/account/signup-illustration.svg"
-                    className="section-main-image animate-image"
-                    alt="Sign up"
-                  />
                 </div>
-              </div> */}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </section>
-      {/* Sign up Section End */}
+      {/* Signup Section End */}
 
       <Footer />
     </>
