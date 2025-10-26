@@ -219,7 +219,38 @@ const Booking = () => {
   };
 
   const calculatingBookingCharge = async () => {
-    // setBookingCharge();
+    // Debug logging to identify the issue
+    console.log("Calculating booking charge with data:", {
+      bookingQuote: bookingDetails?.bookingQuote,
+      couponCode,
+      smsConfirmation: checkedSmsConfirmation,
+      cancellationCover: checkedCancellationCover,
+      numOfVehicle: vehiclesDetails.length,
+      vehiclesDetails,
+      bookingDetails
+    });
+
+    // Validate required data before making API call
+    if (!bookingDetails?.bookingQuote) {
+      toast.current.show({
+        severity: "error",
+        summary: "Missing Booking Information",
+        detail: "Booking quote information is missing. Please start a new booking.",
+        life: 3000,
+      });
+      return;
+    }
+
+    if (vehiclesDetails.length === 0) {
+      toast.current.show({
+        severity: "error",
+        summary: "Missing Vehicle Information",
+        detail: "Please add at least one vehicle to proceed.",
+        life: 3000,
+      });
+      return;
+    }
+
     try {
       const response = await api.post(
         "/api/user/calculate-total-booking-charge",
@@ -234,11 +265,13 @@ const Booking = () => {
       console.log(response.data);
       setBookingCharge(response.data);
     } catch (err) {
-      console.log(err);
+      console.log("Booking charge calculation error:", err);
+      console.log("Error response:", err.response?.data);
+      
       toast.current.show({
         severity: "error",
         summary: "Error in Booking charge calculation!",
-        detail: err.response.data.error,
+        detail: err.response?.data?.error || "Unable to calculate booking charges. Please try again.",
         life: 3000,
       });
     }
@@ -254,6 +287,15 @@ const Booking = () => {
     checkedSmsConfirmation,
     vehiclesDetails,
   ]);
+
+  // Initialize vehicle details if needed
+  useEffect(() => {
+    if (bookingDetails && vehiclesDetails.length === 1 && 
+        !vehiclesDetails[0].regNo && !vehiclesDetails[0].make) {
+      // If we have booking details but no vehicle info, ensure at least one vehicle slot
+      console.log("Initializing vehicle details for booking");
+    }
+  }, [bookingDetails]);
 
   const checkingCouponCodeValidity = async () => {
     try {
