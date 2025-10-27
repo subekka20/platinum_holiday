@@ -11,10 +11,13 @@ import Preloader from "../../Preloader";
 import api from "../../api";
 import { setLogout } from "../../state";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { performLogout } from "../../utils/logoutUtil";
 
 const ChangePassword = () => {
     const toast = useRef(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const token = useSelector((state) => state.auth.token);
     const [loading, setLoading] = useState(false);
 
@@ -70,9 +73,7 @@ const ChangePassword = () => {
                 life: 3000
             });
             setTimeout(() => {
-                dispatch(
-                    setLogout()
-                )
+                performLogout(dispatch, navigate);
             }, 2000);
         } catch (err) {
             console.log(err);

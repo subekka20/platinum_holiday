@@ -10,9 +10,10 @@ import '../Css/style.css';
 import '../Css/responsive.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../state';
+import { performLogoutWithConfirmation } from '../../utils/logoutUtil';
 
 const Layout = () => {
-    const navigate = useNavigate;
+    const navigate = useNavigate();
     const { pathname } = useLocation();
     const dispatch = useDispatch();
     const [menuOpen, setMenuOpen] = useState(false);
@@ -67,14 +68,7 @@ const Layout = () => {
     };
 
     const handleLogOut = () => {
-        confirmDialog({
-            message: 'Are you sure you want to Sign out?',
-            header: 'Sign out',
-            icon: 'bi bi-box-arrow-right',
-            defaultFocus: 'reject',
-            acceptClassName: 'p-button-danger',
-            accept: () => { dispatch(setLogout()); },
-        });
+        performLogoutWithConfirmation(confirmDialog, dispatch, navigate, 'Are you sure you want to sign out?');
         setMenuOpen(false);
     }
 

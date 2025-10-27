@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../AdminLayout/Layout";
 
 import { InputText } from "primereact/inputtext";
-import { FloatLabel } from "primereact/floatlabel";
 import { Password } from "primereact/password";
 import { Checkbox } from "primereact/checkbox";
 import { Button } from "primereact/button";
@@ -15,6 +14,9 @@ import api from "../../api";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
 import withComponentName from "../../withComponentName";
+
+// Import the new CSS file
+import "./AdminLogin.css";
 
 const AdminLogin = () => {
   const toast = useRef(null);
@@ -92,217 +94,114 @@ const AdminLogin = () => {
   return (
     <>
       <Toast ref={toast} />
-
-      <div className="login_bg">
-        <div className="col-sm-8 col-md-88 mx-auto">
-          <article
-            className="custom-card"
-            data-aos="fade-up"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1016%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='%23DDF4E7'%3e%3c/rect%3e%3cpath d='M0%2c816.835C152.696%2c810.118%2c204.143%2c599.733%2c326.936%2c508.722C437.943%2c426.446%2c624.575%2c437.134%2c681.912%2c311.419C739.252%2c185.696%2c640.831%2c45.43%2c598.181%2c-86.005C562.551%2c-195.807%2c511.378%2c-293.045%2c453.378%2c-392.854C381.503%2c-516.54%2c347.906%2c-682.012%2c217.57%2c-740.975C86.394%2c-800.318%2c-65.002%2c-732.344%2c-202.471%2c-689.553C-337.978%2c-647.373%2c-477.888%2c-601.874%2c-571.628%2c-495.318C-665.689%2c-388.396%2c-698.5%2c-244.299%2c-718.239%2c-103.267C-737.919%2c37.343%2c-755.977%2c189.896%2c-684.72%2c312.701C-615.221%2c432.475%2c-457.471%2c456.218%2c-345.958%2c538.321C-224.276%2c627.911%2c-150.96%2c823.475%2c0%2c816.835' fill='%2367C090'%3e%3c/path%3e%3cpath d='M1920 1948.745C2082.81 1977.812 2251.237 1900.358 2382.858 1800.22 2509.386 1703.957 2572.996 1552.868 2633.553 1405.869 2692.103 1263.742 2737.769 1117.279 2727.376 963.917 2716.437 802.49 2663.077 648.552 2573.12 514.068 2474.504 366.64 2356.746 220.942 2189.982 160.527 2019.131 98.632 1828.235 123.102 1656.302 181.926 1489.03 239.155 1313.713 328.392 1235.672 487.026 1160.746 639.327 1285.43 817.284 1261.093 985.263 1236.714 1153.535 1027.106 1300.876 1095.188 1456.679 1162.92 1611.682 1407.153 1565.297 1552.422 1651.962 1690.457 1734.311 1761.769 1920.496 1920 1948.745' fill='%2326667F'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1016'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e")`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-              backgroundSize: "cover",
-              backgroundAttachment: "fixed",
-            }}
-          >
-            <div className="custom-card-logo-area">
+      
+      <div className="simple-admin-login">
+        <div className="simple-login-container">
+          <div className="simple-login-card">
+            {/* Header */}
+            <div className="simple-login-header">
               <img
                 src="assets/images/logo.png"
-                className="custom-card-logo"
+                className="simple-login-logo"
                 alt="Platinum Holiday Service"
               />
+              <h1 className="simple-login-title">Admin Portal</h1>
+              <p className="simple-login-subtitle">Sign in to continue</p>
             </div>
-            <h3 className="custom-card-tile" style={{ textAlign:"center", color:"#124170"}}>Admin Login</h3>
-            <h6 className="custom-card-sub-tile" style={{ textAlign:"center", color:"#124170"}}>
-              Welcome Back! Please enter your credentials to access the admin
-              dashboard
-            </h6>
-            <form
-              action=""
-              className="custom-card-form"
-              onSubmit={handleSubmit}
-            >
-              <div className="custom-form-group contains-float-input">
-                <div
-                  className="custom-role-group"
-                  style={{ textAlign: "center", marginBottom: "20px" }}
-                >
-                  <label
-                    className="custom-role-label"
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "normal",
-                      lineHeight: "1.5",
-                      color: "#333",
-                    }}
+
+            {/* Form */}
+            <form className="simple-login-form" onSubmit={handleSubmit}>
+              {/* Role Selection */}
+              <div className="simple-form-field">
+                <label className="simple-field-label">Access Level</label>
+                <div className="simple-role-tabs">
+                  <button
+                    type="button"
+                    className={`simple-role-tab ${signInInfo.role === "Admin" ? "active" : ""}`}
+                    onClick={() => setSignInInfo({ ...signInInfo, role: "Admin" })}
                   >
-                    Role
-                  </label>
-                  <div
-                    className="custom-role-options"
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "20px",
-                    }}
+                    Admin
+                  </button>
+                  <button
+                    type="button"
+                    className={`simple-role-tab ${signInInfo.role === "Moderator" ? "active" : ""}`}
+                    onClick={() => setSignInInfo({ ...signInInfo, role: "Moderator" })}
                   >
-                    <div
-                      className="custom-role-option"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                      }}
-                    >
-                      <RadioButton
-                        inputId="roleAdmin"
-                        name="role"
-                        value="Admin"
-                        onChange={handleInputChange}
-                        checked={signInInfo.role === "Admin"}
-                      />
-                      <label
-                        htmlFor="roleAdmin"
-                        className="custom-role-label"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: "normal",
-                          lineHeight: "1.5",
-                          color: "#333",
-                        }}
-                      >
-                        Admin
-                      </label>
-                    </div>
-                    <div
-                      className="custom-role-option"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                      }}
-                    >
-                      <RadioButton
-                        inputId="roleModerator"
-                        name="role"
-                        value="Moderator"
-                        onChange={handleInputChange}
-                        checked={signInInfo.role === "Moderator"}
-                      />
-                      <label
-                        htmlFor="roleModerator"
-                        className="custom-role-label"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: "normal",
-                          lineHeight: "1.5",
-                          color: "#333",
-                        }}
-                      >
-                        Moderator
-                      </label>
-                    </div>
-                    {/* <div 
-                                            className="custom-role-option" 
-                                            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-                                        >
-                                            <RadioButton 
-                                                inputId="roleUser" 
-                                                name="role" 
-                                                value="Admin-User"
-                                                onChange={handleInputChange} 
-                                                checked={signInInfo.role === 'Admin-User'} 
-                                            />
-                                            <label htmlFor="roleUser" className="custom-role-label"
-                                            style={{
-                                                fontSize: '14px',  
-                                                fontWeight: 'normal', 
-                                                lineHeight: '1.5',   
-                                                color: '#333',       
-                                            }}>User</label>
-                                        </div> */}
-                  </div>
-                  {require && !signInInfo.role && (
-                    <small className="text-danger form-error-msg">
-                      Please select a role
-                    </small>
-                  )}
+                    Moderator
+                  </button>
                 </div>
-              </div>
-
-              <div className="custom-form-group contains-float-input">
-                <FloatLabel>
-                  <InputText
-                    id="email"
-                    keyfilter="email"
-                    className="custom-form-input"
-                    name="email"
-                    value={signInInfo.email}
-                    onChange={handleInputChange}
-                  />
-                  <label htmlFor="email" className="custom-float-label">
-                    Email
-                  </label>
-                </FloatLabel>
-                {require && !signInInfo.email && (
-                  <small className="text-danger form-error-msg">
-                    This field is required
-                  </small>
+                {require && !signInInfo.role && (
+                  <span className="simple-error">Please select access level</span>
                 )}
-                <small className="text-danger form-error-msg">
-                  {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInInfo.email) &&
-                  signInInfo.email
-                    ? "Enter valid email"
-                    : ""}
-                </small>
               </div>
 
-              <div className="custom-form-group contains-float-input">
-                <FloatLabel>
+              {/* Email */}
+              <div className="simple-form-field">
+                <label className="simple-field-label form-required">Email</label>
+                <InputText
+                  className={`simple-input ${require && !signInInfo.email ? 'error' : ''}`}
+                  name="email"
+                  value={signInInfo.email}
+                  onChange={handleInputChange}
+                  placeholder="Enter your email"
+                />
+                {require && !signInInfo.email && (
+                  <span className="simple-error">Email is required</span>
+                )}
+                {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInInfo.email) && signInInfo.email && (
+                  <span className="simple-error">Please enter a valid email</span>
+                )}
+              </div>
+
+              {/* Password */}
+              <div className="simple-form-field">
+                <label className="simple-field-label form-required">Password</label>
+                {/* <div className="simple-password-wrapper"> */}
                   <Password
-                    className="custom-form-input"
+                    className={`simple-password ${require && !signInInfo.password ? 'error' : ''}`}
                     name="password"
                     value={signInInfo.password}
                     onChange={handleInputChange}
+                    placeholder="Enter your password"
                     feedback={false}
                     toggleMask
+                    inputClassName={`simple-password-input ${require && !signInInfo.password ? 'error' : ''}`}
                   />
-                  <label htmlFor="username" className="custom-float-label">
-                    Password
-                  </label>
-                </FloatLabel>
+                {/* </div> */}
                 {require && !signInInfo.password && (
-                  <small className="text-danger form-error-msg">
-                    This field is required
-                  </small>
+                  <span className="simple-error">Password is required</span>
                 )}
               </div>
 
-              <div className="custom-form-group contains-float-input">
-                <div className="custom-check-group">
-                  <div className="custom-check-area">
-                    <Checkbox
-                      inputId="rememberMe"
-                      onChange={(e) => setChecked(e.checked)}
-                      checked={checked}
-                    ></Checkbox>
-                    <label htmlFor="rememberMe" className="custom-check-label">
-                      Remember me
-                    </label>
-                  </div>
+              {/* Remember Me */}
+              <div className="simple-form-field">
+                <div className="simple-checkbox-wrapper">
+                  <Checkbox
+                    inputId="rememberMe"
+                    onChange={(e) => setChecked(e.checked)}
+                    checked={checked}
+                  />
+                  <label htmlFor="rememberMe" className="simple-checkbox-label">
+                    Remember Me
+                  </label>
                 </div>
               </div>
 
-              <div className="custom-form-group contains-float-input mb-0">
-                <Button
-                  label="LOGIN"
-                  className="w-100 submit-button justify-content-center"
-                  loading={loading}
-                />
-              </div>
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                label={loading ? "Signing in..." : "Sign In"}
+                className="simple-submit-btn"
+                loading={loading}
+                disabled={loading}
+              />
             </form>
-          </article>
+
+            {/* Footer */}
+            {/* <div className="simple-login-footer">
+              <p>Need help? Contact IT support</p>
+            </div> */}
+          </div>
         </div>
       </div>
     </>

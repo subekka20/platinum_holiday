@@ -1,0 +1,394 @@
+/* ============ Simple & Elegant Admin Login Styles ============ */
+
+/* Main Container */
+.simple-admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.simple-login-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Login Card */
+.simple-login-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.simple-login-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Header */
+.simple-login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.simple-login-logo {
+  height: 60px;
+  width: auto;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.simple-login-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.simple-login-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Form */
+.simple-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Form Fields */
+.simple-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.simple-field-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+/* Required field indicator */
+.simple-field-label.form-required::after {
+  content: " *";
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* Role Tabs */
+.simple-role-tabs {
+  display: flex;
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.simple-role-tab {
+  flex: 1;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.simple-role-tab:hover {
+  color: #374151;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.simple-role-tab.active {
+  background: #124170;
+  color: white;
+  box-shadow: 0 2px 4px rgba(18, 65, 112, 0.2);
+}
+
+/* Input Styles */
+.simple-input {
+  width: 100% !important;
+  padding: 16px 18px !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+  outline: none !important;
+  color: #1f2937 !important;
+}
+
+.simple-input:focus {
+  border-color: #124170 !important;
+  box-shadow: 0 0 0 3px rgba(18, 65, 112, 0.1) !important;
+}
+
+.simple-input.error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+}
+
+.simple-input::placeholder {
+  color: #9ca3af !important;
+  font-weight: 400 !important;
+}
+
+/* Password Input Specific */
+.simple-input.p-password {
+  position: relative;
+  width: 100%;
+}
+
+.simple-input.p-password .p-password {
+  width: 100% !important;
+  display: block !important;
+}
+
+.simple-input.p-password .p-inputwrapper {
+  width: 100% !important;
+}
+
+.simple-input.p-password .p-password-input {
+  width: 100% !important;
+  padding: 16px 50px 16px 18px !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  background: white !important;
+  outline: none !important;
+  color: #1f2937 !important;
+  font-family: inherit !important;
+}
+
+.simple-input.p-password .p-password-input:focus {
+  border-color: #124170 !important;
+  box-shadow: 0 0 0 3px rgba(18, 65, 112, 0.1) !important;
+}
+
+.simple-input.error.p-password .p-password-input {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+}
+
+.simple-input.p-password .p-password-input::placeholder {
+  color: #9ca3af !important;
+  font-weight: 400 !important;
+}
+
+.simple-input.p-password .p-password-toggle {
+  right: 18px !important;
+  color: #6b7280 !important;
+  background: transparent !important;
+  border: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  cursor: pointer !important;
+}
+
+.simple-input.p-password .p-password-toggle:hover {
+  color: #124170 !important;
+}
+
+/* Checkbox */
+.simple-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.simple-checkbox-label {
+  font-size: 14px;
+  color: #6b7280;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Submit Button */
+.simple-submit-btn {
+  width: 100% !important;
+  padding: 16px 24px !important;
+  background: linear-gradient(135deg, #124170 0%, #1e40af 100%) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 14px rgba(18, 65, 112, 0.3) !important;
+  outline: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.simple-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(18, 65, 112, 0.4) !important;
+  background: linear-gradient(135deg, #0f3554 0%, #1d4ed8 100%) !important;
+}
+
+.simple-submit-btn:active {
+  transform: translateY(0) !important;
+}
+
+.simple-submit-btn:disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Footer */
+.simple-login-footer {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.simple-login-footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Error Messages */
+.simple-error {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 6px;
+  display: block;
+  animation: fadeInError 0.3s ease-out;
+}
+
+@keyframes fadeInError {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PrimeReact Checkbox Customization */
+.p-checkbox .p-checkbox-box {
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid #d1d5db !important;
+  border-radius: 4px !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.p-checkbox .p-checkbox-box:hover {
+  border-color: #124170 !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background: #124170 !important;
+  border-color: #124170 !important;
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+  color: white !important;
+  font-size: 12px !important;
+}
+
+/* Toast Customization */
+.p-toast .p-toast-message {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .simple-admin-login {
+    padding: 16px;
+  }
+  
+  .simple-login-card {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  .simple-login-title {
+    font-size: 24px;
+  }
+  
+  .simple-input,
+  .simple-input.p-password .p-password-input {
+    padding: 14px 16px !important;
+    font-size: 16px !important;
+  }
+  
+  .simple-submit-btn {
+    padding: 14px 20px !important;
+    font-size: 15px !important;
+  }
+  
+  .simple-role-tab {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Animation for form appearance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.simple-login-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Focus states for accessibility */
+.simple-role-tab:focus-visible {
+  outline: 2px solid #124170;
+  outline-offset: 2px;
+}
+
+.simple-input:focus-visible,
+.simple-input.p-password .p-password-input:focus-visible {
+  outline: 2px solid #124170 !important;
+  outline-offset: 2px !important;
+}
+
+.simple-submit-btn:focus-visible {
+  outline: 2px solid #93c5fd !important;
+  outline-offset: 2px !important;
+}

@@ -6,6 +6,7 @@ import { setLogout } from "../state";
 import { Ripple } from "primereact/ripple";
 import { Link } from "react-router-dom";
 import { getBookingChargesWithCouponCodeAndCorrespondingDiscount } from "../utils/chargesAndCouponCode";
+import { performLogout } from "../utils/logoutUtil";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -296,7 +297,7 @@ const Header = () => {
                               className="elegant-logout-btn p-ripple"
                               type="button"
                               onClick={() => {
-                                dispatch(setLogout());
+                                performLogout(dispatch, navigate);
                               }}
                             >
                               <div className="logout-icon">
@@ -435,7 +436,7 @@ const Header = () => {
                     type="button"
                     className="mobile-action-btn danger"
                     onClick={() => {
-                      dispatch(setLogout());
+                      performLogout(dispatch, navigate);
                       closeMenu();
                     }}
                   >

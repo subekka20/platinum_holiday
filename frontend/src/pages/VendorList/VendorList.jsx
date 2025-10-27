@@ -55,6 +55,8 @@ const VendorList = () => {
 
   const airports = useSelector((state) => state.vendor.airport);
   const quotes = useSelector((state) => state.vendor.quotes);
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
@@ -383,6 +385,7 @@ const VendorList = () => {
   return (
     <>
       {!quoteInfo && <Navigate to="/" />}
+      {(!user || !token) && <Navigate to="/sign-in" />}
       {pageLoading && <Preloader />}
       <Header />
 

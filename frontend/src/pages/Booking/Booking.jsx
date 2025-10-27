@@ -683,6 +683,7 @@ const Booking = () => {
   return (
     <>
       {!bookingDetails && <Navigate to="/" />}
+      {(!user || !token) && <Navigate to="/sign-in" />}
       <Header />
 
       {/* Breadcrumb Section Start */}

@@ -26,6 +26,7 @@ import { setLogin, setLogout } from "../../state";
 import { Toast } from 'primereact/toast';
 import api from "../../api";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { performLogoutWithConfirmation } from "../../utils/logoutUtil";
 
 const Dashboard = () => {
     const editProfile = useRef(null);
@@ -98,16 +99,7 @@ const Dashboard = () => {
     }, []);
 
     const logOut = () => {
-        confirmDialog({
-            message: 'Are you sure you want to Sign out?',
-            header: 'Logout Confirmation',
-            icon: 'bi bi-trash-fill',
-            defaultFocus: 'reject',
-            acceptClassName: 'p-button-danger',
-            accept: () => {
-                dispatch(setLogout());
-            },
-        });
+        performLogoutWithConfirmation(confirmDialog, dispatch, navigate, 'Are you sure you want to sign out?');
     }
 
     const handleInputChange = async (e) => {
