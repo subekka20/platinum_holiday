@@ -9,27 +9,6 @@ const TermsAndConditions = () => {
         <>
             <Header />
 
-            {/* Breadcrumb Section Start */}
-            <section className="breadcrumb-section overflow-hidden">
-                <div className="container-md">
-                    <div className="row">
-                        <div className="col-12">
-                            <h3 className='breadcrumb-title'>Terms & Conditions</h3>
-                            <nav aria-label="breadcrumb">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="/">Home</a>
-                                    </li>
-                                    <li className="breadcrumb-item active" aria-current="page">Terms & Conditions</li>
-                                </ol>
-                            </nav>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* Breadcrumb Section End */}
-
             {/* Terms & Conditions Section Start */}
             <section className="section-padding overflow-hidden">
                 <div className="container-md">

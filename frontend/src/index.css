@@ -3835,7 +3835,7 @@ button.custom-form-link:disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  /* background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'); */
   opacity: 0.3;
 }
 
@@ -3921,7 +3921,7 @@ button.custom-form-link:disabled {
   font-weight: 600;
   margin: 0;
   opacity: 0.95;
-  color: #667eea;
+  color: #FFF;
 }
 
 .form-section {
@@ -4031,11 +4031,11 @@ button.custom-form-link:disabled {
 
 .clean-input {
   width: 100% !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: #f8fafc !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 12px !important;
   padding: 16px 20px !important;
-  color: white !important;
+  color: #374151 !important;
   font-size: 16px !important;
   transition: all 0.3s ease !important;
   font-weight: 400 !important;
@@ -4049,11 +4049,12 @@ button.custom-form-link:disabled {
 .clean-input.p-password {
   width: 100% !important;
   display: block !important;
-  background: transparent !important;
+  background: #f8fafc !important;
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
   box-shadow: none !important;
+  color: #374151 !important;
 }
 
 .clean-input.p-password > .p-inputwrapper {
@@ -4068,11 +4069,11 @@ button.custom-form-link:disabled {
 
 .clean-input .p-password-input {
   width: 100% !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: #f8fafc !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   border-radius: 12px !important;
   padding: 16px 50px 16px 20px !important;
-  color: white !important;
+  color: #374151 !important;
   font-size: 16px !important;
   transition: all 0.3s ease !important;
   font-weight: 400 !important;
@@ -4082,26 +4083,26 @@ button.custom-form-link:disabled {
 }
 
 .clean-input .p-password-input::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: #9ca3af !important;
   font-weight: 400 !important;
 }
 
 .clean-input .p-password-input:focus {
   border-color: #667eea !important;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: #ffffff !important;
   outline: none !important;
 }
 
 .clean-input::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: #9ca3af !important;
   font-weight: 400 !important;
 }
 
 .clean-input:focus {
   border-color: #667eea !important;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: #ffffff !important;
   outline: none !important;
 }
 
@@ -4167,7 +4168,7 @@ button.custom-form-link:disabled {
 }
 
 .remember-label {
-  color: #4a5568 !important;
+  color: #fff !important;
   font-size: 14px !important;
   font-weight: 500 !important;
   cursor: pointer !important;
@@ -4175,7 +4176,7 @@ button.custom-form-link:disabled {
 }
 
 .forgot-password {
-  color: #667eea !important;
+  color: #fff !important;
   text-decoration: none !important;
   font-size: 14px !important;
   font-weight: 600 !important;
@@ -4418,12 +4419,12 @@ button.custom-form-link:disabled {
 
 .clean-password .p-password-input {
   width: 100% !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: #f8fafc !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 12px !important;
   padding: 16px 50px 16px 20px !important;
   font-size: 16px !important;
-  color: white !important;
+  color: #374151 !important;
   backdrop-filter: blur(10px) !important;
   transition: all 0.3s ease !important;
   line-height: 1.5 !important;
@@ -4433,7 +4434,7 @@ button.custom-form-link:disabled {
 }
 
 .clean-password .p-password-input::placeholder {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: #9ca3af !important;
   font-weight: 400 !important;
 }
 

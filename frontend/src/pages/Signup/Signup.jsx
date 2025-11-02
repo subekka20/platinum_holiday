@@ -363,6 +363,8 @@ const Signup = () => {
                     <p className="clean-card-subtitle">
                       Complete your registration details below
                     </p>
+
+                    <h6 style={{color:"white", fontSize:"12px"}}><span style={{ color: "red" }}>* </span >All fields are required</h6>
                   </div>
                   
                   <form className="clean-signin-form signup-form" onSubmit={handleSubmit}>
