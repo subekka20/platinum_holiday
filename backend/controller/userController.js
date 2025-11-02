@@ -545,10 +545,10 @@ const carParkingBookingDetail = async (req, res) => {
             price_data: {
               currency: "gbp",
               product_data: {
-                name: "Car Parking Booking",
-                images: [
-                  "https://www.theparkingdeals.co.uk/assets/images/logo.png",
-                ],
+                name: "Platinum Holiday Booking",
+                // images: [
+                //   "https://www.theparkingdeals.co.uk/assets/images/logo.png",
+                // ],
               },
               unit_amount: bookingResult.totalPayable * 100,
               // unit_amount:  0.3* 100
