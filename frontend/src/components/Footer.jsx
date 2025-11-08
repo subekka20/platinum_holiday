@@ -125,15 +125,15 @@ const Footer = () => {
                       <a href="#" className="social-link" aria-label="Facebook">
                         <i className="bi bi-facebook"></i>
                       </a>
-                      <a href="#" className="social-link" aria-label="Twitter">
+                      {/* <a href="#" className="social-link" aria-label="Twitter">
                         <i className="bi bi-twitter"></i>
-                      </a>
+                      </a> */}
                       <a href="#" className="social-link" aria-label="Instagram">
                         <i className="bi bi-instagram"></i>
                       </a>
-                      <a href="#" className="social-link" aria-label="LinkedIn">
+                      {/* <a href="#" className="social-link" aria-label="LinkedIn">
                         <i className="bi bi-linkedin"></i>
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
@@ -160,7 +160,7 @@ const Footer = () => {
                       </button>
                     </li>
                     <li>
-                      <button onClick={() => goToLink("/faqs")} className="footer-nav-link">
+                      <button onClick={() => goToLink("/faq")} className="footer-nav-link">
                         <i className="bi bi-chevron-right"></i>
                         FAQs
                       </button>
