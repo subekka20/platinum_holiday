@@ -3425,23 +3425,16 @@ button.custom-form-link:disabled {
 }
 
 .signup-link {
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: rgba(15, 23, 32, 0.6);
-  border: 1px solid rgba(51, 65, 85, 0.3);
-  border-radius: 12px;
   color: #cbd5e1;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.3s ease;
 }
 
 .signup-link:hover {
-  background: rgba(15, 23, 32, 0.8);
+  /* background: rgba(15, 23, 32, 0.8); */
   border-color: rgba(59, 130, 246, 0.3);
   color: #3b82f6;
 }
@@ -3835,8 +3828,8 @@ button.custom-form-link:disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'); */
   opacity: 0.3;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .signin-container {
@@ -3921,7 +3914,7 @@ button.custom-form-link:disabled {
   font-weight: 600;
   margin: 0;
   opacity: 0.95;
-  color: #FFF;
+  color: #fff;
 }
 
 .form-section {
@@ -4260,14 +4253,6 @@ button.custom-form-link:disabled {
   margin: 0 !important;
 }
 
-.signup-link {
-  color: white !important;
-  text-decoration: none !important;
-  font-weight: 600 !important;
-  transition: color 0.3s ease !important;
-  background-color:  #9142e1 !important;
-}
-
 .signup-link:hover {
   color: white !important;
 }
@@ -4348,6 +4333,375 @@ button.custom-form-link:disabled {
 .signup-form .row {
   margin-left: -8px !important;
   margin-right: -8px !important;
+}
+
+/* Split Screen Signin Design */
+.split-signin-section {
+  min-height: 100vh;
+  margin-top: 80px;
+  display: flex;
+  background: #f8fafc;
+}
+
+.split-container {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+}
+
+/* Left Panel - Login Form */
+.signin-left-panel {
+  flex: 1;
+  max-width: 50%;
+  background: linear-gradient(
+      45deg,
+      rgba(102, 126, 234, 0.8),
+      rgba(118, 75, 162, 0.8)
+    ),
+    url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.signin-form-container {
+  width: 100%;
+  max-width: 400px;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-top: 30px;
+}
+
+.signin-brand {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.brand-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.brand-name-j {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 8px 0;
+}
+
+.welcome-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Form Styles */
+.split-signin-form {
+  width: 100%;
+}
+
+.split-input {
+  width: 100% !important;
+  background: rgb(170 170 255 / 70%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 14px 16px !important;
+  color: white !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+  line-height: 1.2 !important;
+  display: block !important;
+}
+
+.split-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.split-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  outline: none !important;
+}
+
+/* Password input specific styling */
+.split-input.p-password {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+.split-input.p-password > .p-inputwrapper {
+  width: 100% !important;
+  height: 48px !important;
+  display: block !important;
+}
+
+.split-input .p-password-input {
+  width: 100% !important;
+  background: rgb(170 170 255 / 70%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 14px 45px 14px 16px !important;
+  color: white !important;
+  font-size: 16px !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+  line-height: 1.2 !important;
+  display: block !important;
+}
+
+.split-input .p-password-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.split-input .p-password-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  outline: none !important;
+}
+
+.split-input .p-password-toggle {
+  right: 12px !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.split-input .p-password-toggle:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Additional overrides to ensure password field matches email field exactly */
+.input-group .split-input.p-password {
+  margin: 0 !important;
+}
+
+.split-input.p-password .p-inputwrapper-filled {
+  height: 48px !important;
+}
+
+.split-input.p-password .p-inputwrapper-focus {
+  height: 48px !important;
+}
+
+.split-checkbox {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.split-signin-button {
+  width: 100% !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 14px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 24px !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.split-signin-button:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+}
+
+.split-signin-button:disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+}
+
+.signup-link {
+  color: #667eea !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+}
+
+.signup-link:hover {
+  color: #5a67d8 !important;
+}
+
+/* Right Panel - Background Image */
+.signin-right-panel {
+  flex: 1;
+  max-width: 50%;
+  background: linear-gradient(
+      45deg,
+      rgba(102, 126, 234, 0.8),
+      rgba(118, 75, 162, 0.8)
+    ),
+    url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.overlay-content {
+  max-width: 400px;
+  color: white;
+}
+
+.overlay-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.overlay-description {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Responsive Design for Split Screen */
+@media (max-width: 1024px) {
+  .split-container {
+    flex-direction: column;
+  }
+
+  .signin-left-panel,
+  .signin-right-panel {
+    max-width: 100%;
+  }
+
+  .signin-right-panel {
+    min-height: 40vh;
+  }
+
+  .overlay-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .signin-left-panel {
+    padding: 30px 20px;
+  }
+
+  .signin-right-panel {
+    min-height: 30vh;
+  }
+
+  .overlay-title {
+    font-size: 1.8rem;
+  }
+
+  .overlay-description {
+    font-size: 1rem;
+  }
+
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-left-panel {
+    padding: 20px 15px;
+  }
+
+  .split-input,
+  .split-input .p-password-input {
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    height: 44px !important;
+  }
+  
+  .split-input .p-password-input {
+    padding: 12px 40px 12px 14px !important;
+  }
+
+  .split-signin-button {
+    padding: 12px 20px !important;
+    font-size: 15px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(15, 23, 32, 0.6);
+  border: 1px solid rgba(51, 65, 85, 0.3);
+  border-radius: 12px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  }
+
+  .welcome-title {
+    font-size: 1.6rem;
+  }
+
+  .overlay-title {
+    font-size: 1.5rem;
+  }
 }
 
 .signup-form .row > [class*="col-"] {

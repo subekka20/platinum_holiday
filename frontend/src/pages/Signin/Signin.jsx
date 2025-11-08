@@ -85,38 +85,40 @@ const Signin = () => {
       <Header />
       <Toast ref={toast} />
 
-      {/* Clean Signin Section */}
-      <section className="clean-signin-section">
-        <div className="signin-container">
-          <div className="signin-card">
-            {/* Logo Section */}
-            <div className="logo-section">
-              <img
-                src="assets/images/logo.png"
-                className="signin-logo"
-                alt="Platinum Holiday Service"
-              />
-              <h1 className="company-name">Platinum Holiday Service</h1>
-            </div>
+      {/* Split Screen Signin Section */}
+      <section className="split-signin-section">
+        <div className="split-container">
+          {/* Left Side - Login Form */}
+          <div className="signin-left-panel">
+            <div className="signin-form-container">
+              {/* Logo Section */}
+              <div className="signin-brand">
+                <img
+                  src="assets/images/logo.png"
+                  className="brand-logo"
+                  alt="Platinum Holiday Service"
+                />
+                <h1 className="brand-name-j">Platinum Holiday Service</h1>
+              </div>
 
-            {/* Form Section */}
-            <div className="form-section">
-              <div className="form-header">
-                <h2 className="form-title" style={{color:"white"}}>Sign In</h2>
-                <p className="form-subtitle">
-                  Welcome back! Please sign in to your account
+              {/* Welcome Section */}
+              <div className="welcome-section">
+                <h2 className="welcome-title">Welcome back</h2>
+                <p className="welcome-subtitle">
+                  Please sign in to your account
                 </p>
               </div>
 
-              <form className="signin-form" onSubmit={handleSubmit}>
+              {/* Form Section */}
+              <form className="split-signin-form" onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <label htmlFor="email" className="input-label form-required">
-                    Email 
+                  <label htmlFor="email" className="input-label">
+                    Email
                   </label>
                   <InputText
                     id="email"
                     keyfilter="email"
-                    className="clean-input"
+                    className="split-input"
                     name="email"
                     value={signInInfo.email}
                     onChange={handleInputChange}
@@ -132,15 +134,12 @@ const Signin = () => {
                 </div>
 
                 <div className="input-group">
-                  <label
-                    htmlFor="password"
-                    className="input-label form-required"
-                  >
+                  <label htmlFor="password" className="input-label">
                     Password
                   </label>
                   <Password
                     id="password"
-                    className="clean-input"
+                    className="split-input"
                     name="password"
                     value={signInInfo.password}
                     onChange={handleInputChange}
@@ -161,7 +160,7 @@ const Signin = () => {
                       inputId="rememberMe"
                       onChange={(e) => setChecked(e.checked)}
                       checked={checked}
-                      className="clean-checkbox"
+                      className="split-checkbox"
                     />
                     <label htmlFor="rememberMe" className="remember-label">
                       Remember me
@@ -174,7 +173,7 @@ const Signin = () => {
 
                 <Button
                   label="Sign In"
-                  className="signin-button"
+                  className="split-signin-button"
                   loading={loading}
                   disabled={loading}
                 />
@@ -182,12 +181,24 @@ const Signin = () => {
                 <div className="signup-section">
                   <p className="signup-text">
                     Don't have an account?{" "}
-                    <a href="/sign-up" style={{ textDecoration:"none", color:"purple", fontSize: "16px", fontWeight: "bold" }}>
-                      Sign Up 
+                    <a href="/sign-up" className="signup-link">
+                      Sign Up
                     </a>
                   </p>
                 </div>
               </form>
+            </div>
+          </div>
+
+          {/* Right Side - Background Image */}
+          <div className="signin-right-panel">
+            <div className="image-overlay">
+              <div className="overlay-content">
+                <h3 className="overlay-title">Premium Airport Parking Services</h3>
+                <p className="overlay-description">
+                  Secure, convenient, and affordable parking solutions for your travel needs
+                </p>
+              </div>
             </div>
           </div>
         </div>
