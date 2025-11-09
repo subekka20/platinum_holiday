@@ -221,94 +221,122 @@ const Signup = () => {
       <Header />
       <Toast ref={toast} />
 
-      {/* Clean Signup Section */}
-      <section className="clean-signin-section">
-        <div className="container">
-          <div className="row justify-content-center align-items-center min-vh-100">
-            {page === 1 ? (
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="clean-signin-card" data-aos="fade-up">
-                  <div className="clean-card-header">
+      {/* Split Screen Signup Section */}
+      <section className="split-signin-section">
+        <div className="split-container">
+          {/* Left Panel - Signup Forms */}
+          <div className="signin-left-panel">
+            <div className="signin-form-container">
+              {page === 1 ? (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="clean-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
-                    <h2 className="clean-card-title">Account Verification</h2>
-                    <p className="clean-card-subtitle">
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
+                  </div>
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Account Verification</h2>
+                    <p className="welcome-subtitle">
                       Enter your email address below for verification
                     </p>
                   </div>
-                  
-                  <form className="clean-signin-form" onSubmit={handleVerifyEmail}>
-                    <div className="clean-input-group">
+
+                  {/* Form Section */}
+                  <form className="split-signin-form" onSubmit={handleVerifyEmail}>
+                    <div className="input-group">
+                      <label htmlFor="verify_email" className="input-label">
+                        Email Address
+                      </label>
                       <InputText
                         id="verify_email"
                         keyfilter="email"
-                        className="clean-input"
+                        className="split-input"
                         placeholder="Enter your email address"
                         name="email"
                         value={signUpInfo.email}
                         onChange={handleInputChange}
                       />
-                      <label htmlFor="verify_email" className="clean-label">
-                        Email Address *
-                      </label>
-                      
                       {(showError && !signUpInfo.email) && (
-                        <small className="clean-error-msg">
-                          This field is required
-                        </small>
+                        <small className="error-text">This field is required</small>
                       )}
                       {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
-                        <small className="clean-error-msg">
-                          Enter valid email
-                        </small>
+                        <small className="error-text">Enter valid email</small>
                       )}
                       {emailExists && (
-                        <small className="clean-error-msg">
-                          Email already exists
-                        </small>
+                        <small className="error-text">Email already exists</small>
                       )}
                     </div>
 
                     <Button
                       label={loading ? "Processing..." : "VERIFY EMAIL"}
-                      className="clean-submit-btn"
+                      className="split-signin-button"
                       loading={loading}
                       disabled={!signUpInfo.email || emailExists}
                       type="submit"
                     />
-                                    </form>
-                </div>
-              </div>
-            ) : page === 2 ? (
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="clean-signin-card" data-aos="fade-up">
-                  <button
-                    className="clean-back-btn"
-                    onClick={goBack}
-                  >
-                    <i className="ri ri-arrow-left-line"></i>
-                    Back
-                  </button>
-                  
-                  <div className="clean-card-header">
+
+                    <div className="signup-section">
+                      <p className="signup-text">
+                        Already have an account?{" "}
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
+                        </a>
+                      </p>
+                    </div>
+                  </form>
+                </>
+              ) : page === 2 ? (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="clean-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
-                    <h2 className="clean-card-title">OTP Verification</h2>
-                    <p className="clean-card-subtitle">
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
+                  </div>
+
+                  {/* Back Button */}
+                  <div className="signup-section" style={{ marginBottom: '20px' }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <i className="ri-arrow-left-line"></i>
+                      Back
+                    </button>
+                  </div>
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">OTP Verification</h2>
+                    <p className="welcome-subtitle">
                       Enter the OTP verification code sent to your email address
                     </p>
                   </div>
-                  
-                  <form className="clean-signin-form" onSubmit={handleVerifyOTP}>
-                    <div className="clean-otp-group">
-                      <label className="clean-otp-label">Enter OTP *</label>
-                      <div className="clean-otp-container">
+
+                  {/* Form Section */}
+                  <form className="split-signin-form" onSubmit={handleVerifyOTP}>
+                    <div className="input-group">
+                      <label className="input-label">Enter OTP</label>
+                      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
                         <InputOtp
                           value={otp}
                           onChange={(e) => {
@@ -316,152 +344,178 @@ const Signup = () => {
                             setOTP(e.value);
                           }}
                           numInputs={6}
-                          className="clean-otp-input"
+                          className="split-otp-input"
                         />
                       </div>
                       {(showError && !otp) && (
-                        <small className="clean-error-msg">
-                          This field is required
-                        </small>
+                        <small className="error-text">This field is required</small>
                       )}
                     </div>
 
                     <Button
                       label={reSendLoading ? "Processing..." : loading ? "Verifying..." : "VERIFY OTP"}
-                      className="clean-submit-btn"
+                      className="split-signin-button"
                       loading={loading}
                       disabled={!otp}
                       type="submit"
                     />
                     
-                    <div className="clean-resend-section">
-                      <p>
+                    <div className="signup-section">
+                      <p className="signup-text">
                         Didn't receive the code?{" "}
                         <button
                           type="button"
-                          className="clean-link-btn"
                           onClick={handleResendCode}
                           disabled={isButtonDisabled}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: '#667eea',
+                            textDecoration: 'underline',
+                            cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
+                            opacity: isButtonDisabled ? 0.5 : 1
+                          }}
                         >
                           Resend Code {isButtonDisabled && `(${seconds}s)`}
                         </button>
                       </p>
                     </div>
                   </form>
-                </div>
-              </div>
-            ) : (
-              <div className="col-12 col-lg-10 col-xl-8 mx-auto">
-                <div className="clean-signin-card signup-form-card" data-aos="fade-up">
-                  <div className="clean-card-header">
+                </>
+              ) : (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="clean-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
-                    <h2 className="clean-card-title">Create Your Account</h2>
-                    <p className="clean-card-subtitle">
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
+                  </div>
+                  <Divider></Divider>
+
+                  {/* Back Button */}
+                  {/* <div className="signup-section" style={{ marginBottom: '20px' }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <i className="ri-arrow-left-line"></i>
+                      Back
+                    </button>
+                  </div> */}
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Create Your Account</h2>
+                    <p className="welcome-subtitle">
                       Complete your registration details below
                     </p>
-
-                    <h6 style={{color:"white", fontSize:"12px"}}><span style={{ color: "red" }}>* </span >All fields are required</h6>
+                    <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px', margin: '8px 0 0 0' }}>
+                      <span style={{ color: 'red' }}>*</span> All fields are required
+                    </p>
                   </div>
-                  
-                  <form className="clean-signin-form signup-form" onSubmit={handleSubmit}>
-                    <div className="row">
-                      <div className="col-md-3 col-sm-4">
-                        <div className="clean-input-group">
+
+                  {/* Form Section */}
+                  <form className="split-signin-form signup-form" onSubmit={handleSubmit}>
+                    <div className="signup-form-grid">
+                      <div className="input-group-row">
+                        <div className="input-group" style={{ flex: '0 0 30%' }}>
+                          <label className="input-label">Title</label>
                           <Dropdown 
                             value={{ name: signUpInfo.title }} 
                             onChange={(e) => setSignUpInfo({ ...signUpInfo, title: e.value?.name })} 
                             options={titles} 
                             optionLabel="name"
                             placeholder="Select"
-                            className="clean-dropdown"
+                            className="split-dropdown"
                           />
-                          {/* <label className="clean-label">Title *</label> */}
                           {(showError && !signUpInfo.title) && (
-                            <small className="clean-error-msg">This field is required</small>
+                            <small className="error-text">This field is required</small>
                           )}
                         </div>
-                      </div>
-
-                      <div className="col-md-4 col-sm-8">
-                        <div className="clean-input-group">
-                          {/* <label className="clean-label">First Name *</label> */}
+                        <div className="input-group" style={{ flex: '1' }}>
+                          <label className="input-label">First Name</label>
                           <InputText
-                            className="clean-input"
+                            className="split-input"
                             name="firstName"
                             value={signUpInfo.firstName}
                             onChange={handleInputChange}
                             placeholder="Enter your first name"
                           />
                           {(showError && !signUpInfo.firstName) && (
-                            <small className="clean-error-msg">This field is required</small>
+                            <small className="error-text">This field is required</small>
                           )}
                         </div>
                       </div>
 
-                      <div className="col-md-5">
-                        <div className="clean-input-group">
+                      <div className="input-group-row">
+                        <div className="input-group">
+                          <label className="input-label">Last Name</label>
                           <InputText
-                            className="clean-input"
+                            className="split-input"
                             name="lastName"
                             value={signUpInfo.lastName}
                             onChange={handleInputChange}
                             placeholder="Enter your last name"
                           />
-                          {/* <label className="clean-label">Last Name</label> */}
                         </div>
-                      </div>
-
-                      <div className="col-md-6">
-                        <div className="clean-input-group">
-                          <InputText
-                            keyfilter="email"
-                            className="clean-input"
-                            name="email"
-                            value={signUpInfo.email}
-                            onChange={handleInputChange}
-                            placeholder="Enter your email address"
-                          />
-                          {/* <label className="clean-label">Email Address *</label> */}
-                          {(showError && !signUpInfo.email) && (
-                            <small className="clean-error-msg">This field is required</small>
-                          )}
-                          {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
-                            <small className="clean-error-msg">Enter valid email</small>
-                          )}
-                          {emailExists && (
-                            <small className="clean-error-msg">Email already exists</small>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="col-md-6">
-                        <div className="clean-input-group">
+                        <div className="input-group">
+                          <label className="input-label">Mobile Number</label>
                           <InputText
                             keyfilter="num"
-                            className="clean-input"
+                            className="split-input"
                             name="mobileNumber"
                             value={signUpInfo.mobileNumber}
                             onChange={handleInputChange}
                             placeholder="Enter your mobile number"
                           />
-                          {/* <label className="clean-label">Mobile Number *</label> */}
                           {(showError && !signUpInfo.mobileNumber) && (
-                            <small className="clean-error-msg">This field is required</small>
+                            <small className="error-text">This field is required</small>
                           )}
                           {(!(/^\d{9,}$/.test(signUpInfo.mobileNumber)) && signUpInfo.mobileNumber) && (
-                            <small className="clean-error-msg">Enter valid phone number</small>
+                            <small className="error-text">Enter valid phone number</small>
                           )}
                         </div>
                       </div>
 
-                      <div className="col-md-6">
-                        <div className="clean-input-group">
+                      <div className="input-group">
+                        <label className="input-label">Email Address</label>
+                        <InputText
+                          keyfilter="email"
+                          className="split-input"
+                          name="email"
+                          value={signUpInfo.email}
+                          onChange={handleInputChange}
+                          placeholder="Enter your email address"
+                        />
+                        {(showError && !signUpInfo.email) && (
+                          <small className="error-text">This field is required</small>
+                        )}
+                        {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
+                          <small className="error-text">Enter valid email</small>
+                        )}
+                        {emailExists && (
+                          <small className="error-text">Email already exists</small>
+                        )}
+                      </div>
+
+                      <div className="input-group-row">
+                        <div className="input-group">
+                          <label className="input-label">Password</label>
                           <Password
-                            className="clean-password"
+                            className="split-input"
                             name="password"
                             value={signUpInfo.password}
                             onChange={handleInputChange}
@@ -471,20 +525,17 @@ const Signup = () => {
                             placeholder="Enter your password"
                             feedback={true}
                           />
-                          {/* <label className="clean-label">Password *</label> */}
                           {(showError && !signUpInfo.password) && (
-                            <small className="clean-error-msg">This field is required</small>
+                            <small className="error-text">This field is required</small>
                           )}
                           {(signUpInfo.password.length < 8 && signUpInfo.password) && (
-                            <small className="clean-error-msg">Password must be at least 8 characters long</small>
+                            <small className="error-text">Password must be at least 8 characters long</small>
                           )}
                         </div>
-                      </div>
-
-                      <div className="col-md-6">
-                        <div className="clean-input-group">
+                        <div className="input-group">
+                          <label className="input-label">Confirm Password</label>
                           <Password
-                            className="clean-password"
+                            className="split-input"
                             name="confirmPassword"
                             value={signUpInfo.confirmPassword}
                             onChange={handleInputChange}
@@ -492,59 +543,72 @@ const Signup = () => {
                             toggleMask
                             placeholder="Re-enter your password"
                           />
-                          {/* <label className="clean-label">Confirm Password *</label> */}
                           {(showError && !signUpInfo.confirmPassword) && (
-                            <small className="clean-error-msg">This field is required</small>
+                            <small className="error-text">This field is required</small>
                           )}
                           {(signUpInfo.password !== signUpInfo.confirmPassword && signUpInfo.confirmPassword) && (
-                            <small className="clean-error-msg">Password & Confirm Password must match</small>
+                            <small className="error-text">Password & Confirm Password must match</small>
                           )}
                         </div>
                       </div>
                     </div>
 
-                    <div className="clean-checkbox-group">
-                      <Checkbox
-                        inputId="terms"
-                        onChange={(e) => setChecked(e.checked)}
-                        checked={checked}
-                      />
-                      <label htmlFor="terms" className="clean-checkbox-label">
-                        I accept the use of cookies in accordance with the{" "}
-                        <a href="/terms-and-conditions" target="_blank" className="clean-link">
-                          Terms
-                        </a>{" "}
-                        and{" "}
-                        <a href="/privacy-policy" target="_blank" className="clean-link">
-                          Privacy Policy
-                        </a>
-                      </label>
+                    <div className="form-extras" style={{ marginTop: '20px' }}>
+                      <div className="remember-section">
+                        <Checkbox
+                          inputId="terms"
+                          onChange={(e) => setChecked(e.checked)}
+                          checked={checked}
+                          className="split-checkbox"
+                        />
+                        <label htmlFor="terms" className="remember-label" style={{ fontSize: '13px' }}>
+                          I accept the{" "}
+                          <a href="/terms-and-conditions" target="_blank" style={{ color: '#667eea' }}>
+                            Terms
+                          </a>{" "}
+                          and{" "}
+                          <a href="/privacy-policy" target="_blank" style={{ color: '#667eea' }}>
+                            Privacy Policy
+                          </a>
+                        </label>
+                      </div>
                     </div>
 
                     <Button
                       label="CREATE ACCOUNT"
                       disabled={!checked}
-                      className="clean-submit-btn"
+                      className="split-signin-button"
                       loading={loading}
                       type="submit"
                     />
 
-                    <div className="clean-form-footer">
-                      <p>
+                    <div className="signup-section">
+                      <p className="signup-text">
                         Already have an account?{" "}
-                        <a href="/sign-in" style={{ textDecoration:"none", color:"purple", fontSize: "16px", fontWeight: "bold" }}>
-                          Sign in
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
                         </a>
                       </p>
                     </div>
                   </form>
-                </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Right Panel - Background Image */}
+          <div className="signin-right-panel">
+            <div className="image-overlay">
+              <div className="overlay-content">
+                <h3 className="overlay-title">Join Platinum Holiday Service</h3>
+                <p className="overlay-description">
+                  Create your account to access premium airport parking services and exclusive travel benefits
+                </p>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
-      {/* Signup Section End */}
 
       <Footer />
     </>
