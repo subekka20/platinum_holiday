@@ -545,7 +545,7 @@ const carParkingBookingDetail = async (req, res) => {
             price_data: {
               currency: "gbp",
               product_data: {
-                name: "Platinum Holiday Booking",
+                name: "Platinum Holiday Booking..",
               },
               unit_amount: bookingResult.totalPayable * 100,
               // unit_amount:  0.3* 100
