@@ -215,7 +215,7 @@ const ForgotPassword = () => {
                     </div>
 
                     <Button
-                      label={loading ? "Processing..." : "SEND RESET LINK"}
+                      label={loading ? "Processing..." : "CHANGE PASSWORD"}
                       className="split-signin-button"
                       loading={loading}
                       disabled={!resetPasswordInfo.email}

@@ -130,12 +130,12 @@ const Header = () => {
                     className="nav-logo-link"
                   >
                     <img
-                      src="assets/images/logo.png"
+                      src="assets/images/logo-light.png"
                       className="nav-logo"
                       alt="Logo"
                     />
                     <img
-                      src="assets/images/logo.png"
+                      src="assets/images/logo-light.png"
                       className="scrolled-logo"
                       alt="Logo"
                     />

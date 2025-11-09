@@ -473,7 +473,7 @@ const Booking = () => {
       console.log(result);
 
       ReactGA.event({
-        category: 'CAR PARK BOOKING',
+        category: 'VEHICLE PARK BOOKING',
         action: 'booking',
         label: 'online_booking',
         value: response.data?.totalPayable
