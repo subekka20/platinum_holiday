@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Tilt from 'react-parallax-tilt';
 import { InputText } from "primereact/inputtext";
 import { Password } from 'primereact/password';
 import { Divider } from 'primereact/divider';
@@ -10,7 +9,6 @@ import { Dropdown } from 'primereact/dropdown';
 import { Checkbox } from "primereact/checkbox";
 import { Button } from 'primereact/button';
 import { InputOtp } from 'primereact/inputotp';
-
 import { Toast } from 'primereact/toast';
 import api from "../../api";
 import { sendVerificationEmail, verifyOTP } from "../../utils/authUtil";
@@ -152,9 +150,9 @@ const Signup = () => {
         detail: "You have been registered successfully",
         life: 3000
       });
-      // window.location.href = "/sign-in";
+      // Redirect to home page after successful registration
       setTimeout(() => {
-        navigate("/sign-in")
+        navigate("/")
       }, 2000);
     } catch (err) {
       console.log(err);
@@ -165,7 +163,7 @@ const Signup = () => {
         detail: errorMessage,
         life: 3000
       });
-    }finally{
+    } finally {
       setLoading(false);
     };
   };
@@ -220,417 +218,304 @@ const Signup = () => {
 
   return (
     <>
-    <Preloader/>
       <Header />
-
-      {/* Breadcrumb Section Start */}
-      {/* <section className="breadcrumb-section overflow-hidden">
-        <div className="container-md">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="breadcrumb-title">Sign up</h3>
-              <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="/">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    Sign up
-                  </li>
-                </ol>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* Breadcrumb Section End */}
-
       <Toast ref={toast} />
 
-      {/* Sign up Section Start */}
-      <section className="section-padding overflow-hidden">
-        <div className="container-md">
-          <div className="row">
-            <div className="col-12 mb-4 mb-lg-5">
-              <h3
-                className="section-heading text-center mx-auto text-purple"
-                data-aos="zoom-out"
-              >
-                Sign Up
-              </h3>
-              <div className="mt-5 mb-2 mb-sm-4">
-                <p
-                  className="section-paragraph text-center mb-0"
-                  data-aos="fade"
-                >
-                  Join Platinum Holiday Service community today to unlock a world of
-                  convenient airport parking solutions. By signing up, you
-                  gain access to our secure platform, where you can easily
-                  browse and book from a variety of parking options tailored
-                  to your travel needs. Whether you prefer short-term
-                  convenience or long-term savings, we have the perfect
-                  parking solution for you. Don't miss out on exclusive offers
-                  and seamless booking experiences—sign up now and simplify
-                  your travel plans with Platinum Holiday Service.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {page === 1 ? (
-            <div className="row">
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area" data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/account-verification-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="Account Verification"
-                    />
-                  </Tilt>
-                </div>
-              </div>
-
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <article className="custom-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+      {/* Split Screen Signup Section */}
+      <section className="split-signin-section">
+        <div className="split-container">
+          {/* Left Panel - Signup Forms */}
+          <div className="signin-left-panel">
+            <div className="signin-form-container">
+              {page === 1 ? (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
                   </div>
-                  <h3 className="custom-card-tile">Account Verification</h3>
-                  <h6 className="custom-card-sub-tile">
-                    Enter your email address below for verification
-                  </h6>
-                  <form action="" className="custom-card-form">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="verify_email"
-                            className="custom-form-label form-required"
-                          >
-                            Email
-                          </label>
-                          <InputText
-                            id="verify_email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            placeholder="Enter your email address"
-                            name="email"
-                            value={signUpInfo.email}
-                            onChange={handleInputChange}
-                          />
 
-                          {(showError && !signUpInfo.email) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                          <small className="text-danger form-error-msg">
-                            {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                              signUpInfo.email
-                            ) && signUpInfo.email
-                              ? "Enter valid email"
-                              : ""}
-                          </small>
-                          <small className="text-danger form-error-msg">
-                            {emailExists ? "Email already exists" : ""}
-                          </small>
-                        </div>
-                      </div>
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Account Verification</h2>
+                    <p className="welcome-subtitle">
+                      Enter your email address below for verification
+                    </p>
+                  </div>
+
+                  {/* Form Section */}
+                  <form className="split-signin-form" onSubmit={handleVerifyEmail}>
+                    <div className="input-group">
+                      <label htmlFor="verify_email" className="input-label">
+                        Email Address
+                      </label>
+                      <InputText
+                        id="verify_email"
+                        keyfilter="email"
+                        className="split-input"
+                        placeholder="Enter your email address"
+                        name="email"
+                        value={signUpInfo.email}
+                        onChange={handleInputChange}
+                      />
+                      {(showError && !signUpInfo.email) && (
+                        <small className="error-text">This field is required</small>
+                      )}
+                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
+                        <small className="error-text">Enter valid email</small>
+                      )}
+                      {emailExists && (
+                        <small className="error-text">Email already exists</small>
+                      )}
                     </div>
 
-                    <div className="custom-form-group contains-float-input mb-0">
-                      <Button
-                        label={`${loading ? "Processing..." : "VERIFY"}`}
-                        className="w-100 submit-button justify-content-center"
-                        loading={loading}
-                        onClick={handleVerifyEmail}
-                        disabled={!signUpInfo.email}
-                      />
+                    <Button
+                      label={loading ? "Processing..." : "VERIFY EMAIL"}
+                      className="split-signin-button"
+                      loading={loading}
+                      disabled={!signUpInfo.email || emailExists}
+                      type="submit"
+                    />
+
+                    <div className="signup-section">
+                      <p className="signup-text">
+                        Already have an account?{" "}
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
+                        </a>
+                      </p>
                     </div>
                   </form>
-                </article>
-              </div>
-            </div>
-          ) : page === 2 ? (
-            <div className="row">
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area " data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/enter-otp-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="OTP Verification"
-                    />
-                  </Tilt>
-                </div>
-              </div>
-
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <button
-                  className="back-page-btn"
-                  onClick={goBack}
-                  data-aos="fade-left"
-                >
-                  <i className="ri ri-arrow-left-line me-2"></i>Back
-                </button>
-                <article className="custom-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+                </>
+              ) : page === 2 ? (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
                   </div>
-                  <h3 className="custom-card-tile">OTP Verification</h3>
-                  <h6 className="custom-card-sub-tile">
-                    Enter the OTP verification code sent to your email address
-                  </h6>
-                  <form action="" className="custom-card-form">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-4">
-                          <label
-                            htmlFor="otp"
-                            className="custom-form-label form-required text-center mx-auto"
-                          >
-                            Enter OTP
-                          </label>
 
-                          <div className="otp-input-area">
-                            <InputOtp
-                              id="otp"
-                              className="custom-form-input otp-input"
-                              value={otp}
-                              onChange={(e) => {
-                                setShowError(false);
-                                setOTP(e.value);
-                              }}
-                            />
-                          </div>
-                          {(showError && !otp) && (
-                            <small className="text-danger form-error-msg text-center mt-3">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
+                  {/* Back Button */}
+                  <div className="signup-section" style={{ marginBottom: '20px' }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <i className="ri-arrow-left-line"></i>
+                      Back
+                    </button>
+                  </div>
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">OTP Verification</h2>
+                    <p className="welcome-subtitle">
+                      Enter the OTP verification code sent to your email address
+                    </p>
+                  </div>
+
+                  {/* Form Section */}
+                  <form className="split-signin-form" onSubmit={handleVerifyOTP}>
+                    <div className="input-group">
+                      <label className="input-label">Enter OTP</label>
+                      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                        <InputOtp
+                          value={otp}
+                          onChange={(e) => {
+                            setShowError(false);
+                            setOTP(e.value);
+                          }}
+                          numInputs={6}
+                          className="split-otp-input"
+                        />
                       </div>
+                      {(showError && !otp) && (
+                        <small className="error-text">This field is required</small>
+                      )}
                     </div>
 
-                    <div className="custom-form-group contains-float-input">
-                      <Button
-                        label={`${reSendLoading
-                          ? "Processing..."
-                          : loading
-                            ? "Verifying..."
-                            : "VERIFY"
-                          }`}
-                        className="w-100 submit-button justify-content-center"
-                        onClick={handleVerifyOTP}
-                        loading={loading}
-                        disabled={!otp}
-                      />
-                    </div>
-
-                    <div className="custom-form-link-area text-center">
-                      <p>
-                        Didn’t received the code?{" "}
+                    <Button
+                      label={reSendLoading ? "Processing..." : loading ? "Verifying..." : "VERIFY OTP"}
+                      className="split-signin-button"
+                      loading={loading}
+                      disabled={!otp}
+                      type="submit"
+                    />
+                    
+                    <div className="signup-section">
+                      <p className="signup-text">
+                        Didn't receive the code?{" "}
                         <button
-                          className="custom-form-link"
+                          type="button"
                           onClick={handleResendCode}
                           disabled={isButtonDisabled}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: '#667eea',
+                            textDecoration: 'underline',
+                            cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
+                            opacity: isButtonDisabled ? 0.5 : 1
+                          }}
                         >
-                          <b>
-                            Resend Code {isButtonDisabled && `(${seconds}s)`}
-                          </b>
+                          Resend Code {isButtonDisabled && `(${seconds}s)`}
                         </button>
                       </p>
                     </div>
                   </form>
-                </article>
-              </div>
-            </div>
-          ) : (
-            <div className="row">
-             
-              <div className="col-12 col-xl-8 col-lg-6 my-auto d-lg-none d-xxl-block">
-                {/* <button
-                  className="back-page-btn"
-                  onClick={goBack}
-                  data-aos="fade-left"
-                >
-                  <i className="ri ri-arrow-left-line me-2"></i>Back
-                </button> */}
-                <article className="custom-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+                </>
+              ) : (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo center-panel-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
                   </div>
-                  <h3 className="custom-card-tile" style={{ textAlign: "center"}}>Create Your Account</h3>
-                  {/* <h6 className="custom-card-sub-tile">
-                    Enter the details below
-                  </h6> */}
-                  <form action="" className="custom-card-form"
-                    onSubmit={handleSubmit}
-                  >
-                    <div className="row">
-                      <div className="col-12 col-sm-3 col-xl-2 col-lg-2 col-md-3">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="title"
-                            className="custom-form-label form-required"
-                          >
-                            Title
-                          </label>
-                          <Dropdown id="title" value={{ name: signUpInfo.title }} onChange={(e) => setSignUpInfo({ ...signUpInfo, title: e.value?.name })} options={titles} optionLabel="name"
-                            placeholder="Select" className="w-full w-100 custom-form-dropdown" />
-                          {/* <select id="title" className="custom-form-input"
-                            name="title"
-                            value={signUpInfo.title}
-                            onChange={handleInputChange}
-                          >
-                            <option value="">Select</option>
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Ms">Ms</option>
-                          </select> */}
+                  <Divider></Divider>
+
+                  {/* Back Button */}
+                  {/* <div className="signup-section" style={{ marginBottom: '20px' }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <i className="ri-arrow-left-line"></i>
+                      Back
+                    </button>
+                  </div> */}
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Create Your Account</h2>
+                    <p className="welcome-subtitle">
+                      Complete your registration details below
+                    </p>
+                    <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '12px', margin: '8px 0 0 0' }}>
+                      <span style={{ color: 'red' }}>*</span> All fields are required
+                    </p>
+                  </div>
+
+                  {/* Form Section */}
+                  <form className="split-signin-form signup-form" onSubmit={handleSubmit}>
+                    <div className="signup-form-grid">
+                      <div className="input-group-row">
+                        <div className="input-group" style={{ flex: '0 0 30%' }}>
+                          <label className="input-label">Title</label>
+                          <Dropdown 
+                            value={{ name: signUpInfo.title }} 
+                            onChange={(e) => setSignUpInfo({ ...signUpInfo, title: e.value?.name })} 
+                            options={titles} 
+                            optionLabel="name"
+                            placeholder="Select"
+                            className="split-dropdown"
+                          />
                           {(showError && !signUpInfo.title) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="error-text">This field is required</small>
                           )}
                         </div>
-                      </div>
-
-                      <div className="col-12 col-sm-9 col-xl-5 col-lg-5 col-md-9">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="firstName"
-                            className="custom-form-label form-required"
-                          >
-                            First name
-                          </label>
+                        <div className="input-group" style={{ flex: '1' }}>
+                          <label className="input-label">First Name</label>
                           <InputText
-                            id="firstName"
-                            className="custom-form-input"
+                            className="split-input"
                             name="firstName"
                             value={signUpInfo.firstName}
                             onChange={handleInputChange}
                             placeholder="Enter your first name"
                           />
                           {(showError && !signUpInfo.firstName) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="error-text">This field is required</small>
                           )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-5 col-lg-5">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="lastName"
-                            className="custom-form-label"
-                          >
-                            Last name
-                          </label>
+                      <div className="input-group-row">
+                        <div className="input-group">
+                          <label className="input-label">Last Name</label>
                           <InputText
-                            id="lastName"
-                            className="custom-form-input"
+                            className="split-input"
                             name="lastName"
                             value={signUpInfo.lastName}
                             onChange={handleInputChange}
                             placeholder="Enter your last name"
                           />
                         </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="email"
-                            className="custom-form-label form-required"
-                          >
-                            Email
-                          </label>
-                          {/* <InputText
-                            id="email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            value={signUpInfo.email}
-                            readOnly
-                          /> */}
+                        <div className="input-group">
+                          <label className="input-label">Mobile Number</label>
                           <InputText
-                            id="verify_email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            placeholder="Enter your email address"
-                            name="email"
-                            value={signUpInfo.email}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.email) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                          <small className="text-danger form-error-msg">
-                            {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                              signUpInfo.email
-                            ) && signUpInfo.email
-                              ? "Enter valid email"
-                              : ""}
-                          </small>
-                          <small className="text-danger form-error-msg">
-                            {emailExists ? "Email already exists" : ""}
-                          </small>
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="mobileNumber"
-                            className="custom-form-label form-required"
-                          >
-                            Mobile number
-                          </label>
-                          <InputText
-                            id="mobileNumber"
                             keyfilter="num"
-                            className="custom-form-input"
+                            className="split-input"
                             name="mobileNumber"
                             value={signUpInfo.mobileNumber}
                             onChange={handleInputChange}
                             placeholder="Enter your mobile number"
                           />
                           {(showError && !signUpInfo.mobileNumber) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="error-text">This field is required</small>
                           )}
-                          <small className='text-danger form-error-msg'>{(!(/^\d{9,}$/.test(signUpInfo.mobileNumber)) && signUpInfo.mobileNumber) ? "Enter valid phone number" : ""}</small>
+                          {(!(/^\d{9,}$/.test(signUpInfo.mobileNumber)) && signUpInfo.mobileNumber) && (
+                            <small className="error-text">Enter valid phone number</small>
+                          )}
                         </div>
                       </div>
 
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="password"
-                            className="custom-form-label form-required"
-                          >
-                            Password
-                          </label>
+                      <div className="input-group">
+                        <label className="input-label">Email Address</label>
+                        <InputText
+                          keyfilter="email"
+                          className="split-input"
+                          name="email"
+                          value={signUpInfo.email}
+                          onChange={handleInputChange}
+                          placeholder="Enter your email address"
+                        />
+                        {(showError && !signUpInfo.email) && (
+                          <small className="error-text">This field is required</small>
+                        )}
+                        {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpInfo.email) && signUpInfo.email && (
+                          <small className="error-text">Enter valid email</small>
+                        )}
+                        {emailExists && (
+                          <small className="error-text">Email already exists</small>
+                        )}
+                      </div>
+
+                      <div className="input-group-row">
+                        <div className="input-group">
+                          <label className="input-label">Password</label>
                           <Password
-                            id="password"
-                            className="custom-form-input"
+                            className="split-input"
                             name="password"
                             value={signUpInfo.password}
                             onChange={handleInputChange}
@@ -638,27 +523,19 @@ const Signup = () => {
                             footer={footer}
                             toggleMask
                             placeholder="Enter your password"
+                            feedback={true}
                           />
                           {(showError && !signUpInfo.password) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="error-text">This field is required</small>
                           )}
-                          <small className='text-danger form-error-msg'>{(signUpInfo.password.length < 8 && signUpInfo.password) ? "Password must be atleast 8 characters long" : ""}</small>
+                          {(signUpInfo.password.length < 8 && signUpInfo.password) && (
+                            <small className="error-text">Password must be at least 8 characters long</small>
+                          )}
                         </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group">
-                          <label
-                            htmlFor="confirmPassword"
-                            className="custom-form-label form-required"
-                          >
-                            Confirm password
-                          </label>
+                        <div className="input-group">
+                          <label className="input-label">Confirm Password</label>
                           <Password
-                            id="confirmPassword"
-                            className="custom-form-input"
+                            className="split-input"
                             name="confirmPassword"
                             value={signUpInfo.confirmPassword}
                             onChange={handleInputChange}
@@ -667,196 +544,71 @@ const Signup = () => {
                             placeholder="Re-enter your password"
                           />
                           {(showError && !signUpInfo.confirmPassword) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                            <small className="error-text">This field is required</small>
                           )}
-                          <small className='text-danger text-capitalized form-error-message'>{(signUpInfo.password !== signUpInfo.confirmPassword && signUpInfo.confirmPassword) ? "Password & Confirm Password must be equal" : ""}</small>
-                        </div>
-                      </div>
-
-                      {/* <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="addressLine1"
-                            className="custom-form-label form-required"
-                          >
-                            Address Line 1
-                          </label>
-                          <InputText
-                            id="addressLine1"
-                            className="custom-form-input"
-                            name="addressL1"
-                            value={signUpInfo.addressL1}
-                            onChange={handleInputChange}
-
-                          />
-                          {(showError && !signUpInfo.addressL1) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
+                          {(signUpInfo.password !== signUpInfo.confirmPassword && signUpInfo.confirmPassword) && (
+                            <small className="error-text">Password & Confirm Password must match</small>
                           )}
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-6">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="addressLine2"
-                            className="custom-form-label"
-                          >
-                            Address Line 2
-                          </label>
-                          <InputText
-                            id="addressLine2"
-                            className="custom-form-input"
-                            name="addressL2"
-                            value={signUpInfo.addressL2}
-                            onChange={handleInputChange}
-                          />
-                          {showError && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-                      <div className="col-12 col-sm-6 col-xl-4 col-lg-4">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="city"
-                            className="custom-form-label form-required"
-                          >
-                            City
-                          </label>
-                          <InputText
-                            id="city"
-                            className="custom-form-input"
-                            name="city"
-                            value={signUpInfo.city}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.city) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-4 col-lg-4">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="country"
-                            className="custom-form-label form-required"
-                          >
-                            Country
-                          </label>
-                          <InputText
-                            id="country"
-                            className="custom-form-input"
-                            name="country"
-                            value={signUpInfo.country}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.country) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="col-12 col-sm-6 col-xl-4 col-lg-4">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="postcode"
-                            className="custom-form-label form-required"
-                          >
-                            Postcode
-                          </label>
-                          <InputText
-                            id="postcode"
-                            className="custom-form-input"
-                            name="postCode"
-                            value={signUpInfo.postCode}
-                            onChange={handleInputChange}
-                          />
-                          {(showError && !signUpInfo.postCode) && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div> */}
-                    </div>
-
-                    <div className="custom-form-group contains-float-input">
-                      <div className="custom-check-group">
-                        <div className="custom-check-area">
-                          <Checkbox
-                            inputId="rememberMe"
-                            onChange={(e) => setChecked(e.checked)}
-                            checked={checked}
-                          ></Checkbox>
-                          <label
-                            htmlFor="rememberMe"
-                            className="custom-check-label"
-                          >
-                            I accept the use of cookies in accordance with the {" "}
-                            <a href="/terms-and-conditions" target="_blank">
-                              Terms
-                            </a>{" "}
-                            and{" "}
-                            <a href="/privacy-policy" target="_blank">
-                              {" "}
-                              Privacy policy
-                            </a>
-                          </label>
                         </div>
                       </div>
                     </div>
 
-                    <div className="custom-form-group contains-float-input">
-                      <Button
-                        label="SIGNUP"
-                        disabled={!checked}
-                        className="w-100 submit-button justify-content-center"
-                        loading={loading}
-                      />
+                    <div className="form-extras" style={{ marginTop: '20px' }}>
+                      <div className="remember-section">
+                        <Checkbox
+                          inputId="terms"
+                          onChange={(e) => setChecked(e.checked)}
+                          checked={checked}
+                          className="split-checkbox"
+                        />
+                        <label htmlFor="terms" className="remember-label" style={{ fontSize: '13px' }}>
+                          I accept the{" "}
+                          <a href="/terms-and-conditions" target="_blank" style={{ color: '#667eea' }}>
+                            Terms
+                          </a>{" "}
+                          and{" "}
+                          <a href="/privacy-policy" target="_blank" style={{ color: '#667eea' }}>
+                            Privacy Policy
+                          </a>
+                        </label>
+                      </div>
                     </div>
 
-                    <div className="custom-form-link-area text-center">
-                      <p>
-                        Already have account?{" "}
-                        <a href="/sign-in" className="custom-form-link">
-                          <b>Sign in</b>
+                    <Button
+                      label="CREATE ACCOUNT"
+                      disabled={!checked}
+                      className="split-signin-button"
+                      loading={loading}
+                      type="submit"
+                    />
+
+                    <div className="signup-section">
+                      <p className="signup-text">
+                        Already have an account?{" "}
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
                         </a>
                       </p>
                     </div>
                   </form>
-                </article>
-              </div>
+                </>
+              )}
+            </div>
+          </div>
 
-               <div className="col-12 col-xl-4 col-lg-6 my-auto d-lg-none d-xxl-block">
-                <div
-                  className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
-                  data-aos="zoom-out"
-                >
-                  {/* <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}> */}
-                    <img
-                      src="assets/images/account/signup-illustration.svg"
-                      className="section-main-image animate-image"
-                      alt="Sign up"
-                    />
-                  {/* </Tilt> */}
-                </div>
+          {/* Right Panel - Background Image */}
+          <div className="signin-right-panel">
+            <div className="image-overlay">
+              <div className="overlay-content">
+                <h3 className="overlay-title">Join Platinum Holiday Service</h3>
+                <p className="overlay-description">
+                  Create your account to access premium airport parking services and exclusive travel benefits
+                </p>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
-      {/* Sign up Section End */}
 
       <Footer />
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AboutUs.css";
 import "./AboutUs-responsive.css";
 import Footer from "../../components/Footer";
@@ -7,191 +7,200 @@ import Tilt from "react-parallax-tilt";
 import Preloader from "../../Preloader";
 
 const AboutUs = () => {
+  useEffect(() => {
+    // Add scroll animations or other effects here if needed
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Preloader />
       <Header />
 
-      {/* Breadcrumb Section Start */}
-      {/* <section className="breadcrumb-section overflow-hidden">
-                <div className="container-md">
-                    <div className="row">
-                        <div className="col-12">
-                            <h3 className='breadcrumb-title'>About us</h3>
-                            <nav aria-label="breadcrumb">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="/">Home</a>
-                                    </li>
-                                    <li className="breadcrumb-item active" aria-current="page">About us</li>
-                                </ol>
-                            </nav>
-
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-      {/* Breadcrumb Section End */}
-
-      {/* About us Section Start */}
-      <section className="section-padding overflow-hidden">
+      {/* Story Section */}
+      <section className="story-section">
         <div className="container">
-          <h3 className="section-heading text-center mx-auto text-purple">
-            About Us
-          </h3>
-
-          <div className="row content-margin-top">
-            {/* <div className="col-12 mx-auto">
-                            <div className="section-image-area">
-                                <Tilt>
-                                    <img src="assets/images/logo.png" className='about-img animate-scale-image' alt="Platinum Holiday Service" />
-                                </Tilt>
-                            </div>
-                        </div> */}
-
-            <div className="col-12 ">
-              <p className="section-paragraph text-center mb-0">
-                Platinum Holiday Service is your trusted partner for stress-free
-                airport parking. Our goal is to make every journey start and end
-                with ease by offering reliable, affordable, and convenient
-                parking solutions tailored to your needs. We carefully select
-                and evaluate parking options to guarantee secure facilities and
-                the best value for money. With our simple 24/7 online platform,
-                you can book, manage, and confirm your space in just a few
-                clicks—anytime, anywhere. From short-stay and long-stay to valet
-                and self-parking, we provide flexible choices designed around
-                modern travelers. Thank you for choosing Platinum Holiday
-                Service—we look forward to making your travel smoother with
-                parking you can depend on
-              </p>
+          <div className="row align-items-center">
+            <div className="col-lg-6">
+              <div className="story-content">
+                <div className="section-badge">Our Story</div>
+                <h2 className="section-title">
+                  Built on Trust, Driven by Excellence
+                </h2>
+                <p className="story-text">
+                  Founded with a simple mission: to eliminate the stress of airport parking. 
+                  We understand that every journey begins with a single step, and that step 
+                  shouldn't be worrying about where to park your car.
+                </p>
+                <p className="story-text">
+                  Today, we've grown into a trusted network of premium parking partners, 
+                  serving thousands of travelers with the same commitment to quality and 
+                  reliability that started our journey.
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div className="row content-margin-top content-card-row">
-            <div className="col-12 mx-auto">
-              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className="h-100"> */}
-                <article className="about-content-card">
-                  <div className="content-card-header">
-                    <div className="content-icon-area">
-                      <img
-                        src="assets/images/about/promise.png"
-                        alt="Our Promise"
-                      />
+            <div className="col-lg-6">
+              <div className="story-visual">
+                <Tilt
+                  className="tilt-container"
+                  tiltMaxAngleX={10}
+                  tiltMaxAngleY={10}
+                  perspective={1000}
+                  scale={1.02}
+                  transitionSpeed={1000}
+                >
+                  <div className="visual-card">
+                    <div className="card-content">
+                      <i className="bi bi-building"></i>
+                      <h3>Platinum Holiday Service</h3>
+                      <p>Your trusted parking partner</p>
                     </div>
-                    <h4 className="content-card-head">Our Promise</h4>
                   </div>
-                  <p className="content-card-desc">
-                    At Platinum Holiday Service, we specialize in providing
-                    exceptional airport parking solutions. By rigorously
-                    evaluating available parking options, we ensure that you
-                    receive unparalleled service at the most competitive rates.
-                    Our website is designed for ease of use, offering a secure,
-                    comprehensive, and 24/7 accessible platform.
-                  </p>
-                </article>
-              {/* </Tilt> */}
-            </div>
-
-            <div className="col-12 mx-auto">
-              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className="h-100"> */}
-                <article className="about-content-card">
-                  <div className="content-card-header">
-                    <div className="content-icon-area">
-                      <img
-                        src="assets/images/about/service.png"
-                        alt="Our Services"
-                      />
-                    </div>
-                    <h4 className="content-card-head">Our Services</h4>
-                  </div>
-                  <p className="content-card-desc">
-                    We cater to a diverse clientele including business
-                    professionals, families, and solo travelers, offering a
-                    variety of parking services tailored to meet different
-                    needs. Our offerings include Valet Parking, Self-Park
-                    Options, Long-Term Parking, all chosen to maximize your
-                    convenience and security.
-                  </p>
-                </article>
-              {/* </Tilt> */}
-            </div>
-
-            <div className="col-12 mx-auto">
-              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className="h-100"> */}
-                <article className="about-content-card">
-                  <div className="content-card-header">
-                    <div className="content-icon-area">
-                      <img
-                        src="assets/images/about/technology.png"
-                        alt="Innovative Technology"
-                      />
-                    </div>
-                    <h4 className="content-card-head">Innovative Technology</h4>
-                  </div>
-                  <p className="content-card-desc">
-                    Our state-of-the-art booking system is intuitive and
-                    user-friendly, facilitating a quick and easy search process
-                    to help you find exactly what you need. We are committed to
-                    leveraging cutting-edge technology to enhance your
-                    experience and interaction with our services.
-                  </p>
-                </article>
-              {/* </Tilt> */}
-            </div>
-
-            <div className="col-12 mx-auto">
-              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className="h-100"> */}
-                <article className="about-content-card">
-                  <div className="content-card-header">
-                    <div className="content-icon-area">
-                      <img
-                        src="assets/images/about/safety.png"
-                        alt="Commitment to Safety"
-                      />
-                    </div>
-                    <h4 className="content-card-head">Commitment to Safety</h4>
-                  </div>
-                  <p className="content-card-desc">
-                    At Platinum Holiday Service, your vehicle’s safety is our
-                    top priority. We conduct thorough inspections of each
-                    facility to ensure robust security measures are always in
-                    place. Additionally, we regularly verify that all
-                    operational practices and necessary insurance and liability
-                    documentation of our partners adhere to strict industry
-                    standards.
-                  </p>
-                </article>
-              {/* </Tilt> */}
-            </div>
-
-            <div className="col-12 mx-auto">
-              {/* <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} className="h-100"> */}
-                <article className="about-content-card">
-                  <div className="content-card-header">
-                    <div className="content-icon-area">
-                      <img
-                        src="assets/images/about/customer-service.png"
-                        alt="Superior Customer Service"
-                      />
-                    </div>
-                    <h4 className="content-card-head">
-                      Superior Customer Service
-                    </h4>
-                  </div>
-                  <p className="content-card-desc">
-                    We pride ourselves on delivering superior customer service.
-                    Our expert team is dedicated to efficiently resolving your
-                    inquiries and addressing any issues with professionalism and
-                    care. Your satisfaction is our foremost priority, and we
-                    strive to exceed your expectations in every interaction.
-                  </p>
-                </article>
-              {/* </Tilt> */}
+                </Tilt>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      {/* About us Section End */}
+
+      {/* Values Section */}
+      <section className="values-section">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">Our Values</div>
+            <h2 className="section-title">What Drives Us Forward</h2>
+            <p className="section-subtitle">
+              Our core values shape everything we do, from selecting partners 
+              to delivering exceptional customer experiences.
+            </p>
+          </div>
+
+          <div className="values-grid">
+            <div className="value-card">
+              <div className="value-icon">
+                <i className="bi bi-heart-fill"></i>
+              </div>
+              <h3>Trust & Security</h3>
+              <p>
+                Every parking facility undergoes rigorous security assessments. 
+                Your vehicle's safety is our top priority with 24/7 monitoring 
+                and comprehensive insurance coverage.
+              </p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon">
+                <i className="bi bi-lightning-charge"></i>
+              </div>
+              <h3>Innovation</h3>
+              <p>
+                We continuously evolve our platform with cutting-edge technology, 
+                ensuring seamless booking experiences and real-time updates for 
+                complete transparency.
+              </p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon">
+                <i className="bi bi-people-fill"></i>
+              </div>
+              <h3>Customer First</h3>
+              <p>
+                Your journey matters to us. From instant booking confirmations 
+                to responsive support, we're committed to exceeding your 
+                expectations at every touchpoint.
+              </p>
+            </div>
+
+            <div className="value-card">
+              <div className="value-icon">
+                <i className="bi bi-graph-up-arrow"></i>
+              </div>
+              <h3>Reliability</h3>
+              <p>
+                Count on us for consistent, dependable service. Our proven track 
+                record and partner network ensure your parking is always 
+                guaranteed and hassle-free.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="services-section">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-5">
+              <div className="services-content">
+                <div className="section-badge">Services</div>
+                <h2 className="section-title">
+                  Comprehensive Parking Solutions
+                </h2>
+                <p className="services-description">
+                  From quick drop-offs to extended stays, we offer flexible 
+                  parking options designed to fit every travel need and budget.
+                </p>
+
+                <div className="service-features">
+                  <div className="feature-row">
+                    <div className="feature-icon">
+                      <i className="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div className="feature-content">
+                      <h4>Meet & Greet Valet</h4>
+                      <p>Premium service with doorstep pickup and delivery</p>
+                    </div>
+                  </div>
+
+                  <div className="feature-row">
+                    <div className="feature-icon">
+                      <i className="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div className="feature-content">
+                      <h4>Self-Park Options</h4>
+                      <p>Secure, affordable parking with shuttle transfers</p>
+                    </div>
+                  </div>
+
+                  <div className="feature-row">
+                    <div className="feature-icon">
+                      <i className="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div className="feature-content">
+                      <h4>Long-Stay Deals</h4>
+                      <p>Special rates for extended parking periods</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-7">
+              <div className="services-visual">
+                <div className="service-cards">
+                  <div className="service-mini-card card-1">
+                    <i className="bi bi-car-front-fill"></i>
+                    <span>Valet Service</span>
+                  </div>
+                  <div className="service-mini-card card-2">
+                    <i className="bi bi-shield-check"></i>
+                    <span>24/7 Security</span>
+                  </div>
+                  <div className="service-mini-card card-3">
+                    <i className="bi bi-bus-front"></i>
+                    <span>Free Shuttle</span>
+                  </div>
+                  <div className="service-mini-card card-4">
+                    <i className="bi bi-credit-card"></i>
+                    <span>Easy Payment</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </>

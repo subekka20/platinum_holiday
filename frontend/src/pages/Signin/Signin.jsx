@@ -11,7 +11,6 @@ import { Toast } from "primereact/toast";
 import { setLogin } from "../../state";
 import api from "../../api";
 import withComponentName from "../../withComponentName";
-import Preloader from "../../Preloader";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -83,168 +82,123 @@ const Signin = () => {
 
   return (
     <>
-      <Preloader />
       <Header />
-
       <Toast ref={toast} />
 
-      {/* Sign in Section Start */}
-      <section className="section-padding overflow-hidden">
-        <div className="container-md">
-          <div className="row">
-            <div className="col-12 mb-4 mb-lg-5">
-              <h3
-                className="section-heading text-center mx-auto text-purple"
-                data-aos="zoom-out"
-              >
-                Sign In
-              </h3>
-              <div className="mt-5 mb-2 mb-sm-4">
-                <p
-                  className="section-paragraph text-center mb-0"
-                  data-aos="fade"
-                >
-                  Welcome Back to Platinum Holiday Service Sign in to access
-                  your bookings and manage your parking reservations with ease.
-                  Our secure platform ensures a smooth, hassle-free experience
-                  every time. Need help? Our support team is always here for
-                  you. Thank you for choosing Platinum Holiday Service — your
-                  journey starts here.
+      {/* Split Screen Signin Section */}
+      <section className="split-signin-section">
+        <div className="split-container">
+          {/* Left Side - Login Form */}
+          <div className="signin-left-panel">
+            <div className="signin-form-container">
+              {/* Logo Section */}
+              <div className="signin-brand">
+                <img
+                  src="assets/images/logo.png"
+                  className="brand-logo"
+                  alt="Platinum Holiday Service"
+                />
+                <h1 className="brand-name-j">Platinum Holiday Service</h1>
+              </div>
+
+              {/* Welcome Section */}
+              <div className="welcome-section">
+                <h2 className="welcome-title">Welcome back</h2>
+                <p className="welcome-subtitle">
+                  Please sign in to your account
                 </p>
               </div>
-            </div>
 
-            <div className="col-12 col-xl-6 col-lg-6 my-auto">
-              <div
-                className="section-main-image-area mb-5 mb-sm-5 mb-lg-0"
-                data-aos="fade-up"
-              >
-                <img
-                  src="/assets/images/account/signin-illustration.svg"
-                  alt="Sign in"
-                  className="section-main-image animate-image"
-                />
-              </div>
-            </div>
-            <div className="col-12 col-xl-6 col-lg-6 col-sm-10 col-md-10 mx-auto">
-              <article className="custom-card" data-aos="fade-up">
-                <div className="custom-card-logo-area">
-                  <img
-                    src="assets/images/logo.png"
-                    className="custom-card-logo"
-                    alt="Platinum Holiday Service"
+              {/* Form Section */}
+              <form className="split-signin-form" onSubmit={handleSubmit}>
+                <div className="input-group">
+                  <label htmlFor="email" className="input-label">
+                    Email
+                  </label>
+                  <InputText
+                    id="email"
+                    keyfilter="email"
+                    className="split-input"
+                    name="email"
+                    value={signInInfo.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter your email address"
                   />
+                  {require && !signInInfo.email && (
+                    <small className="error-text">This field is required</small>
+                  )}
+                  {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInInfo.email) &&
+                    signInInfo.email && (
+                      <small className="error-text">Enter valid email</small>
+                    )}
                 </div>
-                <h3
-                  className="custom-card-tile"
-                  style={{ textAlign: "center" }}
-                >
-                  Welcome to <span>Platinum Holiday Service</span>
-                </h3>
-                <form
-                  action=""
-                  className="custom-card-form"
-                  onSubmit={handleSubmit}
-                >
-                  <div className="custom-form-group contains-float-input">
-                    <FloatLabel>
-                      <InputText
-                        id="email"
-                        keyfilter="email"
-                        className="custom-form-input"
-                        name="email"
-                        value={signInInfo.email}
-                        onChange={handleInputChange}
-                      />
-                      <label htmlFor="email" className="custom-float-label">
-                        Email
-                      </label>
-                    </FloatLabel>
-                    {require && !signInInfo.email && (
-                      <small className="text-danger form-error-msg">
-                        This field is required
-                      </small>
-                    )}
-                    <small className="text-danger form-error-msg">
-                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signInInfo.email) &&
-                      signInInfo.email
-                        ? "Enter valid email"
-                        : ""}
+
+                <div className="input-group">
+                  <label htmlFor="password" className="input-label">
+                    Password
+                  </label>
+                  <Password
+                    id="password"
+                    className="split-input"
+                    name="password"
+                    value={signInInfo.password}
+                    onChange={handleInputChange}
+                    toggleMask
+                    feedback={false}
+                    placeholder="Enter your password"
+                  />
+                  {require && !signInInfo.password && (
+                    <small className="error-text">
+                      This field is required
                     </small>
-                  </div>
+                  )}
+                </div>
 
-                  <div className="custom-form-group contains-float-input">
-                    <FloatLabel>
-                      <Password
-                        className="custom-form-input"
-                        name="password"
-                        value={signInInfo.password}
-                        onChange={handleInputChange}
-                        feedback={false}
-                        toggleMask
-                      />
-                      <label htmlFor="username" className="custom-float-label">
-                        Password
-                      </label>
-                    </FloatLabel>
-                    {require && !signInInfo.password && (
-                      <small className="text-danger form-error-msg">
-                        This field is required
-                      </small>
-                    )}
-                  </div>
-
-                  <div className="custom-form-group contains-float-input">
-                    <div className="custom-check-group">
-                      <div className="custom-check-area">
-                        <Checkbox
-                          inputId="rememberMe"
-                          onChange={(e) => setChecked(e.checked)}
-                          checked={checked}
-                        ></Checkbox>
-                        <label
-                          htmlFor="rememberMe"
-                          className="custom-check-label"
-                        >
-                          Remember me
-                        </label>
-                      </div>
-
-                      <a
-                        href="/forgot-password"
-                        style={{
-                          color: "#ff0000ff",
-                          fontSize: "15px",
-                          textDecoration: "none",
-                          fontWeight: 500,
-                          transition: "ease 0.5s",
-                          border: "none",
-                          outline: "none",
-                        }}
-                      >
-                        Forgot password?
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="custom-form-group contains-float-input">
-                    <Button
-                      label="LOGIN"
-                      className="w-100 submit-button justify-content-center"
-                      loading={loading}
+                <div className="form-extras">
+                  <div className="remember-section">
+                    <Checkbox
+                      inputId="rememberMe"
+                      onChange={(e) => setChecked(e.checked)}
+                      checked={checked}
+                      className="split-checkbox"
                     />
+                    <label htmlFor="rememberMe" className="remember-label">
+                      Remember me
+                    </label>
                   </div>
+                  <a href="/forgot-password" className="forgot-password">
+                    Forgot Password?
+                  </a>
+                </div>
 
-                  <div className="custom-form-link-area text-center">
-                    <p>
-                      Don't have an account?{" "}
-                      <a href="/sign-up" className="custom-form-link">
-                        <b>Sign up</b>
-                      </a>
-                    </p>
-                  </div>
-                </form>
-              </article>
+                <Button
+                  label="Sign In"
+                  className="split-signin-button"
+                  loading={loading}
+                  disabled={loading}
+                />
+
+                <div className="signup-section">
+                  <p className="signup-text">
+                    Don't have an account?{" "}
+                    <a href="/sign-up" className="signup-link">
+                      Sign Up
+                    </a>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          {/* Right Side - Background Image */}
+          <div className="signin-right-panel">
+            <div className="image-overlay">
+              <div className="overlay-content">
+                <h3 className="overlay-title">Premium Airport Parking Services</h3>
+                <p className="overlay-description">
+                  Secure, convenient, and affordable parking solutions for your travel needs
+                </p>
+              </div>
             </div>
           </div>
         </div>

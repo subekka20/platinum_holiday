@@ -545,10 +545,7 @@ const carParkingBookingDetail = async (req, res) => {
             price_data: {
               currency: "gbp",
               product_data: {
-                name: "Car Parking Booking",
-                images: [
-                  "https://www.theparkingdeals.co.uk/assets/images/logo.png",
-                ],
+                name: "Platinum Holiday Booking",
               },
               unit_amount: bookingResult.totalPayable * 100,
               // unit_amount:  0.3* 100
@@ -559,7 +556,7 @@ const carParkingBookingDetail = async (req, res) => {
         mode: "payment",
         success_url: adminBooking
           ? `${process.env.FRONTEND_URL}/bookings`
-          : `${process.env.FRONTEND_URL}/dashboard`,
+          : `${process.env.FRONTEND_URL}/dashboard?tab=bookings`,
         cancel_url: adminBooking
           ? `${process.env.FRONTEND_URL}/reservation`
           : `${process.env.FRONTEND_URL}/booking`,
@@ -602,7 +599,7 @@ const carParkingBookingDetail = async (req, res) => {
       ...(adminBookingWithOutPayment && { mailStatus: true }),
       ...(!adminBooking && { user }),
       token,
-      message: "Car park booking created successfully!",
+      message: "Vehicle park booking created successfully!",
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });

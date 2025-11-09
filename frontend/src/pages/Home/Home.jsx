@@ -51,6 +51,8 @@ const Home = () => {
   const [couponCode, setCouponCode] = useState("");
 
   const airports = useSelector((state) => state.vendor.airport);
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
   const couponCodeObj = useSelector(
     (state) => state.bookingChargeCouponCode.couponCode?.couponCode
   );
@@ -196,6 +198,21 @@ const Home = () => {
   const handleGetQuote = async (e) => {
     e.preventDefault();
     setShowError(false);
+    
+    // Check if user is signed in
+    if (!user || !token) {
+      toast.current.show({
+        severity: "warn",
+        summary: "Sign In Required",
+        detail: "Please sign in to make a reservation. Redirecting to sign in page...",
+        life: 4000,
+      });
+      setTimeout(() => {
+        navigate("/sign-in");
+      }, 2000);
+      return;
+    }
+
     if (
       !selectedAirport ||
       !dropOffDate ||
@@ -489,25 +506,15 @@ const Home = () => {
 
       <Toast ref={toast} />
 
-      <section className="section-padding overflow-hidden">
+      <section className="ph-hero overflow-hidden">
         <div className="container-md">
-          <div className="row">
+          <div className="row align-items-center">
             <div className="col-12 col-xl-6 col-lg-6 pe-xl-5 mt-4">
-              <h3 className="section-heading text-center mx-auto text-lg-start ms-lg-0">
-                Reserve your parking space
-              </h3>
-
-              <p className="section-paragraph text-center text-lg-start mt-5 mb-5 mb-xl-0 justify">
-                Make your travel planning effortless with Platinum Holiday
-                Service. Our fast and user-friendly booking form gives you an
-                instant quote for airport parking in seconds. Just choose your
-                airport, set your drop-off and pick-up dates, and apply any
-                coupon codes to unlock extra savings. From short-term and
-                long-term stays to premium parking options, we make it simple to
-                secure the best deal. Enjoy peace of mind knowing your parking
-                is reserved before you even leave home. Complete the form below
-                and start your journey stress-free with Platinum Holiday
-                Service.
+              <h1 className="ph-hero-title">Reserve your parking space</h1>
+              <p className="ph-hero-desc">
+                Make your travel planning effortless with Platinum Holiday Service. Our fast and
+                user-friendly booking process gives you an instant quote to airport parking in seconds.
+                Just choose your airport. Set entry and exit details to secure the best deal. Enjoy peace of mind.
               </p>
             </div>
             <div className="col-12 col-xl-6 col-lg-6">
@@ -519,11 +526,11 @@ const Home = () => {
               > */}
               <form
                 action=""
-                className="custom-card-form form-2 get-quote-form mt-0 p-3"
+                className="ph-card get-quote-form mt-0 p-3"
                 onSubmit={handleGetQuote}
               >
-                <div className="custom-card-logo-area mb-3">
-                  <h3 className="custom-card-header-head">Grab Your Space</h3>
+                <div className="ph-card-head mb-3">
+                  <h3>Grab Your Space</h3>
                 </div>
 
                 <div className="form-head-input-area">
@@ -532,7 +539,7 @@ const Home = () => {
                       <div className="custom-form-group mb-0 input-with-icon">
                         <label
                           htmlFor="airport"
-                          className="custom-form-label form-required text-sm-center"
+                          className="custom-form-label form-required text-sm-center ph-label"
                         >
                           Select your airport
                         </label>
@@ -554,8 +561,9 @@ const Home = () => {
                             placeholder="Select a Airport"
                             //   valueTemplate={selectedAirportTemplate}
                             //   itemTemplate={airportOptionTemplate}
-                            className="w-full w-100 custom-form-dropdown"
+                            className="w-full w-100 custom-form-dropdown ph-input"
                             invalid={showError}
+                            style={{ color: "#000" }}
                           />
                         </div>
                         {showError && !selectedAirport && (
@@ -577,7 +585,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="dropOffDate"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Entry date
                       </label>
@@ -590,8 +598,9 @@ const Home = () => {
                           placeholder="dd/mm/yyyy"
                           dateFormat="dd/mm/yy"
                           minDate={today}
-                          className="w-100"
+                          className="w-100 ph-input"
                           invalid={showError}
+                          style={{ color: "#000" }}
                         />
                       </div>
                       {showError && !dropOffDate && (
@@ -606,7 +615,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="dropOffTime"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Entry time
                       </label>
@@ -622,8 +631,9 @@ const Home = () => {
                           placeholder="Select the time"
                           valueTemplate={selectedTimeTemplate}
                           itemTemplate={timeTemplate}
-                          className="w-full w-100 custom-form-dropdown"
+                          className="w-full w-100 custom-form-dropdown ph-input"
                           invalid={showError}
+                          style={{ color: "#000" }}
                         />
                       </div>
                       {showError && !dropOffTime && (
@@ -638,7 +648,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="pickupDate"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Exit date
                       </label>
@@ -657,7 +667,7 @@ const Home = () => {
                           dateFormat="dd/mm/yy"
                           minDate={dropOffDate}
                           disabled={!dropOffDate}
-                          className="w-100"
+                          className="w-100 ph-input"
                           invalid={showError}
                         />
                       </div>
@@ -673,7 +683,7 @@ const Home = () => {
                     <div className="custom-form-group mb-3 mb-sm-4 input-with-icon">
                       <label
                         htmlFor="pickupTime"
-                        className="custom-form-label form-required"
+                        className="custom-form-label form-required ph-label"
                       >
                         Exit time
                       </label>
@@ -689,7 +699,7 @@ const Home = () => {
                           placeholder="Select the time"
                           valueTemplate={selectedTimeTemplate}
                           itemTemplate={timeTemplate}
-                          className="w-full w-100 custom-form-dropdown"
+                          className="w-full w-100 custom-form-dropdown ph-input"
                           invalid={showError}
                         />
                       </div>
@@ -704,257 +714,359 @@ const Home = () => {
 
                 <div className="custom-form-group contains-float-input mb-0">
                   <Button
-                    label="Reserve Now"
-                    className="w-100 submit-button justify-content-center"
+                    label={user && token ? "Reserve Now" : "Sign In to Reserve"}
+                    className="w-100 submit-button justify-content-center ph-btn"
                     loading={loading}
                   />
+                  {!user && !token && (
+                    <small className="text-info d-block text-center mt-2">
+                      <i className="bi bi-info-circle me-1"></i>
+                      You need to be signed in to make a reservation. 
+                      <a href="/sign-in" className="text-decoration-none ms-1">Sign In</a> or 
+                      <a href="/sign-up" className="text-decoration-none ms-1">Create Account</a>
+                    </small>
+                  )}
                 </div>
               </form>
               {/* </article> */}
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Steps Section: Responsive horizontal→vertical flow */}
-      <section className="steps-section">
-        <div className="steps-wrap">
-          {/* Step 1 */}
-          <div className="step">
-            <div className="step-icon">
-              <img
-                src="assets/images/home/select_date.png"
-                alt="Select Parking Dates"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
+        {/* Enhanced Process Section */}
+        <div className="process-section">
+          <div className="process-container">
+            <div className="process-header">
+              <span className="process-badge">Simple Process</span>
+              <h2 className="process-title">Book Your Parking in 3 Easy Steps</h2>
+              <p className="process-subtitle">
+                Experience hassle-free airport parking with our streamlined booking process
+              </p>
             </div>
-            <div className="step-title">Select Parking Dates.</div>
-          </div>
+            
+            <div className="process-timeline">
+              {/* Step 1 */}
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <div className="timeline-icon">
+                    <i className="bi bi-search"></i>
+                  </div>
+                  <div className="timeline-info">
+                    <h4 className="timeline-title">Search & Compare</h4>
+                    <p className="timeline-description">
+                      Select your airport, choose dates and times. 
+                      Compare prices from multiple parking providers instantly.
+                    </p>
+                    <div className="timeline-features">
+                      <span className="feature-tag">Real-time availability</span>
+                      <span className="feature-tag">Best price guarantee</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="timeline-connector"></div>
+              </div>
 
-          {/* Arrow and line 1 */}
-          <div className="connector">
-            <svg
-              width="120"
-              height="50"
-              viewBox="0 0 120 50"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0,25 C40,0 80,50 120,25"
-                stroke="#124170"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="arrowhead"
-            >
-              <path
-                d="M4 12h16m0 0l-5-5m5 5l-5 5"
-                stroke="#124170"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+              {/* Step 2 */}
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <div className="timeline-icon">
+                    <i className="bi bi-credit-card"></i>
+                  </div>
+                  <div className="timeline-info">
+                    <h4 className="timeline-title">Book & Pay Securely</h4>
+                    <p className="timeline-description">
+                      Choose your preferred parking option and complete your booking 
+                      with our secure payment system.
+                    </p>
+                    <div className="timeline-features">
+                      <span className="feature-tag">Instant confirmation</span>
+                      <span className="feature-tag">Secure payment</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="timeline-connector"></div>
+              </div>
 
-          {/* Step 2 */}
-          <div className="step">
-            <div className="step-icon">
-              <img
-                src="assets/images/home/search.png"
-                alt="Search and Book Space"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
+              {/* Step 3 */}
+              <div className="timeline-item">
+                <div className="timeline-content">
+                  <div className="timeline-icon">
+                    <i className="bi bi-airplane"></i>
+                  </div>
+                  <div className="timeline-info">
+                    <h4 className="timeline-title">Park & Travel</h4>
+                    <p className="timeline-description">
+                      Arrive at your reserved parking space, drop off your vehicle, 
+                      and enjoy your stress-free journey.
+                    </p>
+                    <div className="timeline-features">
+                      <span className="feature-tag">24/7 security</span>
+                      <span className="feature-tag">Free shuttle service</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="step-title">Search and Book Space</div>
-          </div>
 
-          {/* Arrow and line 2 */}
-          <div className="connector">
-            <svg
-              width="120"
-              height="50"
-              viewBox="0 0 120 50"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0,25 C40,0 80,50 120,25"
-                stroke="#124170"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="arrowhead"
-            >
-              <path
-                d="M4 12h16m0 0l-5-5m5 5l-5 5"
-                stroke="#124170"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-
-          {/* Step 3 */}
-          <div className="step">
-            <div className="step-icon">
-              <img
-                src="assets/images/home/travel.png"
-                alt="Enjoy Your Travel"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
+            {/* Benefits Grid */}
+            <div className="benefits-grid">
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-shield-check"></i>
+                </div>
+                <h5>Secure & Safe</h5>
+                <p>CCTV monitored facilities</p>
+              </div>
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-clock"></i>
+                </div>
+                <h5>Save Time</h5>
+                <p>Quick online booking</p>
+              </div>
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-currency-dollar"></i>
+                </div>
+                <h5>Best Prices</h5>
+                <p>Guaranteed lowest rates</p>
+              </div>
+              <div className="benefit-item">
+                <div className="benefit-icon">
+                  <i className="bi bi-headset"></i>
+                </div>
+                <h5>24/7 Support</h5>
+                <p>Always here to help</p>
+              </div>
             </div>
-            <div className="step-title">Enjoy Your Travel</div>
           </div>
-        </div>
 
-        {/* Component-scoped CSS */}
-        <style>{`
-    .steps-section {
-      background: #DDF4E7;
-      padding: 40px 0;
-      border-radius: 16px;
-      margin: 20px 0;
+          {/* Enhanced Component Styles */}
+          <style>{`
+    .process-section {
+      background: transparent;
+      padding: 80px 0 60px 0;
+      margin: 0;
     }
-    .steps-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      max-width: 900px;
+    
+    .process-container {
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 20px;
     }
-    .step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 180px;
-      flex: 1;
-      margin: 8px 0;
-    }
-    .step-icon {
-      background: #fff;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 12px #0001;
-      margin-bottom: 12px;
-    }
-    .step-icon img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-    .step-title {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #26667F;
+    
+    .process-header {
       text-align: center;
-      max-width: 160px;
-      line-height: 1.3;
+      margin-bottom: 60px;
     }
-    .connector {
+    
+    .process-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .process-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+    }
+    
+    .process-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    .process-timeline {
+      margin-bottom: 60px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    
+    .timeline-item:last-child .timeline-connector {
+      display: none;
+    }
+    
+    .timeline-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .timeline-content:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateX(8px);
+    }
+    
+    .timeline-icon {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex: 0;
-      padding: 0 4px;
+      color: white;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
     }
-    .connector .arrowhead {
-      margin: 0 4px;
-      display: block;
+    
+    .timeline-info {
+      flex: 1;
+    }
+    
+    .timeline-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 12px 0;
+    }
+    
+    .timeline-description {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      margin: 0 0 16px 0;
+    }
+    
+    .timeline-features {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .feature-tag {
+      background: rgba(102, 126, 234, 0.2);
+      color: #a5b4fc;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+    
+    .timeline-connector {
+      position: absolute;
+      left: 54px;
+      top: 100%;
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(102, 126, 234, 0.5), transparent);
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    
+    .benefit-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: scale(1.02);
+    }
+    
+    .benefit-icon {
+      background: rgba(102, 126, 234, 0.2);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      color: #a5b4fc;
+      font-size: 20px;
+    }
+    
+    .benefit-item h5 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 8px 0;
+    }
+    
+    .benefit-item p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin: 0;
     }
 
-    /* ---------- Responsive ---------- */
-
-    /* Tablets: tighten spacing slightly */
-    @media (max-width: 992px) {
-      .steps-wrap {
-        gap: 8px 0;
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .process-title {
+        font-size: 32px;
       }
-      .step {
-        min-width: 160px;
-      }
-      .step-icon {
-        width: 72px;
-        height: 72px;
-      }
-      .step-icon img {
-        width: 40px;
-        height: 40px;
-      }
-      .step-title {
-        font-size: 1rem;
-        max-width: 150px;
-      }
-    }
-
-    /* Phones: stack vertically, hide connectors, shrink icons/text */
-    @media (max-width: 640px) {
-      .steps-wrap {
+      
+      .timeline-content {
         flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
+        text-align: center;
+        gap: 16px;
+      }
+      
+      .timeline-connector {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .benefits-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .process-container {
         padding: 0 16px;
       }
-      .step {
-        flex: none;
-        min-width: 0;
-        padding: 12px 0;
+      
+      .timeline-content {
+        padding: 24px 20px;
       }
-      .connector {
-        display: none; /* hide wavy lines & arrows on mobile */
+      
+      .process-title {
+        font-size: 28px;
       }
-      .step-icon {
-        width: 64px;
-        height: 64px;
-        margin-bottom: 10px;
-      }
-      .step-icon img {
-        width: 36px;
-        height: 36px;
-      }
-      .step-title {
-        font-size: 0.98rem;
-        max-width: 220px;
-      }
-    }
-
-    /* Very small devices */
-    @media (max-width: 380px) {
-      .step-title {
-        font-size: 0.94rem;
+      
+      .process-subtitle {
+        font-size: 16px;
       }
     }
   `}</style>
+        </div>
       </section>
 
       <Footer />

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Tilt from "react-parallax-tilt";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
@@ -11,7 +10,6 @@ import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { sendVerificationEmail } from "../../utils/authUtil";
 import withComponentName from "../../withComponentName";
-import Preloader from "../../Preloader";
 
 const ForgotPassword = () => {
   const toast = useRef(null);
@@ -153,180 +151,217 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Preloader />
       <Header />
-      <section className="section-padding overflow-hidden">
-        <div className="container-md">
-          <Toast ref={toast} />
+      <Toast ref={toast} />
 
-          {page === 1 ? (
-            // Email Verification Page
-            <div className="row">
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <article className="custom-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
+      {/* Split Screen Forgot Password Section */}
+      <section className="split-signin-section">
+        <div className="split-container">
+          {/* Left Panel - Forgot Password Forms */}
+          <div className="signin-left-panel">
+            <div className="signin-form-container">
+              {page === 1 ? (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="custom-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
                   </div>
-                  <h3
-                    className="custom-card-tile"
-                    style={{ textAlign: "center" }}
-                  >
-                    Email Verification
-                  </h3>
-                  {/* <h6 className="custom-card-sub-tile">
-                    Enter your registered email address below for verification
-                  </h6> */}
-                  <form action="" className="custom-card-form">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="verify_email"
-                            className="custom-form-label form-required"
-                          >
-                            Email
-                          </label>
-                          <InputText
-                            id="verify_email"
-                            keyfilter="email"
-                            className="custom-form-input"
-                            placeholder="Enter your email address"
-                            name="email"
-                            value={resetPasswordInfo.email}
-                            onChange={handleInputChange}
-                          />
-                          {showError && (
-                            <small className="text-danger form-error-msg">
-                              This field is required
-                            </small>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="custom-form-group contains-float-input mb-0">
-                      <Button
-                        label={`${loading ? "Processing..." : "VERIFY"}`}
-                        className="w-100 submit-button justify-content-center"
-                        loading={loading}
-                        onClick={handleVerifyEmail}
-                        disabled={!resetPasswordInfo.email}
-                      />
-                    </div>
-                  </form>
-                </article>
-              </div>
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area" data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
-                    <img
-                      src="assets/images/account/account-verification-pink.svg"
-                      className="section-main-image animate-image"
-                      alt="Email Verification"
-                    />
-                  </Tilt>
-                </div>
-              </div>
-            </div>
-          ) : (
-            // Reset Password Page
-            <div className="row">
-              <div className="col-12 col-xl-6 col-xxl-6 col-lg-6 col-sm-11 col-md-11 mx-auto">
-                <button
-                  className="back-page-btn"
-                  onClick={goBack}
-                  data-aos="fade-left"
-                >
-                  <i className="ri ri-arrow-left-line me-2"></i>Back
-                </button>
-                <article className="custom-card" data-aos="fade-up">
-                  <div className="custom-card-logo-area">
-                    <img
-                      src="assets/images/logo.png"
-                      className="custom-card-logo"
-                      alt="Platinum Holiday Service"
-                    />
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Reset Password</h2>
+                    <p className="welcome-subtitle">
+                      Enter your email address to receive password reset
+                      instructions
+                    </p>
                   </div>
-                  <h3 className="custom-card-tile" style={{ textAlign: "center" }}>Reset Your Password</h3>
-                  {/* <h6 className="custom-card-sub-tile">
-                    Please enter your new password below.
-                  </h6> */}
+
+                  {/* Form Section */}
                   <form
-                    action=""
-                    className="custom-card-form"
-                    onSubmit={handleSubmit}
+                    className="split-signin-form"
+                    onSubmit={handleVerifyEmail}
                   >
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="custom-form-group mb-3 mb-sm-4">
-                          <label
-                            htmlFor="password"
-                            className="custom-form-label form-required"
-                          >
-                            New password
-                          </label>
-                          <Password
-                            id="password"
-                            className="custom-form-input"
-                            name="newPassword"
-                            value={resetPasswordInfo.newPassword}
-                            onChange={handleInputChange}
-                            header={header}
-                            footer={footer}
-                            toggleMask
-                            placeholder="Enter your new password"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12">
-                        <div className="custom-form-group">
-                          <label
-                            htmlFor="confirmPassword"
-                            className="custom-form-label form-required"
-                          >
-                            Confirm password
-                          </label>
-                          <Password
-                            id="confirmPassword"
-                            className="custom-form-input"
-                            name="confirmPassword"
-                            value={resetPasswordInfo.confirmPassword}
-                            onChange={handleInputChange}
-                            feedback={false}
-                            toggleMask
-                            placeholder="Re-enter your new password"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="custom-form-group contains-float-input mb-0">
-                      <Button
-                        label="RESET"
-                        className="w-100 submit-button justify-content-center"
-                        loading={loading}
+                    <div className="input-group">
+                      <label htmlFor="verify_email" className="input-label">
+                        Email Address
+                      </label>
+                      <InputText
+                        id="verify_email"
+                        keyfilter="email"
+                        className="split-input"
+                        placeholder="Enter your email address"
+                        name="email"
+                        value={resetPasswordInfo.email}
+                        onChange={handleInputChange}
                       />
+                      {showError && !resetPasswordInfo.email && (
+                        <small className="error-text">
+                          This field is required
+                        </small>
+                      )}
+                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                        resetPasswordInfo.email
+                      ) &&
+                        resetPasswordInfo.email && (
+                          <small className="error-text">
+                            Enter valid email
+                          </small>
+                        )}
+                    </div>
+
+                    <Button
+                      label={loading ? "Processing..." : "CHANGE PASSWORD"}
+                      className="split-signin-button"
+                      loading={loading}
+                      disabled={!resetPasswordInfo.email}
+                      type="submit"
+                    />
+
+                    <div className="signup-section">
+                      <p className="signup-text">
+                        Remember your password?{" "}
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
+                        </a>
+                      </p>
                     </div>
                   </form>
-                </article>
-              </div>
-              <div className="col-12 col-xl-6 col-lg-6 my-auto">
-                <div className="section-main-image-area" data-aos="zoom-out">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8}>
+                </>
+              ) : (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
-                      src="assets/images/account/reset-password.svg"
-                      className="section-main-image animate-image"
-                      alt="Reset Password"
+                      src="assets/images/logo.png"
+                      className="brand-logo"
+                      alt="Platinum Holiday Service"
                     />
-                  </Tilt>
-                </div>
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
+                  </div>
+                  <Divider></Divider>
+                  {/* Back Button */}
+                  {/* <div className="signup-section" style={{ marginBottom: '20px' }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <i className="ri-arrow-left-line"></i>
+                      Back
+                    </button>
+                  </div> */}
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Create New Password</h2>
+                    <p className="welcome-subtitle">
+                      Please enter your new password below
+                    </p>
+                  </div>
+
+                  {/* Form Section */}
+                  <form className="split-signin-form" onSubmit={handleSubmit}>
+                    <div className="input-group">
+                      <label className="input-label">New Password</label>
+                      <Password
+                        className="split-input"
+                        name="newPassword"
+                        value={resetPasswordInfo.newPassword}
+                        onChange={handleInputChange}
+                        header={header}
+                        footer={footer}
+                        toggleMask
+                        placeholder="Enter your new password"
+                        feedback={true}
+                      />
+                      {showError && !resetPasswordInfo.newPassword && (
+                        <small className="error-text">
+                          This field is required
+                        </small>
+                      )}
+                      {resetPasswordInfo.newPassword.length < 8 &&
+                        resetPasswordInfo.newPassword && (
+                          <small className="error-text">
+                            Password must be at least 8 characters long
+                          </small>
+                        )}
+                    </div>
+
+                    <div className="input-group">
+                      <label className="input-label">Confirm Password</label>
+                      <Password
+                        className="split-input"
+                        name="confirmPassword"
+                        value={resetPasswordInfo.confirmPassword}
+                        onChange={handleInputChange}
+                        feedback={false}
+                        toggleMask
+                        placeholder="Re-enter your new password"
+                      />
+                      {showError && !resetPasswordInfo.confirmPassword && (
+                        <small className="error-text">
+                          This field is required
+                        </small>
+                      )}
+                      {resetPasswordInfo.newPassword !==
+                        resetPasswordInfo.confirmPassword &&
+                        resetPasswordInfo.confirmPassword && (
+                          <small className="error-text">
+                            Passwords do not match
+                          </small>
+                        )}
+                    </div>
+
+                    <Button
+                      label="RESET PASSWORD"
+                      className="split-signin-button"
+                      loading={loading}
+                      type="submit"
+                    />
+
+                    <div className="signup-section">
+                      <p className="signup-text">
+                        Remember your password?{" "}
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
+                        </a>
+                      </p>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Right Panel - Background Image */}
+          <div className="signin-right-panel">
+            <div className="image-overlay">
+              <div className="overlay-content">
+                <h3 className="overlay-title">Password Recovery</h3>
+                <p className="overlay-description">
+                  Securely reset your password and regain access to your
+                  Platinum Holiday Service account
+                </p>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
+
       <Footer />
     </>
   );

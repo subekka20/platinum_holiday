@@ -6,6 +6,7 @@ import { setLogout } from "../state";
 import { Ripple } from "primereact/ripple";
 import { Link } from "react-router-dom";
 import { getBookingChargesWithCouponCodeAndCorrespondingDiscount } from "../utils/chargesAndCouponCode";
+import { performLogout } from "../utils/logoutUtil";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -129,12 +130,12 @@ const Header = () => {
                     className="nav-logo-link"
                   >
                     <img
-                      src="assets/images/logo.png"
+                      src="assets/images/logo-light.png"
                       className="nav-logo"
                       alt="Logo"
                     />
                     <img
-                      src="assets/images/logo.png"
+                      src="assets/images/logo-light.png"
                       className="scrolled-logo"
                       alt="Logo"
                     />
@@ -204,68 +205,109 @@ const Header = () => {
                       >
                         <button
                           type="button"
-                          className="profile-toggle-btn p-ripple"
+                          className="elegant-profile-toggle p-ripple"
                           onClick={toggleDropdownMenu}
                         >
-                          <div className="profile-toggle-img-area">
-                            {/* <img src="assets/images/profile-img.png" className='profile-toggle-img' alt="" /> */}
+                          <div className="profile-avatar-container">
                             <img
                               src={user?.dp || "assets/images/user.png"}
-                              className="profile-toggle-no-img"
-                              alt=""
+                              className="profile-avatar"
+                              alt="User Avatar"
                             />
+                            <div className="avatar-status-indicator"></div>
                           </div>
-                          <div className="profile-toggle-detail">
-                            <h5>Hi 👋</h5>
-                            <h6>{user?.firstName || "---------"}</h6>
+                          <div className="profile-info">
+                            <span className="profile-greeting">Welcome back</span>
+                            <span className="profile-name">{user?.firstName || "User"}</span>
                           </div>
-                          <i
-                            className={`bi bi-chevron-down ${isOpen ? "rotate" : ""
-                              }`}
-                          ></i>
+                          <div className="dropdown-arrow">
+                            <i
+                              className={`bi bi-chevron-down ${isOpen ? "rotated" : ""}`}
+                            ></i>
+                          </div>
                           <Ripple />
                         </button>
-                        <ul
-                          className={`profile-dropdown-menu ${isOpen ? "open" : ""
-                            }`}
+
+                        <div
+                          className={`elegant-dropdown-menu ${isOpen ? "show" : ""}`}
                         >
-                          <div className="profile-dropdown-detail">
-                            <div className="profile-dropdown-image-area">
-                              {/* <img src="assets/images/profile-img.png" className='profile-dropdown-img' alt="" /> */}
+                          <div className="dropdown-header">
+                            <div className="dropdown-avatar">
                               <img
                                 src={user?.dp || "assets/images/user.png"}
-                                className="profile-dropdown-no-img"
-                                alt=""
+                                className="dropdown-avatar-img"
+                                alt="User"
                               />
+                              <div className="avatar-overlay">
+                                <i className="bi bi-camera-fill"></i>
+                              </div>
                             </div>
-                            <h6 className="dropdown-profile-name">
-                              {user?.firstName || "---------"}
-                            </h6>
+                            <div className="dropdown-user-info">
+                              <h6 className="dropdown-user-name">
+                                {user?.firstName || "User"} {user?.lastName || ""}
+                              </h6>
+                              <p className="dropdown-user-email">
+                                {user?.email || "user@example.com"}
+                              </p>
+                            </div>
                           </div>
-                          <li className="profile-dropdown-item mb-1 mt-1">
+
+                          <div className="dropdown-divider"></div>
+
+                          <div className="dropdown-menu-items">
                             <button
                               onClick={() => goToLink("/dashboard")}
-                              className="profile-dropdown-link profile p-ripple"
+                              className="elegant-dropdown-item p-ripple"
                             >
-                              <i className="bi bi-speedometer2 me-2"></i>
-                              Dashboard
+                              <div className="item-icon dashboard">
+                                <i className="bi bi-grid-3x3-gap-fill"></i>
+                              </div>
+                              <div className="item-content">
+                                <span className="item-title">Dashboard</span>
+                                <span className="item-subtitle">View your overview</span>
+                              </div>
+                              <div className="item-arrow">
+                                <i className="bi bi-chevron-right"></i>
+                              </div>
                               <Ripple />
                             </button>
-                          </li>
-                          <li className="profile-dropdown-item">
+
                             <button
-                              className="profile-dropdown-link logout p-ripple"
+                              onClick={() => goToLink("/dashboard?tab=bookings")}
+                              className="elegant-dropdown-item p-ripple"
+                            >
+                              <div className="item-icon bookings">
+                                <i className="bi bi-calendar-check-fill"></i>
+                              </div>
+                              <div className="item-content">
+                                <span className="item-title">My Bookings</span>
+                                <span className="item-subtitle">View reservations</span>
+                              </div>
+                              <div className="item-arrow">
+                                <i className="bi bi-chevron-right"></i>
+                              </div>
+                              <Ripple />
+                            </button>
+                          </div>
+
+                          <div className="dropdown-divider"></div>
+
+                          <div className="dropdown-footer">
+                            <button
+                              className="elegant-logout-btn p-ripple"
                               type="button"
                               onClick={() => {
-                                dispatch(setLogout());
+                                performLogout(dispatch, navigate);
                               }}
                             >
-                              <i className="bi bi-trash-fill me-2"></i>
-                              Logout
+                              <div className="logout-icon">
+                                <i className="bi bi-box-arrow-right"></i>
+                              </div>
+                              <span>Sign Out</span>
                               <Ripple />
                             </button>
-                          </li>
-                        </ul>
+                          </div>
+                        </div>
                       </li>
                     </ul>
                   )}
@@ -273,10 +315,11 @@ const Header = () => {
                   <ul className="menu-toggle-btn-area">
                     <li className="nav-button-grp-item">
                       <button
-                        className="menu-toggle-button"
+                        className={`menu-toggle-button ${menuOpen ? 'active' : ''}`}
                         onClick={toggleMenu}
+                        aria-label="Toggle menu"
                       >
-                        <i class="bi bi-list"></i>
+                        <span className="hamburger-line"></span>
                       </button>
                     </li>
                   </ul>
@@ -291,106 +334,157 @@ const Header = () => {
           onClick={closeMenu}
         ></div>
 
-        <div className={`mobile-menu-section ${menuOpen ? "show" : ""}`}>
-          <button className="menu-close-button" onClick={closeMenu}>
-            <i class="ri-close-large-line"></i>
-          </button>
-          <button onClick={() => goToLink("/")} className="menu-logo-link">
-            <img src="assets/images/logo.png" alt="Logo" />
-          </button>
-          <ul className="menu-link-area">
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/")}
-                className={`menu-link ${window.location.pathname === "/" ? "active" : ""
-                  }`}
-              >
-                Home
-              </button>
-            </li>
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/about-us")}
-                className={`menu-link ${window.location.pathname === "/about-us" ? "active" : ""
-                  }`}
-              >
-                About
-              </button>
-            </li>
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/services")}
-                className={`menu-link ${window.location.pathname === "/services" ? "active" : ""
-                  }`}
-              >
-                Services
-              </button>
-            </li>
-            <li className="menu-link-item">
-              <button
-                onClick={() => goToLink("/contact-us")}
-                className={`menu-link ${window.location.pathname === "/contact-us" ? "active" : ""
-                  }`}
-              >
-                Contact
-              </button>
-            </li>
-          </ul>
+        <div className={`modern-mobile-menu ${menuOpen ? "show" : ""}`}>
+          <div className="mobile-menu-header">
+            <button onClick={() => goToLink("/")} className="mobile-menu-logo">
+              <img src="assets/images/logo-light.png" alt="Platinum Holiday" />
+              <span className="brand-text">Platinum Holiday</span>
+            </button>
+            <button className="modern-close-button" onClick={closeMenu}>
+              <span className="close-line"></span>
+              <span className="close-line"></span>
+            </button>
+          </div>
 
-          {user ? (
-            <div className="menu-profile-area">
-              <div className="menu-profile-body">
-                <div className="menu-profile-img-area">
-                  <img src={user?.dp || "assets/images/user.png"} alt="" />
-                </div>
-                <div className="menu-profile-content">
-                  <h6 className="menu-profile-head">👋 Hi,</h6>
-                  <h6 className="menu-profile-name">
-                    {user?.firstName || "---------"}
-                  </h6>
-                </div>
-              </div>
-              <hr />
-              <div className="menu-profile-footer">
+          <nav className="mobile-nav-area">
+            <ul className="mobile-nav-list">
+              <li className="mobile-nav-item">
                 <button
-                  onClick={() => goToLink("/dashboard")}
-                  className="menu-profile-link primary-btn"
-                >
-                  <i className="bi bi-speedometer2"></i> Dashboard
-                </button>
-                <button
-                  type="button"
-                  className="menu-profile-link danger-btn"
                   onClick={() => {
-                    dispatch(setLogout());
+                    goToLink("/");
+                    closeMenu();
                   }}
+                  className={`mobile-nav-link ${window.location.pathname === "/" ? "active" : ""
+                    }`}
                 >
-                  <i class="bi bi-trash-fill"></i>
-                  Logout
-                </button>
-              </div>
-            </div>
-          ) : (
-            <ul className="menu-btn-link-area">
-              <li className="menu-btn-link-item">
-                <button
-                  onClick={() => goToLink("/sign-up")}
-                  className="menu-btn-link with-outline"
-                >
-                  Sign up
+                  <i className="bi bi-house-fill"></i>
+                  <span>Home</span>
+                  <i className="bi bi-chevron-right"></i>
                 </button>
               </li>
-
-              <li className="menu-btn-link-item">
+              <li className="mobile-nav-item">
                 <button
-                  onClick={() => goToLink("/sign-in")}
-                  className="menu-btn-link with-bg"
+                  onClick={() => {
+                    goToLink("/about-us");
+                    closeMenu();
+                  }}
+                  className={`mobile-nav-link ${window.location.pathname === "/about-us" ? "active" : ""
+                    }`}
                 >
-                  Sign in
+                  <i className="bi bi-info-circle-fill"></i>
+                  <span>About Us</span>
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+              </li>
+              <li className="mobile-nav-item">
+                <button
+                  onClick={() => {
+                    goToLink("/services");
+                    closeMenu();
+                  }}
+                  className={`mobile-nav-link ${window.location.pathname === "/services" ? "active" : ""
+                    }`}
+                >
+                  <i className="bi bi-gear-fill"></i>
+                  <span>Services</span>
+                  <i className="bi bi-chevron-right"></i>
+                </button>
+              </li>
+              <li className="mobile-nav-item">
+                <button
+                  onClick={() => {
+                    goToLink("/contact-us");
+                    closeMenu();
+                  }}
+                  className={`mobile-nav-link ${window.location.pathname === "/contact-us" ? "active" : ""
+                    }`}
+                >
+                  <i className="bi bi-telephone-fill"></i>
+                  <span>Contact Us</span>
+                  <i className="bi bi-chevron-right"></i>
                 </button>
               </li>
             </ul>
+          </nav>
+
+          {user ? (
+            <div className="mobile-user-section">
+              <div className="mobile-user-card">
+                <div className="mobile-user-info">
+                  <div className="mobile-user-avatar">
+                    <img src={user?.dp || "assets/images/user.png"} alt="User" />
+                  </div>
+                  <div className="mobile-user-details">
+                    <h6 className="mobile-user-greeting">👋 Welcome back</h6>
+                    <h5 className="mobile-user-name">
+                      {user?.firstName || "User"}
+                    </h5>
+                  </div>
+                </div>
+                <div className="mobile-user-actions">
+                  <button
+                    onClick={() => {
+                      goToLink("/dashboard");
+                      closeMenu();
+                    }}
+                    className="mobile-action-btn primary"
+                  >
+                    <i className="bi bi-speedometer2"></i>
+                    Dashboard
+                  </button>
+                  <button
+                    type="button"
+                    className="mobile-action-btn danger"
+                    onClick={() => {
+                      performLogout(dispatch, navigate);
+                      closeMenu();
+                    }}
+                  >
+                    <i className="bi bi-box-arrow-right"></i>
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="mobile-auth-section">
+              <div className="mobile-auth-buttons">
+                <button
+                  onClick={() => {
+                    goToLink("/sign-up");
+                    closeMenu();
+                  }}
+                  className="mobile-auth-btn secondary"
+                >
+                  <i className="bi bi-person-plus"></i>
+                  Create Account
+                </button>
+                <button
+                  onClick={() => {
+                    goToLink("/sign-in");
+                    closeMenu();
+                  }}
+                  className="mobile-auth-btn primary"
+                >
+                  <i className="bi bi-box-arrow-in-right"></i>
+                  Sign In
+                </button>
+              </div>
+            </div>
           )}
+
+          <div className="mobile-menu-footer">
+            <div className="mobile-contact-info">
+              <a href="tel:+447375551666" className="mobile-contact-item">
+                <i className="bi bi-telephone-fill"></i>
+                +44 1234567890
+              </a>
+              <a href="mailto:info@platinumholiday.co.uk" className="mobile-contact-item">
+                <i className="bi bi-envelope-fill"></i>
+                info@platinumholiday.co.uk
+              </a>
+            </div>
+          </div>
         </div>
       </header>
     </>

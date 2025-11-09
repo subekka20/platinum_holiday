@@ -219,7 +219,38 @@ const Booking = () => {
   };
 
   const calculatingBookingCharge = async () => {
-    // setBookingCharge();
+    // Debug logging to identify the issue
+    console.log("Calculating booking charge with data:", {
+      bookingQuote: bookingDetails?.bookingQuote,
+      couponCode,
+      smsConfirmation: checkedSmsConfirmation,
+      cancellationCover: checkedCancellationCover,
+      numOfVehicle: vehiclesDetails.length,
+      vehiclesDetails,
+      bookingDetails
+    });
+
+    // Validate required data before making API call
+    if (!bookingDetails?.bookingQuote) {
+      toast.current.show({
+        severity: "error",
+        summary: "Missing Booking Information",
+        detail: "Booking quote information is missing. Please start a new booking.",
+        life: 3000,
+      });
+      return;
+    }
+
+    if (vehiclesDetails.length === 0) {
+      toast.current.show({
+        severity: "error",
+        summary: "Missing Vehicle Information",
+        detail: "Please add at least one vehicle to proceed.",
+        life: 3000,
+      });
+      return;
+    }
+
     try {
       const response = await api.post(
         "/api/user/calculate-total-booking-charge",
@@ -234,11 +265,13 @@ const Booking = () => {
       console.log(response.data);
       setBookingCharge(response.data);
     } catch (err) {
-      console.log(err);
+      console.log("Booking charge calculation error:", err);
+      console.log("Error response:", err.response?.data);
+      
       toast.current.show({
         severity: "error",
         summary: "Error in Booking charge calculation!",
-        detail: err.response.data.error,
+        detail: err.response?.data?.error || "Unable to calculate booking charges. Please try again.",
         life: 3000,
       });
     }
@@ -254,6 +287,15 @@ const Booking = () => {
     checkedSmsConfirmation,
     vehiclesDetails,
   ]);
+
+  // Initialize vehicle details if needed
+  useEffect(() => {
+    if (bookingDetails && vehiclesDetails.length === 1 && 
+        !vehiclesDetails[0].regNo && !vehiclesDetails[0].make) {
+      // If we have booking details but no vehicle info, ensure at least one vehicle slot
+      console.log("Initializing vehicle details for booking");
+    }
+  }, [bookingDetails]);
 
   const checkingCouponCodeValidity = async () => {
     try {
@@ -431,7 +473,7 @@ const Booking = () => {
       console.log(result);
 
       ReactGA.event({
-        category: 'CAR PARK BOOKING',
+        category: 'VEHICLE PARK BOOKING',
         action: 'booking',
         label: 'online_booking',
         value: response.data?.totalPayable
@@ -641,10 +683,11 @@ const Booking = () => {
   return (
     <>
       {!bookingDetails && <Navigate to="/" />}
+      {(!user || !token) && <Navigate to="/sign-in" />}
       <Header />
 
       {/* Breadcrumb Section Start */}
-      <section className="breadcrumb-section overflow-hidden">
+      {/* <section className="breadcrumb-section overflow-hidden">
         <div className="container-md">
           <div className="row">
             <div className="col-12">
@@ -662,7 +705,7 @@ const Booking = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Breadcrumb Section End */}
 
       <Toast ref={toast} />
@@ -702,13 +745,11 @@ const Booking = () => {
                                     This field is required
                                   </small>
                                 )}
-                                <small className="text-danger form-error-msg">
-                                  {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                                    userDetails.email
-                                  ) && userDetails.email
-                                    ? "Enter valid email"
-                                    : ""}
-                                </small>
+                                {userDetails.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userDetails.email) && (
+                                  <small className="text-danger form-error-msg">
+                                    Enter valid email
+                                  </small>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -1539,150 +1580,6 @@ const Booking = () => {
                       </h5>
                     </div>
 
-                    {/* <Divider className="divider-margin" /> */}
-
-                    {/* Coupon Code */}
-                    {/* <div className="booking-card-head-area">
-                      <h4 className="booking-card-head">Card Details</h4>
-
-                      <div className="row mt-4">
-                        <div className="col-12 col-sm-6 col-lg-8 col-xl-6">
-                          <div className="custom-form-group mb-3 mb-sm-4">
-                            <label
-                              htmlFor="cardName"
-                              className="custom-form-label form-required"
-                            >
-                              Name on Card
-                            </label>
-                            <InputText
-                              id="cardName"
-                              className="custom-form-input"
-                              name="name"
-                              value={cardDetails.name}
-                              onChange={handleInputCardDetailChange}
-                              placeholder="Name on Card"
-                            />
-                            {(showError && !cardDetails.name) && (
-                              <small className="text-danger form-error-msg">
-                                This field is required
-                              </small>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-6">
-                          <div className="custom-form-group mb-3 mb-sm-4">
-                            <label
-                              htmlFor="cardPostCode"
-                              className="custom-form-label form-required"
-                            >
-                              Post code
-                            </label>
-                            <InputText
-                              id="cardPostCode"
-                              className="custom-form-input"
-                              name="postCode"
-                              value={cardDetails.postCode}
-                              onChange={handleInputCardDetailChange}
-                              placeholder="Post code"
-                            />
-                            {(showError && !cardDetails.postCode) && (
-                              <small className="text-danger form-error-msg">
-                                This field is required
-                              </small>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="col-12 col-sm-7 col-lg-12 col-xl-7">
-                          <div className="custom-form-group mb-3 mb-sm-4">
-                            <label
-                              htmlFor="cardNumber"
-                              className="custom-form-label form-required"
-                            >
-                              Card Number
-                            </label>
-                            <IconField iconPosition="left">
-                              <InputIcon className="bi bi-credit-card-fill opacity-50">
-                                {" "}
-                              </InputIcon>
-                              <InputMask
-                                name='cardNo'
-                                value={cardDetails.cardNo}
-                                v-model="value1"
-                                className="custom-form-input input-padding"
-                                onChange={handleInputCardDetailChange}
-                                mask="9999 9999 9999 9999"
-                                placeholder="0000 0000 0000 0000"
-                              />
-                            </IconField>
-                            {(showError && !cardDetails.cardNo) && (
-                              <small className="text-danger form-error-msg">
-                                This field is required
-                              </small>
-                            )}
-                          </div>
-                        </div>
-                        <div className="col-6 col-sm-3 col-lg-4 col-xl-3">
-                          <div className="custom-form-group mb-3 mb-sm-4">
-                            <label
-                              htmlFor="cardDate"
-                              className="custom-form-label form-required"
-                            >
-                              Expiry Date
-                            </label>
-                            <InputMask
-                              name='expDate'
-                              value={cardDetails.expDate}
-                              className="custom-form-input"
-                              onChange={handleInputCardDetailChange}
-                              mask="99/99"
-                              placeholder="MM/YY"
-                              slotChar="MM/YY"
-                            />
-                            {(showError && !cardDetails.expDate) && (
-                              <small className="text-danger form-error-msg">
-                                This field is required
-                              </small>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="col-6 col-sm-2 col-lg-3 col-xl-2">
-                          <div className="custom-form-group mb-3 mb-sm-4">
-                            <label
-                              htmlFor="cardCVV"
-                              className="custom-form-label form-required"
-                            >
-                              CVV
-                            </label>
-                            <InputMask
-                            name='cvv'
-                              value={cardDetails.cvv}
-                              className="custom-form-input"
-                              onChange={handleInputCardDetailChange}
-                              mask="999"
-                              placeholder="CVV"
-                            />
-                            {(showError && !cardDetails.cvv) && (
-                              <small className="text-danger form-error-msg">
-                                This field is required
-                              </small>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="col-12">
-                          <p className="page-warning-text">
-                            <span className="form-required me-2"></span>Please
-                            do not reload or close the page while the payment
-                            is being processed
-                          </p>
-                        </div>
-                      </div>
-                    </div> */}
-                    {/*  */}
-
                     <Divider className="divider-margin" />
 
                     <div className="account-agree-area">
@@ -1722,189 +1619,231 @@ const Booking = () => {
               </article>
             </div>
             <div className="col-12 col-lg-5 col-xl-4 ps-xl-2 position-relative book-summary-section mt-lg-0">
-              <article className="detail-card">
-                <div className="detail-card-label-area main mt-0">
-                  <h5>Your Booking Summary</h5>
-                </div>
-                <div className="detail-card-info-area mb-1">
-                  <div className="detail-card-info-icon-area">
-                    <i className="bi bi-building-fill"></i>
-                  </div>
-                  <div className="detail-card-info-body">
-                    <p>Company :</p>
-                    <h6>{bookingDetails?.companyName}</h6>
-                  </div>
-                </div>
-
-                <div className="detail-card-info-area">
-                  <div className="detail-card-info-icon-area">
-                    <i className="bi bi-geo-alt-fill"></i>
-                  </div>
-                  <div className="detail-card-info-body">
-                    <p>Location :</p>
-                    <h6>{bookingDetails?.airportName?.name}</h6>
-                  </div>
-                </div>
-
-                <div className="detail-card-row">
-                  <div className="detail-card-panel">
-                    <div className="detail-card-info-area">
-                      <div className="detail-card-info-icon-area">
-                        <i className="bi bi-calendar2-fill"></i>
-                      </div>
-                      <div className="detail-card-info-body">
-                        <p>Drop Off Date :</p>
-                        {/* <h6>{formatDate(bookingDetails?.dropOffDate)}</h6> */}
-                        <h6>{bookingDetails?.dropOffDate}</h6>
-                      </div>
+              {/* Modern Booking Summary Card */}
+              <div className="modern-booking-summary">
+                {/* Header Section */}
+                <div className="booking-summary-header">
+                  <div className="header-content">
+                    <div className="header-icon">
+                      <i className="bi bi-clipboard-check-fill"></i>
+                    </div>
+                    <div className="header-text">
+                      <h3>Booking Summary</h3>
+                      <p>Review your parking details</p>
                     </div>
                   </div>
-                  <div className="detail-card-panel">
-                    <div className="detail-card-info-area">
-                      <div className="detail-card-info-icon-area">
-                        <i className="bi bi-clock-fill"></i>
-                      </div>
-                      <div className="detail-card-info-body">
-                        <p>Drop Off Time :</p>
-                        <h6>{bookingDetails?.dropOffTime}</h6>
-                        {/* <h6>{formatTime(bookingDetails?.dropOffTime)}</h6> */}
-                      </div>
+                  <div className="summary-badge">
+                    <i className="bi bi-shield-check-fill"></i>
+                    <span>Secure</span>
+                  </div>
+                </div>
+
+                {/* Company & Location Card */}
+                <div className="info-card company-card">
+                  <div className="company-logo">
+                    <img src={bookingDetails?.companyImg || "assets/images/default-company.png"} alt="Company Logo" />
+                  </div>
+                  <div className="company-info">
+                    <h4>{bookingDetails?.companyName}</h4>
+                    <div className="service-badge">
+                      <i className="bi bi-car-front-fill"></i>
+                      {bookingDetails?.serviceType}
+                    </div>
+                    <div className="location-info">
+                      <i className="bi bi-geo-alt-fill"></i>
+                      <span>{bookingDetails?.airportName?.name}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="detail-card-row mb-0">
-                  <div className="detail-card-panel">
-                    <div className="detail-card-info-area">
-                      <div className="detail-card-info-icon-area">
-                        <i className="bi bi-calendar2-fill"></i>
+                {/* Trip Details */}
+                <div className="trip-details-section">
+                  <h5 className="section-title">
+                    <i className="bi bi-calendar-event"></i>
+                    Trip Details
+                  </h5>
+                  
+                  {/* Drop-off Details */}
+                  <div className="trip-card drop-off">
+                    <div className="trip-header">
+                      <div className="trip-icon departure">
+                        <i className="bi bi-box-arrow-down"></i>
                       </div>
-                      <div className="detail-card-info-body">
-                        <p>Return Date :</p>
-                        {/* <h6>{formatDate(bookingDetails?.pickUpDate)}</h6> */}
-                        <h6>{bookingDetails?.pickUpDate}</h6>
+                      <div className="trip-label">
+                        <h6>Drop-off</h6>
+                        <span className="trip-type">Departure</span>
+                      </div>
+                    </div>
+                    <div className="trip-details">
+                      <div className="detail-item">
+                        <i className="bi bi-calendar3"></i>
+                        <span>{bookingDetails?.dropOffDate}</span>
+                      </div>
+                      <div className="detail-item">
+                        <i className="bi bi-clock"></i>
+                        <span>{bookingDetails?.dropOffTime}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="detail-card-panel">
-                    <div className="detail-card-info-area">
-                      <div className="detail-card-info-icon-area">
-                        <i className="bi bi-clock-fill"></i>
+
+                  {/* Trip Duration Indicator */}
+                  <div className="trip-duration">
+                    <div className="duration-line">
+                      <div className="duration-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                       </div>
-                      <div className="detail-card-info-body">
-                        <p>Return Time :</p>
-                        <h6>{bookingDetails?.pickupTime}</h6>
-                        {/* <h6>{formatTime(bookingDetails?.pickUpTime)}</h6> */}
+                    </div>
+                    <div className="duration-info">
+                      <i className="bi bi-hourglass-split"></i>
+                      <span>Parking Duration</span>
+                    </div>
+                  </div>
+
+                  {/* Pick-up Details */}
+                  <div className="trip-card pick-up">
+                    <div className="trip-header">
+                      <div className="trip-icon arrival">
+                        <i className="bi bi-box-arrow-up"></i>
+                      </div>
+                      <div className="trip-label">
+                        <h6>Pick-up</h6>
+                        <span className="trip-type">Return</span>
+                      </div>
+                    </div>
+                    <div className="trip-details">
+                      <div className="detail-item">
+                        <i className="bi bi-calendar3"></i>
+                        <span>{bookingDetails?.pickUpDate}</span>
+                      </div>
+                      <div className="detail-item">
+                        <i className="bi bi-clock"></i>
+                        <span>{bookingDetails?.pickupTime}</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </article>
 
-              <article className="detail-card mt-3 card-position-sticky mb-3 mb-sm-0">
-                <div className="detail-card-label-area main mt-0">
-                  <h5>{bookingDetails?.serviceType}</h5>
-                </div>
-                <div className="detail-card-logo-area">
-                  <img src={bookingDetails?.companyImg} alt="" />
-                  {/* <img src="assets/images/lion-parking.png" alt="" /> */}
-                </div>
-                <div className="detail-card-label-area">
-                  <h5>{bookingDetails?.airportName?.name}</h5>
-                </div>
-
-                <div className="total-detail-area">
-                  <div className="total-detail">
-                    <h5 className="total-detail-head">Booking Quote</h5>
-                    <h5 className="total-detail-price">
-                      £{" "}
-                      {bookingCharge?.bookingQuote ||
-                        bookingCharge?.bookingQuote}
-                    </h5>
-                  </div>
-
-                  <Divider className="divider-primary" />
-
-                  <div className="total-detail">
-                    <h5 className="total-detail-head">Booking Fee</h5>
-                    <h5 className="total-detail-price">
-                      £ {bookingCharge?.bookingFee || 0}
-                    </h5>
-                  </div>
-
-                  {checkedSmsConfirmation && (
-                    <>
-                      <Divider className="divider-primary" />
-
-                      <div className="total-detail">
-                        <h5 className="total-detail-head">SMS Confirmation</h5>
-                        <h5 className="total-detail-price">
-                          £ {bookingCharge?.smsConfirmation || 0}
-                        </h5>
-                      </div>
-                    </>
-                  )}
-
-                  {checkedCancellationCover &&
-                    bookingCharge?.cancellationCover > 0 && (
-                      <>
-                        <Divider className="divider-primary" />
-
-                        <div className="total-detail">
-                          <h5 className="total-detail-head">
-                            Cancellation Cover
-                          </h5>
-                          <h5 className="total-detail-price">
-                            £ {bookingCharge?.cancellationCover}
-                          </h5>
+                {/* Pricing Breakdown */}
+                <div className="pricing-section">
+                  <h5 className="section-title">
+                    <i className="bi bi-receipt"></i>
+                    Price Breakdown
+                  </h5>
+                  
+                  <div className="pricing-card">
+                    <div className="price-items">
+                      <div className="price-item base-price">
+                        <div className="price-label">
+                          <i className="bi bi-tag-fill"></i>
+                          <span>Booking Quote</span>
                         </div>
-                      </>
-                    )}
-
-                  {((couponCode && couponValid) || !couponCode) && (
-                    <>
-                      <Divider className="divider-primary" />
-
-                      <div className="total-detail">
-                        <h5 className="total-detail-head text-bold">
-                          Total before discount
-                        </h5>
-                        {couponCode ? (
-                          <h5 className="total-detail-price text-bold">
-                            £ {bookingCharge?.totalBeforeDiscount || 0}
-                          </h5>
-                        ) : (
-                          <h5 className="total-detail-price text-bold">-</h5>
-                        )}
+                        <div className="price-value">
+                          £{bookingCharge?.bookingQuote || bookingDetails?.bookingQuote || 0}
+                        </div>
                       </div>
 
-                      <Divider className="divider-primary" />
-
-                      <div className="total-detail">
-                        <h5 className="total-detail-head">Coupon Discount</h5>
-                        {couponCode ? (
-                          <h5 className="total-detail-price">
-                            - {bookingCharge?.couponDiscount || 0} %
-                          </h5>
-                        ) : (
-                          <h5 className="total-detail-price">-</h5>
-                        )}
+                      <div className="price-item">
+                        <div className="price-label">
+                          <i className="bi bi-credit-card"></i>
+                          <span>Booking Fee</span>
+                        </div>
+                        <div className="price-value">
+                          £{bookingCharge?.bookingFee || 0}
+                        </div>
                       </div>
-                    </>
-                  )}
 
-                  <Divider className="divider-primary" />
+                      {checkedSmsConfirmation && (
+                        <div className="price-item optional">
+                          <div className="price-label">
+                            <i className="bi bi-chat-dots"></i>
+                            <span>SMS Confirmation</span>
+                          </div>
+                          <div className="price-value">
+                            £{bookingCharge?.smsConfirmation || 0}
+                          </div>
+                        </div>
+                      )}
 
-                  <div className="total-detail">
-                    <h5 className="total-detail-head text-bold">
-                      Total Payable
-                    </h5>
-                    <h5 className="total-detail-price text-bold">
-                      £ {bookingCharge?.totalPayable || 0}
-                    </h5>
+                      {checkedCancellationCover && bookingCharge?.cancellationCover > 0 && (
+                        <div className="price-item optional">
+                          <div className="price-label">
+                            <i className="bi bi-shield-plus"></i>
+                            <span>Cancellation Cover</span>
+                          </div>
+                          <div className="price-value">
+                            £{bookingCharge?.cancellationCover}
+                          </div>
+                        </div>
+                      )}
+
+                      {couponCode && couponValid && (
+                        <>
+                          <div className="price-divider"></div>
+                          <div className="price-item subtotal">
+                            <div className="price-label">
+                              <i className="bi bi-calculator"></i>
+                              <span>Subtotal</span>
+                            </div>
+                            <div className="price-value">
+                              £{bookingCharge?.totalBeforeDiscount || 0}
+                            </div>
+                          </div>
+                          <div className="price-item discount">
+                            <div className="price-label">
+                              <i className="bi bi-percent"></i>
+                              <span>Coupon Discount</span>
+                            </div>
+                            <div className="price-value discount-value">
+                              -{bookingCharge?.couponDiscount || 0}%
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="total-section">
+                      <div className="total-label">
+                        <i className="bi bi-cash-coin"></i>
+                        <span>Total Amount</span>
+                      </div>
+                      <div className="total-value">
+                        £{bookingCharge?.totalPayable || 0}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </article>
+
+                {/* Security Features */}
+                <div className="security-features">
+                  <div className="feature-item">
+                    <i className="bi bi-shield-check"></i>
+                    <span>Secure Payment</span>
+                  </div>
+                  <div className="feature-item">
+                    <i className="bi bi-lightning-charge"></i>
+                    <span>Instant Confirmation</span>
+                  </div>
+                  <div className="feature-item">
+                    <i className="bi bi-telephone"></i>
+                    <span>24/7 Support</span>
+                  </div>
+                </div>
+
+                {/* Savings Highlight */}
+                {couponCode && couponValid && bookingCharge?.couponDiscount > 0 && (
+                  <div className="savings-highlight">
+                    <div className="savings-icon">
+                      <i className="bi bi-piggy-bank-fill"></i>
+                    </div>
+                    <div className="savings-text">
+                      <h6>Great Savings!</h6>
+                      <p>You're saving {bookingCharge?.couponDiscount}% with your coupon</p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

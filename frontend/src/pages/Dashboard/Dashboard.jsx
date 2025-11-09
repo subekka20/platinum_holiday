@@ -25,17 +25,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setLogout } from "../../state";
 import { Toast } from 'primereact/toast';
 import api from "../../api";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { performLogoutWithConfirmation } from "../../utils/logoutUtil";
 
 const Dashboard = () => {
     const editProfile = useRef(null);
     const toast = useRef(null);
     const dispatch = useDispatch();
+    const location = useLocation();
     const [showError, setShowError] = useState(false);
     const [showEditArea, setShowEditArea] = useState(false);
     const [filterDate, setFilterDate] = useState(null);
+    const [activeTab, setActiveTab] = useState('profile');
     const today = new Date();
     const navigate = useNavigate();
+
+    // Check URL parameters to set initial tab
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const tabParam = searchParams.get('tab');
+        if (tabParam === 'bookings') {
+            setActiveTab('bookings');
+        }
+    }, [location]);
 
     const titles = [
         { name: 'Mr.' },
@@ -87,16 +99,7 @@ const Dashboard = () => {
     }, []);
 
     const logOut = () => {
-        confirmDialog({
-            message: 'Are you sure you want to Sign out?',
-            header: 'Logout Confirmation',
-            icon: 'bi bi-trash-fill',
-            defaultFocus: 'reject',
-            acceptClassName: 'p-button-danger',
-            accept: () => {
-                dispatch(setLogout());
-            },
-        });
+        performLogoutWithConfirmation(confirmDialog, dispatch, navigate, 'Are you sure you want to sign out?');
     }
 
     const handleInputChange = async (e) => {
@@ -318,588 +321,370 @@ const Dashboard = () => {
       <>
         <Header />
 
-        {/* Breadcrumb Section Start */}
-        {/* <section className="breadcrumb-section overflow-hidden">
-          <div className="container-md">
-            <div className="row">
-              <div className="col-12">
-                <h3 className="breadcrumb-title">Dashboard</h3>
-                <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a href="/">Home</a>
-                    </li>
-                    <li className="breadcrumb-item active" aria-current="page">
-                      Dashboard
-                    </li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </section> */}
-        {/* Breadcrumb Section End */}
-
         <ConfirmDialog />
+        <Toast ref={toast} />
 
-        {/* Profile section */}
-        <section className="section-padding dashboard-section">
-          <div className="container-md">
-            <div className="row">
-              <div className="col-12 col-xl-3">
-                <div
-                  className="nav dashboard-tab-area tabs panel-sticky"
-                  id="dashboard-tab"
-                  role="tablist"
-                  aria-orientation="vertical"
-                >
-                  <button
-                    className="nav-link dashboard-tab-link p-ripple active"
-                    id="v-pills-profile-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#v-pills-profile"
-                    type="button"
-                    role="tab"
-                    aria-controls="v-pills-profile"
-                    aria-selected="true"
-                  >
-                    <i className="bi bi-person-fill me-3"></i>
-                    Profile
-                    <Ripple />
-                  </button>
-                  <button
-                    className="nav-link dashboard-tab-link p-ripple"
-                    id="v-pills-bookings-tab"
-                    data-bs-toggle="pill"
-                    data-bs-target="#v-pills-bookings"
-                    type="button"
-                    role="tab"
-                    aria-controls="v-pills-bookings"
-                    aria-selected="false"
-                  >
-                    <i className="bi bi-calendar2-check-fill me-3"></i>
-                    My Bookings
-                    <Ripple />
-                  </button>
+        {/* Modern Dashboard Section */}
+        <section className="modern-dashboard-section">
+          <div className="container-fluid">
+            <div className="dashboard-container">
+              {/* Dashboard Header */}
+              <div className="dashboard-header">
+                <div className="welcome-section">
+                  <h1 className="dashboard-title">
+                    Welcome back, {user?.firstName || "User"}!
+                  </h1>
+                  <p className="dashboard-subtitle">
+                    Manage your profile and view your bookings
+                  </p>
+                </div>
+                <div className="dashboard-stats">
+                  <div className="stat-card">
+                    <div className="stat-icon">
+                      <i className="bi bi-calendar-check"></i>
+                    </div>
+                    <div className="stat-info">
+                      <h3>{bookings?.length || 0}</h3>
+                      <p>Total Bookings</p>
+                    </div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-icon active">
+                      <i className="bi bi-check-circle"></i>
+                    </div>
+                    <div className="stat-info">
+                      <h3>{bookings?.filter(b => b.status === 'Paid')?.length || 0}</h3>
+                      <p>Completed</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="col-12 col-xl-9">
-                <div
-                  className="dashboard-tab-area tab-content"
-                  id="dashboard-tabContent"
+              {/* Navigation Tabs */}
+              <div className="dashboard-navigation">
+                <button
+                  className={`nav-tab ${activeTab === 'profile' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('profile')}
+                  type="button"
                 >
-                  <div
-                    className="tab-pane dashboard-tab-content fade show active"
-                    id="v-pills-profile"
-                    role="tabpanel"
-                    aria-labelledby="v-pills-profile-tab"
-                    tabindex="0"
-                  >
-                    <article className="dashboard-profile-card">
-                      <div className="dashboard-profile-head">
-                        <h5>Profile</h5>
-                        <a
-                          href="#editProfile"
-                          className="prfile-edit-btn"
-                          type="button"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title={`${showEditArea ? "Cancel" : "Edit Profile"}`}
-                          onClick={togglePanel}
-                        >
-                          <i
-                            className={`bi ${
-                              showEditArea
-                                ? "bi-x-lg text-danger"
-                                : "bi-pencil-square"
-                            }`}
-                          ></i>
-                        </a>
-                      </div>
-                      <div className="dashboard-profile-container">
-                        <div className="row">
-                          <div className="col-12 col-xl-4 col-lg-4 col-md-4 col-sm-3 my-auto mx-auto h-100">
-                            <div className="dashboard-profile-image-area">
-                              {user?.dp && (
-                                <Image
-                                  src={user?.dp}
-                                  className="dashboard-profile-img"
-                                  alt="Image"
-                                  preview
-                                />
-                              )}
+                  <i className="bi bi-person-circle"></i>
+                  <span>Profile</span>
+                </button>
+                <button
+                  className={`nav-tab ${activeTab === 'bookings' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('bookings')}
+                  data-tab="bookings"
+                  type="button"
+                >
+                  <i className="bi bi-calendar2-week"></i>
+                  <span>My Bookings</span>
+                </button>
+              </div>
 
-                              {/* if no image */}
-                              {!user?.dp && (
-                                <img
-                                  src="assets/images/user.png"
-                                  className="dashboard-profile-no-img"
-                                  alt=""
-                                />
-                              )}
-                              {/*  */}
+              {/* Tab Content */}
+              <div className="dashboard-content">
+                {/* Profile Tab */}
+                {activeTab === 'profile' && (
+                  <div className="profile-dashboard">
+                    {/* Profile Card */}
+                    <div className="modern-profile-card">
+                      <div className="profile-header">
+                        <div className="profile-avatar-section">
+                          <div className="avatar-container">
+                            {user?.dp ? (
+                              <Image
+                                src={user.dp}
+                                className="profile-avatar-img"
+                                alt="Profile"
+                                preview
+                              />
+                            ) : (
+                              <img
+                                src="assets/images/user.png"
+                                className="profile-avatar-default"
+                                alt="User"
+                              />
+                            )}
+                            <div className="avatar-badge">
+                              <i className="bi bi-check-circle-fill"></i>
                             </div>
                           </div>
-                          <div className="col-12 col-xl-8 col-lg-8 col-md-8 col-sm-9 dash-tab-divider">
-                            <div className="dashboard-profile-detail-area">
-                              <div className="dashboard-profile-detail">
-                                <h6 className="dashboard-profile-detail-title">
-                                  <i className="bi bi-person-lines-fill"></i>
-                                  Name :
-                                </h6>
-                                <h6 className="dashboard-profile-content">
-                                  {user?.title}. {user?.firstName}{" "}
-                                  {user?.lastName}
-                                </h6>
-                              </div>
+                        </div>
+                        <div className="profile-info">
+                          <h2 className="profile-name">
+                            {user?.title}. {user?.firstName} {user?.lastName}
+                          </h2>
+                          <p className="profile-email">{user?.email}</p>
+                          <div className="profile-badges">
+                            <span className="badge verified">
+                              <i className="bi bi-shield-check"></i>
+                              Verified
+                            </span>
+                          </div>
+                        </div>
+                        <div className="profile-actions">
+                          <button
+                            className="action-btn primary"
+                            onClick={togglePanel}
+                            title={showEditArea ? "Cancel Edit" : "Edit Profile"}
+                            // style={{color:"yellow"}}
+                          >
+                            <i className={`bi ${showEditArea ? "bi-x-lg" : "bi-pencil"}`}></i>
+                          </button>
+                        </div>
+                      </div>
 
-                              {/* <Divider className='mt-3' /> */}
-                              <div className="dashboard-profile-detail">
-                                <h6 className="dashboard-profile-detail-title">
-                                  <i className="bi bi-telephone-fill"></i>
-                                  Mobile No. :
-                                </h6>
-                                <h6 className="dashboard-profile-content">
-                                  {user?.mobileNumber}
-                                </h6>
-                              </div>
-
-                              <div className="dashboard-profile-detail">
-                                <h6 className="dashboard-profile-detail-title">
-                                  <i className="bi bi-envelope-fill"></i>
-                                  Email :
-                                </h6>
-                                <h6 className="dashboard-profile-content">
-                                  {user?.email}
-                                </h6>
-                              </div>
-
-                              {/* <div className="dashboard-profile-detail mb-0">
-                                <h6 className="dashboard-profile-detail-title">
-                                  <i className="bi bi-geo-alt-fill"></i>
-                                  Address :
-                                </h6>
-                                <h6 className="dashboard-profile-content">
-                                  {user?.addressL1 || "-"} {user?.addressL2}
-                                </h6>
-                              </div> */}
+                      <div className="profile-details">
+                        <div className="detail-grid">
+                          <div className="detail-item">
+                            <div className="detail-icon">
+                              <i className="bi bi-telephone-fill"></i>
+                            </div>
+                            <div className="detail-content">
+                              <span className="detail-label">Phone</span>
+                              <span className="detail-value">{user?.mobileNumber || "Not provided"}</span>
+                            </div>
+                          </div>
+                          <div className="detail-item">
+                            <div className="detail-icon">
+                              <i className="bi bi-envelope-fill"></i>
+                            </div>
+                            <div className="detail-content">
+                              <span className="detail-label">Email</span>
+                              <span className="detail-value">{user?.email}</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="dashboard-profile-footer">
-                        <Button
-                          label="Change Password"
+
+                      <div className="profile-footer">
+                        <button
+                          className="footer-btn secondary"
                           onClick={() => goToLink("/change-password")}
-                          icon="bi bi-lock"
-                          className="primary dashboard-action-btn"
-                          text
-                        />
-                        <Button
-                          label="Sign out"
+                        >
+                          <i className="bi bi-lock"></i>
+                          Change Password
+                        </button>
+                        <button
+                          className="footer-btn danger"
                           onClick={logOut}
-                          severity="danger"
-                          icon="bi bi-box-arrow-right"
-                          className="dashboard-action-btn"
-                          text
-                        />
+                        >
+                          <i className="bi bi-box-arrow-right"></i>
+                          Sign Out
+                        </button>
                       </div>
-                    </article>
+                    </div>
 
-                    <Toast ref={toast} />
-
+                    {/* Edit Profile Panel */}
                     <Panel
                       ref={editProfile}
                       id="editProfile"
                       header="Edit Profile"
-                      className="mt-3 edit-profile-section"
+                      className="modern-edit-panel"
                       toggleable
                       collapsed
                     >
-                      <div className="edit-profile-area">
-                        <div className="row">
-                          <div className="col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2">
-                            <div className="custom-form-group mb-3 mb-sm-4">
-                              <label
-                                htmlFor="title"
-                                className="custom-form-label"
-                              >
-                                Profile Picture
-                              </label>
-                              {/* <FileUpload
-                                                            mode="basic"
-                                                            name="demo[]"
-                                                            accept="image/*"
-                                                            maxFileSize={5000000}
-                                                            className="profil-img-upload"
-                                                            // onUpload={onUpload}
-                                                            auto
-                                                            chooseLabel="Browse"
-                                                        /> */}
-                              <FileUpload
-                                name="dp"
-                                accept="image/*"
-                                customUpload={true}
-                                uploadHandler={dpUploadHandler}
-                                className="profil-img-upload"
-                                mode="basic"
-                                auto={true}
-                                chooseLabel="Browse"
-                              />
-                              {/* {showError && (
-                                                            <small className="text-danger form-error-msg">
-                                                                This field is required
-                                                            </small>
-                                                        )} */}
-                            </div>
-                          </div>
-                          <div className="col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2">
-                            <div className="custom-form-group mb-3 mb-sm-4">
-                              <label
-                                htmlFor="title"
-                                className="custom-form-label form-required"
-                              >
-                                Title
-                              </label>
-                              <Dropdown
-                                id="title"
-                                value={{ name: userInfo.title }}
-                                onChange={(e) =>
-                                  setUserInfo({
-                                    ...userInfo,
-                                    title: e.value?.name,
-                                  })
-                                }
-                                options={titles}
-                                optionLabel="name"
-                                placeholder="Select"
-                                className="w-full w-100 custom-form-dropdown"
-                              />
-                              {showError && !userInfo.title && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="row">
-                          <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <div className="custom-form-group mb-3 mb-sm-4">
-                              <label
-                                htmlFor="firstName"
-                                className="custom-form-label form-required"
-                              >
-                                First Name
-                              </label>
-                              <InputText
-                                id="firstName"
-                                className="custom-form-input"
-                                name="firstName"
-                                placeholder="Enter First Name"
-                                value={userInfo.firstName}
-                                onChange={handleInputChange}
-                              />
-                              {showError && !userInfo.firstName && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <div className="custom-form-group mb-3 mb-sm-4">
-                              <label
-                                htmlFor="lastName"
-                                className="custom-form-label"
-                              >
-                                Last Name
-                              </label>
-                              <InputText
-                                id="lastName"
-                                className="custom-form-input"
-                                name="lastName"
-                                placeholder="Enter Last Name"
-                                value={userInfo.lastName}
-                                onChange={handleInputChange}
-                              />
-                              {/* {showError && (
-                                                            <small className="text-danger form-error-msg">
-                                                                This field is required
-                                                            </small>
-                                                        )} */}
-                            </div>
-                          </div>
-
-                          <div className="col-12 col-sm-6 col-lg-6 col-xl-6">
-                            <div className="custom-form-group mb-3 mb-sm-4">
-                              <label
-                                htmlFor="mobileNumber"
-                                className="custom-form-label form-required"
-                              >
-                                Mobile Number
-                              </label>
-                              {/* <InputMask
-                                                            id="mobileNumber"
-                                                            className="custom-form-input"
-                                                            name="mobileNumber"
-                                                            mask="(999) 9999-9999"
-                                                            placeholder="(020) 1234-5678"
-                                                            value={userInfo.mobileNumber}
-                                                            onChange={handleInputChange}
-                                                        ></InputMask> */}
-                              <InputText
-                                id="mobileNumber"
-                                keyfilter="num"
-                                className="custom-form-input"
-                                name="mobileNumber"
-                                value={userInfo.mobileNumber}
-                                onChange={handleInputChange}
-                              />
-                              {showError && !userInfo.mobileNumber && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                              <small className="text-danger form-error-msg">
-                                {!/^\d{9,}$/.test(userInfo.mobileNumber) &&
-                                userInfo.mobileNumber
-                                  ? "Enter valid phone number"
-                                  : ""}
-                              </small>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="row">
-                          <div className="col-12">
-                            <label
-                              htmlFor="address"
-                              className="custom-form-label form-required"
-                            >
-                              Address
-                            </label>
-                          </div>
-
-                          {/* <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <div className="custom-form-group mb-3 mb-sm-4">
-                              <InputText
-                                id="addressL1"
-                                className="custom-form-input"
-                                name="addressL1"
-                                placeholder="Address Line 1"
-                                value={userInfo.addressL1}
-                                onChange={handleInputChange}
-                              />
-                              {showError && !userInfo.addressL1 && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <div className="custom-form-group mb-3 mb-sm-0">
-                              <InputText
-                                id="addressL2"
-                                className="custom-form-input"
-                                name="addressL2"
-                                placeholder="Address Line 2"
-                                value={userInfo.addressL2}
-                                onChange={handleInputChange}
-                              />
-                            </div>
-                          </div> */}
-
-                          {/* <div className="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                            <div className="custom-form-group mb-3 mb-sm-0">
-                              <InputText
-                                id="city"
-                                className="custom-form-input   form-required"
-                                name="city"
-                                placeholder="City"
-                                value={userInfo.city}
-                                onChange={handleInputChange}
-                              />
-                              {showError && !userInfo.city && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="col-12 col-sm-5 col-md-5 col-lg-4 col-xl-4">
-                            <div className="custom-form-group mb-3 mb-sm-0">
-                              <InputText
-                                id="country"
-                                className="custom-form-input"
-                                name="country"
-                                placeholder="Country"
-                                value={userInfo.country}
-                                onChange={handleInputChange}
-                              />
-                              {showError && !userInfo.country && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="col-12 col-sm-3 col-md-3 col-lg-4 col-xl-4">
-                            <div className="custom-form-group mb-0">
-                              <InputText
-                                id="postCode"
-                                className="custom-form-input"
-                                name="postCode"
-                                placeholder="Post Code"
-                                value={userInfo.postCode}
-                                onChange={handleInputChange}
-                              />
-                              {showError && !userInfo.postCode && (
-                                <small className="text-danger form-error-msg">
-                                  This field is required
-                                </small>
-                              )}
-                            </div>
-                          </div> */}
-                        </div>
-
-                        <Divider className="divider-margin mt-3 mb-3 mt-sm-4 mb-sm-4" />
-
-                        <div className="row">
-                          <div className="col-12 mx-auto me-0 col-lg-3 col-xl-3 col-md-4 col-sm-4">
-                            <Button
-                              label="Update"
-                              className="custom-btn-primary w-100 result-card-btn"
-                              onClick={handleProfileUpdate}
-                              loading={loading}
+                      <div className="edit-form-container">
+                        <div className="form-section">
+                          <h6 className="section-title">Profile Picture</h6>
+                          <div className="upload-section">
+                            <FileUpload
+                              name="dp"
+                              accept="image/*"
+                              customUpload={true}
+                              uploadHandler={dpUploadHandler}
+                              className="modern-file-upload"
+                              mode="basic"
+                              auto={true}
+                              chooseLabel="Choose Photo"
                             />
                           </div>
+                        </div>
+
+                        <div className="form-grid">
+                          <div className="form-group">
+                            <label className="modern-label required">Title</label>
+                            <Dropdown
+                              value={{ name: userInfo.title }}
+                              onChange={(e) =>
+                                setUserInfo({
+                                  ...userInfo,
+                                  title: e.value?.name,
+                                })
+                              }
+                              options={titles}
+                              optionLabel="name"
+                              placeholder="Select Title"
+                              className="modern-dropdown"
+                            />
+                            {showError && !userInfo.title && (
+                              <small className="error-message">This field is required</small>
+                            )}
+                          </div>
+
+                          <div className="form-group">
+                            <label className="modern-label required">First Name</label>
+                            <InputText
+                              className="modern-input"
+                              name="firstName"
+                              placeholder="Enter first name"
+                              value={userInfo.firstName}
+                              onChange={handleInputChange}
+                            />
+                            {showError && !userInfo.firstName && (
+                              <small className="error-message">This field is required</small>
+                            )}
+                          </div>
+
+                          <div className="form-group">
+                            <label className="modern-label">Last Name</label>
+                            <InputText
+                              className="modern-input"
+                              name="lastName"
+                              placeholder="Enter last name"
+                              value={userInfo.lastName}
+                              onChange={handleInputChange}
+                            />
+                          </div>
+
+                          <div className="form-group">
+                            <label className="modern-label required">Mobile Number</label>
+                            <InputText
+                              keyfilter="num"
+                              className="modern-input"
+                              name="mobileNumber"
+                              placeholder="Enter mobile number"
+                              value={userInfo.mobileNumber}
+                              onChange={handleInputChange}
+                            />
+                            {showError && !userInfo.mobileNumber && (
+                              <small className="error-message">This field is required</small>
+                            )}
+                            {!/^\d{9,}$/.test(userInfo.mobileNumber) && userInfo.mobileNumber && (
+                              <small className="error-message">Enter valid phone number</small>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="form-actions">
+                          <Button
+                            label="Update Profile"
+                            className="update-btn"
+                            onClick={handleProfileUpdate}
+                            loading={loading}
+                          />
                         </div>
                       </div>
                     </Panel>
                   </div>
+                )}
 
-                  <div
-                    className="tab-pane dashboard-tab-content fade"
-                    id="v-pills-bookings"
-                    role="tabpanel"
-                    aria-labelledby="v-pills-bookings-tab"
-                    tabindex="0"
-                  >
-                    <article className="dashboard-profile-card">
-                      <div className="dashboard-profile-head">
-                        <h5>Bookings</h5>
-                      </div>
-                      <div className="filter_area">
-                        <div className="row">
-                            <div className="col-12 col-xl-4 col-sm-6">
-                                <div className="custom-form-group mb-sm-0 mb-3">
-                                    <label htmlFor="bookingDate" className="custom-form-label">Filter by booking date : </label>
-                                    <div className="form-icon-group">
-                                        <i className="bi bi-calendar2-fill input-grp-icon"></i>
-                                        <Calendar id="bookingDate" value={bookingDate} onChange={(e)=>
-                                            {
-                                                setBookingDate(e.value); 
-                                                handleFilterByDate(e); 
-                                            }
-                                        } placeholder='dd/mm/yyyy' dateFormat="dd/mm/yy" 
-                                        maxDate={today} 
-                                        className='w-100' />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-12 col-xl-4 col-sm-6">
-                                <div className="custom-form-group mb-sm-0 mb-3">
-                                    <label htmlFor="dropOffDate" className="custom-form-label">Search by booking id : </label>
-                                    <div className="form-icon-group">
-                                        <i className="bi bi-search input-grp-icon"></i>
-                                        <InputText
-                                            id="searchKey"
-                                            className="custom-form-input"
-                                            name="searchKey"
-                                            placeholder="Search here.."
-                                            value={searchKey}
-                                            onChange={(e) => {
-                                                const value = e.target.value;
-                                                setSearchKey(value); 
-                                                const bookingId = value ? value : null;         
-                                                fetchBookings(bookingId, null); 
-                                            }}
-                                        />
-                                        {/* <Calendar id="dropOffDate" value={bookingDate} onChange={handleFilterByDate} placeholder='dd/mm/yyyy' dateFormat="dd/mm/yy" minDate={today} className='w-100' /> */}
-                                    </div>
-                                </div>
-                            </div>
+                {/* Bookings Tab */}
+                {activeTab === 'bookings' && (
+                  <div className="bookings-dashboard">
+                    <div className="bookings-header">
+                      <h3 className="bookings-title">My Bookings</h3>
+                      <div className="bookings-filters">
+                        <div className="filter-group">
+                          <label className="filter-label">Filter by Date</label>
+                          <Calendar
+                            value={bookingDate}
+                            onChange={(e) => {
+                              setBookingDate(e.value);
+                              handleFilterByDate(e);
+                            }}
+                            placeholder="Select date"
+                            dateFormat="dd/mm/yy"
+                            maxDate={today}
+                            className="filter-calendar"
+                          />
                         </div>
-                      </div>  
-                      <div className="row">
-                        <div className="col-12">
-                          {bookings && bookings?.length > 0 && <div className="dash-table-area">
-                            <DataTable
-                              value={bookings}
-                              paginator
-                              size="small"
-                              rows={rows}
-                              totalRecords={totalRecords}
-                              // onPage={onPageChange}
-                              loading={loading}
-                              rowsPerPageOptions={rowPerPage}
-                              tableStyle={{ minWidth: "50rem" }}
-                              rowHover
-                              className="dash-table"
-                            >
-                              <Column
-                                field="id"
-                                header="bookingId"
-                                style={{ width: "20%" }}
-                              ></Column>
-                              <Column
-                                header="Date & Time"
-                                body={dateTimeTemplate}
-                                style={{ width: "30%" }}
-                              ></Column>
-                              <Column
-                                header="Status"
-                                body={statusBodyTemplate}
-                                style={{ width: "25%" }}
-                              ></Column>
-                              <Column
-                                body={searchBodyTemplate}
-                                header="Info"
-                                style={{ width: "10%" }}
-                              ></Column>
-                              <Column
-                                body={cancelBodyTemplate}
-                                header="Cancel"
-                                style={{ width: "15%" }}
-                              ></Column>
-                            </DataTable>
-                          </div>}
-                          {loading &&  (
-                        <div className="no_data_found_area">
-                            {/* <img src="/assets/images/no_data_2.svg" alt="No booking data!" /> */}
-                            <h6>Loading...</h6>
-                        </div>
-                    )}
-                    {!loading && bookings && bookings?.length === 0 && (
-                        <div className="no_data_found_area">
-                            <img src="/assets/images/no_data_2.svg" alt="No booking data!" />
-                            <h6>No booking data!</h6>
-                        </div>
-                    )}
+                        <div className="filter-group">
+                          <label className="filter-label">Search Booking</label>
+                          <InputText
+                            className="filter-search"
+                            name="searchKey"
+                            placeholder="Enter booking ID"
+                            value={searchKey}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              setSearchKey(value);
+                              const bookingId = value ? value : null;
+                              fetchBookings(bookingId, null);
+                            }}
+                          />
                         </div>
                       </div>
-                    </article>
+                    </div>
+
+                    <div className="bookings-content">
+                      {loading && (
+                        <div className="loading-state">
+                          <div className="loading-spinner"></div>
+                          <p>Loading bookings...</p>
+                        </div>
+                      )}
+
+                      {!loading && bookings && bookings.length > 0 && (
+                        <div className="bookings-grid">
+                          {bookings.map((booking, index) => (
+                            <div key={index} className="booking-card">
+                              <div className="booking-header">
+                                <div className="booking-id">
+                                  <span className="id-label">Booking ID</span>
+                                  <span className="id-value">{booking.id}</span>
+                                </div>
+                                <div className={`booking-status ${booking.status.toLowerCase()}`}>
+                                  {booking.status}
+                                </div>
+                              </div>
+                              <div className="booking-details">
+                                <div className="booking-date">
+                                  <i className="bi bi-calendar-event"></i>
+                                  <span>{booking.date} {booking.time}</span>
+                                </div>
+                                <div className="booking-location">
+                                  <i className="bi bi-geo-alt"></i>
+                                  <span>{booking.details?.airportName || "Airport"}</span>
+                                </div>
+                              </div>
+                              <div className="booking-actions">
+                                <button
+                                  className="action-btn view"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#bookingDetailModal"
+                                  onClick={() => setSelectedBooking(booking.details)}
+                                >
+                                  <i className="bi bi-eye"></i>
+                                  View Details
+                                </button>
+                                {booking.details?.cancellationCoverFee && (
+                                  <button className="action-btn cancel">
+                                    <i className="bi bi-x-circle"></i>
+                                    Cancel
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {!loading && bookings && bookings.length === 0 && (
+                        <div className="empty-state">
+                          <div className="empty-icon">
+                            <i className="bi bi-calendar-x"></i>
+                          </div>
+                          <h4>No bookings found</h4>
+                          <p>You haven't made any bookings yet. Start by making your first reservation!</p>
+                          <button className="cta-btn" onClick={() => goToLink("/")}>
+                            Make a Booking
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
