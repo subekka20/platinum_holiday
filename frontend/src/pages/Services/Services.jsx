@@ -160,25 +160,25 @@ const Services = () => {
             <div className="col-lg-6">
               <div className="features-visual">
                 <div className="visual-cards">
-                  <div className="visual-card card-1">
-                    <i className="bi bi-shield-fill"></i>
-                    <h5>Secure</h5>
-                    <p>Protected</p>
+                  <div className="visual-card">
+                    <i className="bi bi-shield-check-fill"></i>
+                    <h5>100% Secure</h5>
+                    <p>Advanced security monitoring</p>
                   </div>
-                  <div className="visual-card card-2">
-                    <i className="bi bi-clock-fill"></i>
-                    <h5>Always Open</h5>
-                    <p>24/7 Access</p>
+                  <div className="visual-card">
+                    <i className="bi bi-clock-history"></i>
+                    <h5>24/7 Available</h5>
+                    <p>Round the clock access</p>
                   </div>
-                  <div className="visual-card card-3">
-                    <i className="bi bi-award-fill"></i>
-                    <h5>Premium</h5>
-                    <p>Quality Service</p>
+                  <div className="visual-card">
+                    <i className="bi bi-star-fill"></i>
+                    <h5>Premium Quality</h5>
+                    <p>Exceptional service standards</p>
                   </div>
-                  <div className="visual-card card-4">
+                  <div className="visual-card">
                     <i className="bi bi-geo-alt-fill"></i>
-                    <h5>Convenient</h5>
-                    <p>Prime Locations</p>
+                    <h5>Prime Location</h5>
+                    <p>Close to all major airports</p>
                   </div>
                 </div>
               </div>
