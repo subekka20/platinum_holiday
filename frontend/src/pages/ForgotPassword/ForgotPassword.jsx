@@ -154,98 +154,131 @@ const ForgotPassword = () => {
       <Header />
       <Toast ref={toast} />
 
-      {/* Clean Forgot Password Section */}
-      <section className="clean-signin-section">
-        <div className="container">
-          <div className="row justify-content-center align-items-center min-vh-100">
-            {page === 1 ? (
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="clean-signin-card" data-aos="fade-up">
-                  <div className="clean-card-header">
+      {/* Split Screen Forgot Password Section */}
+      <section className="split-signin-section">
+        <div className="split-container">
+          {/* Left Panel - Forgot Password Forms */}
+          <div className="signin-left-panel">
+            <div className="signin-form-container">
+              {page === 1 ? (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="clean-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
-                    <h2 className="clean-card-title">Reset Password</h2>
-                    <p className="clean-card-subtitle">
-                      Enter your email address to receive password reset instructions
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
+                  </div>
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Reset Password</h2>
+                    <p className="welcome-subtitle">
+                      Enter your email address to receive password reset
+                      instructions
                     </p>
                   </div>
-                  
-                  <form className="clean-signin-form" onSubmit={handleVerifyEmail}>
-                    <div className="clean-input-group">
+
+                  {/* Form Section */}
+                  <form
+                    className="split-signin-form"
+                    onSubmit={handleVerifyEmail}
+                  >
+                    <div className="input-group">
+                      <label htmlFor="verify_email" className="input-label">
+                        Email Address
+                      </label>
                       <InputText
                         id="verify_email"
                         keyfilter="email"
-                        className="clean-input"
+                        className="split-input"
                         placeholder="Enter your email address"
                         name="email"
                         value={resetPasswordInfo.email}
                         onChange={handleInputChange}
                       />
-                      {/* <label htmlFor="verify_email" className="clean-label">
-                        Email Address *
-                      </label>
-                       */}
-                      {(showError && !resetPasswordInfo.email) && (
-                        <small className="clean-error-msg">
+                      {showError && !resetPasswordInfo.email && (
+                        <small className="error-text">
                           This field is required
                         </small>
                       )}
-                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resetPasswordInfo.email) && resetPasswordInfo.email && (
-                        <small className="clean-error-msg">
-                          Enter valid email
-                        </small>
-                      )}
+                      {!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                        resetPasswordInfo.email
+                      ) &&
+                        resetPasswordInfo.email && (
+                          <small className="error-text">
+                            Enter valid email
+                          </small>
+                        )}
                     </div>
 
                     <Button
-                      label={loading ? "Processing..." : "CHANGE PASSWORD"}
-                      className="clean-submit-btn"
+                      label={loading ? "Processing..." : "SEND RESET LINK"}
+                      className="split-signin-button"
                       loading={loading}
                       disabled={!resetPasswordInfo.email}
                       type="submit"
                     />
 
-                    <div className="clean-form-footer">
-                      <p>
+                    <div className="signup-section">
+                      <p className="signup-text">
                         Remember your password?{" "}
-                        <a href="/sign-in" className="clean-link">
-                          Sign in
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
                         </a>
                       </p>
                     </div>
                   </form>
-                </div>
-              </div>
-            ) : (
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="clean-signin-card" data-aos="fade-up">
-                  <button
-                    className="clean-back-btn"
-                    onClick={goBack}
-                  >
-                    <i className="ri ri-arrow-left-line"></i>
-                    Back
-                  </button>
-                  
-                  <div className="clean-card-header">
+                </>
+              ) : (
+                <>
+                  {/* Logo Section */}
+                  <div className="signin-brand">
                     <img
                       src="assets/images/logo.png"
-                      className="clean-card-logo"
+                      className="brand-logo"
                       alt="Platinum Holiday Service"
                     />
-                    <h2 className="clean-card-title">Create New Password</h2>
-                    <p className="clean-card-subtitle">
+                    <h1 className="brand-name-j">Platinum Holiday Service</h1>
+                  </div>
+                  <Divider></Divider>
+                  {/* Back Button */}
+                  {/* <div className="signup-section" style={{ marginBottom: '20px' }}>
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.7)',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <i className="ri-arrow-left-line"></i>
+                      Back
+                    </button>
+                  </div> */}
+
+                  {/* Welcome Section */}
+                  <div className="welcome-section">
+                    <h2 className="welcome-title">Create New Password</h2>
+                    <p className="welcome-subtitle">
                       Please enter your new password below
                     </p>
                   </div>
-                  
-                  <form className="clean-signin-form" onSubmit={handleSubmit}>
-                    <div className="clean-input-group">
+
+                  {/* Form Section */}
+                  <form className="split-signin-form" onSubmit={handleSubmit}>
+                    <div className="input-group">
+                      <label className="input-label">New Password</label>
                       <Password
-                        className="clean-password"
+                        className="split-input"
                         name="newPassword"
                         value={resetPasswordInfo.newPassword}
                         onChange={handleInputChange}
@@ -255,18 +288,23 @@ const ForgotPassword = () => {
                         placeholder="Enter your new password"
                         feedback={true}
                       />
-                      {/* <label className="clean-label">New Password *</label> */}
-                      {(showError && !resetPasswordInfo.newPassword) && (
-                        <small className="clean-error-msg">This field is required</small>
+                      {showError && !resetPasswordInfo.newPassword && (
+                        <small className="error-text">
+                          This field is required
+                        </small>
                       )}
-                      {(resetPasswordInfo.newPassword.length < 8 && resetPasswordInfo.newPassword) && (
-                        <small className="clean-error-msg">Password must be at least 8 characters long</small>
-                      )}
+                      {resetPasswordInfo.newPassword.length < 8 &&
+                        resetPasswordInfo.newPassword && (
+                          <small className="error-text">
+                            Password must be at least 8 characters long
+                          </small>
+                        )}
                     </div>
 
-                    <div className="clean-input-group">
+                    <div className="input-group">
+                      <label className="input-label">Confirm Password</label>
                       <Password
-                        className="clean-password"
+                        className="split-input"
                         name="confirmPassword"
                         value={resetPasswordInfo.confirmPassword}
                         onChange={handleInputChange}
@@ -274,38 +312,55 @@ const ForgotPassword = () => {
                         toggleMask
                         placeholder="Re-enter your new password"
                       />
-                      {/* <label className="clean-label">Confirm Password *</label> */}
-                      {(showError && !resetPasswordInfo.confirmPassword) && (
-                        <small className="clean-error-msg">This field is required</small>
+                      {showError && !resetPasswordInfo.confirmPassword && (
+                        <small className="error-text">
+                          This field is required
+                        </small>
                       )}
-                      {(resetPasswordInfo.newPassword !== resetPasswordInfo.confirmPassword && resetPasswordInfo.confirmPassword) && (
-                        <small className="clean-error-msg">Passwords do not match</small>
-                      )}
+                      {resetPasswordInfo.newPassword !==
+                        resetPasswordInfo.confirmPassword &&
+                        resetPasswordInfo.confirmPassword && (
+                          <small className="error-text">
+                            Passwords do not match
+                          </small>
+                        )}
                     </div>
 
                     <Button
                       label="RESET PASSWORD"
-                      className="clean-submit-btn"
+                      className="split-signin-button"
                       loading={loading}
                       type="submit"
                     />
 
-                    <div className="clean-form-footer">
-                      <p>
+                    <div className="signup-section">
+                      <p className="signup-text">
                         Remember your password?{" "}
-                        <a href="/sign-in" className="clean-link">
-                          Sign in
+                        <a href="/sign-in" className="signup-link">
+                          Sign In
                         </a>
                       </p>
                     </div>
                   </form>
-                </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Right Panel - Background Image */}
+          <div className="signin-right-panel">
+            <div className="image-overlay">
+              <div className="overlay-content">
+                <h3 className="overlay-title">Password Recovery</h3>
+                <p className="overlay-description">
+                  Securely reset your password and regain access to your
+                  Platinum Holiday Service account
+                </p>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
-      {/* Forgot Password Section End */}
 
       <Footer />
     </>
