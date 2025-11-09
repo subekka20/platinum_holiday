@@ -471,9 +471,9 @@ code {
   transition: ease 0.5s;
   background: radial-gradient(
     1200px 600px at 80% 10%,
-    #1f2a36 0%,
-    #0f1720 55%,
-    #0b1017 100%
+    #2a3844 0%,
+    #1a252e 55%,
+    #151e25 100%
   );
 }
 
@@ -488,9 +488,9 @@ code {
   box-shadow: 0px 5px 15px #22205725;
   background: radial-gradient(
     1200px 600px at 80% 10%,
-    #1f2a36e6 0%,
-    #0f1720e6 55%,
-    #0b1017e6 100%
+    #2a3844f0 0%,
+    #1a252ef0 55%,
+    #151e25f0 100%
   );
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -637,8 +637,9 @@ code {
 
 .nav-link-button.with-bg {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: 2px solid linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* border: 2px solid linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
   color: #eaf6ff;
+  box-shadow: none !important;
 }
 
 .nav-link-button.with-outline {
@@ -655,6 +656,7 @@ code {
 .nav-link-button.with-bg:hover {
   background-color: transparent !important;
   color: #79b4ff !important;
+  box-shadow: none !important;
 }
 
 .menu-toggle-button {
@@ -4371,7 +4373,7 @@ button.custom-form-link:disabled {
 
 .signin-form-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   color: white;
   background: rgba(0, 0, 0, 0.4);
   padding: 40px;
@@ -4486,6 +4488,7 @@ button.custom-form-link:disabled {
   box-sizing: border-box !important;
   line-height: 1.2 !important;
   display: block !important;
+  box-shadow: none !important;
 }
 
 .split-input .p-password-input::placeholder {
@@ -4494,14 +4497,14 @@ button.custom-form-link:disabled {
 
 .split-input .p-password-input:focus {
   border-color: #667eea !important;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+  box-shadow: none !important;
   background: rgba(255, 255, 255, 0.15) !important;
   outline: none !important;
 }
 
 .split-input .p-password-toggle {
   right: 12px !important;
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: white !important;
   background: transparent !important;
   border: none !important;
   padding: 4px !important;
@@ -4524,6 +4527,25 @@ button.custom-form-link:disabled {
 
 .split-input.p-password .p-inputwrapper-focus {
   height: 48px !important;
+}
+
+/* Remove any shadows from password components */
+.split-input .p-password-input,
+.split-input.p-password,
+.split-input.p-password .p-inputwrapper {
+  box-shadow: none !important;
+}
+
+.split-input .p-password-input:focus {
+  box-shadow: none !important;
+}
+
+/* Ensure password panel (strength meter) styling */
+.split-input .p-password-panel {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 .split-checkbox {
@@ -4679,28 +4701,243 @@ button.custom-form-link:disabled {
   .split-signin-button {
     padding: 12px 20px !important;
     font-size: 15px !important;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: rgba(15, 23, 32, 0.6);
-  border: 1px solid rgba(51, 65, 85, 0.3);
-  border-radius: 12px;
-  color: #cbd5e1;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
   }
 
   .welcome-title {
     font-size: 1.6rem;
   }
+}
+
+/* Signup Form Specific Styles for Split Screen */
+.signup-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-group-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.input-group-row .input-group {
+  flex: 1;
+}
+
+.split-dropdown.p-dropdown {
+  width: 100% !important;
+  background: rgb(170 170 255 / 70%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  color: white !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.split-dropdown.p-dropdown:hover {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.split-dropdown.p-dropdown:focus-within {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.split-dropdown .p-dropdown-label {
+  padding: 12px 16px !important;
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  height: 48px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.split-dropdown .p-dropdown-label.p-placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.split-dropdown .p-dropdown-trigger {
+  color: rgba(255, 255, 255, 0.7) !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.split-dropdown .p-dropdown-trigger:hover {
+  background: transparent !important;
+  color: white !important;
+}
+
+.split-otp-input.p-inputotp {
+  gap: 8px !important;
+}
+
+.split-otp-input .p-inputotp-input {
+  width: 45px !important;
+  height: 45px !important;
+  background: rgb(170 170 255 / 70%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.split-otp-input .p-inputotp-input:focus {
+  outline: none !important;
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.error-text {
+  display: block !important;
+  color: #ff6b6b !important;
+  font-size: 12px !important;
+  margin-top: 6px !important;
+  font-weight: 500 !important;
+}
+
+.signup-text {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.remember-label {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Mobile Responsive Adjustments for Signup */
+@media (max-width: 768px) {
+  .signin-form-container {
+    padding: 30px 20px !important;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+
+  .input-group-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .input-group-row .input-group {
+    flex: 1 !important;
+    width: 100% !important;
+  }
+
+  .signup-form-grid {
+    gap: 14px;
+  }
+
+  .split-otp-input .p-inputotp-input {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 14px !important;
+  }
 
   .overlay-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem !important;
+  }
+
+  .overlay-description {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Stack all input rows on smaller screens for better readability */
+  .input-group-row {
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+  
+  .input-group-row .input-group {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-form-container {
+    padding: 20px 15px !important;
+    border-radius: 15px !important;
+  }
+
+  .brand-logo {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .brand-name-j {
+    font-size: 1.2rem !important;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem !important;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.9rem !important;
+  }
+
+  .split-input,
+  .split-input .p-password-input,
+  .split-dropdown .p-dropdown-label {
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    height: 44px !important;
+  }
+  
+  .split-input .p-password-input {
+    padding: 12px 40px 12px 14px !important;
+  }
+
+  .split-dropdown .p-dropdown-trigger {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .split-otp-input {
+    gap: 6px !important;
+  }
+
+  .split-otp-input .p-inputotp-input {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 13px !important;
+  }
+
+  .remember-label {
+    font-size: 12px !important;
+  }
+
+  .signup-form-grid {
+    gap: 12px;
   }
 }
 
