@@ -284,3 +284,57 @@
 * {
     transition: all 0.3s ease;
 }
+
+/* Disable dropdown animations/flying effects */
+.p-dropdown-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-dropdown-panel-enter {
+    animation: none !important;
+    transition: none !important;
+}
+
+.p-dropdown-panel-enter-active {
+    animation: none !important;
+    transition: none !important;
+}
+
+.p-dropdown-panel-enter-done {
+    animation: none !important;
+    transition: none !important;
+}
+
+.p-dropdown-panel-exit {
+    animation: none !important;
+    transition: none !important;
+}
+
+.p-dropdown-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Calendar dropdown panel animations disable */
+.p-datepicker-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-datepicker-panel-enter,
+.p-datepicker-panel-enter-active,
+.p-datepicker-panel-enter-done,
+.p-datepicker-panel-exit,
+.p-datepicker-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Disable PrimeReact's default overlay animations */
+.p-component-overlay {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+}

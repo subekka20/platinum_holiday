@@ -6171,3 +6171,209 @@ button.custom-form-link:disabled {
     display: none;
   }
 }
+
+/* ===================================== */
+/* GLOBAL DROPDOWN ANIMATION DISABLE */
+/* ===================================== */
+
+/* Disable all PrimeReact dropdown animations/flying effects globally */
+.p-dropdown-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-dropdown-panel-enter,
+.p-dropdown-panel-enter-active,
+.p-dropdown-panel-enter-done,
+.p-dropdown-panel-exit,
+.p-dropdown-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable calendar/datepicker animations */
+.p-datepicker-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-datepicker-panel-enter,
+.p-datepicker-panel-enter-active,
+.p-datepicker-panel-enter-done,
+.p-datepicker-panel-exit,
+.p-datepicker-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Additional comprehensive Calendar animation disable */
+.p-datepicker,
+.p-calendar-panel,
+.p-calendar .p-inputwrapper,
+.p-calendar .p-calendar-button {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-calendar-panel-enter,
+.p-calendar-panel-enter-active,
+.p-calendar-panel-enter-done,
+.p-calendar-panel-exit,
+.p-calendar-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable React CSSTransition animations for Calendar */
+.calendar-slide-up-enter,
+.calendar-slide-up-enter-active,
+.calendar-slide-up-enter-done,
+.calendar-slide-up-exit,
+.calendar-slide-up-exit-active,
+.calendar-slide-down-enter,
+.calendar-slide-down-enter-active,
+.calendar-slide-down-enter-done,
+.calendar-slide-down-exit,
+.calendar-slide-down-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable all PrimeReact slide/fade animations globally */
+.p-fadeIn,
+.p-fadeInRight,
+.p-fadeInLeft,
+.p-fadeInUp,
+.p-fadeInDown,
+.p-slideInUp,
+.p-slideInDown,
+.p-slideInLeft,
+.p-slideInRight,
+.p-zoomIn,
+.p-flipInY {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable multiselect dropdown animations */
+.p-multiselect-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-multiselect-panel-enter,
+.p-multiselect-panel-enter-active,
+.p-multiselect-panel-enter-done,
+.p-multiselect-panel-exit,
+.p-multiselect-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable overlay panel animations */
+.p-overlaypanel {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+}
+
+.p-overlaypanel-enter,
+.p-overlaypanel-enter-active,
+.p-overlaypanel-enter-done,
+.p-overlaypanel-exit,
+.p-overlaypanel-exit-active {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+}
+
+/* Disable menu/context menu animations */
+.p-menu {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-contextmenu {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable autocomplete dropdown animations */
+.p-autocomplete-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-autocomplete-panel-enter,
+.p-autocomplete-panel-enter-active,
+.p-autocomplete-panel-enter-done,
+.p-autocomplete-panel-exit,
+.p-autocomplete-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Disable tooltip animations */
+.p-tooltip {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+}
+
+.p-tooltip-enter,
+.p-tooltip-enter-active,
+.p-tooltip-enter-done,
+.p-tooltip-exit,
+.p-tooltip-exit-active {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+}
+
+/* Disable general PrimeReact overlay animations */
+.p-component-overlay {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+}
+
+.p-component-overlay-enter,
+.p-component-overlay-enter-active,
+.p-component-overlay-enter-done,
+.p-component-overlay-exit,
+.p-component-overlay-exit-active {
+    animation: none !important;
+    transition: opacity 0.1s ease !important;
+    transform: none !important;
+}
+
+/* Disable password strength panel animations */
+.p-password-panel {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.p-password-panel-enter,
+.p-password-panel-enter-active,
+.p-password-panel-enter-done,
+.p-password-panel-exit,
+.p-password-panel-exit-active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}

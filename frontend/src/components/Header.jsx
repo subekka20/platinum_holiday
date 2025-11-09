@@ -477,7 +477,7 @@ const Header = () => {
             <div className="mobile-contact-info">
               <a href="tel:+447375551666" className="mobile-contact-item">
                 <i className="bi bi-telephone-fill"></i>
-                +44 7375 551666
+                +44 1234567890
               </a>
               <a href="mailto:info@platinumholiday.co.uk" className="mobile-contact-item">
                 <i className="bi bi-envelope-fill"></i>

@@ -31,8 +31,8 @@ const ContactUs = () => {
     {
       icon: "bi-telephone-fill", 
       title: "Call Us",
-      content: "+44 7375 551666",
-      href: "tel:+44 7375 551666",
+      content: "+44 1234567890",
+      href: "tel:+44 1234567890",
       description: "24/7 customer support"
     },
     {
