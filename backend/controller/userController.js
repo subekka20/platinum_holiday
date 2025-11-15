@@ -53,7 +53,7 @@ const sendVerificationEmail = async (
             <p>Dear Sir/Madam,</p>
             <p>${content}</p>
             <h1>${verificationCode}</h1>
-            <p>If you have any questions, please contact our support team at <a href="mailto:info@theparkingdeals.co.uk">info@theparkingdeals.co.uk</a>.</p>
+            <p>If you have any questions, please contact our support team at <a href="mailto:info@platinumholidayservice.co.uk">info@platinumholidayservice.co.uk</a>.</p>
             <p>Thank you for choosing Platinum Holiday Service. We look forward to serving you.</p>
           </div>
         </div>
@@ -545,7 +545,7 @@ const carParkingBookingDetail = async (req, res) => {
             price_data: {
               currency: "gbp",
               product_data: {
-                name: "Platinum Holiday Booking",
+                name: "Platinum Holiday Booking..",
               },
               unit_amount: bookingResult.totalPayable * 100,
               // unit_amount:  0.3* 100

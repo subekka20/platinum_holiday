@@ -209,7 +209,7 @@ const Footer = () => {
                       <div className="contact-info">
                         <span className="contact-label">Phone</span>
                         <a href="tel:+447375551666" className="contact-value">
-                          +44 1234567890
+                          +447375551666
                         </a>
                       </div>
                     </div>
@@ -220,8 +220,8 @@ const Footer = () => {
                       </div>
                       <div className="contact-info">
                         <span className="contact-label">Email</span>
-                        <a href="mailto:info@platinumholiday.co.uk" className="contact-value">
-                          info@platinumholiday.co.uk
+                        <a href="mailto:info@platinumholidayservice.co.uk" className="contact-value">
+                          info@platinumholidayservice.co.uk
                         </a>
                       </div>
                     </div>

@@ -24,15 +24,15 @@ const ContactUs = () => {
     {
       icon: "bi-envelope-fill",
       title: "Email Us",
-      content: "info@platinumholiday.co.uk",
-      href: "mailto:info@platinumholiday.co.uk",
+      content: "info@platinumholidayservice.co.uk",
+      href: "mailto:info@platinumholidayservice.co.uk",
       description: "Send us an email anytime"
     },
     {
       icon: "bi-telephone-fill", 
       title: "Call Us",
-      content: "+44 1234567890",
-      href: "tel:+44 1234567890",
+      content: "+447375551666",
+      href: "tel:+447375551666",
       description: "24/7 customer support"
     },
     {

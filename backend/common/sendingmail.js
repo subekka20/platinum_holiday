@@ -345,7 +345,7 @@ const sendEmailToUser = async (booking, user, type) => {
                 </p>
                 <p class="mt-2">
                     <b>
-                        Complaint Email: <a href="mailto:info@theparkingdeals.co.uk">info@theparkingdeals.co.uk</a>
+                        Complaint Email: <a href="mailto:info@platinumholidayservice.co.uk">info@platinumholidayservice.co.uk</a>
                     </b>
                 </p>
 
@@ -507,7 +507,7 @@ const sendEmailToUser = async (booking, user, type) => {
                         would like more information, please send us an email.
                     </span>
                     <br>
-                    <a class="text-bold" href="mailto:info@theparkingdeals.co.uk">(info@theparkingdeals.co.uk)</a>
+                    <a class="text-bold" href="mailto:info@platinumholidayservice.co.uk">(info@platinumholidayservice.co.uk)</a>
                 </p>
 
                 <p class="mb-3 mt-4 text-bold">Disclaimer :</p>
@@ -676,7 +676,7 @@ const sendEmailToUser = async (booking, user, type) => {
                         would like more information, please send us an email.
                     </span>
                     <br>
-                    <a class="text-bold" href="mailto:info@theparkingdeals.co.uk">(info@theparkingdeals.co.uk)</a>
+                    <a class="text-bold" href="mailto:info@platinumholidayservice.co.uk">(info@platinumholidayservice.co.uk)</a>
                 </p>
 
                 <p class="mb-3 mt-4 text-bold">Disclaimer :</p>
@@ -826,8 +826,8 @@ const sendEmailToUser = async (booking, user, type) => {
 
                 <p>
                     <b>
-                        <a href="mailto:info@theparkingdeals.co.uk">
-                            info@theparkingdeals.co.uk
+                        <a href="mailto:info@platinumholidayservice.co.uk">
+                            info@platinumholidayservice.co.uk
                         </a>
                     </b>
                 </p>
@@ -1191,8 +1191,8 @@ const sendEmailToCompany = async (booking, user, type) => {
   
                   <p>
                       <b>
-                          <a href="mailto:info@theparkingdeals.co.uk">
-                              info@theparkingdeals.co.uk
+                          <a href="mailto:info@platinumholidayservice.co.uk">
+                              info@platinumholidayservice.co.uk
                           </a>
                       </b>
                   </p>
