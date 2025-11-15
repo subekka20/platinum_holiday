@@ -178,7 +178,7 @@ const TermsAndConditions = () => {
                   <p className="terms-contact-text">
                     If you have any questions about these Terms & Conditions,
                     please contact us at  <a href="tel:+447375551666" className="contact-value">
-                          +44 1234567890
+                          +447375551666
                         </a>
                   </p>
                 </div>

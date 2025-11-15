@@ -410,7 +410,7 @@ const respondToTheContactOrFaqForm = async (req, res) => {
                                 </tr>
                             </tbody>
                         </table>
-                        <p>If you have any questions, please contact our support team at <a href="mailto:info@theparkingdeals.co.uk">info@theparkingdeals.co.uk</a>.</p>
+                        <p>If you have any questions, please contact our support team at <a href="mailto:info@platinumholidayservice.co.uk">info@platinumholidayservice.co.uk</a>.</p>
                         <p>Thank you for choosing Shopname. We look forward to serving you.</p>
                     </div>
                 </div>
