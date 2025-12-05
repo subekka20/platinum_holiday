@@ -473,7 +473,7 @@ const Header = () => {
             </div>
           )}
 
-          <div className="mobile-menu-footer">
+          {/* <div className="mobile-menu-footer">
             <div className="mobile-contact-info">
               <a href="tel:+447375551666" className="mobile-contact-item">
                 <i className="bi bi-telephone-fill"></i>
@@ -484,7 +484,7 @@ const Header = () => {
                 info@platinumholidayservice.co.uk
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
       </header>
     </>
