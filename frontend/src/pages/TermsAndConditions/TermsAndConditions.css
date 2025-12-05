@@ -768,3 +768,60 @@
     display: none !important;
   }
 }
+
+/* Enhanced Terms Styles */
+.terms-highlight {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.terms-highlight p {
+  margin: 0;
+  color: #92400e;
+  font-weight: 500;
+}
+
+.contact-details {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border: 1px solid #e2e8f0;
+}
+
+.contact-details p {
+  margin: 0.5rem 0;
+  color: #475569;
+}
+
+.contact-details strong {
+  color: #1e293b;
+}
+
+.terms-legal-note {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+
+.terms-legal-note p {
+  margin: 0;
+  color: #1e40af;
+}
+
+.contact-value {
+  color: #667eea !important;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.contact-value:hover {
+  color: white !important;
+  /* text-decoration: underline; */
+}

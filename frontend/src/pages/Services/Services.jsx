@@ -161,7 +161,7 @@ const Services = () => {
               <div className="features-visual">
                 <div className="visual-cards">
                   <div className="visual-card">
-                    <i className="bi bi-shield-check-fill"></i>
+                    <i className="bi bi-shield-check"></i>
                     <h5>100% Secure</h5>
                     <p>Advanced security monitoring</p>
                   </div>
