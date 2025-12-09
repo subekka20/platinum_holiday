@@ -34,7 +34,7 @@ app.use(
   cors({
     // CORS setup
     origin: [
-      "https://platinum-holiday-web.onrender.com",
+      "https://www.platinumholidayservice.co.uk/",
       "http://localhost:3000",
       "http://localhost:3001",
       "http://localhost:3002",
