@@ -34,11 +34,11 @@ app.use(
   cors({
     // CORS setup
     origin: [
-      "https://www.theparkingdeals.co.uk",
+      "https://platinum-holiday-web.onrender.com",
       "http://localhost:3000",
       "http://localhost:3001",
       "http://localhost:3002",
-      "https://the-parking-deals.netlify.app",
+      // "https://the-parking-deals.netlify.app",
       "https://platinum-holiday-backend.onrender.com",
     ],
     credentials: true,
