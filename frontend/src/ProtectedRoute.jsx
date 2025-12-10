@@ -72,9 +72,9 @@ const isAuthPage = ['/sign-in', '/sign-up', '/forgot-password', '/admin-login'].
         return <Navigate to="/bookings" />;
     };
 
-    if (childType === 'VendorList') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    // if (childType === 'VendorList') {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // };
 
     return children;
 };
