@@ -84,9 +84,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Home /></ProtectedRoute></Suspense>} />
         <Route path='/about-us' element={<Suspense fallback={<Preloader />}><ProtectedRoute><AboutUs /></ProtectedRoute></Suspense>} />
-        <Route path='/sign-in' element={<ProtectedRoute><Signin /></ProtectedRoute>} />
-        <Route path='/sign-up' element={<ProtectedRoute><Signup /></ProtectedRoute>} />
-        <Route path='/forgot-password' element={<ProtectedRoute><ForgotPassword /></ProtectedRoute>} />
+        <Route path='/sign-in' element={<Signin />} />
+        <Route path='/sign-up' element={<Signup />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/privacy-policy' element={<Suspense fallback={<Preloader />}><ProtectedRoute><PrivacyPolicy /></ProtectedRoute></Suspense>} />
         <Route path='/terms-and-conditions' element={<Suspense fallback={<Preloader />}><ProtectedRoute><TermsAndConditions /></ProtectedRoute></Suspense>} />
         <Route path='/faq' element={<Suspense fallback={<Preloader />}><ProtectedRoute><FaQ /></ProtectedRoute></Suspense>} />
