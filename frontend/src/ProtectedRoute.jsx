@@ -37,9 +37,9 @@ const ProtectedRoute = ({ children }) => {
     }
 
     const { pathname } = location;
-    const childType = children.type?.componentName;
-    const isAuthPage = ['Signin', 'Signup', 'ForgotPassword', 'AdminLogin'].includes(childType);
-
+    // const childType = children.type?.componentName;
+    // const isAuthPage = ['Signin', 'Signup', 'ForgotPassword', 'AdminLogin'].includes(childType);
+const isAuthPage = ['/sign-in', '/sign-up', '/forgot-password', '/admin-login'].includes(location.pathname);
     if (isAuthPage && isAuth) {
         const redirectPath = isAuth.role === 'Admin' ? '/bookings' : '/';
         return <Navigate to={redirectPath} />;
