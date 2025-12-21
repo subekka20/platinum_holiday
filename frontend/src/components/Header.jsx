@@ -130,12 +130,12 @@ const Header = () => {
                     className="nav-logo-link"
                   >
                     <img
-                      src="assets/images/logo-light.png"
+                      src="assets/images/logo-n.png"
                       className="nav-logo"
                       alt="Logo"
                     />
                     <img
-                      src="assets/images/logo-light.png"
+                      src="assets/images/logo-n.png"
                       className="scrolled-logo"
                       alt="Logo"
                     />
@@ -337,7 +337,7 @@ const Header = () => {
         <div className={`modern-mobile-menu ${menuOpen ? "show" : ""}`}>
           <div className="mobile-menu-header">
             <button onClick={() => goToLink("/")} className="mobile-menu-logo">
-              <img src="assets/images/logo-light.png" alt="Platinum Holiday" />
+              <img src="assets/images/logo-n.png" alt="Platinum Holiday" />
               <span className="brand-text">Platinum Holiday</span>
             </button>
             <button className="modern-close-button" onClick={closeMenu}>

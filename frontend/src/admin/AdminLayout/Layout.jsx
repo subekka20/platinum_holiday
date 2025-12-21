@@ -103,7 +103,7 @@ const Layout = () => {
                     <li>
                         <Link href="#" className="logo_title_area">
                             <span class="icon logo">
-                                <img src="/assets/images/logo-light.png" alt="" />
+                                <img src="/assets/images/logo-n.png" alt="" />
                             </span>
                             <span class="logo_title">
                                 Platinum Holiday <br />
