@@ -291,9 +291,9 @@ async function generateBookingId() {
   if (latestBooking && latestBooking.bookingId) {
     const lastIdNumber = parseInt(latestBooking.bookingId.split("-")[1]);
     const newIdNumber = lastIdNumber + 1;
-    return `TPD-${newIdNumber.toString().padStart(6, "0")}`;
+    return `PHS-${newIdNumber.toString().padStart(6, "0")}`;
   } else {
-    return "TPD-000100";
+    return "PHS-000100";
   }
 }
 
