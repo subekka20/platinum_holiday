@@ -41,6 +41,9 @@ const Booking = () => {
   const [showAlert, setShowAlert] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const toast = useRef(null);
+  const user = useSelector((state) => state.auth.user);
+  const token = useSelector((state) => state.auth.token);
+
   const [page, setPage] = useState(3);
   const [loading, setLoading] = useState(false);
   const [verified, setVerified] = useState(false);
@@ -81,9 +84,6 @@ const Booking = () => {
   const [checkedCancellationCover, setCheckedCancellationCover] =
     useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
-
-  const user = useSelector((state) => state.auth.user);
-  const token = useSelector((state) => state.auth.token);
 
   const initalUserDetails = {
     email: "",
@@ -321,7 +321,9 @@ const Booking = () => {
 
   const handleInputChange = async (e) => {
     const { name, value } = e.target;
-    setUserDetails({ ...userDetails, [name]: value });
+    const updatedDetails = { ...userDetails, [name]: value };
+    setUserDetails(updatedDetails);
+    
     if (name === "email") {
       setShowError(false);
       setEmailExist(false);
@@ -334,6 +336,14 @@ const Booking = () => {
       } catch (err) {
         console.log(err);
       }
+    }
+    
+    // Auto-login when password is entered for existing users
+    if (name === "password" && value && emailExist && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(updatedDetails.email)) {
+      // Use setTimeout to ensure the password state is updated and avoid showing errors
+      setTimeout(() => {
+        handleLoginForExistingUser(updatedDetails.email, value);
+      }, 300);
     }
   };
 
@@ -368,7 +378,124 @@ const Booking = () => {
 
   const handleLogin = () => { };
 
-  const handleRegister = () => { };
+  const handleLoginForExistingUser = async (email, password) => {
+    if (!email || !password) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/api/auth/login", {
+        email: email,
+        password: password
+      });
+      console.log(response.data);
+      
+      dispatch(
+        setLogin({
+          user: response.data.user,
+          token: response.data.token,
+        })
+      );
+      
+      toast.current.show({
+        severity: "success",
+        summary: "Login Successful",
+        detail: "Welcome back!",
+        life: 2000,
+      });
+      
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.log(err);
+      toast.current.show({
+        severity: "error",
+        summary: "Login Failed",
+        detail: err.response?.data?.error || "Invalid credentials",
+        life: 3000,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async () => {
+    if (!userDetails.email || !userDetails.firstName || !userDetails.password || 
+        !userDetails.confirmPassword || !userDetails.mobileNumber || !userDetails.title) {
+      setShowError(true);
+      toast.current.show({
+        severity: "error",
+        summary: "Error in Registration",
+        detail: "Please fill all required fields!",
+        life: 3000,
+      });
+      return;
+    }
+
+    if (userDetails.password !== userDetails.confirmPassword) {
+      toast.current.show({
+        severity: "error",
+        summary: "Error in Registration",
+        detail: "Password and Confirm Password do not match!",
+        life: 3000,
+      });
+      return;
+    }
+
+    if (userDetails.password.length < 8) {
+      toast.current.show({
+        severity: "error",
+        summary: "Error in Registration",
+        detail: "Password must be at least 8 characters long!",
+        life: 3000,
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("/api/auth/register", {
+        email: userDetails.email,
+        firstName: userDetails.firstName,
+        lastName: userDetails.lastName,
+        password: userDetails.password,
+        mobileNumber: userDetails.mobileNumber,
+        title: userDetails.title,
+        role: "User"
+      });
+      
+      console.log(response.data);
+      
+      dispatch(
+        setLogin({
+          user: response.data.user,
+          token: response.data.token,
+        })
+      );
+
+      // Set page to 3 (booking details) after successful registration
+      setPage(3);
+      
+      toast.current.show({
+        severity: "success",
+        summary: "Registration Successful",
+        detail: "Account created successfully!",
+        life: 3000,
+      });
+      
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.log(err);
+      toast.current.show({
+        severity: "error",
+        summary: "Failed to Register",
+        detail: err.response?.data?.error || "Registration failed. Please try again.",
+        life: 3000,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleApplyCoupon = () => {
     if (couponCode) {
@@ -683,7 +810,6 @@ const Booking = () => {
   return (
     <>
       {!bookingDetails && <Navigate to="/" />}
-      {(!user || !token) && <Navigate to="/sign-in" />}
       <Header />
 
       {/* Breadcrumb Section Start */}
@@ -788,14 +914,14 @@ const Booking = () => {
                                     )}
                                   </div>
 
-                                  {/* <div className="custom-form-group contains-float-input pt-2 mb-1">
-                                  <Button
-                                    label="LOGIN"
-                                    className="w-100 submit-button justify-content-center"
-                                    onClick={handleLogin}
-                                    loading={loading}
-                                  />
-                                </div> */}
+                                  <div className="custom-form-group contains-float-input pt-2 mb-1">
+                                    <Button
+                                      label="LOGIN"
+                                      className="w-100 submit-button justify-content-center"
+                                      onClick={handleLogin}
+                                      loading={loading}
+                                    />
+                                  </div>
                                 </div>
                               </div>
                             )}
@@ -983,16 +1109,16 @@ const Booking = () => {
                                 </div>
                               </div>
 
-                              {/* <div className="col-12 col-sm-6 col-xl-6 mx-auto">
-                                  <div className="custom-form-group contains-float-input pt-2 mb-1">
-                                    <Button
-                                      label="SIGN UP"
-                                      className="w-100 submit-button justify-content-center"
-                                      onClick={handleRegister}
-                                      loading={loading}
-                                    />
-                                  </div>
-                                </div> */}
+                              <div className="col-12 col-sm-6 col-xl-6 mx-auto">
+                                <div className="custom-form-group contains-float-input pt-2 mb-1">
+                                  <Button
+                                    label="SIGN UP"
+                                    className="w-100 submit-button justify-content-center"
+                                    onClick={handleRegister}
+                                    loading={loading}
+                                  />
+                                </div>
+                              </div>
                             </div>
                           ) : null}
                           {/*  */}

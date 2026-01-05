@@ -385,7 +385,6 @@ const VendorList = () => {
   return (
     <>
       {!quoteInfo && <Navigate to="/" />}
-      {(!user || !token) && <Navigate to="/sign-in" />}
       {pageLoading && <Preloader />}
       <Header />
 
