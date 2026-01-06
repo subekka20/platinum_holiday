@@ -3,17 +3,17 @@ import "./Booking.css";
 import "./Booking-responsive.css";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { InputIcon } from "primereact/inputicon";
+// import { InputIcon } from "primereact/inputicon";
 
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Checkbox } from "primereact/checkbox";
-import { InputMask } from "primereact/inputmask";
+// import { InputMask } from "primereact/inputmask";
 import { Password } from "primereact/password";
 import { InputOtp } from "primereact/inputotp";
-import { IconField } from "primereact/iconfield";
+// import { IconField } from "primereact/iconfield";
 
 import { Toast } from "primereact/toast";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
@@ -36,10 +36,10 @@ const Booking = () => {
   const dispatch = useDispatch();
   const { bookingDetails } = location.state || {};
   const [showError, setShowError] = useState(false);
-  const [showCouponError, setShowCouponError] = useState(false);
+  // const [showCouponError, setShowCouponError] = useState(false);
   const [couponValid, setCouponValid] = useState(false);
-  const [showAlert, setShowAlert] = useState(true);
-  const [isFocused, setIsFocused] = useState(false);
+  // const [showAlert, setShowAlert] = useState(true);
+  // const [isFocused, setIsFocused] = useState(false);
   const toast = useRef(null);
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
@@ -52,25 +52,25 @@ const Booking = () => {
   const [seconds, setSeconds] = useState(0);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [departTerminal, setDepartTerminal] = useState();
-  const depart_terminals = [
-    { name: "Terminal 1" },
-    { name: "Terminal 2" },
-    { name: "Terminal 3" },
-    { name: "Terminal 4" },
-    { name: "Terminal 5" },
-  ];
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  // const [departTerminal, setDepartTerminal] = useState();
+  // const depart_terminals = [
+  //   { name: "Terminal 1" },
+  //   { name: "Terminal 2" },
+  //   { name: "Terminal 3" },
+  //   { name: "Terminal 4" },
+  //   { name: "Terminal 5" },
+  // ];
 
-  const [arrivalTerminal, setArrivalTerminal] = useState();
-  const arrival_terminals = [
-    { name: "Terminal 1" },
-    { name: "Terminal 2" },
-    { name: "Terminal 3" },
-    { name: "Terminal 4" },
-    { name: "Terminal 5" },
-  ];
+  // const [arrivalTerminal, setArrivalTerminal] = useState();
+  // const arrival_terminals = [
+  //   { name: "Terminal 1" },
+  //   { name: "Terminal 2" },
+  //   { name: "Terminal 3" },
+  //   { name: "Terminal 4" },
+  //   { name: "Terminal 5" },
+  // ];
 
   const titles = [
     { name: "Mr." },
@@ -219,38 +219,7 @@ const Booking = () => {
   };
 
   const calculatingBookingCharge = async () => {
-    // Debug logging to identify the issue
-    console.log("Calculating booking charge with data:", {
-      bookingQuote: bookingDetails?.bookingQuote,
-      couponCode,
-      smsConfirmation: checkedSmsConfirmation,
-      cancellationCover: checkedCancellationCover,
-      numOfVehicle: vehiclesDetails.length,
-      vehiclesDetails,
-      bookingDetails
-    });
-
-    // Validate required data before making API call
-    if (!bookingDetails?.bookingQuote) {
-      toast.current.show({
-        severity: "error",
-        summary: "Missing Booking Information",
-        detail: "Booking quote information is missing. Please start a new booking.",
-        life: 3000,
-      });
-      return;
-    }
-
-    if (vehiclesDetails.length === 0) {
-      toast.current.show({
-        severity: "error",
-        summary: "Missing Vehicle Information",
-        detail: "Please add at least one vehicle to proceed.",
-        life: 3000,
-      });
-      return;
-    }
-
+    // setBookingCharge();
     try {
       const response = await api.post(
         "/api/user/calculate-total-booking-charge",
@@ -265,13 +234,11 @@ const Booking = () => {
       console.log(response.data);
       setBookingCharge(response.data);
     } catch (err) {
-      console.log("Booking charge calculation error:", err);
-      console.log("Error response:", err.response?.data);
-      
+      console.log(err);
       toast.current.show({
         severity: "error",
         summary: "Error in Booking charge calculation!",
-        detail: err.response?.data?.error || "Unable to calculate booking charges. Please try again.",
+        detail: err.response.data.error,
         life: 3000,
       });
     }
@@ -287,15 +254,6 @@ const Booking = () => {
     checkedSmsConfirmation,
     vehiclesDetails,
   ]);
-
-  // Initialize vehicle details if needed
-  useEffect(() => {
-    if (bookingDetails && vehiclesDetails.length === 1 && 
-        !vehiclesDetails[0].regNo && !vehiclesDetails[0].make) {
-      // If we have booking details but no vehicle info, ensure at least one vehicle slot
-      console.log("Initializing vehicle details for booking");
-    }
-  }, [bookingDetails]);
 
   const checkingCouponCodeValidity = async () => {
     try {
@@ -323,7 +281,7 @@ const Booking = () => {
     const { name, value } = e.target;
     const updatedDetails = { ...userDetails, [name]: value };
     setUserDetails(updatedDetails);
-    
+
     if (name === "email") {
       setShowError(false);
       setEmailExist(false);
@@ -336,14 +294,6 @@ const Booking = () => {
       } catch (err) {
         console.log(err);
       }
-    }
-    
-    // Auto-login when password is entered for existing users
-    if (name === "password" && value && emailExist && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(updatedDetails.email)) {
-      // Use setTimeout to ensure the password state is updated and avoid showing errors
-      setTimeout(() => {
-        handleLoginForExistingUser(updatedDetails.email, value);
-      }, 300);
     }
   };
 
@@ -376,126 +326,9 @@ const Booking = () => {
     setCardDetails({ ...cardDetails, [name]: value });
   };
 
-  const handleLogin = () => { };
+  const handleLogin = () => {};
 
-  const handleLoginForExistingUser = async (email, password) => {
-    if (!email || !password) {
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await api.post("/api/auth/login", {
-        email: email,
-        password: password
-      });
-      console.log(response.data);
-      
-      dispatch(
-        setLogin({
-          user: response.data.user,
-          token: response.data.token,
-        })
-      );
-      
-      toast.current.show({
-        severity: "success",
-        summary: "Login Successful",
-        detail: "Welcome back!",
-        life: 2000,
-      });
-      
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
-      console.log(err);
-      toast.current.show({
-        severity: "error",
-        summary: "Login Failed",
-        detail: err.response?.data?.error || "Invalid credentials",
-        life: 3000,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleRegister = async () => {
-    if (!userDetails.email || !userDetails.firstName || !userDetails.password || 
-        !userDetails.confirmPassword || !userDetails.mobileNumber || !userDetails.title) {
-      setShowError(true);
-      toast.current.show({
-        severity: "error",
-        summary: "Error in Registration",
-        detail: "Please fill all required fields!",
-        life: 3000,
-      });
-      return;
-    }
-
-    if (userDetails.password !== userDetails.confirmPassword) {
-      toast.current.show({
-        severity: "error",
-        summary: "Error in Registration",
-        detail: "Password and Confirm Password do not match!",
-        life: 3000,
-      });
-      return;
-    }
-
-    if (userDetails.password.length < 8) {
-      toast.current.show({
-        severity: "error",
-        summary: "Error in Registration",
-        detail: "Password must be at least 8 characters long!",
-        life: 3000,
-      });
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await api.post("/api/auth/register", {
-        email: userDetails.email,
-        firstName: userDetails.firstName,
-        lastName: userDetails.lastName,
-        password: userDetails.password,
-        mobileNumber: userDetails.mobileNumber,
-        title: userDetails.title,
-        role: "User"
-      });
-      
-      console.log(response.data);
-      
-      dispatch(
-        setLogin({
-          user: response.data.user,
-          token: response.data.token,
-        })
-      );
-
-      // Set page to 3 (booking details) after successful registration
-      setPage(3);
-      
-      toast.current.show({
-        severity: "success",
-        summary: "Registration Successful",
-        detail: "Account created successfully!",
-        life: 3000,
-      });
-      
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
-      console.log(err);
-      toast.current.show({
-        severity: "error",
-        summary: "Failed to Register",
-        detail: err.response?.data?.error || "Registration failed. Please try again.",
-        life: 3000,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  const handleRegister = async () => {};
 
   const handleApplyCoupon = () => {
     if (couponCode) {
@@ -600,10 +433,10 @@ const Booking = () => {
       console.log(result);
 
       ReactGA.event({
-        category: 'VEHICLE PARK BOOKING',
-        action: 'booking',
-        label: 'online_booking',
-        value: response.data?.totalPayable
+        category: "CAR PARK BOOKING",
+        action: "booking",
+        label: "online_booking",
+        value: response.data?.totalPayable,
       });
 
       toast.current.show({
@@ -704,7 +537,11 @@ const Booking = () => {
     }
 
     // Check if travel details are filled
-    if (!travelDetails.departureTerminal || !travelDetails.arrivalTerminal || !travelDetails.inBoundFlight) {
+    if (
+      !travelDetails.departureTerminal ||
+      !travelDetails.arrivalTerminal ||
+      !travelDetails.inBoundFlight
+    ) {
       setShowError(true);
       toast.current.show({
         severity: "error",
@@ -871,11 +708,14 @@ const Booking = () => {
                                     This field is required
                                   </small>
                                 )}
-                                {userDetails.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userDetails.email) && (
-                                  <small className="text-danger form-error-msg">
-                                    Enter valid email
-                                  </small>
-                                )}
+                                {userDetails.email &&
+                                  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                                    userDetails.email
+                                  ) && (
+                                    <small className="text-danger form-error-msg">
+                                      Enter valid email
+                                    </small>
+                                  )}
                               </div>
                             </div>
                           </div>
@@ -913,15 +753,6 @@ const Booking = () => {
                                       </small>
                                     )}
                                   </div>
-
-                                  <div className="custom-form-group contains-float-input pt-2 mb-1">
-                                    <Button
-                                      label="LOGIN"
-                                      className="w-100 submit-button justify-content-center"
-                                      onClick={handleLogin}
-                                      loading={loading}
-                                    />
-                                  </div>
                                 </div>
                               </div>
                             )}
@@ -929,11 +760,11 @@ const Booking = () => {
 
                           {/* for create account */}
                           {page === 1 &&
-                            !emailExist &&
-                            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                              userDetails.email
-                            ) &&
-                            userDetails.email ? (
+                          !emailExist &&
+                          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                            userDetails.email
+                          ) &&
+                          userDetails.email ? (
                             <div className="row mt-4">
                               <div className="col-12">
                                 <h6 className="account-alert">
@@ -944,8 +775,9 @@ const Booking = () => {
                               <div className="col-12 col-sm-6 col-xl-6 mx-auto">
                                 <div className="custom-form-group contains-float-input pt-2 mb-1">
                                   <Button
-                                    label={`${loading ? "Processing..." : "VERIFY"
-                                      }`}
+                                    label={`${
+                                      loading ? "Processing..." : "VERIFY"
+                                    }`}
                                     className="w-100 submit-button justify-content-center"
                                     onClick={handleVerify}
                                     loading={loading}
@@ -994,12 +826,13 @@ const Booking = () => {
 
                                 <div className="custom-form-group contains-float-input mb-3">
                                   <Button
-                                    label={`${reSendLoading
+                                    label={`${
+                                      reSendLoading
                                         ? "Processing..."
                                         : loading
-                                          ? "Verifying..."
-                                          : "VERIFY"
-                                      }`}
+                                        ? "Verifying..."
+                                        : "VERIFY"
+                                    }`}
                                     className="w-100 submit-button justify-content-center"
                                     onClick={handleVerifyOTP}
                                     loading={loading}
@@ -1068,7 +901,7 @@ const Booking = () => {
                                   )}
                                   <small className="text-danger form-error-msg">
                                     {userDetails.password.length < 8 &&
-                                      userDetails.password
+                                    userDetails.password
                                       ? "Password must be atleast 8 characters long"
                                       : ""}
                                   </small>
@@ -1102,14 +935,14 @@ const Booking = () => {
                                   <small className="text-danger text-capitalized form-error-message">
                                     {userDetails.password !==
                                       userDetails.confirmPassword &&
-                                      userDetails.confirmPassword
+                                    userDetails.confirmPassword
                                       ? "Password & Confirm Password must be equal"
                                       : ""}
                                   </small>
                                 </div>
                               </div>
 
-                              <div className="col-12 col-sm-6 col-xl-6 mx-auto">
+                              {/* <div className="col-12 col-sm-6 col-xl-6 mx-auto">
                                 <div className="custom-form-group contains-float-input pt-2 mb-1">
                                   <Button
                                     label="SIGN UP"
@@ -1118,7 +951,7 @@ const Booking = () => {
                                     loading={loading}
                                   />
                                 </div>
-                              </div>
+                              </div> */}
                             </div>
                           ) : null}
                           {/*  */}
@@ -1373,14 +1206,14 @@ const Booking = () => {
                             }
                             options={
                               bookingDetails &&
-                                Array.isArray(
-                                  bookingDetails?.airportName.terminals
-                                )
+                              Array.isArray(
+                                bookingDetails?.airportName.terminals
+                              )
                                 ? bookingDetails?.airportName.terminals?.map(
-                                  (ter) => {
-                                    return { name: ter };
-                                  }
-                                )
+                                    (ter) => {
+                                      return { name: ter };
+                                    }
+                                  )
                                 : []
                             }
                             optionLabel="name"
@@ -1414,14 +1247,14 @@ const Booking = () => {
                             }
                             options={
                               bookingDetails &&
-                                Array.isArray(
-                                  bookingDetails?.airportName.terminals
-                                )
+                              Array.isArray(
+                                bookingDetails?.airportName.terminals
+                              )
                                 ? bookingDetails?.airportName.terminals?.map(
-                                  (ter) => {
-                                    return { name: ter };
-                                  }
-                                )
+                                    (ter) => {
+                                      return { name: ter };
+                                    }
+                                  )
                                 : []
                             }
                             optionLabel="name"
@@ -1641,7 +1474,7 @@ const Booking = () => {
                             <label htmlFor="cancellationCover" className="ml-2">
                               Cancellation Cover{" "}
                               {bookingCharge &&
-                                bookingCharge?.cancellationCover > 0
+                              bookingCharge?.cancellationCover > 0
                                 ? "- £" + bookingCharge?.cancellationCover
                                 : ""}
                             </label>
@@ -1717,7 +1550,8 @@ const Booking = () => {
                         value="1"
                       />
                       <label htmlFor="isAgreed" className="ml-2">
-                        On making payment you agree to Platinum Holiday Service&nbsp;
+                        On making payment you agree to Platinum Holiday
+                        Service&nbsp;
                         <a href="/terms-and-conditions" target="_blank">
                           Terms and Conditions
                         </a>
@@ -1767,7 +1601,13 @@ const Booking = () => {
                 {/* Company & Location Card */}
                 <div className="info-card company-card">
                   <div className="company-logo">
-                    <img src={bookingDetails?.companyImg || "assets/images/default-company.png"} alt="Company Logo" />
+                    <img
+                      src={
+                        bookingDetails?.companyImg ||
+                        "assets/images/default-company.png"
+                      }
+                      alt="Company Logo"
+                    />
                   </div>
                   <div className="company-info">
                     <h4>{bookingDetails?.companyName}</h4>
@@ -1788,7 +1628,7 @@ const Booking = () => {
                     <i className="bi bi-calendar-event"></i>
                     Trip Details
                   </h5>
-                  
+
                   {/* Drop-off Details */}
                   <div className="trip-card drop-off">
                     <div className="trip-header">
@@ -1857,7 +1697,7 @@ const Booking = () => {
                     <i className="bi bi-receipt"></i>
                     Price Breakdown
                   </h5>
-                  
+
                   <div className="pricing-card">
                     <div className="price-items">
                       <div className="price-item base-price">
@@ -1866,7 +1706,10 @@ const Booking = () => {
                           <span>Booking Quote</span>
                         </div>
                         <div className="price-value">
-                          £{bookingCharge?.bookingQuote || bookingDetails?.bookingQuote || 0}
+                          £
+                          {bookingCharge?.bookingQuote ||
+                            bookingDetails?.bookingQuote ||
+                            0}
                         </div>
                       </div>
 
@@ -1892,17 +1735,18 @@ const Booking = () => {
                         </div>
                       )}
 
-                      {checkedCancellationCover && bookingCharge?.cancellationCover > 0 && (
-                        <div className="price-item optional">
-                          <div className="price-label">
-                            <i className="bi bi-shield-plus"></i>
-                            <span>Cancellation Cover</span>
+                      {checkedCancellationCover &&
+                        bookingCharge?.cancellationCover > 0 && (
+                          <div className="price-item optional">
+                            <div className="price-label">
+                              <i className="bi bi-shield-plus"></i>
+                              <span>Cancellation Cover</span>
+                            </div>
+                            <div className="price-value">
+                              £{bookingCharge?.cancellationCover}
+                            </div>
                           </div>
-                          <div className="price-value">
-                            £{bookingCharge?.cancellationCover}
-                          </div>
-                        </div>
-                      )}
+                        )}
 
                       {couponCode && couponValid && (
                         <>
@@ -1958,17 +1802,22 @@ const Booking = () => {
                 </div>
 
                 {/* Savings Highlight */}
-                {couponCode && couponValid && bookingCharge?.couponDiscount > 0 && (
-                  <div className="savings-highlight">
-                    <div className="savings-icon">
-                      <i className="bi bi-piggy-bank-fill"></i>
+                {couponCode &&
+                  couponValid &&
+                  bookingCharge?.couponDiscount > 0 && (
+                    <div className="savings-highlight">
+                      <div className="savings-icon">
+                        <i className="bi bi-piggy-bank-fill"></i>
+                      </div>
+                      <div className="savings-text">
+                        <h6>Great Savings!</h6>
+                        <p>
+                          You're saving {bookingCharge?.couponDiscount}% with
+                          your coupon
+                        </p>
+                      </div>
                     </div>
-                    <div className="savings-text">
-                      <h6>Great Savings!</h6>
-                      <p>You're saving {bookingCharge?.couponDiscount}% with your coupon</p>
-                    </div>
-                  </div>
-                )}
+                  )}
               </div>
             </div>
           </div>
