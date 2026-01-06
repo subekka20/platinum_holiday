@@ -92,7 +92,7 @@ function App() {
         <Route path='/faq' element={<Suspense fallback={<Preloader />}><ProtectedRoute><FaQ /></ProtectedRoute></Suspense>} />
         <Route path='/contact-us' element={<Suspense fallback={<Preloader />}><ProtectedRoute><ContactUs /></ProtectedRoute></Suspense>} />
         <Route path='/services' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Services /></ProtectedRoute></Suspense>} />
-        <Route path='/results' element={<ProtectedRoute><VendorList /></ProtectedRoute>} />
+        <Route path='/results' element={<Suspense fallback={<Preloader />}><VendorList /></Suspense>} />
         <Route path='/booking' element={<Suspense fallback={<Preloader />}><Booking /></Suspense>} />
         <Route path='/dashboard' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Dashboard /></ProtectedRoute></Suspense>} />
         <Route path='/change-password' element={<Suspense fallback={<Preloader />}><ProtectedRoute><ChangePassword /></ProtectedRoute></Suspense>} />

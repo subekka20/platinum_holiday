@@ -1,7 +1,7 @@
 import api from "../api";
 import { setAirports, setQuotes } from "../state";
 
-const airports = [{ name: "Luton" }];
+// const airports = [{ name: "Luton" }];
 
 const quoteForDay = (quote, day) => {
   const incrementPerDay = 5;
@@ -580,6 +580,111 @@ const settingQuotes = (day) => {
           <p>
             Airport&nbsp; levy charges entry &nbsp;paid by comapany and exit
             fees paid by customer.
+          </p>
+        </div>
+      ),
+    },
+    {
+      _id: "6698afc1c2b01f8e85778762",
+      name: "The Parking Deals Meet & Greet",
+      logo: "https://www.theparkingdeals.co.uk/assets/images/logo.png",
+      type: "Meet and Greet",
+      rating: 4.8,
+      quote: 0,
+      cancellationCover: true,
+      facilities: [
+        "Premium meet and greet service",
+        "Terminal drop-off and collection",
+        "Professional uniformed staff",
+        "Secure off-site parking",
+        "Competitive pricing",
+        "24/7 customer support"
+      ],
+      overView: (
+        <div>
+          <p>
+            <strong>Transfers</strong>
+          </p>
+          <p>Opening times: 24 Hours / 7 Days</p>
+          <p>Drop off at the terminal - No transfers required</p>
+          <p>Your keys will stay with the car park whilst you are away</p>
+          <p>&nbsp;</p>
+          <p>
+            <strong>Why Choose The Parking Deals?</strong>
+          </p>
+          <p>Premium meet and greet service with competitive rates</p>
+          <p>Professional, uniformed, and insured chauffeurs</p>
+          <p>Direct terminal collection - no waiting time</p>
+          <p>Secure off-airport parking compound</p>
+          <p>Vehicle inspection and photography for your peace of mind</p>
+          <p>Full liability insurance coverage</p>
+          <p>&nbsp;</p>
+          <p>
+            <strong>Service Details</strong>
+          </p>
+          <p>Simply drive to the terminal and hand over your keys</p>
+          <p>Our chauffeur will inspect and photograph your vehicle</p>
+          <p>Vehicle is securely parked in our monitored compound</p>
+          <p>On return, your car is brought back to the terminal</p>
+          <p>&nbsp;</p>
+          <p>
+            <strong>Additional Information</strong>
+          </p>
+          <p>Vehicle must have valid MOT and road tax</p>
+          <p>Adequate fuel level required</p>
+          <p>Tyres must meet legal requirements</p>
+          <p>Vehicle must be roadworthy</p>
+          <p>&nbsp;</p>
+          <p>
+            <strong>Vehicle Restrictions</strong>
+          </p>
+          <p>Standard car parking spaces (2.4m x 4.8m)</p>
+          <p>Large vehicles require prior arrangement</p>
+          <p>&nbsp;</p>
+          <p>
+            <strong>Insurance</strong>
+          </p>
+          <p>All drivers fully insured to operate your vehicle</p>
+          <p>Comprehensive liability coverage included</p>
+        </div>
+      ),
+      dropOffProcedure: (
+        <div>
+          <p>
+            <strong>Departure Procedure</strong>
+          </p>
+          <p>
+            Call us 20 minutes before arriving at the airport. Our uniformed chauffeur
+            will meet you at the designated meet & greet area in <strong>Terminal Car Park 1</strong>, 
+            Level 3, next to the lifts and pay machines.
+          </p>
+          <p>
+            Your chauffeur will carry photo ID and your booking details. We'll perform 
+            a brief vehicle inspection, documenting any existing damage on our booking form.
+            After confirming your return details, you'll sign the form and receive a copy
+            with our contact information.
+          </p>
+          <p>
+            <strong>Important:</strong> Please notify us as soon as possible if you're 
+            running early or late. Allow sufficient travel time as airport access roads
+            can experience heavy traffic.
+          </p>
+        </div>
+      ),
+      pickUpProcedure: (
+        <div>
+          <p>
+            <strong>Return Procedure</strong>
+          </p>
+          <p>
+            Call us when you've collected your luggage and are ready to leave the terminal.
+            Our chauffeur will bring your vehicle to the same collection point where you
+            dropped it off.
+          </p>
+          <p>
+            We'll perform a final inspection with you to ensure everything is in order
+            before handing back your keys. The typical waiting time is 10-15 minutes
+            from your call.
           </p>
         </div>
       ),

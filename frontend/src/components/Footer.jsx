@@ -102,7 +102,7 @@ const Footer = () => {
                       aria-label="Go to homepage"
                     >
                       <img
-                        src="../assets/images/logo-light.png"
+                        src="../assets/images/logo-n.png"
                         className="footer-logo-img"
                         alt="Platinum Holiday Service"
                       />

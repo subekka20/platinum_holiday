@@ -79,7 +79,7 @@ const Reservation = () => {
   const airports = useSelector((state) => state.vendor.airport);
   const token = useSelector((state) => state.auth.token);
 
-  const vendors = [{ name: "Airport Parking Bay" }, { name: "Luton 247" }];
+  const vendors = [{ name: "Airport Parking Bay" }, { name: "Luton 247" }, { name: "The Parking Deals" }];
 
   const quotes = useSelector((state) => state.vendor.quotes);
 

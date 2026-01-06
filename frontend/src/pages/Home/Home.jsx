@@ -198,20 +198,6 @@ const Home = () => {
   const handleGetQuote = async (e) => {
     e.preventDefault();
     setShowError(false);
-    
-    // Check if user is signed in
-    if (!user || !token) {
-      toast.current.show({
-        severity: "warn",
-        summary: "Sign In Required",
-        detail: "Please sign in to make a reservation. Redirecting to sign in page...",
-        life: 4000,
-      });
-      setTimeout(() => {
-        navigate("/sign-in");
-      }, 2000);
-      return;
-    }
 
     if (
       !selectedAirport ||
@@ -714,18 +700,11 @@ const Home = () => {
 
                 <div className="custom-form-group contains-float-input mb-0">
                   <Button
-                    label={user && token ? "Reserve Now" : "Sign In to Reserve"}
+                    label="Reserve Now"
                     className="w-100 submit-button justify-content-center ph-btn"
                     loading={loading}
+                    type="submit"
                   />
-                  {!user && !token && (
-                    <small className="text-info d-block text-center mt-2">
-                      <i className="bi bi-info-circle me-1"></i>
-                      You need to be signed in to make a reservation. 
-                      <a href="/sign-in" className="text-decoration-none ms-1">Sign In</a> or 
-                      <a href="/sign-up" className="text-decoration-none ms-1">Create Account</a>
-                    </small>
-                  )}
                 </div>
               </form>
               {/* </article> */}
