@@ -102,7 +102,7 @@ const Footer = () => {
                       aria-label="Go to homepage"
                     >
                       <img
-                        src="../assets/images/logo-n.png"
+                        src="../assets/images/logo-light.png"
                         className="footer-logo-img"
                         alt="Platinum Holiday Service"
                       />
@@ -119,13 +119,13 @@ const Footer = () => {
                   </p>
                   
                   {/* Social Media Links */}
-                  <div className="social-links">
+                  {/* <div className="social-links">
                     <span className="social-label">Follow Us:</span>
                     <div className="social-icons">
                       <a href="#" className="social-link" aria-label="Facebook">
                         <i className="bi bi-facebook"></i>
                       </a>
-                      {/* <a href="#" className="social-link" aria-label="Twitter">
+                      <a href="#" className="social-link" aria-label="Twitter">
                         <i className="bi bi-twitter"></i>
                       </a>
                       <a href="#" className="social-link" aria-label="Instagram">
@@ -133,9 +133,9 @@ const Footer = () => {
                       </a>
                       <a href="#" className="social-link" aria-label="LinkedIn">
                         <i className="bi bi-linkedin"></i>
-                      </a> */}
+                      </a>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

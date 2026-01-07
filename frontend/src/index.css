@@ -3910,7 +3910,7 @@ button.custom-form-link:disabled {
   font-weight: 600;
   margin: 0;
   opacity: 0.95;
-  color: #fff;
+  color: #000000;
 }
 
 .form-section {
