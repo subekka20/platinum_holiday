@@ -27,7 +27,11 @@ const {
     getAllVendorTerminals,
     updateVendorTerminal,
     deleteVendorTerminal,
-    getVendorsForDropdown
+    getVendorsForDropdown,
+    createServiceType,
+    getAllServiceTypes,
+    updateServiceType,
+    deleteServiceType
 } = require("../controller/adminController");
 
 // Define the maximum file size (in bytes) for each image. For example, 5MB:
@@ -127,5 +131,18 @@ router.delete("/delete-vendor-terminal/:id", authMiddleware, deleteVendorTermina
 
 //get vendors for dropdown
 router.get("/vendors-dropdown", authMiddleware, getVendorsForDropdown);
+
+//service type routes
+//create service type
+router.post("/create-service-type", authMiddleware, createServiceType);
+
+//get all service types
+router.get("/service-types", authMiddleware, getAllServiceTypes);
+
+//update service type
+router.put("/update-service-type/:id", authMiddleware, updateServiceType);
+
+//delete service type
+router.delete("/delete-service-type/:id", authMiddleware, deleteServiceType);
 
 module.exports = router;

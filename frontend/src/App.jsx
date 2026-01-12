@@ -57,11 +57,11 @@ const Bookings = React.lazy(() => import('./admin/Bookings/Bookings'));
 const Users = React.lazy(() => import('./admin/Users/Users'));
 const Customers = React.lazy(() => import('./admin/Customers/Customers'));
 const VendorsTerminal = React.lazy(() => import('./admin/VendorsTerminal/VendorTerminal'));
+const ServiceType = React.lazy(() => import('./admin/ServiceType/ServiceType'));
 const Vendors = React.lazy(() => import('./admin/Vendors/Vendors'));
 const Airports = React.lazy(() => import('./admin/Airports/Airports'));
 const VendorsBookings = React.lazy(() => import('./admin/Vendors/VendorBookings'));
-const Extras = React.lazy(() => import('./admin/Extras/Extras'));
-
+const Extras = React.lazy(() => import("./admin/Extras/Extras"));
 const MEASUREMENT_ID = process.env.REACT_APP_MEASUREMENT_ID;
 ReactGA.initialize(MEASUREMENT_ID);
 
@@ -108,6 +108,7 @@ function App() {
           <Route path='customers' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Customers /></ProtectedRoute></Suspense>} />
           <Route path='vendors' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Vendors /></ProtectedRoute></Suspense>} />
           <Route path='vendorsTerminal' element={<Suspense fallback={<Preloader />}><ProtectedRoute><VendorsTerminal /></ProtectedRoute></Suspense>} />
+          <Route path='serviceType' element={<Suspense fallback={<Preloader />}><ProtectedRoute><ServiceType /></ProtectedRoute></Suspense>} />
           <Route path='airports' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Airports /></ProtectedRoute></Suspense>} />
           <Route path='vendors/bookings/:id' element={<Suspense fallback={<Preloader />}><ProtectedRoute><VendorsBookings /></ProtectedRoute></Suspense>} />
           <Route path='extras' element={<Suspense fallback={<Preloader />}><ProtectedRoute><Extras /></ProtectedRoute></Suspense>} />
