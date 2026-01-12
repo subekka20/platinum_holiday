@@ -11,6 +11,7 @@ const { default: mongoose } = require("mongoose");
 const BookingDetail = require("../models/bookingDetailModel");
 const Airport = require("../models/airports");
 const VendorTerminal = require("../models/vendorTerminalModel");
+const ServiceType = require("../models/serviceTypeModel");
 
 /* creating coupon code and corresponding discount */
 const updateCouponCodeDiscount = async (req, res) => {
@@ -1374,6 +1375,156 @@ const getVendorsForDropdown = async (req, res) => {
   }
 };
 
+/* Service Type Management */
+/* Create service type */
+const createServiceType = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { type, description } = req.body;
+
+    if (!type || !description) {
+      return res.status(400).json({ error: "Type and description are required" });
+    }
+
+    // Check if service type already exists
+    const existingServiceType = await ServiceType.findOne({ type });
+    if (existingServiceType) {
+      return res.status(400).json({ 
+        error: "Service type already exists" 
+      });
+    }
+
+    const serviceType = new ServiceType({
+      type,
+      description
+    });
+
+    await serviceType.save();
+
+    return res.status(201).json({
+      message: "Service type created successfully",
+      data: serviceType
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Get all service types */
+const getAllServiceTypes = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { page = 1, limit = 10 } = req.query;
+    const parsedPage = parseInt(page, 10);
+    const parsedLimit = parseInt(limit, 10);
+
+    const skip = (parsedPage - 1) * parsedLimit;
+    
+    const totalCount = await ServiceType.countDocuments();
+    
+    const serviceTypes = await ServiceType.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parsedLimit)
+      .lean();
+
+    return res.status(200).json({
+      currentPage: parsedPage,
+      totalPages: Math.ceil(totalCount / parsedLimit),
+      totalCount,
+      data: serviceTypes
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Update service type */
+const updateServiceType = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { id } = req.params;
+    const { type, description } = req.body;
+
+    if (!type || !description) {
+      return res.status(400).json({ error: "Type and description are required" });
+    }
+
+    // Check if service type already exists (excluding current record)
+    const existingServiceType = await ServiceType.findOne({
+      type,
+      _id: { $ne: id }
+    });
+
+    if (existingServiceType) {
+      return res.status(400).json({ 
+        error: "Service type already exists" 
+      });
+    }
+
+    const updatedServiceType = await ServiceType.findByIdAndUpdate(
+      id,
+      { type, description },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedServiceType) {
+      return res.status(404).json({ error: "Service type not found" });
+    }
+
+    return res.status(200).json({
+      message: "Service type updated successfully",
+      data: updatedServiceType
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Delete service type */
+const deleteServiceType = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { id } = req.params;
+
+    const deletedServiceType = await ServiceType.findByIdAndDelete(id);
+
+    if (!deletedServiceType) {
+      return res.status(404).json({ error: "Service type not found" });
+    }
+
+    return res.status(200).json({
+      message: "Service type deleted successfully"
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   updateCouponCodeDiscount,
   updatingBookingFare,
@@ -1397,5 +1548,9 @@ module.exports = {
   getAllVendorTerminals,
   updateVendorTerminal,
   deleteVendorTerminal,
-  getVendorsForDropdown
+  getVendorsForDropdown,
+  createServiceType,
+  getAllServiceTypes,
+  updateServiceType,
+  deleteServiceType
 };

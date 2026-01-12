@@ -184,6 +184,15 @@ const Layout = () => {
                         </Link>
                     </li>
 
+                    <li className={`${pathname === '/serviceType' ? 'active' : ''}`}>
+                        <Link to={'/serviceType'} onClick={() => setMenuOpen(false)}>
+                            <span className="icon">
+                                <i class="bi bi-arrow-down-up"></i>
+                            </span>
+                            <span className="title">Service Type</span>
+                        </Link>
+                    </li>
+
                     <li className={`${pathname === '/extras' ? 'active' : ''}`}>
                         <Link to={'/extras'} onClick={() => setMenuOpen(false)}>
                             <span className="icon">
