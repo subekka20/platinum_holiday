@@ -47,7 +47,7 @@ const sendVerificationEmail = async (
     `
         <div style="padding: 20px; font-family: Calibri;">
           <div style="text-align: center;">
-            <a href="www.theparkingdeals.co.uk"><img src="https://res.cloudinary.com/piragashcloud/image/upload/v1721238830/logo512_dmvwkk.png" alt="Platinum Holiday Service Logo" width="80" height="80"></a>
+            <a href="www.platinumholidayservice.co.uk"><img src="https://res.cloudinary.com/dluxwbwea/image/upload/v1768149983/logo-light_yusxov.png" alt="Platinum Holiday Service Logo" width="80" height="80"></a>
           </div>
           <div style="margin-top: 40px; font-size: 15px;">
             <p>Dear Sir/Madam,</p>
