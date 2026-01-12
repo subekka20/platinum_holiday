@@ -9,7 +9,7 @@ import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import '../Css/style.css';
 import '../Css/responsive.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLogout } from '../../state';
+// import { setLogout } from '../../state';
 import { performLogoutWithConfirmation } from '../../utils/logoutUtil';
 
 const Layout = () => {
@@ -62,10 +62,10 @@ const Layout = () => {
         setMenuOpen(false);
     };
 
-    const goToLink = (path) => {
-        navigate(path);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    // const goToLink = (path) => {
+    //     navigate(path);
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // };
 
     const handleLogOut = () => {
         performLogoutWithConfirmation(confirmDialog, dispatch, navigate, 'Are you sure you want to sign out?');
@@ -103,7 +103,7 @@ const Layout = () => {
                     <li>
                         <Link href="#" className="logo_title_area">
                             <span class="icon logo">
-                                <img src="/assets/images/logo-n.png" alt="" />
+                                <img src="/assets/images/logo-light.png" alt="" />
                             </span>
                             <span class="logo_title">
                                 Platinum Holiday <br />
@@ -174,6 +174,15 @@ const Layout = () => {
                             <span className="title">Users</span>
                         </Link>
                     </li>}
+
+                    <li className={`${pathname === '/vendorsTerminal' ? 'active' : ''}`}>
+                        <Link to={'/vendorsTerminal'} onClick={() => setMenuOpen(false)}>
+                            <span className="icon">
+                                <i class="bi bi-arrow-down-up"></i>
+                            </span>
+                            <span className="title">Vendor Terminals</span>
+                        </Link>
+                    </li>
 
                     <li className={`${pathname === '/extras' ? 'active' : ''}`}>
                         <Link to={'/extras'} onClick={() => setMenuOpen(false)}>

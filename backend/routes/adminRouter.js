@@ -22,7 +22,12 @@ const {
     findBookingsOfVendor,
     addAirport,
     editAirport,
-    deleteAirport
+    deleteAirport,
+    createVendorTerminal,
+    getAllVendorTerminals,
+    updateVendorTerminal,
+    deleteVendorTerminal,
+    getVendorsForDropdown
 } = require("../controller/adminController");
 
 // Define the maximum file size (in bytes) for each image. For example, 5MB:
@@ -106,5 +111,21 @@ router.put("/edit-airport/:id", authMiddleware, editAirport);
 
 //delete airport
 router.delete("/delete-airport/:id", authMiddleware, deleteAirport);
+
+//vendor terminal routes
+//create vendor terminal
+router.post("/create-vendor-terminal", authMiddleware, createVendorTerminal);
+
+//get all vendor terminals
+router.get("/vendor-terminals", authMiddleware, getAllVendorTerminals);
+
+//update vendor terminal
+router.put("/update-vendor-terminal/:id", authMiddleware, updateVendorTerminal);
+
+//delete vendor terminal
+router.delete("/delete-vendor-terminal/:id", authMiddleware, deleteVendorTerminal);
+
+//get vendors for dropdown
+router.get("/vendors-dropdown", authMiddleware, getVendorsForDropdown);
 
 module.exports = router;

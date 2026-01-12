@@ -10,6 +10,7 @@ const { handleUpload, deleteOldImage } = require("../utils/cloudinaryUtils");
 const { default: mongoose } = require("mongoose");
 const BookingDetail = require("../models/bookingDetailModel");
 const Airport = require("../models/airports");
+const VendorTerminal = require("../models/vendorTerminalModel");
 
 /* creating coupon code and corresponding discount */
 const updateCouponCodeDiscount = async (req, res) => {
@@ -1173,6 +1174,206 @@ const findBookingsOfVendor = async (req, res) => {
   }
 };
 
+/* Vendor Terminal Management */
+/* Create vendor terminal */
+const createVendorTerminal = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { vendor_id, terminal, service_type } = req.body;
+
+    if (!vendor_id || !terminal || !service_type) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Check if vendor exists and has the specified service type
+    const vendor = await User.findById(vendor_id);
+    if (!vendor || vendor.role !== "Vendor") {
+      return res.status(404).json({ error: "Vendor not found" });
+    }
+
+    if (vendor.serviceType !== service_type) {
+      return res.status(400).json({ error: "Service type mismatch with vendor" });
+    }
+
+    // Check if terminal already assigned to this vendor
+    const existingTerminal = await VendorTerminal.findOne({
+      vendor_id,
+      terminal
+    });
+
+    if (existingTerminal) {
+      return res.status(400).json({ 
+        error: "Terminal already assigned to this vendor" 
+      });
+    }
+
+    const vendorTerminal = new VendorTerminal({
+      vendor_id,
+      terminal,
+      service_type
+    });
+
+    await vendorTerminal.save();
+
+    return res.status(201).json({
+      message: "Vendor terminal created successfully",
+      data: vendorTerminal
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Get all vendor terminals */
+const getAllVendorTerminals = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { page = 1, limit = 10 } = req.query;
+    const parsedPage = parseInt(page, 10);
+    const parsedLimit = parseInt(limit, 10);
+
+    const skip = (parsedPage - 1) * parsedLimit;
+    
+    const totalCount = await VendorTerminal.countDocuments();
+    
+    const vendorTerminals = await VendorTerminal.find()
+      .populate('vendor_id', 'companyName email serviceType')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(parsedLimit)
+      .lean();
+
+    return res.status(200).json({
+      currentPage: parsedPage,
+      totalPages: Math.ceil(totalCount / parsedLimit),
+      totalCount,
+      data: vendorTerminals
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Update vendor terminal */
+const updateVendorTerminal = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { id } = req.params;
+    const { vendor_id, terminal, service_type } = req.body;
+
+    if (!vendor_id || !terminal || !service_type) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Check if vendor exists and has the specified service type
+    const vendor = await User.findById(vendor_id);
+    if (!vendor || vendor.role !== "Vendor") {
+      return res.status(404).json({ error: "Vendor not found" });
+    }
+
+    if (vendor.serviceType !== service_type) {
+      return res.status(400).json({ error: "Service type mismatch with vendor" });
+    }
+
+    // Check if terminal already assigned to another vendor (excluding current record)
+    const existingTerminal = await VendorTerminal.findOne({
+      vendor_id,
+      terminal,
+      _id: { $ne: id }
+    });
+
+    if (existingTerminal) {
+      return res.status(400).json({ 
+        error: "Terminal already assigned to this vendor" 
+      });
+    }
+
+    const updatedVendorTerminal = await VendorTerminal.findByIdAndUpdate(
+      id,
+      { vendor_id, terminal, service_type },
+      { new: true, runValidators: true }
+    ).populate('vendor_id', 'companyName email serviceType');
+
+    if (!updatedVendorTerminal) {
+      return res.status(404).json({ error: "Vendor terminal not found" });
+    }
+
+    return res.status(200).json({
+      message: "Vendor terminal updated successfully",
+      data: updatedVendorTerminal
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Delete vendor terminal */
+const deleteVendorTerminal = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const { id } = req.params;
+
+    const deletedVendorTerminal = await VendorTerminal.findByIdAndDelete(id);
+
+    if (!deletedVendorTerminal) {
+      return res.status(404).json({ error: "Vendor terminal not found" });
+    }
+
+    return res.status(200).json({
+      message: "Vendor terminal deleted successfully"
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+/* Get vendors for dropdown */
+const getVendorsForDropdown = async (req, res) => {
+  try {
+    const { role } = req.user;
+    if (role !== "Admin") {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    const vendors = await User.find({ role: "Vendor" })
+      .select('_id companyName serviceType email')
+      .sort({ companyName: 1 })
+      .lean();
+
+    return res.status(200).json({
+      data: vendors
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   updateCouponCodeDiscount,
   updatingBookingFare,
@@ -1191,5 +1392,10 @@ module.exports = {
   findBookingsOfVendor,
   addAirport,
   editAirport,
-  deleteAirport
+  deleteAirport,
+  createVendorTerminal,
+  getAllVendorTerminals,
+  updateVendorTerminal,
+  deleteVendorTerminal,
+  getVendorsForDropdown
 };
