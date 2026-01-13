@@ -1,14 +1,34 @@
 const User = require('../models/userModel');
+const VendorTerminal = require('../models/vendorTerminalModel');
+const ServiceType = require('../models/serviceTypeModel');
 const sendEmail = require('./mailService');
 
 const sendEmailToUser = async (booking, user, type) => {
+    // Get company details
     const company = await User.findById(booking.companyId)
-        .select("email companyName serviceType")
+        .select("email companyName serviceType overView pickUpProcedure dropOffProcedure")
         .lean()
         .exec();
 
     if (!company) {
         throw new Error("Company not found");
+    }
+
+    // Get vendor terminal details
+    const vendorTerminal = await VendorTerminal.findOne({ vendor_id: booking.companyId })
+        .lean()
+        .exec();
+
+    let serviceTypeDescription = '';
+    if (vendorTerminal) {
+        // Get service type description from ServiceType table
+        const serviceTypeData = await ServiceType.findOne({ type: vendorTerminal.service_type })
+            .lean()
+            .exec();
+        
+        if (serviceTypeData) {
+            serviceTypeDescription = serviceTypeData.description;
+        }
     }
 
     return sendEmail(
@@ -327,529 +347,106 @@ const sendEmailToUser = async (booking, user, type) => {
                       </table>
                       
                   </div>
-  
-                <p class="mt-4">
-                    Note:
-                    Platinum Holiday Service acts as booking agents only and do not store or handle customer vehicles. Your service
-                    delivery contract will be with
-                    <span>${company.companyName}.</span>
-                    You must follow the instructions below and contact the service provider to
-                    arrange your service. For any
-                    issues regarding the parking service (delay, damage etc.) please contact your service provider.
-                </p>
 
-                <p class="mt-2">
-                    <b>
-                        Complaint Number: <a href="tel::07777135649">07777135649</a>
-                    </b>
-                </p>
-                <p class="mt-2">
-                    <b>
-                        Complaint Email: <a href="mailto:info@platinumholidayservice.co.uk">info@platinumholidayservice.co.uk</a>
-                    </b>
-                </p>
-
-                <h4 class="booking_head mt-5">
-                    Instructions:
-                </h4>
-
-                <!-- <h5 class="booking_sub_head mt-3">
-                    Telephone your friendly driver:
-                    <span>07534185858 or 07534185856</span>
-                </h5> -->
-
-                <p>We require you to call us 20-30 minutes prior to your arrival so we can arrange a driver for you.</p>
-
-                <h5 class="booking_sub_head mt-4">
-                    Directions and Instructions:
-                </h5>
-
-
-            ${((company.companyName).toLowerCase() === "luton 247 meet & greet" || (company.companyName).toLowerCase() === "airport parking bay meet & greet luton") ? (
-            `
-                <p class="mb-3 text-bold">Meet & Greet service</p>
-
-                <p class="mb-2">
-                    Secure off-site parking
-                </p>
-
-                <p class="mb-2">
-                    Repable, punctual & professional staff
-                </p>
-
-                <p class="mb-2">
-                    24/7 service
-                </p>
-
-                <p class="mb-2">
-                    A <span class="text-bold">£10</span> exit fee is payable upon return (card or cash accepted)
-                </p>
-
-                <p class="mb-2">
-                    <span class="text-bold">£20</span> per additional day applies for overstays
-                </p>
-
-                <p class="mb-2">
-                    Vehicles may be moved up to 4–5 miles to our other secure car park compound during busy periods
-                    for operational reasons
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">Meet & Greet – Customer Instructions</p>
-
-                <p class="mb-2">
-                    Authorised Operator at Luton Airport | Secure Off-Site Parking
-                </p>
-
-                <p class="mb-2">
-                    What is Off-Site Meet & Greet?
-                </p>
-
-                <p class="mb-2 ms-3 text-bold">
-                    Drop your car at Car Park 1 – Level 3
-                </p>
-
-                <p class="mb-2 ms-3">
-                    Our driver parks it in our private, off-site facility
-                </p>
-
-                <p class="mb-2 ms-3">
-                    We return your car to the same location upon your return
-                </p>
-
-                <p class="mb-2 ms-3">
-                    No need for shuttles – terminal convenience at a better rate
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">Drop-Off Instructions:</p>
-
-                <p class="mb-2 text-bold">
-                    Call us 30 minutes before arrival:
-                    <a href="tel:07534 185856" class="text-bold font-17">07534 185856</a> / <a href="tel:07534 185858"
-                        class="text-bold font-17">07534 185858</a>
-                </p>
-
-                <p class="mb-2">
-                    Follow signs to <span class="text-bold text-underlined">Car Park 1, Level 3</span>
-                </p>
-
-                <p class="mb-2">
-                    Look for the <span class="text-bold">"Offsite Meet & Greet"</span> signage and our Airport Parking Bay desk
-                </p>
-
-                <p class="mb-2">
-                    Park in any available bay and meet our staff in hi-vis
-                </p>
-
-                <p class="mb-2">
-                    Show booking confirmation to our staff
-                </p>
-
-                <p class="mb-2">
-                    Sign the handover form and retain your copy
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">Return Instructions:</p>
-
-                <p class="mb-2">
-                    Call us twice:
-                </p>
-
-                <p class="mb-2">
-                    When your flight lands
-                </p>
-
-                <p class="mb-2">
-                    Once you’ve cleared Customs
-                </p>
-
-                <p class="mb-2">
-                    Your vehicle will be returned to <span class="text-bold">Car Park 1 – Level 3</span>
-                </p>
-
-                <p class="mb-2">
-                    <span class="text-bold">£10</span> exit fee is required for the airport car
-                    park – payable by card or cash
-                </p>
-
-                <p class="mb-2">
-                    Late returns are charged £20 per additional calendar day
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">Vehicle Conditions:</p>
-
-                <p class="mb-2">
-                    Vehicle must be taxed, MOT-certified, and roadworthy
-                </p>
-
-                <p class="mb-2">
-                    Tyres must meet legal tread depth
-                </p>
-
-                <p class="mb-2">
-                    All valuables must be removed – we do not accept liability for items left in the vehicle
-                </p>
-
-                <p class="mb-2">
-                    Ensure washer fluid and fuel are topped up
-                </p>
-
-                <p class="mb-2">
-                    Keep a spare key with you
-                </p>
-
-                <p class="mb-2">
-                    <span class="text-underlined">
-                        Note:Since we are a booking agency, we deal with changing reservations, dates, and other details. If you
-                        would like more information, please send us an email.
-                    </span>
-                    <br>
-                    <a class="text-bold" href="mailto:info@platinumholidayservice.co.uk">(info@platinumholidayservice.co.uk)</a>
-                </p>
-
-                <p class="mb-3 mt-4 text-bold">Disclaimer :</p>
-
-                <p class="text-bold mb-2">
-                    We act as booking agent and we do not take vehicles from any airport. The service provider takes the vehicle
-                    and they park it in their own car park. You need to call the service provider on your departure and return
-                    day. Any issues regarding parking service (Delay, Damage etc. ) must be discussed with the service provider.
-                </p>
-
-                <p class="text-bold mb-2">
-                    Any complaints over delay or damages must be sent via email. <br>
-                    <a class="text-bold" href="mailto:info@airportparkingbay.co.uk">(info@airportparkingbay.co.uk)</a>
-                </p>
-
-                <p class="mb-3 mt-4">
-                    Contact Details (24/7): <br>
-                    <a href="tel:07534 185856" class="text-bold font-17">07534 185856</a> / <a href="tel:07534 185858"
-                        class="text-bold font-17">07534 185858</a>
-                </p>
-            `
-        ) : company.companyName.toLowerCase() === "airport parking bay park & ride" ? (
-            `
-                <p class="mb-3 text-bold">Park & Ride service</p>
-
-                <p class="mb-2">
-                    1 mile from Luton Airport
-                </p>
-
-                <p class="mb-2">
-                    Airport transfer included
-                </p>
-
-                <p class="mb-2">
-                    Frequent drop-off and pick-up at the terminal
-                </p>
-
-                <p class="mb-2">
-                    Secure car park
-                </p>
-
-                <p class="mb-2">
-                    Customer must leave their vehicle key with us for secure storage and handling
-                </p>
-
-                <p class="mb-2">
-                    Vehicles may be moved up to 4–5 miles to our other secure car park during busy periods
-                </p>
-
-                <p class="mb-2">
-                    <span class="text-bold">£20</span> per additional day will be charged for overstays
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">Park & Ride – Customer Instructions</p>
-
-                <p class="mb-2">
-                    Secure Gated Parking – Luton Airport
-                </p>
-
-                <p class="mb-2 mt-4 text-bold">
-                    Before You Arrive:
-                </p>
-
-                <p class="mb-3">
-                    Car Park Address: <br>
-                    <span class="text-bold font-17">No. 2 Guildford Street, Luton, LU1 2NR </span><br>
-                    <a
-                        href="https://www.google.com/maps/search/51.880825,+-0.411919?entry=tts&g_ep=EgoyMDI1MDYxNy4wIPu8ASoASAFQAw%3D%3D&skid=ccb5b830-56e9-440c-89e0-a6d42df4142b">
-                        Google Maps
-                    </a>
-                </p>
-
-                <p class="mb-2">
-                    Look for the yellow "Private Car Park" sign on the left before the roundabout
-                </p>
-
-                <p class="mb-2 text-bold">
-                    Call us 30 minutes before arrival:
-                    <a href="tel:07534 185856" class="text-bold font-17">07534 185856</a> / <a href="tel:07534 185858"
-                        class="text-bold font-17">07534 185858</a>
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">On Arrival:</p>
-
-                <p class="mb-2">
-                    Park in any space inside the gated compound
-                </p>
-
-                <p class="mb-2">
-                    Stay with your luggage while waiting for the shuttle
-                </p>
-
-                <p class="mb-2">
-                    Hand over your vehicle key to our staff for secure parking
-                </p>
-
-                <p class="mb-2">
-                    Vehicles may be moved up to 4–5 miles to our other secure car park during busy periods
-                </p>
-
-                <p class="mb-2">
-                    Shuttle transfer takes approx. 5–10 minutes
-                </p>
-
-                <p class="mb-2">
-                    Max 4 passengers per vehicle
-                </p>
-
-                <p class="mb-2">
-                    No child seats provided – please bring your own if needed
-                </p>
-
-
-                <p class="mb-3 mt-4 text-bold">Return Instructions:</p>
-
-                <p class="mb-2">
-                    Call us twice:
-                </p>
-
-                <p class="mb-2">
-                    When your flight lands
-                </p>
-
-                <p class="mb-2">
-                    Once you’ve cleared Customs
-                </p>
-
-                <p class="mb-2">
-                    You will be collected from <span class="text-bold">Car Park 1 – Level 0</span> (same drop-off point)
-                </p>
-
-                <p class="mb-2">
-                    We’ll return you to the car park for vehicle and key collection
-                </p>
-
-
-                <p class="mt-4 mb-3 text-bold">
-                    Important Notes:
-                </p>
-
-                <p class="mb-2">
-                    Arrive at least 4 hours before your flight
-                </p>
-
-                <p class="mb-2">
-                    Allow 30–45 minutes extra during busy times
-                </p>
-
-                <p class="mb-2">
-                    All valuables must be removed – we do not accept liability for items left in the vehicle
-                </p>
-
-                <p class="mb-2">
-                    Vehicles over 2m in height will incur a £50 surcharge
-                </p>
-
-                <p class="mb-2">
-                    Late returns will incur £20 per additional day
-                </p>
-
-                <p class="mb-2">
-                    <span class="text-underlined">
-                        Note:Since we are a booking agency, we deal with changing reservations, dates, and other details. If you
-                        would like more information, please send us an email.
-                    </span>
-                    <br>
-                    <a class="text-bold" href="mailto:info@platinumholidayservice.co.uk">(info@platinumholidayservice.co.uk)</a>
-                </p>
-
-                <p class="mb-3 mt-4 text-bold">Disclaimer :</p>
-
-                <p class="text-bold mb-2">
-                    We act as booking agent and we do not take vehicles from any airport. The service provider takes the vehicle
-                    and they park it in their own car park. You need to call the service provider on your departure and return
-                    day. Any issues regarding parking service (Delay, Damage etc. ) must be discussed with the service provider.
-                </p>
-
-                <p class="text-bold mb-2">
-                    Any complaints over delay or damages must be sent via email.<br>
-                    <a class="text-bold" href="mailto:info@airportparkingbay.co.uk">(info@airportparkingbay.co.uk)</a>
-                </p>
-
-                <p class="mb-2 mt-4">
-                    Contact Details (24/7): <br>
-                    <a href="tel:07534 185856" class="text-bold font-17">07534 185856</a> / <a href="tel:07534 185858"
-                        class="text-bold font-17">07534 185858</a>
-                </p>
-
-                <p class="mb-2">
-                    Admin & bookings:
-                    <a class="text-bold" href="mailto:info@airportparkingbay.co.uk">info@airportparkingbay.co.uk</a>
-                </p>
-            `
-        ) : (
-            `
-                <p class="mb-3 text-bold">Arrival Procedure</p>
-                <p>
-                    Please call us 20 minutes prior arriving to the airport on
-                    <span>${company.mobileNumber}</span>.
-                    <br>
-                    Please follow signs for Multi-Storey car park (LU2 9QT Height Restrictions 2.1m or 6ft 8in) and drive to the
-                    barrier, you need to take a
-                    ticket after the barrier follow the sign for Level 3 or off airport parking meet & greet drop off point pull
-                    into a bay, where you will find our
-                    driver waiting for you, and please give your ticket and the key to the driver. Will ask you to check your
-                    vehicle and sign the paperwork for
-                    handover.
-                </p>
-
-                <p class="mb-3 mt-4 text-bold">Return Procedure</p>
-                <p>
-                    On your safe retum, we require you to call us twice on 07534185858 or 07534185856. Once as soon as you land
-                    and the other as soon
-                    as you collected your luggage.
-                </p>
-                <p class="mt-2">
-                    You will be required to pay per £5.OO (15mins) Change to validate car park Entry & Exit Fee.
-                </p>
-            `
-        )}
-
-                <p class="mb-3 mt-4 text-bold">ATTENTION</p>
-                <p>
-                    If you return after midnight you have to pay additional day charge
-                </p>
-
-                <h5 class="booking_sub_head mt-4">
-                    After 15 Minutes: Normal Airport tariffs apply.
-                </h5>
-
-                <p>
-                    For any amendments or any changes while you abroad, please email
-                    <a href="mailto::${company.email}">:${company.email}</a>
-                </p>
-
-                <h5 class="booking_sub_head mt-4">
-                    Warning: <span class="font-weight-normal">Please note that unless your car:</span>
-                </h5>
-
-                <ul>
-                    <li>Have a valid road tax and contains a valid road tax for your return date</li>
-                    <li>has tyre tread on each tyre that is within the legal limit</li>
-                    <li>or is in any other way unsafe to drive</li>
-                </ul>
-
-                <p class="mt-3 mb-3">
-                    the driver will not be able to take your car and you will have to make other arrangements to park your car.
-                    Your contract will be
-                    deemed to have started and you will not be able to claim a refund.
-                </p>
-
-                <p>
-                    Please also ensure that your vehicle has water in the washer bottle and that you have not run your fuel down
-                    to the minimum as
-                    although our car park is close to the airport we will have to drive your car off the airport itself.
-                </p>
-
-                <h4 class="booking_head mt-5">
-                    Essential Information:
-                </h4>
-
-                <p class="mb-3">
-                    A booking may be cancelled up to 48 hours prior to drop off date except on certain non-flexible offers and
-                    same day bookings which are
-                    non-refundable. All cancellations will incur a £15 administration fee unless cancellation cover is
-                    purchased at time of booking.
-                </p>
-
-                <p class="mb-3">
-                    You must allow sufficient time to drop off the vehicle and complete airport departure procedures. Please
-                    take in to account traffic delays,
-                    breakdowns or semce delays during busy periods. If you are late or early, please inform Service Provider as
-                    soon as possible. Last
-                    minute changes or no advance notice may result in delays to your service.
-                </p>
-
-                <p class="mb-3">
-                    Any parking is at your own risk and subject to service provider's terms and conditions, so we ask that you
-                    don't keep any valuables in
-                    your car. Check your vehicle carefully at pickup and report any issues to driver and ensure these are logged
-                    on the paperwork before
-                    leaving. Claims cannot be considered once your vehicle has left the terminal or car park. You can view our
-                    full terms on our website
-                </p>
-
-                <p>
-                    If you have any further queries or if you need any help with your booking, please contact us on
-                    <a href="tel:tel:07777135649">tel:07777135649</a>
-                </p>
-
-                <h6 class="mt-5 booking_footer_text">
-                    Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
-                    processing
-                    companies to accept payments. Therefore, you may see their name on your bank/card statements.
-                </h6>
-
-                <h6 class="mt-3 booking_footer_text mb-4">
-                    <b>
-                        We use cookies to improve your experience on our site. By continuing to browse the site, you agree to
-                        our use of
-                        <a href="https://www.theparkingdeals.co.uk/terms-and-conditions" rel="noopener"
-                            target="_blank">cookies</a>
-                        &nbsp;&&nbsp;
-                        <a href="https://www.theparkingdeals.co.uk/privacy-policy" rel="noopener"
-                            target="_blank">privacy-policy</a>
-                    </b>
-                </h6>
-
-                <hr class="mb-3 ">
-
-                <h4 class="booking_head mb-2">
-                    Contact Us
-                </h4>
-
-                <p>
-                    <b>
-                        <a href="mailto:info@platinumholidayservice.co.uk">
-                            info@platinumholidayservice.co.uk
-                        </a>
-                    </b>
-                </p>
-
-                <p class="mt-2">
-                    <b><a href="tel:07777135649">07777135649</a></b>
-                </p>
-
-                <hr class="mt-4">
-
-                <h4 class="booking_head mt-4 mb-2 text-center">
-                    We Accept
-                </h4>
-
-                <div class="booking_accept_area">
-                    <!-- <img src="https://www.paypalobjects.com/digitalassets/c/website/logo/full-text/pp_fc_hl.svg" height="25"
-                        alt="Pay Pal"> -->
-                    <img src="https://i.ibb.co/tmGWs0x/6220ac7d912013c51947f9c6.png" height="50" alt="Stripe">
-                </div>
-            </div>
-        </body>
-        `
+                  ${serviceTypeDescription ? `
+                  <h4 class="booking_head mt-5">
+                      Service Type Information
+                  </h4>
+                  <p class="mb-3">
+                      ${serviceTypeDescription}
+                  </p>
+                  ` : ''}
+
+                  ${company.overView ? `
+                  <h4 class="booking_head mt-5">
+                      Service Overview
+                  </h4>
+                  <p class="mb-3">
+                      ${company.overView}
+                  </p>
+                  ` : ''}
+
+                  ${company.dropOffProcedure ? `
+                  <h4 class="booking_head mt-4">
+                      Drop-Off Procedure
+                  </h4>
+                  <div class="mb-3">
+                      ${company.dropOffProcedure}
+                  </div>
+                  ` : ''}
+
+                  ${company.pickUpProcedure ? `
+                  <h4 class="booking_head mt-4">
+                      Pick-Up Procedure
+                  </h4>
+                  <div class="mb-3">
+                      ${company.pickUpProcedure}
+                  </div>
+                  ` : ''}
+
+                  <p class="mt-4">
+                      Note: Platinum Holiday Service acts as booking agents only and do not store or handle customer vehicles. 
+                      Your service delivery contract will be with <span>${company.companyName}.</span>
+                  </p>
+
+                  <p class="mt-2">
+                      For any questions or support, please contact us:
+                  </p>
+                  
+                  <p class="mt-2">
+                      <b>Phone: <a href="tel:07777135649">07777135649</a></b>
+                  </p>
+                  <p class="mt-2">
+                      <b>Email: <a href="mailto:info@platinumholidayservice.co.uk">info@platinumholidayservice.co.uk</a></b>
+                  </p>
+
+                  <h6 class="mt-5 booking_footer_text">
+                      Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
+                      processing companies to accept payments. Therefore, you may see their name on your bank/card statements.
+                  </h6>
+
+                  <h6 class="mt-3 booking_footer_text mb-4">
+                      <b>
+                          We use cookies to improve your experience on our site. By continuing to browse the site, you agree to
+                          our use of
+                          <a href="https://www.theparkingdeals.co.uk/terms-and-conditions" rel="noopener"
+                              target="_blank">cookies</a>
+                          &nbsp;&&nbsp;
+                          <a href="https://www.theparkingdeals.co.uk/privacy-policy" rel="noopener"
+                              target="_blank">privacy-policy</a>
+                      </b>
+                  </h6>
+
+                  <hr class="mb-3">
+
+                  <h4 class="booking_head mb-2">
+                      Contact Us
+                  </h4>
+
+                  <p>
+                      <b>
+                          <a href="mailto:info@platinumholidayservice.co.uk">
+                              info@platinumholidayservice.co.uk
+                          </a>
+                      </b>
+                  </p>
+
+                  <p class="mt-2">
+                      <b><a href="tel:07777135649">07777135649</a></b>
+                  </p>
+
+                  <hr class="mt-4">
+
+                  <h4 class="booking_head mt-4 mb-2 text-center">
+                      We Accept
+                  </h4>
+
+                  <div class="booking_accept_area">
+                      <img src="https://i.ibb.co/tmGWs0x/6220ac7d912013c51947f9c6.png" height="50" alt="Stripe">
+                  </div>
+              </div>
+          </body>
+          `
     );
 };
 
@@ -1167,8 +764,7 @@ const sendEmailToCompany = async (booking, user, type) => {
   
                   <h6 class="mt-5 booking_footer_text">
                       Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
-                      processing
-                      companies to accept payments. Therefore, you may see their name on your bank/card statements.
+                      processing companies to accept payments. Therefore, you may see their name on your bank/card statements.
                   </h6>
   
                   <h6 class="mt-3 booking_footer_text mb-4">
@@ -1207,6 +803,5 @@ const sendEmailToCompany = async (booking, user, type) => {
                 `
     );
 };
-
 
 module.exports = { sendEmailToUser, sendEmailToCompany };
