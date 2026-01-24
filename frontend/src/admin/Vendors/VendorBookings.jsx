@@ -206,7 +206,7 @@ const VendorBookings = () => {
     const exportToPDF = async () => {
         const doc = new jsPDF();
 
-        // const logoUrl = "https://www.theparkingdeals.co.uk/assets/images/logo.png";
+        // const logoUrl = "https://www.platinumholidayservice.co.uk/assets/images/logo.png";
         const logoUrl = "/assets/images/logo.png";
         const logoBase64 = await loadImageToBase64(logoUrl);
 

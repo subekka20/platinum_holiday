@@ -1,45 +1,52 @@
-const User = require('../models/userModel');
-const VendorTerminal = require('../models/vendorTerminalModel');
-const ServiceType = require('../models/serviceTypeModel');
-const sendEmail = require('./mailService');
+const User = require("../models/userModel");
+const VendorTerminal = require("../models/vendorTerminalModel");
+const ServiceType = require("../models/serviceTypeModel");
+const sendEmail = require("./mailService");
 
 const sendEmailToUser = async (booking, user, type) => {
-    // Get company details
-    const company = await User.findById(booking.companyId)
-        .select("email companyName serviceType overView pickUpProcedure dropOffProcedure")
-        .lean()
-        .exec();
+  // Get company details
+  const company = await User.findById(booking.companyId)
+    .select(
+      "email companyName serviceType overView pickUpProcedure dropOffProcedure",
+    )
+    .lean()
+    .exec();
 
-    if (!company) {
-        throw new Error("Company not found");
+  if (!company) {
+    throw new Error("Company not found");
+  }
+
+  // Get vendor terminal details
+  const vendorTerminal = await VendorTerminal.findOne({
+    vendor_id: booking.companyId,
+  })
+    .lean()
+    .exec();
+
+  let serviceTypeDescription = "";
+  if (vendorTerminal) {
+    // Get service type description from ServiceType table
+    const serviceTypeData = await ServiceType.findOne({
+      type: vendorTerminal.service_type,
+    })
+      .lean()
+      .exec();
+
+    if (serviceTypeData) {
+      serviceTypeDescription = serviceTypeData.description;
     }
+  }
 
-    // Get vendor terminal details
-    const vendorTerminal = await VendorTerminal.findOne({ vendor_id: booking.companyId })
-        .lean()
-        .exec();
-
-    let serviceTypeDescription = '';
-    if (vendorTerminal) {
-        // Get service type description from ServiceType table
-        const serviceTypeData = await ServiceType.findOne({ type: vendorTerminal.service_type })
-            .lean()
-            .exec();
-        
-        if (serviceTypeData) {
-            serviceTypeDescription = serviceTypeData.description;
-        }
-    }
-
-    return sendEmail(
-        user.email,
-        `Booking ${type === "Cancelled"
-            ? "Cancelled!"
-            : type === "Failed"
-                ? "Failed!"
-                : "Confirmed!"
-        }`,
-        `
+  return sendEmail(
+    user.email,
+    `Booking ${
+      type === "Cancelled"
+        ? "Cancelled!"
+        : type === "Failed"
+          ? "Failed!"
+          : "Confirmed!"
+    }`,
+    `
             <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -251,14 +258,15 @@ const sendEmailToUser = async (booking, user, type) => {
               </style>
               <div class="booking_info_area">
                   <div class="booking_info_header">
-                      <img src="https://www.theparkingdeals.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
+                      <img src="https://www.platinumholidayservice.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
                   </div>
-                  <h3 class="booking_info_title">Booking ${type === "Cancelled"
-            ? "Cancelled!"
-            : type === "Failed"
-                ? "Failed!"
-                : "Confirmed!"
-        }</h3>
+                  <h3 class="booking_info_title">Booking ${
+                    type === "Cancelled"
+                      ? "Cancelled!"
+                      : type === "Failed"
+                        ? "Failed!"
+                        : "Confirmed!"
+                  }</h3>
                   <p class="mb-4">Dear ${user.firstName},</p>
   
                   <p class="mb-3">
@@ -270,12 +278,13 @@ const sendEmailToUser = async (booking, user, type) => {
                   </p>
   
                   <h4 class="booking_head">
-                      Booking ${type === "Cancelled"
-            ? "Cancelled!"
-            : type === "Failed"
-                ? "Failed!"
-                : "Confirmed!"
-        }:&nbsp;
+                      Booking ${
+                        type === "Cancelled"
+                          ? "Cancelled!"
+                          : type === "Failed"
+                            ? "Failed!"
+                            : "Confirmed!"
+                      }:&nbsp;
                       <span>${booking.bookingId}</span>
                   </h4>
   
@@ -284,8 +293,9 @@ const sendEmailToUser = async (booking, user, type) => {
                           <tbody>
                               <tr>
                                   <th>Booked By</th>
-                                  <td>${user.title} ${user.firstName} ${user.lastname || ""
-        }</td>
+                                  <td>${user.title} ${user.firstName} ${
+                                    user.lastname || ""
+                                  }</td>
                                   <th>Flying From</th>
                                   <td>${booking.airportName}</td>
                               </tr>
@@ -293,35 +303,41 @@ const sendEmailToUser = async (booking, user, type) => {
                                   <th>Service</th>
                                   <td>${company.companyName}</td>
                                   <th>Inbound Flight</th>
-                                  <td>${booking.travelDetail.inBoundFlight || "-"
-        }</td>
+                                  <td>${
+                                    booking.travelDetail.inBoundFlight || "-"
+                                  }</td>
                               </tr>
                               <tr>
                                   <th>Service Type</th>
                                   <td>${company.serviceType}</td>
                                   <th>Extras</th>
-                                  <td>Cancellation Cover: ${booking.cancellationCoverFee ? "Yes" : "No"
-        }</td>
+                                  <td>Cancellation Cover: ${
+                                    booking.cancellationCoverFee ? "Yes" : "No"
+                                  }</td>
                               </tr>
                               <tr>
                                   <th>From</th>
-                                  <td>${booking.dropOffDate} ${booking.dropOffTime
-        }</td>
+                                  <td>${booking.dropOffDate} ${
+                                    booking.dropOffTime
+                                  }</td>
                                   <th>Inbound Terminal</th>
-                                  <td>${booking.travelDetail.arrivalTerminal
-        }</td>
+                                  <td>${
+                                    booking.travelDetail.arrivalTerminal
+                                  }</td>
                               </tr>
                               <tr>
                                   <th>To</th>
-                                  <td>${booking.pickUpDate} ${booking.pickUpTime
-        }</td>
+                                  <td>${booking.pickUpDate} ${
+                                    booking.pickUpTime
+                                  }</td>
                                   <th>Outbound Terminal</th>
-                                  <td>${booking.travelDetail.departureTerminal
-        }</td>
+                                  <td>${
+                                    booking.travelDetail.departureTerminal
+                                  }</td>
                               </tr>
                               ${booking.vehicleDetail
-            .map(
-                (vehicle) => `
+                                .map(
+                                  (vehicle) => `
                               <tr>
                                   <th colspan="4" class="text-center">Vehicle Details</th>
                               </tr>
@@ -336,53 +352,70 @@ const sendEmailToUser = async (booking, user, type) => {
                                   <td>${vehicle.make || "-"}</td>
                                   <th>Model</th>
                                   <td>${vehicle.model || "-"}</td>
-                              </tr>`
-            )
-            .join("")}
+                              </tr>`,
+                                )
+                                .join("")}
                               <tr>
-                                  <th colspan="4" class="text-center">Total Amount: £${booking.totalPayable
-        }</th>
+                                  <th colspan="4" class="text-center">Total Amount: £${
+                                    booking.totalPayable
+                                  }</th>
                               </tr>
                           </tbody>
                       </table>
                       
                   </div>
 
-                  ${serviceTypeDescription ? `
+                  ${
+                    serviceTypeDescription
+                      ? `
                   <h4 class="booking_head mt-5">
                       Service Type Information
                   </h4>
                   <p class="mb-3">
                       ${serviceTypeDescription}
                   </p>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${company.overView ? `
+                  ${
+                    company.overView
+                      ? `
                   <h4 class="booking_head mt-5">
                       Service Overview
                   </h4>
                   <p class="mb-3">
                       ${company.overView}
                   </p>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${company.dropOffProcedure ? `
+                  ${
+                    company.dropOffProcedure
+                      ? `
                   <h4 class="booking_head mt-4">
                       Drop-Off Procedure
                   </h4>
                   <div class="mb-3">
                       ${company.dropOffProcedure}
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${company.pickUpProcedure ? `
+                  ${
+                    company.pickUpProcedure
+                      ? `
                   <h4 class="booking_head mt-4">
                       Pick-Up Procedure
                   </h4>
                   <div class="mb-3">
                       ${company.pickUpProcedure}
                   </div>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
                   <p class="mt-4">
                       Note: Platinum Holiday Service acts as booking agents only and do not store or handle customer vehicles. 
@@ -401,74 +434,47 @@ const sendEmailToUser = async (booking, user, type) => {
                   </p>
 
                   <h6 class="mt-5 booking_footer_text">
-                      Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
-                      processing companies to accept payments. Therefore, you may see their name on your bank/card statements.
+                    Platinum Holiday Service uses 3rd party payment
+                    processing companies to accept payments. Therefore, you may see their name on your bank/card statements.
                   </h6>
 
                   <h6 class="mt-3 booking_footer_text mb-4">
                       <b>
                           We use cookies to improve your experience on our site. By continuing to browse the site, you agree to
                           our use of
-                          <a href="https://www.theparkingdeals.co.uk/terms-and-conditions" rel="noopener"
+                          <a href="https://www.platinumholidayservice.co.uk/terms-and-conditions" rel="noopener"
                               target="_blank">cookies</a>
                           &nbsp;&&nbsp;
-                          <a href="https://www.theparkingdeals.co.uk/privacy-policy" rel="noopener"
+                          <a href="https://www.platinumholidayservice.co.uk/privacy-policy" rel="noopener"
                               target="_blank">privacy-policy</a>
                       </b>
                   </h6>
-
-                  <hr class="mb-3">
-
-                  <h4 class="booking_head mb-2">
-                      Contact Us
-                  </h4>
-
-                  <p>
-                      <b>
-                          <a href="mailto:info@platinumholidayservice.co.uk">
-                              info@platinumholidayservice.co.uk
-                          </a>
-                      </b>
-                  </p>
-
-                  <p class="mt-2">
-                      <b><a href="tel:07777135649">07777135649</a></b>
-                  </p>
-
-                  <hr class="mt-4">
-
-                  <h4 class="booking_head mt-4 mb-2 text-center">
-                      We Accept
-                  </h4>
-
-                  <div class="booking_accept_area">
-                      <img src="https://i.ibb.co/tmGWs0x/6220ac7d912013c51947f9c6.png" height="50" alt="Stripe">
-                  </div>
               </div>
           </body>
-          `
-    );
+          `,
+  );
 };
 
 const sendEmailToCompany = async (booking, user, type) => {
-    const company = await User.findById(booking.companyId)
-        .select("email companyName serviceType")
-        .lean()
-        .exec();
+  const company = await User.findById(booking.companyId)
+    .select("email companyName serviceType")
+    .lean()
+    .exec();
 
-    if (!company) {
-        throw new Error("Company not found");
-    }
+  if (!company) {
+    throw new Error("Company not found");
+  }
 
-    return sendEmail(
-        company.email,
-        `${type === "Cancelled"
-            ? "Parking Slot Booking Cancelled!"
-            : type === "Failed"
-                ? "Parking Slot Booking Failed!"
-                : "Parking slot has been Booked!"
-        }`,
-        `
+  return sendEmail(
+    company.email,
+    `${
+      type === "Cancelled"
+        ? "Parking Slot Booking Cancelled!"
+        : type === "Failed"
+          ? "Parking Slot Booking Failed!"
+          : "Parking slot has been Booked!"
+    }`,
+    `
             <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -681,16 +687,17 @@ const sendEmailToCompany = async (booking, user, type) => {
   
               <div class="booking_info_area">
                   <div class="booking_info_header">
-                      <img src="https://www.theparkingdeals.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
+                      <img src="https://www.platinumholidayservice.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
                   </div>
                   
                   <h4 class="booking_head">
-                      Booking ${type === "Cancelled"
-            ? "Cancelled!"
-            : type === "Failed"
-                ? "Failed!"
-                : "Confirmed!"
-        }:&nbsp;
+                      Booking ${
+                        type === "Cancelled"
+                          ? "Cancelled!"
+                          : type === "Failed"
+                            ? "Failed!"
+                            : "Confirmed!"
+                      }:&nbsp;
                       <span>${booking.bookingId}</span>
                   </h4>
   
@@ -699,8 +706,9 @@ const sendEmailToCompany = async (booking, user, type) => {
                           <tbody>
                               <tr>
                                   <th>Booked By</th>
-                                  <td>${user.title} ${user.firstName} ${user.lastname || ""
-        }</td>
+                                  <td>${user.title} ${user.firstName} ${
+                                    user.lastname || ""
+                                  }</td>
                                   <th>Flying From</th>
                                   <td>${booking.airportName}</td>
                               </tr>
@@ -708,24 +716,29 @@ const sendEmailToCompany = async (booking, user, type) => {
                                   <th>Service</th>
                                   <td>${company.companyName}</td>
                                   <th>Inbound Flight</th>
-                                  <td>${booking.travelDetail.inBoundFlight || "-"
-        }</td>
+                                  <td>${
+                                    booking.travelDetail.inBoundFlight || "-"
+                                  }</td>
                               </tr>
                               <tr>
                                   <th>From</th>
-                                  <td>${booking.dropOffDate} ${booking.dropOffTime
-        }</td>
+                                  <td>${booking.dropOffDate} ${
+                                    booking.dropOffTime
+                                  }</td>
                                   <th>Inbound Terminal</th>
-                                  <td>${booking.travelDetail.arrivalTerminal
-        }</td>
+                                  <td>${
+                                    booking.travelDetail.arrivalTerminal
+                                  }</td>
                               </tr>
                               <tr>
                                   <th>To</th>
-                                  <td>${booking.pickUpDate} ${booking.pickUpTime
-        }</td>
+                                  <td>${booking.pickUpDate} ${
+                                    booking.pickUpTime
+                                  }</td>
                                   <th>Outbound Terminal</th>
-                                  <td>${booking.travelDetail.departureTerminal
-        }</td>
+                                  <td>${
+                                    booking.travelDetail.departureTerminal
+                                  }</td>
                               </tr>
                               <tr>
                                   <th>Mobile Number</th>
@@ -734,8 +747,8 @@ const sendEmailToCompany = async (booking, user, type) => {
                                   <td>${company.serviceType}</td>
                               </tr>
                               ${booking.vehicleDetail
-            .map(
-                (vehicle) => `
+                                .map(
+                                  (vehicle) => `
                               <tr>
                                   <th colspan="4" class="text-center">Vehicle Details</th>
                               </tr>
@@ -750,12 +763,13 @@ const sendEmailToCompany = async (booking, user, type) => {
                                   <td>${vehicle.make || "-"}</td>
                                   <th>Model</th>
                                   <td>${vehicle.model || "-"}</td>
-                              </tr>`
-            )
-            .join("")}
+                              </tr>`,
+                                )
+                                .join("")}
                               <tr>
-                                  <th colspan="4" class="text-center">Total Amount: £${booking.bookingQuote
-        }</th>
+                                  <th colspan="4" class="text-center">Total Amount: £${
+                                    booking.bookingQuote
+                                  }</th>
                               </tr>
                           </tbody>
                       </table>
@@ -763,7 +777,7 @@ const sendEmailToCompany = async (booking, user, type) => {
                   </div>
   
                   <h6 class="mt-5 booking_footer_text">
-                      Platinum Holiday Service is a trading name of Air Travel Extras Limited. Platinum Holiday Service uses 3rd party payment
+                      Platinum Holiday Service uses 3rd party payment
                       processing companies to accept payments. Therefore, you may see their name on your bank/card statements.
                   </h6>
   
@@ -771,10 +785,10 @@ const sendEmailToCompany = async (booking, user, type) => {
                       <b>
                           We use cookies to improve your experience on our site. By continuing to browse the site, you agree to
                           our use of
-                          <a href="https://www.theparkingdeals.co.uk/terms-and-conditions" rel="noopener"
+                          <a href="https://www.platinumholidayservice.co.uk/terms-and-conditions" rel="noopener"
                               target="_blank">cookies</a>
                           &nbsp;&&nbsp;
-                          <a href="https://www.theparkingdeals.co.uk/privacy-policy" rel="noopener"
+                          <a href="https://www.platinumholidayservice.co.uk/privacy-policy" rel="noopener"
                               target="_blank">privacy-policy</a>
                       </b>
                   </h6>
@@ -800,8 +814,8 @@ const sendEmailToCompany = async (booking, user, type) => {
                   <hr class="mt-4">
               </div>
           </body>
-                `
-    );
+                `,
+  );
 };
 
 module.exports = { sendEmailToUser, sendEmailToCompany };
