@@ -587,7 +587,7 @@ const settingQuotes = (day) => {
     {
       _id: "6698afc1c2b01f8e85778762",
       name: "The Parking Deals Meet & Greet",
-      logo: "https://www.theparkingdeals.co.uk/assets/images/logo.png",
+      logo: "https://www.platinumholidayservice.co.uk/assets/images/logo.png",
       type: "Meet and Greet",
       rating: 4.8,
       quote: 0,

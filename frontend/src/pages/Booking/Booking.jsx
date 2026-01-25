@@ -238,7 +238,10 @@ const Booking = () => {
       toast.current.show({
         severity: "error",
         summary: "Error in Booking charge calculation!",
-        detail: err.response.data.error,
+        detail:
+          err?.response?.data?.error ||
+          err?.message ||
+          "Unable to calculate booking charge.",
         life: 3000,
       });
     }
@@ -427,7 +430,7 @@ const Booking = () => {
       const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
       const result = await stripe.redirectToCheckout({
-        sessionId: response.data.id,
+        sessionId: response?.data?.id,
       });
 
       console.log(result);
@@ -436,7 +439,7 @@ const Booking = () => {
         category: "CAR PARK BOOKING",
         action: "booking",
         label: "online_booking",
-        value: response.data?.totalPayable,
+        value: response?.data?.totalPayable,
       });
 
       toast.current.show({
@@ -454,7 +457,8 @@ const Booking = () => {
       toast.current.show({
         severity: "error",
         summary: "Failed to Book",
-        detail: err.response.data.error,
+        detail:
+          err?.response?.data?.error || err?.message || "Booking failed.",
         life: 3000,
       });
     } finally {
