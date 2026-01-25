@@ -258,7 +258,7 @@ const sendEmailToUser = async (booking, user, type) => {
               </style>
               <div class="booking_info_area">
                   <div class="booking_info_header">
-                      <img src="https://www.platinumholidayservice.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
+                      <img src="https://www.platinumholidayservice.co.uk/assets/images/logo-n.png" alt="Platinum Holiday Service">
                   </div>
                   <h3 class="booking_info_title">Booking ${
                     type === "Cancelled"
@@ -687,7 +687,7 @@ const sendEmailToCompany = async (booking, user, type) => {
   
               <div class="booking_info_area">
                   <div class="booking_info_header">
-                      <img src="https://www.platinumholidayservice.co.uk/assets/images/logo.png" alt="Platinum Holiday Service">
+                      <img src="https://www.platinumholidayservice.co.uk/assets/images/logo-n.png" alt="Platinum Holiday Service">
                   </div>
                   
                   <h4 class="booking_head">
