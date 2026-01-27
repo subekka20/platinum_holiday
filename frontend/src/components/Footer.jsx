@@ -108,7 +108,8 @@ const Footer = () => {
                       />
                     </button>
                     <div className="brand-info">
-                      <h3 className="brand-name">Platinum Holiday</h3>
+                      <h3 className="brand-name">Platinum Holiday </h3>
+                      <p className="brand-name">Service</p>
                       <p className="brand-tagline">Premium Airport Parking</p>
                     </div>
                   </div>
