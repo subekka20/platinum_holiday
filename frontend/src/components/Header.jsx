@@ -135,7 +135,7 @@ const Header = () => {
                       alt="Logo"
                     />
                     <div className="brand-info">
-                      <h3 className="brand-name">Platinum Holiday</h3>
+                      <h3 className="brand-name">Platinum Holiday Service</h3>
                     </div>
                     <img
                       src="assets/images/logo-new.png"
