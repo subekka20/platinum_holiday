@@ -500,7 +500,9 @@ code {
 
 .nav-logo-link {
   text-decoration: none;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   outline: #124170;
   border: none;
   background-color: transparent;
@@ -515,6 +517,21 @@ code {
 
 .nav-logo-link img {
   height: 60px;
+}
+
+/* Keep brand text to the right of the visible logo */
+.nav-logo-link .nav-logo {
+  order: 1;
+}
+
+.nav-logo-link .scrolled-logo {
+  order: 2;
+}
+
+.nav-logo-link .brand-info {
+  order: 3;
+  display: flex;
+  align-items: center;
 }
 
 .nav-link-area {
