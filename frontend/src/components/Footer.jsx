@@ -102,15 +102,15 @@ const Footer = () => {
                       aria-label="Go to homepage"
                     >
                       <img
-                        src="../assets/images/logo-n.png"
+                        src="../assets/images/logo-new.png"
                         className="footer-logo-img"
                         alt="Platinum Holiday Service"
                       />
                     </button>
-                    {/* <div className="brand-info">
+                    <div className="brand-info">
                       <h3 className="brand-name">Platinum Holiday</h3>
                       <p className="brand-tagline">Premium Airport Parking</p>
-                    </div> */}
+                    </div>
                   </div>
                   <p className="brand-description">
                     Experience hassle-free airport parking with our premium services. 
